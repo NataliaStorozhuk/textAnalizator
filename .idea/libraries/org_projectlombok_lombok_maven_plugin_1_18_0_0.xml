@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="org.projectlombok:lombok-maven-plugin:1.18.0.0" type="repository">
+    <properties maven-id="org.projectlombok:lombok-maven-plugin:1.18.0.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/lombok-maven-plugin-1.18.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang3-3.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lombok-1.18.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/plexus-build-api-0.0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/plexus-utils-1.5.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
