@@ -1,6 +1,8 @@
 package sample;
 
 
+import lombok.Setter;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Setter
 public class Analyzer {
     int n = 3;
 
