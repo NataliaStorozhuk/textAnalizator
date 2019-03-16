@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -18,7 +17,9 @@ import java.util.ArrayList;
 public class Controller {
 
 
-    private Desktop desktop = Desktop.getDesktop();
+    String desktopPath = System.getProperty("user.home") + "\\" + "Desktop";
+    private String pathFileDetectives = desktopPath + "\\detectives\\";
+    private String pathFileAnother = desktopPath + "\\another\\";
     Analyzer analyzer = new Analyzer();
 
     private Stage stage;
@@ -90,27 +91,20 @@ public class Controller {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 //!!!
-                ArrayList<CompareResults> compareResults = analyzer.getResults(fileAfterPorter1, fileAfterPorter2,
+           /*     ArrayList<CompareResults> compareResults = analyzer.getResults(fileAfterPorter1, fileAfterPorter2,
                         fileAfterPorter3, fileAfterPorter4);
 
-
-                evkl1.setText(compareResults.get(0).evkl.toString());
-                manh1.setText(compareResults.get(0).manh.toString());
                 skalar1.setText(compareResults.get(0).skalar.toString());
                 cos1.setText(compareResults.get(0).cos.toString());
                 durability1.setText(compareResults.get(0).durability.toString());
 
-                evkl2.setText(compareResults.get(1).evkl.toString());
-                manh2.setText(compareResults.get(1).manh.toString());
-            //    skalar2.setText(compareResults.get(1).skalar.toString());
+
                 cos2.setText(compareResults.get(1).cos.toString());
                 durability2.setText(compareResults.get(1).durability.toString());
 
-                evkl3.setText(compareResults.get(2).evkl.toString());
-                manh3.setText(compareResults.get(2).manh.toString());
                 skalar3.setText(compareResults.get(2).skalar.toString());
                 cos3.setText(compareResults.get(2).cos.toString());
-                durability3.setText(compareResults.get(2).durability.toString());
+                durability3.setText(compareResults.get(2).durability.toString());*/
             }
         });
     }
