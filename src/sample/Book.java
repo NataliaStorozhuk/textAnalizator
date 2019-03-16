@@ -19,4 +19,6 @@ public class Book {
         this.lexems = lexems;
     }
 
+    public Book(String averageBook) {
+    }
 }
