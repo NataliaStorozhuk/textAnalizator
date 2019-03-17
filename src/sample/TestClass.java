@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TestClass {
@@ -41,8 +42,51 @@ public class TestClass {
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
 
         books.add(createAverageBook(books));
-        createExcelFile(arrayAfterSort, books, "detectives");
+        createExcelFile(arrayAfterSort, books, "another");
     }
+
+    @Test
+    public void getResultsForMaxDictionary() throws IOException {
+        final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
+        long start = System.currentTimeMillis();
+
+        listFilesForFolder(folder);
+        List<String> arrayAfterSort = analyzer.getResults(books);
+
+        books.add(createAverageBook(books));
+
+        ArrayList<Book> booksMax = new ArrayList<>();
+        Book maxBook = createMaxBook(createAverageBook(books), 300);
+        booksMax.add(maxBook);
+
+        ArrayList<String> maxArrayList = new ArrayList<>();
+        for (int i=0; i<maxBook.tf.size(); i++)
+        {
+            maxArrayList.add(arrayAfterSort.get(maxBook.tf.get(i)));
+        }
+
+        long finish = System.currentTimeMillis();
+        long timeConsumedMillis = finish - start;
+        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
+
+       // books.add(createAverageBook(books));
+        createExcelFile(maxArrayList, booksMax, "detectives_utf8");
+    }
+
+    private Book createMaxBook(Book averageBook, Integer countWords) {
+        Book book = new Book("maxBook");
+        book.setTf(new ArrayList<>());
+        book.setTf_idf(new ArrayList<>());
+        for (int i=0; i<countWords; i++)
+        {
+            book.tf.add(averageBook.tf_idf.indexOf(Collections.max(averageBook.tf_idf)));
+
+            book.tf_idf.add(Collections.max(averageBook.tf_idf));
+            averageBook.tf_idf.set(averageBook.tf_idf.indexOf(Collections.max(averageBook.tf_idf)),0.0);
+        }
+        return book;
+    }
+
 
     private Book createAverageBook(ArrayList<Book> books) {
         Book averageBook = new Book("averageBook");
