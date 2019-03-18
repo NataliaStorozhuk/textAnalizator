@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/lib/commons-codec-1.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/commons-collections4-4.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/poi-4.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/CreateExcelDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Добавили и настроили ломбок, poi, запустили тестовый пример записи в эксельку">
+      <change afterPath="$PROJECT_DIR$/src/sample/StatisticGetter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Porter_3/sample/AlgorithmPorter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Porter_3/sample/AlgorithmPorter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Porter_3/sample/Analyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Porter_3/sample/Analyzer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Porter_3/sample/CompareResults.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Porter_3/sample/CompareResults.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Porter_3/sample/BigDecimalUtility.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Porter_3/sample/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Analyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Analyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/TestClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/TestClass.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -75,35 +80,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Analyzer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/sample/CreateExcelDemo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+            <state relative-caret-position="294">
+              <caret line="205" lean-forward="true" selection-start-line="205" selection-end-line="205" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -112,19 +93,68 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/CompareResults.java">
+        <entry file="file://$PROJECT_DIR$/src/sample/StatisticGetter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="4" selection-end-line="13" />
+            <state relative-caret-position="170">
+              <caret line="10" column="49" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/BigDecimalUtility.java">
+        <entry file="file://$PROJECT_DIR$/src/sample/FileToBookConverter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3689">
-              <caret line="218" selection-end-line="373" />
+            <state relative-caret-position="432">
+              <caret line="26" column="50" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/TestClass.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-76">
+              <caret line="195" column="24" selection-start-line="195" selection-start-column="24" selection-end-line="195" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="471">
+              <caret line="70" selection-start-line="70" selection-end-line="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/AlgorithmPorter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-680">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Book.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-25">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -135,39 +165,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
-              <caret line="70" selection-start-line="70" selection-end-line="70" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/AlgorithmPorter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="3061">
+              <caret line="182" column="35" selection-start-line="182" selection-start-column="35" selection-end-line="182" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/stop_words.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1581">
-              <caret line="93" column="2" selection-start-line="93" selection-start-column="2" selection-end-line="93" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -191,16 +193,21 @@
       <find>лекс</find>
       <find>роллекс</find>
       <find>надевайте</find>
-      <find>getWordsFromString</find>
       <find>Hello</find>
       <find>getWordsAfterPorter</find>
       <find>d1Arra</find>
       <find>getCountEachTokensInFile</find>
       <find>arrayAfterSort</find>
       <find>stream().distinct().collect</find>
-      <find>start</find>
       <find>skalar</find>
       <find>Test</find>
+      <find>getArra</find>
+      <find>getResults</find>
+      <find>getWordsFromString</find>
+      <find>start</find>
+      <find>getW</find>
+      <find>getDoc</find>
+      <find>getBookFromFile</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -218,13 +225,22 @@
         <option value="$PROJECT_DIR$/src/sample/AlgorithmPorter.java" />
         <option value="$PROJECT_DIR$/src/sample/BigDecimalUtility.java" />
         <option value="$PROJECT_DIR$/src/resources/stop_words.txt" />
-        <option value="$PROJECT_DIR$/src/sample/CompareResults.java" />
-        <option value="$PROJECT_DIR$/src/sample/Controller.java" />
         <option value="$PROJECT_DIR$/src/sample/sample.fxml" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
-        <option value="$PROJECT_DIR$/src/sample/Analyzer.java" />
         <option value="$PROJECT_DIR$/src/sample/createEscelDemo.java" />
+        <option value="$PROJECT_DIR$/src/sample/EmployeeDao.java" />
+        <option value="$PROJECT_DIR$/src/sample/Employee.java" />
+        <option value="$PROJECT_DIR$/src/sample/CompareResults.java" />
         <option value="$PROJECT_DIR$/src/sample/CreateExcelDemo.java" />
+        <option value="$PROJECT_DIR$/src/resources/detectiveDictionary.txt" />
+        <option value="$PROJECT_DIR$/src/sample/Book.java" />
+        <option value="$PROJECT_DIR$/src/sample/Controller.java" />
+        <option value="$PROJECT_DIR$/src/sample/ExcelExpjrter.java" />
+        <option value="$PROJECT_DIR$/src/sample/ExcelExporter.java" />
+        <option value="$PROJECT_DIR$/src/sample/FileToBookConverter.java" />
+        <option value="$PROJECT_DIR$/src/sample/StatisticGetter.java" />
+        <option value="$PROJECT_DIR$/src/sample/TestClass.java" />
+        <option value="$PROJECT_DIR$/src/sample/Analyzer.java" />
       </list>
     </option>
   </component>
@@ -253,6 +269,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -287,7 +304,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -304,9 +320,10 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552560519390" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552950814147" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="private" />
+    <property name="ignore_missing_gitignore" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/poi-4.0.1.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -316,9 +333,13 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Natalia\textAnalizator\src\resources" />
       <recent name="C:\Users\Natalia\textAnalizator\lib" />
       <recent name="C:\Users\Natalia\Documents\Porter_3\src\sample" />
       <recent name="C:\Users\Natalia\Documents\Porter_3\src\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="sample" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Natalia\Documents\Porter_3\src" />
@@ -337,7 +358,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.CreateExcelDemo">
+  <component name="RunManager" selected="TestNG.TestClass.getResultsForMaxDictionaryWithoutNames">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -352,20 +373,6 @@
     </configuration>
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CreateExcelDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="sample.CreateExcelDemo" />
-      <module name="Porter_3" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="sample.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -402,7 +409,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Analyzer.getQount" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TestClass.getFiles" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Porter_3" />
       <extension name="coverage">
         <pattern>
@@ -411,8 +418,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="sample" />
-      <option name="MAIN_CLASS_NAME" value="sample.Analyzer" />
-      <option name="METHOD_NAME" value="getQount" />
+      <option name="MAIN_CLASS_NAME" value="sample.TestClass" />
+      <option name="METHOD_NAME" value="getFiles" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -424,7 +431,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Analyzer.testAllMethod" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TestClass.getResultsForDetectiveDictionary" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Porter_3" />
       <extension name="coverage">
         <pattern>
@@ -433,8 +440,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="sample" />
-      <option name="MAIN_CLASS_NAME" value="sample.Analyzer" />
-      <option name="METHOD_NAME" value="testAllMethod" />
+      <option name="MAIN_CLASS_NAME" value="sample.TestClass" />
+      <option name="METHOD_NAME" value="getResultsForDetectiveDictionary" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -446,7 +453,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Analyzer.testFunction" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TestClass.getResultsForMaxDictionary" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Porter_3" />
       <extension name="coverage">
         <pattern>
@@ -455,8 +462,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="sample" />
-      <option name="MAIN_CLASS_NAME" value="sample.Analyzer" />
-      <option name="METHOD_NAME" value="testFunction" />
+      <option name="MAIN_CLASS_NAME" value="sample.TestClass" />
+      <option name="METHOD_NAME" value="getResultsForMaxDictionary" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -468,7 +475,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Analyzer.testGetDoc" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TestClass.getResultsForMaxDictionaryWithoutNames" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Porter_3" />
       <extension name="coverage">
         <pattern>
@@ -477,8 +484,30 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="sample" />
-      <option name="MAIN_CLASS_NAME" value="sample.Analyzer" />
-      <option name="METHOD_NAME" value="testGetDoc" />
+      <option name="MAIN_CLASS_NAME" value="sample.TestClass" />
+      <option name="METHOD_NAME" value="getResultsForMaxDictionaryWithoutNames" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestClass.getResultsForMaxDictionaryWithoutWords" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="Porter_3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sample.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="sample" />
+      <option name="MAIN_CLASS_NAME" value="sample.TestClass" />
+      <option name="METHOD_NAME" value="getResultsForMaxDictionaryWithoutWords" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -513,19 +542,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="TestNG.Analyzer.testFunction" />
-      <item itemvalue="TestNG.Analyzer.testGetDoc" />
-      <item itemvalue="TestNG.Analyzer.testAllMethod" />
-      <item itemvalue="TestNG.Analyzer.getQount" />
-      <item itemvalue="Application.CreateExcelDemo" />
+      <item itemvalue="TestNG.TestClass.getFiles" />
+      <item itemvalue="TestNG.TestClass.getResultsForDetectiveDictionary" />
+      <item itemvalue="TestNG.TestClass.getResultsForMaxDictionary" />
+      <item itemvalue="TestNG.TestClass.getResultsForMaxDictionaryWithoutWords" />
+      <item itemvalue="TestNG.TestClass.getResultsForMaxDictionaryWithoutNames" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CreateExcelDemo" />
-        <item itemvalue="TestNG.Analyzer.testAllMethod" />
-        <item itemvalue="TestNG.Analyzer.getQount" />
-        <item itemvalue="TestNG.Analyzer.testFunction" />
-        <item itemvalue="TestNG.Analyzer.testGetDoc" />
+        <item itemvalue="TestNG.TestClass.getResultsForMaxDictionaryWithoutNames" />
+        <item itemvalue="TestNG.TestClass.getResultsForMaxDictionaryWithoutWords" />
+        <item itemvalue="TestNG.TestClass.getResultsForMaxDictionary" />
+        <item itemvalue="TestNG.TestClass.getResultsForDetectiveDictionary" />
+        <item itemvalue="TestNG.TestClass.getFiles" />
       </list>
     </recent_temporary>
   </component>
@@ -548,38 +577,74 @@
       <workItem from="1533848690047" duration="35000" />
       <workItem from="1539721237007" duration="1270000" />
     </task>
+    <task id="LOCAL-00001" summary="Добавили и настроили ломбок, poi, запустили тестовый пример записи в эксельку">
+      <created>1552561620663</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1552561620663</updated>
+    </task>
+    <task id="LOCAL-00002" summary="настроили под себя экспорт в xls, обновили оббрабтку книг не по одной, а циклами">
+      <created>1552753586598</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1552753586598</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Придумали 1й опыт, запустили на маленькой а потом большой базе. Надо продолжать">
+      <created>1552775978262</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1552775978262</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Добавила ещё 1 опыт провальный. Надо добавить подсчет коэффициентов всяких и какие-то результаты вывести">
+      <created>1552864133858</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1552864133858</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Рефакторинг: вынесли эексель в отдельный файл, обработку исходников в отдельный, маленькие фиксики и улучшения по мелочам">
+      <created>1552948025980</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1552948025980</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Analyzer_getQount - 2018.07.13 at 02h 06m 29s.xml">
-      <configuration name="Analyzer.getQount" configurationId="TestNG" />
+    <history-entry file="TestClass_getResultsForMaxDictionary - 2019.03.18 at 00h 17m 31s.xml">
+      <configuration name="TestClass.getResultsForMaxDictionary" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="Analyzer_getQount - 2018.07.13 at 02h 08m 02s.xml">
-      <configuration name="Analyzer.getQount" configurationId="TestNG" />
+    <history-entry file="TestClass_getResultsForMaxDictionary - 2019.03.18 at 00h 18m 38s.xml">
+      <configuration name="TestClass.getResultsForMaxDictionary" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="Analyzer_testAllMethod - 2018.07.13 at 08h 10m 29s.xml">
-      <configuration name="Analyzer.testAllMethod" configurationId="TestNG" />
+    <history-entry file="TestClass_getResultsForMaxDictionary - 2019.03.18 at 00h 20m 48s.xml">
+      <configuration name="TestClass.getResultsForMaxDictionary" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="Analyzer_testAllMethod - 2018.07.13 at 08h 14m 59s.xml">
-      <configuration name="Analyzer.testAllMethod" configurationId="TestNG" />
+    <history-entry file="TestClass_getResultsForMaxDictionary - 2019.03.18 at 00h 21m 58s.xml">
+      <configuration name="TestClass.getResultsForMaxDictionary" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="Analyzer_testAllMethod - 2018.07.13 at 08h 16m 17s.xml">
-      <configuration name="Analyzer.testAllMethod" configurationId="TestNG" />
+    <history-entry file="TestClass_getResultsForMaxDictionary - 2019.03.18 at 00h 22m 48s.xml">
+      <configuration name="TestClass.getResultsForMaxDictionary" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="Analyzer_testAllMethod - 2018.07.13 at 08h 19m 56s.xml">
-      <configuration name="Analyzer.testAllMethod" configurationId="TestNG" />
+    <history-entry file="TestClass_getResultsForMaxDictionary - 2019.03.18 at 00h 47m 05s.xml">
+      <configuration name="TestClass.getResultsForMaxDictionary" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="Analyzer_testAllMethod - 2018.07.13 at 08h 25m 03s.xml">
-      <configuration name="Analyzer.testAllMethod" configurationId="TestNG" />
+    <history-entry file="TestClass_getResultsForMaxDictionary - 2019.03.18 at 01h 13m 07s.xml">
+      <configuration name="TestClass.getResultsForMaxDictionary" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="Analyzer_testAllMethod - 2018.07.13 at 08h 28m 11s.xml">
-      <configuration name="Analyzer.testAllMethod" configurationId="TestNG" />
+    <history-entry file="TestClass_getResultsForMaxDictionaryWithoutWords - 2019.03.19 at 01h 27m 40s.xml">
+      <configuration name="TestClass.getResultsForMaxDictionaryWithoutWords" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="Analyzer_testAllMethod - 2018.07.13 at 08h 29m 40s.xml">
-      <configuration name="Analyzer.testAllMethod" configurationId="TestNG" />
+    <history-entry file="TestClass_getResultsForMaxDictionaryWithoutWords - 2019.03.19 at 01h 42m 17s.xml">
+      <configuration name="TestClass.getResultsForMaxDictionaryWithoutWords" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="Analyzer_testAllMethod - 2018.07.13 at 08h 32m 42s.xml">
-      <configuration name="Analyzer.testAllMethod" configurationId="TestNG" />
+    <history-entry file="TestClass_getResultsForMaxDictionaryWithoutNames - 2019.03.19 at 01h 59m 50s.xml">
+      <configuration name="TestClass.getResultsForMaxDictionaryWithoutNames" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -587,8 +652,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.24130106" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.25642964" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -596,23 +662,23 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49848714" visible="true" weight="0.10714286" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.37254903" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3282313" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.68683815" visible="true" weight="0.2159864" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49848714" weight="0.37244898" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Application Servers" order="7" />
       <window_info anchor="bottom" id="Profiler" order="8" />
       <window_info anchor="bottom" id="Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5015129" side_tool="true" visible="true" weight="0.10714286" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.31316188" side_tool="true" weight="0.4234694" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.40136054" />
       <window_info anchor="bottom" id="Problems" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.32312927" />
       <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="15" />
+      <window_info anchor="bottom" id="Terminal" order="15" weight="0.32993197" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.51805335" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.5173979" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="JetGradle" order="4" />
@@ -667,22 +733,21 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="Добавили и настроили ломбок, poi, запустили тестовый пример записи в эксельку" />
+    <MESSAGE value="настроили под себя экспорт в xls, обновили оббрабтку книг не по одной, а циклами" />
+    <MESSAGE value="Придумали 1й опыт, запустили на маленькой а потом большой базе. Надо продолжать" />
+    <MESSAGE value="Добавила ещё 1 опыт провальный. Надо добавить подсчет коэффициентов всяких и какие-то результаты вывести" />
+    <MESSAGE value="Рефакторинг: вынесли эексель в отдельный файл, обработку исходников в отдельный, маленькие фиксики и улучшения по мелочам" />
+    <option name="LAST_COMMIT_MESSAGE" value="Рефакторинг: вынесли эексель в отдельный файл, обработку исходников в отдельный, маленькие фиксики и улучшения по мелочам" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/Analyzer.java</url>
-          <line>133</line>
+          <url>file://$PROJECT_DIR$/src/sample/TestClass.java</url>
+          <line>24</line>
           <properties />
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/Analyzer.java</url>
-          <line>296</line>
-          <properties />
-          <option name="timeStamp" value="27" />
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -691,20 +756,41 @@
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>books.get(j)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>books.get(2)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>books.get(j).getTf().get(i)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>books.get(j)).getTf().get(i)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>books.get(0).getTf().size()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/resource.properties" />
-    <entry file="file://$PROJECT_DIR$/src/resources/Достоевский Федор . Преступление и наказание - royallib.ru.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/f-m-tom-2.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/Ахшарумов_-_Концы_в_воду.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/Добрый_-_Гений_русского_сыска_И.Д._Путилин.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/Достоевский Федор . Преступление и наказание - royallib.ru.txt" />
+    <entry file="file://$PROJECT_DIR$/src/resources/f-m-tom-2.txt" />
+    <entry file="file://$PROJECT_DIR$/src/resources/Ахшарумов_-_Концы_в_воду.txt" />
+    <entry file="file://$PROJECT_DIR$/src/resources/Добрый_-_Гений_русского_сыска_И.Д._Путилин.txt" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/io/FileInputStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
@@ -713,13 +799,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/res.properties" />
-    <entry file="file://$PROJECT_DIR$/src/resources/f-m-tom-1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119884">
-          <caret line="7052" column="17" lean-forward="true" selection-start-line="7052" selection-start-column="17" selection-end-line="7052" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/f-m-tom-1.txt" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/io/PrintStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
@@ -729,13 +809,6 @@
     </entry>
     <entry file="uml://MODULES/mdl-Porter_3" />
     <entry file="uml://JAVA/" />
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/testng/lib/testng.jar!/org/testng/internal/Invoker.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="477" selection-start-line="477" selection-end-line="477" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -754,48 +827,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/CompareResults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="4" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/BigDecimalUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3689">
-          <caret line="218" selection-end-line="373" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/AlgorithmPorter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/stop_words.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1581">
-          <caret line="93" column="2" selection-start-line="93" selection-start-column="2" selection-end-line="93" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_144/src.zip!/java/lang/Override.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
@@ -803,27 +834,158 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/testng/lib/testng.jar!/org/testng/xml/XmlClass.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+        <state relative-caret-position="1292">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Analyzer.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/EmployeeDAO.java" />
+    <entry file="file://$PROJECT_DIR$/src/sample/Employee.java" />
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_144/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+        <state relative-caret-position="164">
+          <caret line="687" column="19" selection-start-line="687" selection-start-column="19" selection-end-line="687" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/CompareResults.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_144/src.zip!/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="109" column="36" selection-start-line="109" selection-start-column="36" selection-end-line="109" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/CreateExcelDemo.java" />
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_144/src.zip!/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="291" column="25" selection-start-line="291" selection-start-column="25" selection-end-line="291" selection-end-column="25" />
+          <folding>
+            <element signature="e#11119#11120#0" expanded="true" />
+            <element signature="e#11200#11201#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/testng/lib/testng.jar!/org/testng/internal/Invoker.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="476" selection-start-line="476" selection-end-line="476" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/detectiveDictionary.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="259" column="4" selection-start-line="259" selection-start-column="4" selection-end-line="259" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/stop_words.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="93" column="2" selection-start-line="93" selection-start-column="2" selection-end-line="93" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3061">
+          <caret line="182" column="35" selection-start-line="182" selection-start-column="35" selection-end-line="182" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/CreateExcelDemo.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/ExcelExporter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        <state relative-caret-position="595">
+          <caret line="68" column="16" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/AlgorithmPorter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-680">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/BigDecimalUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="76" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/FileToBookConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="26" column="50" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-25">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/StatisticGetter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="49" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/TestClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-76">
+          <caret line="195" column="24" selection-start-line="195" selection-start-column="24" selection-end-line="195" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Analyzer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="205" lean-forward="true" selection-start-line="205" selection-end-line="205" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

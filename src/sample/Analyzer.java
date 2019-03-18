@@ -3,38 +3,58 @@ package sample;
 
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static sample.FileToBookConverter.getWordsFromString;
-import static sample.FileToBookConverter.usingBufferedReader;
+import static sample.StatisticGetter.*;
 
 @Setter
 public class Analyzer {
-    int n = 3;
 
-    /*Метод делает из списка разных книг отсортированный массив лексем без дубликатов*/
-    private List<String> getAllTokensArray(ArrayList<Book> books) {
-        ArrayList<String> allArray = new ArrayList<String>();
-        for (Book book : books) {
-            allArray.addAll(book.getLexems());
+    public List<String> getSimiliarity(ArrayList<Book> books) {
+
+
+        //формируем общий, сортируем, выкидываем повторы
+        List<String> arrayAfterSort = getAllTokensArray(books);
+
+        //получаем tf - число каждой лексемы в книге
+        for (int i = 0; i < books.size(); i++) {
+            StatisticGetter.getTf(books.get(i), arrayAfterSort);
         }
 
-        List<String> arrayAfterSort = allArray.stream().distinct().collect(Collectors.toList());
-        Collections.sort(arrayAfterSort);
-        
+        //считаем общее число файлов, в которых встречается слово
+        ArrayList<Integer> documentFrequency = getDf(books);
+
+        //считаем idf
+        ArrayList<Double> idf = getIdf(documentFrequency, books.size());
+
+        //получаем tf-idf
+        for (int i = 0; i < books.size(); i++) {
+            getTfIdf(books.get(i), idf);
+        }
+
         return arrayAfterSort;
+
+        //Работаем с исходником
+        //     ArrayList<Integer> tdQ = getTf(qAfterPorter, qAfterPorter);
+      /*  ArrayList<Double> tfIdfQ = getTfIdfQuery(arrayAfterSort, books, idf, bookRequest);
+
+        List<String> qAfterSort = qAfterPorter.stream().distinct().collect(Collectors.toList());
+        Collections.sort(qAfterSort);
+
+        CompareResults compareResults1 =
+                getCompareResults(fileAfterPorter1, qAfterPorter, arrayAfterSort, tfIdfD1, tfIdfQ, qAfterSort);
+
+        return compareResults;*/
     }
 
-    
- 
- /*  private ArrayList<Double> getTfIdfQuery(List<String> arrayAfterSort, ArrayList<Integer> tdD1, ArrayList<Integer> tdD2, ArrayList<Integer> tdD3, ArrayList<Double> idf, ArrayList<String> QArray) {
+
+
+    /*  private ArrayList<Double> getTfIdfQuery(List<String> arrayAfterSort, ArrayList<Integer> tdD1, ArrayList<Integer> tdD2, ArrayList<Integer> tdD3, ArrayList<Double> idf, ArrayList<String> QArray) {
         List<String> QArraySort = QArray.stream().distinct().collect(Collectors.toList());
         Collections.sort(QArraySort);
-        ArrayList<Integer> tdQ = getCountEachTokensInFile(QArray, QArraySort);
+        ArrayList<Integer> tdQ = getTf(QArray, QArraySort);
         ArrayList<Double> tfMaxTf = getTfMaxTf(tdQ);
 
         ArrayList<Integer> countQDocs = getQCountCocs(arrayAfterSort, tdD1, tdD2, tdD3, QArray, QArraySort);
@@ -90,47 +110,10 @@ public class Analyzer {
         return tfMaxTf;
     }
 
-    public List<String> getResults(ArrayList<Book> books) {
-
-
-        //формируем общий, сортируем, выкидываем повторы
-        List<String> arrayAfterSort = getAllTokensArray(books);
-
-        for (int i = 0; i < books.size(); i++) {
-            getCountEachTokensInFile(books.get(i), arrayAfterSort);
-        }
-
-        //считаем общее число файлов, в которых встречается слово
-        ArrayList<Integer> documentFrequency = getCountFilesWithEveryWord(books);
-
-        //считаем idf
-        ArrayList<Double> idf = getIdf(documentFrequency, books.size());
-
-        //получаем tf-idf
-        for (int i = 0; i < books.size(); i++) {
-            getTfIdf(books.get(i), idf);
-        }
-
-        return arrayAfterSort;
-
-        //Работаем с исходником
-        //     ArrayList<Integer> tdQ = getCountEachTokensInFile(qAfterPorter, qAfterPorter);
-      /*  ArrayList<Double> tfIdfQ = getTfIdfQuery(arrayAfterSort, books, idf, bookRequest);
-
-        List<String> qAfterSort = qAfterPorter.stream().distinct().collect(Collectors.toList());
-        Collections.sort(qAfterSort);
-
-        CompareResults compareResults1 =
-                getCompareResults(fileAfterPorter1, qAfterPorter, arrayAfterSort, tfIdfD1, tfIdfQ, qAfterSort);
-
-        return compareResults;*/
-    }
-
-
     private CompareResults getCompareResults(ArrayList<String> fileAfterPorter1, ArrayList<String> qAfterPorter, List<String> arrayAfterSort, ArrayList<Double> tfIdfD1, ArrayList<Double> tfIdfQ, List<String> qAfterSort) {
         long start = System.currentTimeMillis();
 
-        
+
         //формируем общий из 2x, сортируем, выкидываем повторы
      /*   List<String> arrayTokensForTwo = getAllTokensArray(qAfterPorter, fileAfterPorter1);
         ArrayList<Double> tfIdfForDoc1 = getTfIgfForPairDoc(arrayAfterSort, tfIdfD1, arrayTokensForTwo);
@@ -177,6 +160,15 @@ public class Analyzer {
         return tfIdfForDoc1;
     }
 
+    private ArrayList<Double> getTfIdfSkale(ArrayList<Double> idf) {
+        ArrayList<Double> tfIdf = new ArrayList<Double>();
+        for (int i = 0; i < idf.size(); i++) {
+            double temp = idf.get(i) * idf.get(i);
+            tfIdf.add(i, temp);
+            System.out.println(tfIdf.get(i));
+        }
+        return tfIdf;
+    }
 
     private Double getCos(ArrayList<Double> tfIdfD1In2Skale, ArrayList<Double> tfIdfD2In2Skale, Double getSkalar) {
         Double getCos = 0.0;
@@ -215,104 +207,5 @@ public class Analyzer {
         System.out.println("skalar=" + getSkalar);
         System.out.println("pair=" + сountPairs);
         return getSkalar;
-    }
-
-    private ArrayList<Double> getIdf(ArrayList<Integer> documentFrequency, Integer booksSize) {
-        ArrayList<Double> idf = new ArrayList<>();
-        for (int i = 0; i < documentFrequency.size(); i++) {
-
-            //       http://pr0java.blogspot.com/2015/05/biginteger-bigdecimal_70.html
-            BigDecimal baseCountDocs = new BigDecimal(documentFrequency.get(i));
-            BigDecimal bdN = new BigDecimal(booksSize);
-            BigDecimal arg = new BigDecimal(0);
-            double log = 0;
-            if (!baseCountDocs.equals(arg)) {
-                arg = bdN.divide(baseCountDocs, 5, BigDecimal.ROUND_HALF_EVEN);
-                log = Math.log10(arg.doubleValue());
-            }
-
-            idf.add(i, log);
-            System.out.println(idf.get(i));
-        }
-        return idf;
-    }
-
-    private ArrayList<Integer> getCountFilesWithEveryWord(ArrayList<Book> books) {
-        ArrayList<Integer> documentFrequency = new ArrayList<>();
-        for (int i = 0; i < books.get(0).getTf().size(); i++) {
-            int temp = 0;
-            for (int j = 0; j < books.size(); j++) {
-                if ((books.get(j).getTf().get(i)) != 0)
-                    temp++;
-            }
-            documentFrequency.add(i, temp);
-        }
-        return documentFrequency;
-    }
-    
-
-    private void getTfIdf(Book book, ArrayList<Double> idf) {
-        ArrayList<Double> tfIdf = new ArrayList<Double>();
-
-        for (int i = 0; i < idf.size(); i++) {
-            double getCount = book.getTf().get(i).doubleValue();
-            double temp = idf.get(i) * getCount;
-            tfIdf.add(i, temp);
-            // System.out.println(tfIdfD1.get(i));
-        }
-        book.setTf_idf(tfIdf);
-    }
-
-    private ArrayList<Double> getTfIdfSkale(ArrayList<Double> idf) {
-        ArrayList<Double> tfIdf = new ArrayList<Double>();
-        for (int i = 0; i < idf.size(); i++) {
-            double temp = idf.get(i) * idf.get(i);
-            tfIdf.add(i, temp);
-            System.out.println(tfIdf.get(i));
-        }
-        return tfIdf;
-    }
-
-    /*Получает число каждой лексемы в книге*/
-    private void getCountEachTokensInFile(Book book, List<String> arrayAfterSort) {
-        ArrayList<Integer> tf = new ArrayList<Integer>();
-
-        for (int i = 0; i < arrayAfterSort.size(); i++) {
-            String temp = arrayAfterSort.get(i);
-            int numberOfElephants = (int) book.getLexems()
-                    .stream()
-                    .filter(p -> p.equals(temp))
-                    .count();
-
-            tf.add(i, numberOfElephants);
-        }
-
-        book.setTf(tf);
-    }
-
-
-
-    public List<String> getResultsWithDetectivesDictionary(ArrayList<Book> books) {
-
-        //формируем общий, сортируем, выкидываем повторы
-        String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary.txt");
-        ArrayList<String> arrayAfterSort = getWordsFromString(detectiveWordsString);
-
-        for (int i = 0; i < books.size(); i++) {
-            getCountEachTokensInFile(books.get(i), arrayAfterSort);
-        }
-
-        //считаем общее число файлов, в которых встречается слово
-        ArrayList<Integer> documentFrequency = getCountFilesWithEveryWord(books);
-
-        //считаем idf
-        ArrayList<Double> idf = getIdf(documentFrequency, books.size());
-
-        //получаем tf-idf
-        for (int i = 0; i < books.size(); i++) {
-            getTfIdf(books.get(i), idf);
-        }
-
-        return arrayAfterSort;
     }
 }

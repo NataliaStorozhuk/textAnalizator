@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static sample.FileToBookConverter.*;
+import static sample.StatisticGetter.*;
 
 public class TestClass {
 
@@ -21,7 +22,7 @@ public class TestClass {
     public void getFiles() throws IOException {
         final File folder = new File("C:/Users/Natalia/Desktop/detectives");
         listFilesForFolder(folder);
-        List<String> arrayAfterSort = analyzer.getResults(books);
+        List<String> arrayAfterSort = getBaseFrequencies(books);
         ExcelExporter.createExcelFile(arrayAfterSort, books, "allWords");
     }
 
@@ -35,7 +36,7 @@ public class TestClass {
         ArrayList<String> detectiveWords = getWordsFromString(detectiveWordsString);
 
         getListBooksWithDetectiveWordsOnly(folder, detectiveWords);
-        List<String> arrayAfterSort = analyzer.getResultsWithDetectivesDictionary(books);
+        List<String> arrayAfterSort = getResultsWithDetectivesDictionary(books);
 
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;
@@ -52,7 +53,7 @@ public class TestClass {
         long start = System.currentTimeMillis();
 
         listFilesForFolder(folder);
-        List<String> arrayAfterSort = analyzer.getResults(books);
+        List<String> arrayAfterSort = getBaseFrequencies(books);
 
         books.add(createAverageBook(books));
 
@@ -75,12 +76,12 @@ public class TestClass {
 
     //Опыт 2, имена удалены
     @Test
-    public void getResultsForMaxDictionaryWithoutWords() throws IOException {
-        final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
+    public void getResultsForMaxDictionaryWithoutNames() throws IOException {
+        final File folder = new File("C:/Users/Natalia/Desktop/another_viborka_utf8");
         long start = System.currentTimeMillis();
 
-        listFilesForFolder(folder);
-        List<String> arrayAfterSort = analyzer.getResults(books);
+        listFilesForFolderWithoutNames(folder);
+        List<String> arrayAfterSort = getBaseFrequencies(books);
 
         books.add(createAverageBook(books));
 
@@ -98,7 +99,7 @@ public class TestClass {
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
 
 
-        ExcelExporter.createExcelFile(maxArrayList, booksMax, "detectives_utf8");
+        ExcelExporter.createExcelFile(maxArrayList, booksMax, "another_viborka_utf8");
     }
 
 
@@ -152,6 +153,18 @@ public class TestClass {
         }
     }
 
+    //Ходим по папке, собираем файлы в объекты Book
+    public void listFilesForFolderWithoutNames(File folder) {
+
+        for (final File fileEntry : folder.listFiles()) {
+            if (fileEntry.isDirectory()) {
+                listFilesForFolder(fileEntry);
+            } else {
+                books.add(getBookFromFileWithoutNames(fileEntry));
+            }
+        }
+    }
+
     /*Получаем список книг, в котором лексемы каждой книги содержат ТОЛЬКО слова из detectiveWords*/
     public void getListBooksWithDetectiveWordsOnly(File folder, ArrayList<String> detectiveWords) {
 
@@ -178,6 +191,30 @@ public class TestClass {
         Book book = new Book(file.getName(), fileAfterPorter
         );
         return book;
+    }
+
+    public List<String> getResultsWithDetectivesDictionary(ArrayList<Book> books) {
+
+        //формируем общий, сортируем, выкидываем повторы
+        String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary.txt");
+        ArrayList<String> arrayAfterSort = getWordsFromString(detectiveWordsString);
+
+        for (int i = 0; i < books.size(); i++) {
+            getTf(books.get(i), arrayAfterSort);
+        }
+
+        //считаем общее число файлов, в которых встречается слово
+        ArrayList<Integer> documentFrequency = getDf(books);
+
+        //считаем idf
+        ArrayList<Double> idf = getIdf(documentFrequency, books.size());
+
+        //получаем tf-idf
+        for (int i = 0; i < books.size(); i++) {
+            getTfIdf(books.get(i), idf);
+        }
+
+        return arrayAfterSort;
     }
 
 
