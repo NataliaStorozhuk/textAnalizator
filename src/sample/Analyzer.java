@@ -3,50 +3,34 @@ package sample;
 
 import lombok.Setter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static sample.FileToBookConverter.getWordsFromString;
+import static sample.FileToBookConverter.usingBufferedReader;
 
 @Setter
 public class Analyzer {
     int n = 3;
 
+    /*Метод делает из списка разных книг отсортированный массив лексем без дубликатов*/
     private List<String> getAllTokensArray(ArrayList<Book> books) {
         ArrayList<String> allArray = new ArrayList<String>();
-        for (int i = 0; i < books.size(); i++
-        ) {
-            allArray.addAll(books.get(i).getLexems());
+        for (Book book : books) {
+            allArray.addAll(book.getLexems());
         }
 
         List<String> arrayAfterSort = allArray.stream().distinct().collect(Collectors.toList());
         Collections.sort(arrayAfterSort);
-
-        System.out.print(arrayAfterSort);
-        System.out.print(arrayAfterSort.size());
+        
         return arrayAfterSort;
     }
 
-    private List<String> getAllTokensTwoDocs(ArrayList<String> d1Array, ArrayList<String> d2Array) {
-        ArrayList<String> allArray = new ArrayList<String>();
-        allArray.addAll(d1Array);
-        allArray.addAll(d2Array);
-
-        List<String> arrayAfterSort = allArray.stream().distinct().collect(Collectors.toList());
-        Collections.sort(arrayAfterSort);
-
-        System.out.print(arrayAfterSort);
-        System.out.print(arrayAfterSort.size());
-        return arrayAfterSort;
-    }
-
-
+    
+ 
  /*  private ArrayList<Double> getTfIdfQuery(List<String> arrayAfterSort, ArrayList<Integer> tdD1, ArrayList<Integer> tdD2, ArrayList<Integer> tdD3, ArrayList<Double> idf, ArrayList<String> QArray) {
         List<String> QArraySort = QArray.stream().distinct().collect(Collectors.toList());
         Collections.sort(QArraySort);
@@ -146,8 +130,9 @@ public class Analyzer {
     private CompareResults getCompareResults(ArrayList<String> fileAfterPorter1, ArrayList<String> qAfterPorter, List<String> arrayAfterSort, ArrayList<Double> tfIdfD1, ArrayList<Double> tfIdfQ, List<String> qAfterSort) {
         long start = System.currentTimeMillis();
 
+        
         //формируем общий из 2x, сортируем, выкидываем повторы
-        List<String> arrayTokensForTwo = getAllTokensTwoDocs(qAfterPorter, fileAfterPorter1);
+     /*   List<String> arrayTokensForTwo = getAllTokensArray(qAfterPorter, fileAfterPorter1);
         ArrayList<Double> tfIdfForDoc1 = getTfIgfForPairDoc(arrayAfterSort, tfIdfD1, arrayTokensForTwo);
         ArrayList<Double> tfIdfForDoc2 = getTfIgfForPairDoc(qAfterSort, tfIdfQ, arrayTokensForTwo);
 
@@ -165,11 +150,11 @@ public class Analyzer {
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;
 
-
+*/
         CompareResults compareResults = new CompareResults();
-        compareResults.skalar = getSkalar;
+       /* compareResults.skalar = getSkalar;
         compareResults.cos = getCos;
-        compareResults.durability = timeConsumedMillis;
+        compareResults.durability = timeConsumedMillis;*/
         return compareResults;
     }
 
@@ -261,20 +246,10 @@ public class Analyzer {
                     temp++;
             }
             documentFrequency.add(i, temp);
-            // System.out.println(arrayAfterSort.get(i));
-            // System.out.println(documentFrequency.get(i));
         }
         return documentFrequency;
     }
-
-    private Double getLength(ArrayList<Double> tfIdfD1In2Skale) {
-        double sum = 0;
-        for (int i = 0; i < tfIdfD1In2Skale.size(); i++) {
-            sum += tfIdfD1In2Skale.get(i);
-        }
-        double sqrt = Math.sqrt(sum);
-        return sqrt;
-    }
+    
 
     private void getTfIdf(Book book, ArrayList<Double> idf) {
         ArrayList<Double> tfIdf = new ArrayList<Double>();
@@ -298,7 +273,8 @@ public class Analyzer {
         return tfIdf;
     }
 
-    private void /*ArrayList<Integer>*/ getCountEachTokensInFile(Book book, List<String> arrayAfterSort) {
+    /*Получает число каждой лексемы в книге*/
+    private void getCountEachTokensInFile(Book book, List<String> arrayAfterSort) {
         ArrayList<Integer> tf = new ArrayList<Integer>();
 
         for (int i = 0; i < arrayAfterSort.size(); i++) {
@@ -309,65 +285,14 @@ public class Analyzer {
                     .count();
 
             tf.add(i, numberOfElephants);
-            //        System.out.println(numberOfElephants);
-            //      System.out.println(arrayAfterSort.get(i));
         }
 
         book.setTf(tf);
-        //      return tf;
-    }
-
-    public String getDocFromFileSystem(File file) {
-        long start = System.currentTimeMillis();
-        String s = usingBufferedReader(file.getPath());
-        System.out.println(s);
-        return s;
     }
 
 
-    public ArrayList<String> getWordsWithoutStop(ArrayList<String> newS) {
-        String stopWordsString = usingBufferedReader("src/resources/stop_words.txt");
-        ArrayList<String> stopWords = getWordsFromString(stopWordsString);
-        newS.removeAll(stopWords);
-        return newS;
-    }
 
-    public static String usingBufferedReader(String filePath) {
-        StringBuilder contentBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-
-            String sCurrentLine;
-            while ((sCurrentLine = br.readLine()) != null) {
-                contentBuilder.append(sCurrentLine).append("\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return contentBuilder.toString();
-    }
-
-
-    public ArrayList<String> getWordsAfterPorter(ArrayList<String> res) {
-        ArrayList<String> afterPorter = new ArrayList<>();
-        AlgorithmPorter algorithmPorter = new AlgorithmPorter();
-        for (int i = 0; i < res.size(); i++) {
-            String temp = algorithmPorter.stem(res.get(i));
-            afterPorter.add(i, temp);
-            System.out.println(temp);
-        }
-        return afterPorter;
-    }
-
-    public ArrayList<String> getWordsFromString(String q) {
-        String s = q.replaceAll("[^а-яёА-Я]", " ");
-        s = s.toLowerCase();
-        System.out.println(s);
-        ArrayList<String> res = new ArrayList<String>(Arrays.asList(s.split("\\s+")));
-        System.out.println(res);
-        return res;
-    }
-
-    public List<String> getResultswithDetectivesDictionary(ArrayList<Book> books) {
+    public List<String> getResultsWithDetectivesDictionary(ArrayList<Book> books) {
 
         //формируем общий, сортируем, выкидываем повторы
         String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary.txt");

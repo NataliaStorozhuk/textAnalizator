@@ -1,50 +1,51 @@
 package sample;
 
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static sample.FileToBookConverter.*;
+
 public class TestClass {
 
     Analyzer analyzer = new Analyzer();
     ArrayList<Book> books = new ArrayList<>();
 
+    //просто тест получения файлов и потом в эксельку что нибудь записать
     @Test
     public void getFiles() throws IOException {
         final File folder = new File("C:/Users/Natalia/Desktop/detectives");
         listFilesForFolder(folder);
         List<String> arrayAfterSort = analyzer.getResults(books);
-        createExcelFile(arrayAfterSort, books, "allWords");
+        ExcelExporter.createExcelFile(arrayAfterSort, books, "allWords");
     }
 
+    //Получить анализ выбранных 352 слов
     @Test
     public void getResultsForDetectiveDictionary() throws IOException {
         final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
         long start = System.currentTimeMillis();
-        List<String> detectiveDictionary = listFilesForDetectiveFolder(folder);
-        List<String> arrayAfterSort = analyzer.getResultswithDetectivesDictionary(books);
+
+        String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary.txt");
+        ArrayList<String> detectiveWords = getWordsFromString(detectiveWordsString);
+
+        getListBooksWithDetectiveWordsOnly(folder, detectiveWords);
+        List<String> arrayAfterSort = analyzer.getResultsWithDetectivesDictionary(books);
 
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
 
         books.add(createAverageBook(books));
-        createExcelFile(arrayAfterSort, books, "another");
+        ExcelExporter.createExcelFile(arrayAfterSort, books, "another");
     }
 
+    //Опыт 2 без удаления имен
     @Test
     public void getResultsForMaxDictionary() throws IOException {
         final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
@@ -60,8 +61,7 @@ public class TestClass {
         booksMax.add(maxBook);
 
         ArrayList<String> maxArrayList = new ArrayList<>();
-        for (int i=0; i<maxBook.tf.size(); i++)
-        {
+        for (int i = 0; i < maxBook.tf.size(); i++) {
             maxArrayList.add(arrayAfterSort.get(maxBook.tf.get(i)));
         }
 
@@ -69,25 +69,54 @@ public class TestClass {
         long timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
 
-       // books.add(createAverageBook(books));
-        createExcelFile(maxArrayList, booksMax, "detectives_utf8");
+
+        ExcelExporter.createExcelFile(maxArrayList, booksMax, "detectives_utf8");
     }
 
+    //Опыт 2, имена удалены
+    @Test
+    public void getResultsForMaxDictionaryWithoutWords() throws IOException {
+        final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
+        long start = System.currentTimeMillis();
+
+        listFilesForFolder(folder);
+        List<String> arrayAfterSort = analyzer.getResults(books);
+
+        books.add(createAverageBook(books));
+
+        ArrayList<Book> booksMax = new ArrayList<>();
+        Book maxBook = createMaxBook(createAverageBook(books), 300);
+        booksMax.add(maxBook);
+
+        ArrayList<String> maxArrayList = new ArrayList<>();
+        for (int i = 0; i < maxBook.tf.size(); i++) {
+            maxArrayList.add(arrayAfterSort.get(maxBook.tf.get(i)));
+        }
+
+        long finish = System.currentTimeMillis();
+        long timeConsumedMillis = finish - start;
+        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
+
+
+        ExcelExporter.createExcelFile(maxArrayList, booksMax, "detectives_utf8");
+    }
+
+
+    //из книги со соредними значениями показателя высчитываем и сортируем максимум countWords штук слов
     private Book createMaxBook(Book averageBook, Integer countWords) {
         Book book = new Book("maxBook");
         book.setTf(new ArrayList<>());
         book.setTf_idf(new ArrayList<>());
-        for (int i=0; i<countWords; i++)
-        {
+        for (int i = 0; i < countWords; i++) {
             book.tf.add(averageBook.tf_idf.indexOf(Collections.max(averageBook.tf_idf)));
 
             book.tf_idf.add(Collections.max(averageBook.tf_idf));
-            averageBook.tf_idf.set(averageBook.tf_idf.indexOf(Collections.max(averageBook.tf_idf)),0.0);
+            averageBook.tf_idf.set(averageBook.tf_idf.indexOf(Collections.max(averageBook.tf_idf)), 0.0);
         }
         return book;
     }
 
-
+    //из книг всех - всех высчитываем средние показатели
     private Book createAverageBook(ArrayList<Book> books) {
         Book averageBook = new Book("averageBook");
         ArrayList<Double> tf_idf = new ArrayList<Double>();
@@ -111,115 +140,45 @@ public class TestClass {
     }
 
 
-    public List<String> listFilesForDetectiveFolder(File folder) {
-        List<String> dictionaryDetective = null;
-        for (final File fileEntry : folder.listFiles()) {
-            if (fileEntry.isDirectory()) {
-                listFilesForFolder(fileEntry);
-            } else {
-                dictionaryDetective = getBookFromDetectiveBook(fileEntry);
-                System.out.println(fileEntry.getName());
-            }
-        }
-        return dictionaryDetective;
-    }
-
-
+    //Ходим по папке, собираем файлы в объекты Book
     public void listFilesForFolder(File folder) {
 
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
                 listFilesForFolder(fileEntry);
             } else {
-                getBookFromFile(fileEntry);
+                books.add(getBookFromFile(fileEntry));
+            }
+        }
+    }
+
+    /*Получаем список книг, в котором лексемы каждой книги содержат ТОЛЬКО слова из detectiveWords*/
+    public void getListBooksWithDetectiveWordsOnly(File folder, ArrayList<String> detectiveWords) {
+
+        for (final File fileEntry : folder.listFiles()) {
+            if (fileEntry.isDirectory()) {
+                listFilesForFolder(fileEntry);
+            } else {
+                books.add(getBookWithDetectiveWordsOnly(fileEntry, detectiveWords));
                 System.out.println(fileEntry.getName());
             }
         }
-        int p = 0;
     }
 
+    /*Берем книгу из файла, выкиыдваем лишние слова*/
+    public Book getBookWithDetectiveWordsOnly(File file, ArrayList<String> detectiveWords) {
 
-    public void getBookFromFile(File file) {
+        String s = usingBufferedReader(file.getPath());
+        ArrayList<String> wordsFromString = getWordsFromString(s);
 
-        String s = analyzer.getDocFromFileSystem(file);
-        ArrayList<String> wordsFromString = analyzer.getWordsFromString(s);
-
-        ArrayList<String> wordsWithoutStop = analyzer.getWordsWithoutStop(wordsFromString);
-        ArrayList<String> fileAfterPorter = analyzer.getWordsAfterPorter(wordsWithoutStop);
-
-        Book book = new Book(file.getName(), fileAfterPorter);
-        books.add(book);
-    }
-
-    public List<String> getBookFromDetectiveBook(File file) {
-
-        String s = analyzer.getDocFromFileSystem(file);
-        ArrayList<String> wordsFromString = analyzer.getWordsFromString(s);
-
-        String detectiveWordsString = analyzer.usingBufferedReader("src/resources/detectiveDictionary.txt");
-        ArrayList<String> detectiveWords = analyzer.getWordsFromString(detectiveWordsString);
         wordsFromString.retainAll(detectiveWords);
 
-        // ArrayList<String> wordsWithoutStop = analyzer.getWordsWithoutStop(wordsFromString);
-        ArrayList<String> fileAfterPorter = analyzer.getWordsAfterPorter(wordsFromString);
+        ArrayList<String> fileAfterPorter = getWordsAfterPorter(wordsFromString);
 
-        Book book = new Book(file.getName(), fileAfterPorter);
-        books.add(book);
-        return detectiveWords;
+        Book book = new Book(file.getName(), fileAfterPorter
+        );
+        return book;
     }
 
-
-    public void createExcelFile(List<String> lexems, ArrayList<Book> books, String bookName) throws IOException {
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("Employees sheet");
-        int rownum = 0;
-        Cell cell;
-        Row row;
-        //
-        HSSFCellStyle style = createStyleForTitle(workbook);
-
-        row = sheet.createRow(rownum);
-
-        cell = row.createCell(0, CellType.STRING);
-        cell.setCellValue("words");
-        cell.setCellStyle(style);
-
-        for (int i = 0; i < books.size(); i++) {
-            cell = row.createCell(i + 1, CellType.STRING);
-            cell.setCellValue(books.get(i).getName());
-            cell.setCellStyle(style);
-        }
-
-        // Data
-        for (int i = 0; i < lexems.size(); i++) {
-
-            rownum++;
-            row = sheet.createRow(rownum);
-
-            // EmpNo (A)
-            cell = row.createCell(0, CellType.STRING);
-            cell.setCellValue(lexems.get(i));
-
-            for (int j = 0; j < books.size(); j++) {
-                cell = row.createCell(j + 1, CellType.STRING);
-                cell.setCellValue(books.get(j).getTf_idf().get(i));
-                cell.setCellStyle(style);
-            }
-        }
-        File file = new File("C:/Users/Natalia/Desktop/" + bookName + ".xls");
-        file.getParentFile().mkdirs();
-
-        FileOutputStream outFile = new FileOutputStream(file);
-        workbook.write(outFile);
-        System.out.println("Created file: " + file.getAbsolutePath());
-    }
-
-    private static HSSFCellStyle createStyleForTitle(HSSFWorkbook workbook) {
-        HSSFFont font = workbook.createFont();
-        font.setBold(true);
-        HSSFCellStyle style = workbook.createCellStyle();
-        style.setFont(font);
-        return style;
-    }
 
 }

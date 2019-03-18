@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.ArrayList;
 
+import static sample.FileToBookConverter.*;
+
 //import java.awt.*;
 
 public class Controller {
@@ -111,16 +113,16 @@ public class Controller {
 
     private void openFile1(File file) {
 
-        String s = analyzer.getDocFromFileSystem(file);
-        ArrayList<String> newS = analyzer.getWordsFromString(s);
+        String s = usingBufferedReader(file.getPath());
+        ArrayList<String> newS = getWordsFromString(s);
         name1.setText(file.getName());
         countLex1.setText(String.valueOf(newS.size()));
 
-        newS = analyzer.getWordsWithoutStop(newS);
+        newS = getWordsWithoutStop(newS);
         countStop1.setText(String.valueOf(newS.size()));
 
         long start = System.currentTimeMillis();
-        fileAfterPorter1 = analyzer.getWordsAfterPorter(newS);
+        fileAfterPorter1 = getWordsAfterPorter(newS);
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;
         durabilityStem1.setText(String.valueOf(timeConsumedMillis));
@@ -129,16 +131,16 @@ public class Controller {
     private void openFile2(File file) {
 
         Analyzer analyzer = new Analyzer();
-        String s = analyzer.getDocFromFileSystem(file);
+        String s = usingBufferedReader(file.getPath());
         name2.setText(file.getName());
-        ArrayList<String> newS = analyzer.getWordsFromString(s);
+        ArrayList<String> newS = getWordsFromString(s);
         countLex2.setText(String.valueOf(newS.size()));
 
-        newS = analyzer.getWordsWithoutStop(newS);
+        newS = getWordsWithoutStop(newS);
         countStop2.setText(String.valueOf(newS.size()));
 
         long start = System.currentTimeMillis();
-        ArrayList<String> afterP = analyzer.getWordsAfterPorter(newS);
+        ArrayList<String> afterP = getWordsAfterPorter(newS);
         fileAfterPorter2 = afterP;
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;
@@ -149,16 +151,16 @@ public class Controller {
     private void openFile3(File file) {
 
         Analyzer analyzer = new Analyzer();
-        String s = analyzer.getDocFromFileSystem(file);
+        String s = usingBufferedReader(file.getPath());
         name3.setText(file.getName());
-        ArrayList<String> newS = analyzer.getWordsFromString(s);
+        ArrayList<String> newS = getWordsFromString(s);
         countLex3.setText(String.valueOf(newS.size()));
 
-        newS = analyzer.getWordsWithoutStop(newS);
+        newS = getWordsWithoutStop(newS);
         countStop3.setText(String.valueOf(newS.size()));
 
         long start = System.currentTimeMillis();
-        ArrayList<String> afterP = analyzer.getWordsAfterPorter(newS);
+        ArrayList<String> afterP = getWordsAfterPorter(newS);
         fileAfterPorter3 = afterP;
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;
@@ -169,16 +171,16 @@ public class Controller {
     private void openFile4(File file) {
 
         Analyzer analyzer = new Analyzer();
-        String s = analyzer.getDocFromFileSystem(file);
+        String s = usingBufferedReader(file.getPath());
         name4.setText(file.getName());
-        ArrayList<String> newS = analyzer.getWordsFromString(s);
+        ArrayList<String> newS = getWordsFromString(s);
         countLex4.setText(String.valueOf(newS.size()));
 
-        newS = analyzer.getWordsWithoutStop(newS);
+        newS = getWordsWithoutStop(newS);
         countStop4.setText(String.valueOf(newS.size()));
 
         long start = System.currentTimeMillis();
-        ArrayList<String> afterP = analyzer.getWordsAfterPorter(newS);
+        ArrayList<String> afterP = getWordsAfterPorter(newS);
         fileAfterPorter4 = afterP;
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;

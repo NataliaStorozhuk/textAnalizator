@@ -29,7 +29,7 @@ public class AlgorithmPorter {
         private static final Pattern P = Pattern.compile("ь$");
         private static final Pattern NN = Pattern.compile("нн$");
 
-        public String stem(String word) {
+        public static String stem(String word) {
             word = word.toLowerCase();
             word = word.replace('ё', 'е');
             Matcher m = RVRE.matcher(word);
