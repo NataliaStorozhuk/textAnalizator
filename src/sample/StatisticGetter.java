@@ -29,6 +29,11 @@ public class StatisticGetter {
             getTfIdf(book, idf);
         }
 
+        //получаем w по модной формуле
+        for (Book book : books) {
+            getW(book, idf);
+        }
+
         return arrayAfterSort;
 
     }
@@ -62,6 +67,14 @@ public class StatisticGetter {
         }
 
         book.setTf(tf);
+
+        double maxIdf = Collections.max(book.tf);
+
+        ArrayList<Double> newTF = new ArrayList<Double>();
+        for (int i = 0; i < arrayAfterSort.size(); i++) {
+            newTF.add(i, (double) tf.get(i) / maxIdf);
+        }
+        book.normTF = newTF;
     }
 
     //Получили список, который содержит количества файлов, в которых повторяются лексемы
@@ -104,10 +117,22 @@ public class StatisticGetter {
         ArrayList<Double> tfIdf = new ArrayList<Double>();
 
         for (int i = 0; i < idf.size(); i++) {
-            double getCount = book.getTf().get(i).doubleValue();
+            double getCount = book.normTF.get(i);
             double temp = idf.get(i) * getCount;
             tfIdf.add(i, temp);
         }
         book.setTf_idf(tfIdf);
+    }
+
+    //Получили число TfIdf для каждого документа
+    public static void getW(Book book, ArrayList<Double> idf) {
+        ArrayList<Double> w = new ArrayList<Double>();
+
+        for (int i = 0; i < book.normTF.size(); i++) {
+
+            double wi = (0.5 + book.normTF.get(i) * 0.5) * idf.get(i);
+            w.add(wi);
+        }
+        book.setW(w);
     }
 }

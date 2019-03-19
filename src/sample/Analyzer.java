@@ -4,7 +4,6 @@ package sample;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static sample.StatisticGetter.*;
@@ -100,15 +99,6 @@ public class Analyzer {
         return countQDocs;
     }
 
-    private ArrayList<Double> getTfMaxTf(ArrayList<Integer> tdQ) {
-        ArrayList<Double> tfMaxTf = new ArrayList<>();
-        Integer max = Collections.max(tdQ);
-        for (int i = 0; i < tdQ.size(); i++) {
-            tfMaxTf.add(tdQ.get(i).doubleValue() / max.doubleValue());
-            System.out.println(tfMaxTf.get(i));
-        }
-        return tfMaxTf;
-    }
 
     private CompareResults getCompareResults(ArrayList<String> fileAfterPorter1, ArrayList<String> qAfterPorter, List<String> arrayAfterSort, ArrayList<Double> tfIdfD1, ArrayList<Double> tfIdfQ, List<String> qAfterSort) {
         long start = System.currentTimeMillis();
