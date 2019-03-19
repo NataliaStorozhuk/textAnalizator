@@ -6,38 +6,14 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static sample.StatisticGetter.*;
-
 @Setter
 public class Analyzer {
 
-    public List<String> getSimiliarity(ArrayList<Book> books) {
-
-
-        //формируем общий, сортируем, выкидываем повторы
-        List<String> arrayAfterSort = getAllTokensArray(books);
-
-        //получаем tf - число каждой лексемы в книге
-        for (int i = 0; i < books.size(); i++) {
-            StatisticGetter.getTf(books.get(i), arrayAfterSort);
-        }
-
-        //считаем общее число файлов, в которых встречается слово
-        ArrayList<Integer> documentFrequency = getDf(books);
-
-        //считаем idf
-        ArrayList<Double> idf = getIdf(documentFrequency, books.size());
-
-        //получаем tf-idf
-        for (int i = 0; i < books.size(); i++) {
-            getTfIdf(books.get(i), idf);
-        }
-
-        return arrayAfterSort;
+  /*  public List<String> getSimiliarity(ArrayList<Book> books) {
 
         //Работаем с исходником
         //     ArrayList<Integer> tdQ = getTf(qAfterPorter, qAfterPorter);
-      /*  ArrayList<Double> tfIdfQ = getTfIdfQuery(arrayAfterSort, books, idf, bookRequest);
+       ArrayList<Double> tfIdfQ = getTfIdfQuery(arrayAfterSort, books, idf, bookRequest);
 
         List<String> qAfterSort = qAfterPorter.stream().distinct().collect(Collectors.toList());
         Collections.sort(qAfterSort);
@@ -45,8 +21,8 @@ public class Analyzer {
         CompareResults compareResults1 =
                 getCompareResults(fileAfterPorter1, qAfterPorter, arrayAfterSort, tfIdfD1, tfIdfQ, qAfterSort);
 
-        return compareResults;*/
-    }
+        return compareResults;
+    }*/
 
 
 
@@ -80,25 +56,6 @@ public class Analyzer {
         }
         return tfIdfQ;
     }
-
-    private ArrayList<Integer> getQCountCocs(List<String> arrayAfterSort, ArrayList<Integer> tdD1, ArrayList<Integer> tdD2, ArrayList<Integer> tdD3, ArrayList<String> QArray, List<String> QArraySort) {
-        ArrayList<Integer> countQDocs = new ArrayList<>();
-        for (int i = 0; i < QArraySort.size(); i++) {
-            int temp = 0;
-            for (int j = 0; j < arrayAfterSort.size(); j++) {
-                if (arrayAfterSort.get(j).equals(QArray.get(i))) {
-
-                    if (tdD1.get(j) != 0) temp++;
-                    if (tdD2.get(j) != 0) temp++;
-                    if (tdD3.get(j) != 0) temp++;
-                    break;
-                }
-            }
-            countQDocs.add(temp);
-        }
-        return countQDocs;
-    }
-
 
     private CompareResults getCompareResults(ArrayList<String> fileAfterPorter1, ArrayList<String> qAfterPorter, List<String> arrayAfterSort, ArrayList<Double> tfIdfD1, ArrayList<Double> tfIdfQ, List<String> qAfterSort) {
         long start = System.currentTimeMillis();
@@ -184,14 +141,48 @@ public class Analyzer {
     }
 
 
-    private Double getSkalar(ArrayList<Double> tfIdfD1, ArrayList<Double> tfIdfD2) {
+    public static Double getSkalar(AllTokensClass studyViborka, AllTokensClass testViborka) {
         Double getSkalar = 0.0;
         Integer сountPairs = 0;
 
-        for (int i = 0; i < tfIdfD1.size(); i++) {
-            getSkalar += tfIdfD1.get(i) * tfIdfD2.get(i);
-            if (tfIdfD1.get(i) != 0 && tfIdfD2.get(i) != 0)
-                сountPairs++;
+        for (int i = 0; i < studyViborka.arrayAfterSort.size(); i++) {
+
+            for (int j = 0; j < testViborka.arrayAfterSort.size(); j++) {
+
+                if (studyViborka.arrayAfterSort.get(i).equals(testViborka.arrayAfterSort.get(j))) {
+                    getSkalar += (studyViborka.w.get(i) * testViborka.w.get(j));
+                    сountPairs++;
+                    break;
+                }
+
+            }
+        }
+
+        System.out.println("skalar=" + getSkalar);
+        System.out.println("pair=" + сountPairs);
+        return getSkalar;
+    }
+
+    public static Double getSkalarWithDetectiveWords(AllTokensClass studyViborka, AllTokensClass testViborka, ArrayList<String> words) {
+        Double getSkalar = 0.0;
+        Integer сountPairs = 0;
+
+        for (int i = 0; i < studyViborka.arrayAfterSort.size(); i++) {
+
+            for (int j = 0; j < testViborka.arrayAfterSort.size(); j++) {
+
+                if (studyViborka.arrayAfterSort.get(i).equals(testViborka.arrayAfterSort.get(j))) {
+
+                    for (int l = 0; l < words.size(); l++) {
+                        if (words.get(l).equals(studyViborka.arrayAfterSort.get(i))){}
+                    }
+
+                    getSkalar += (studyViborka.w.get(i) * testViborka.w.get(j));
+                    сountPairs++;
+                    break;
+                }
+
+            }
         }
 
         System.out.println("skalar=" + getSkalar);

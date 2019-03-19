@@ -8,33 +8,34 @@ import java.util.stream.Collectors;
 
 public class StatisticGetter {
 
-    public static List<String> getBaseFrequencies(ArrayList<Book> books) {
+    public static AllTokensClass getBaseFrequencies(ArrayList<Book> books) {
 
+        AllTokensClass allTokensClass = new AllTokensClass();
         //формируем общий, сортируем, выкидываем повторы
-        List<String> arrayAfterSort = getAllTokensArray(books);
+        allTokensClass.arrayAfterSort = getAllTokensArray(books);
 
         //получаем tf - число каждой лексемы в книге
         for (Book book : books) {
-            getTf(book, arrayAfterSort);
+            getTf(book, allTokensClass.arrayAfterSort);
         }
 
         //считаем общее число файлов, в которых встречается слово
         ArrayList<Integer> documentFrequency = getDf(books);
 
         //считаем idf
-        ArrayList<Double> idf = getIdf(documentFrequency, books.size());
+        allTokensClass.idf = getIdf(documentFrequency, books.size());
 
         //получаем tf-idf
         for (Book book : books) {
-            getTfIdf(book, idf);
+            getTfIdf(book, allTokensClass.idf);
         }
 
         //получаем w по модной формуле
         for (Book book : books) {
-            getW(book, idf);
+            getW(book, allTokensClass.idf);
         }
 
-        return arrayAfterSort;
+        return allTokensClass;
 
     }
 
@@ -72,7 +73,15 @@ public class StatisticGetter {
 
         ArrayList<Double> newTF = new ArrayList<Double>();
         for (int i = 0; i < arrayAfterSort.size(); i++) {
-            newTF.add(i, (double) tf.get(i) / maxIdf);
+
+            BigDecimal bdDF = new BigDecimal(tf.get(i) );
+            BigDecimal bdN = new BigDecimal(maxIdf);
+            BigDecimal arg = new BigDecimal(0);
+            if (!bdDF.equals(arg)) {
+                arg = bdDF.divide(bdN, 5, BigDecimal.ROUND_HALF_EVEN);
+            }
+
+            newTF.add(i, arg.doubleValue());
         }
         book.normTF = newTF;
     }
@@ -113,7 +122,7 @@ public class StatisticGetter {
     }
 
     //Получили число TfIdf для каждого документа
-    public static void getTfIdf(Book book, ArrayList<Double> idf) {
+    public static void getTfIdf(Book book, List<Double> idf) {
         ArrayList<Double> tfIdf = new ArrayList<Double>();
 
         for (int i = 0; i < idf.size(); i++) {
@@ -124,8 +133,8 @@ public class StatisticGetter {
         book.setTf_idf(tfIdf);
     }
 
-    //Получили число TfIdf для каждого документа
-    public static void getW(Book book, ArrayList<Double> idf) {
+    //Получили число W для каждого документа
+    public static void getW(Book book, List<Double> idf) {
         ArrayList<Double> w = new ArrayList<Double>();
 
         for (int i = 0; i < book.normTF.size(); i++) {
