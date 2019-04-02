@@ -19,5 +19,8 @@
     </orderEntry>
     <orderEntry type="library" name="org.projectlombok:lombok-maven-plugin:1.18.0.0" level="project" />
     <orderEntry type="library" name="org.apache.poi:poi:4.0.1" level="project" />
+    <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:2.9.8" level="project" />
+    <orderEntry type="library" name="h2-1.4.199" level="project" />
+    <orderEntry type="library" name="org.hibernate:hibernate-core:5.4.2.Final" level="project" />
   </component>
 </module>

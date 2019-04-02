@@ -1,7 +1,7 @@
 package sample;
 
 import sample.DTO.AllTokensClass;
-import sample.DTO.Book;
+import sample.DTO.BookProfile;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 
 public class StatisticGetter {
 
-    public static AllTokensClass getBaseFrequencies(ArrayList<Book> books) {
+    public static AllTokensClass getBaseFrequencies(ArrayList<BookProfile> books) {
 
         AllTokensClass allTokensClass = new AllTokensClass();
         //формируем общий, сортируем, выкидываем повторы
         allTokensClass.arrayAfterSort = getAllTokensArray(books);
 
         //получаем tf - число каждой лексемы в книге
-        for (Book book : books) {
+        for (BookProfile book : books) {
             getTf(book, allTokensClass.arrayAfterSort);
         }//долго
 
@@ -36,12 +36,12 @@ public class StatisticGetter {
         }
 
         //получаем tf-idf
-        for (Book book : books) {
+        for (BookProfile book : books) {
             getTfIdf(book, allTokensClass.idf);
         }
 
         //получаем w по модной формуле
-        for (Book book : books) {
+        for (BookProfile book : books) {
             getW(book, allTokensClass.idf);
         }
 
@@ -51,9 +51,9 @@ public class StatisticGetter {
 
 
     /*Метод делает из списка разных книг отсортированный массив лексем без дубликатов*/
-    public static List<String> getAllTokensArray(ArrayList<Book> books) {
+    public static List<String> getAllTokensArray(ArrayList<BookProfile> books) {
         ArrayList<String> allArray = new ArrayList<String>();
-        for (Book book : books) {
+        for (BookProfile book : books) {
             allArray.addAll(book.getLexems());
         }
 
@@ -64,7 +64,7 @@ public class StatisticGetter {
     }
 
     /*Получает количество повторений каждой лексемы в книге tf */
-    public static void getTf(Book book, List<String> arrayAfterSort) {
+    public static void getTf(BookProfile book, List<String> arrayAfterSort) {
         ArrayList<Integer> tf = new ArrayList<Integer>();
 
         for (int i = 0; i < arrayAfterSort.size(); i++) {
@@ -97,7 +97,7 @@ public class StatisticGetter {
     }
 
     //Получили список, который содержит количества файлов, в которых повторяются лексемы
-    public static ArrayList<Integer> getDf(ArrayList<Book> books) {
+    public static ArrayList<Integer> getDf(ArrayList<BookProfile> books) {
         ArrayList<Integer> documentFrequency = new ArrayList<>();
         for (int i = 0; i < books.get(0).getTf().size(); i++) {
             int temp = 0;
@@ -132,7 +132,7 @@ public class StatisticGetter {
     }
 
     //Получили число TfIdf для каждого документа
-    public static void getTfIdf(Book book, List<Double> idf) {
+    public static void getTfIdf(BookProfile book, List<Double> idf) {
         ArrayList<Double> tfIdf = new ArrayList<Double>();
 
         for (int i = 0; i < idf.size(); i++) {
@@ -144,7 +144,7 @@ public class StatisticGetter {
     }
 
     //Получили число W для каждого документа
-    public static void getW(Book book, List<Double> idf) {
+    public static void getW(BookProfile book, List<Double> idf) {
         ArrayList<Double> w = new ArrayList<Double>();
 
         for (int i = 0; i < book.normTF.size(); i++) {

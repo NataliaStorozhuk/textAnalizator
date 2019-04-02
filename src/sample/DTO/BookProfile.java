@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.ArrayList;
 
 @Data
-public class Book {
+public class BookProfile {
 
     public String name;
 
@@ -15,12 +15,12 @@ public class Book {
     public ArrayList<Double> normTF;
     private ArrayList<Double> w;
 
-    public Book(String name, ArrayList<String> lexems) {
+    public BookProfile(String name, ArrayList<String> lexems) {
         this.name = name;
         this.lexems = lexems;
     }
 
-    public Book(String averageBook) {
+    public BookProfile(String averageBook) {
     }
 
 }

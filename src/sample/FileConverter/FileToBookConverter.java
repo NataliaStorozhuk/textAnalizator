@@ -1,7 +1,7 @@
 package sample.FileConverter;
 
 import sample.AlgorithmPorter;
-import sample.DTO.Book;
+import sample.DTO.BookProfile;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,8 +12,8 @@ import java.util.Arrays;
 
 public class FileToBookConverter {
 
-    /*Из файла прямо в объект типа Book*/
-    public static Book getBookFromFile(File file) {
+    /*Из файла прямо в объект типа BookProfile*/
+    public static BookProfile getBookFromFile(File file) {
 
         String s = usingBufferedReader(file.getPath());
         ArrayList<String> wordsFromString = getWordsFromString(s);
@@ -21,13 +21,13 @@ public class FileToBookConverter {
         ArrayList<String> wordsWithoutStop = getWordsWithoutStop(wordsFromString);
         ArrayList<String> fileAfterPorter = getWordsAfterPorter(wordsWithoutStop);
 
-        Book book = new Book(file.getName(), fileAfterPorter);
+        BookProfile book = new BookProfile(file.getName(), fileAfterPorter);
         return book;
     }
 
 
-    /*Из файла прямо в объект типа Book БЕЗ ИМЕН*/
-    public static Book getBookFromFileWithoutNames(File file) {
+    /*Из файла прямо в объект типа BookProfile БЕЗ ИМЕН*/
+    public static BookProfile getBookFromFileWithoutNames(File file) {
 
         String s = usingBufferedReader(file.getPath());
         String sWithoutNames = cutNamesFromString(s);
@@ -36,7 +36,7 @@ public class FileToBookConverter {
         ArrayList<String> wordsWithoutStop = getWordsWithoutStop(wordsFromString);
         ArrayList<String> fileAfterPorter = getWordsAfterPorter(wordsWithoutStop);
 
-        Book book = new Book(file.getName(), fileAfterPorter);
+        BookProfile book = new BookProfile(file.getName(), fileAfterPorter);
         return book;
     }
 

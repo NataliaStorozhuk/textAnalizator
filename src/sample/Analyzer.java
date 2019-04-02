@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 public class Analyzer {
 
-  /*  public List<String> getSimiliarity(ArrayList<Book> books) {
+  /*  public List<String> getSimiliarity(ArrayList<BookProfile> books) {
 
         //Работаем с исходником
         //     ArrayList<Integer> tdQ = getTf(qAfterPorter, qAfterPorter);

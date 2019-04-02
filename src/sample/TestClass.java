@@ -2,7 +2,7 @@ package sample;
 
 import org.testng.annotations.Test;
 import sample.DTO.AllTokensClass;
-import sample.DTO.Book;
+import sample.DTO.BookProfile;
 import sample.FileConverter.ExcelExporter;
 import sample.FileConverter.ObjectToJsonConverter;
 
@@ -20,7 +20,7 @@ import static sample.StatisticGetter.getBaseFrequencies;
 public class TestClass {
 
     Analyzer analyzer = new Analyzer();
-    ArrayList<Book> books = new ArrayList<>();
+    ArrayList<BookProfile> books = new ArrayList<>();
 
     //просто тест получения файлов и потом в эксельку что нибудь записать
     @Test
@@ -97,8 +97,8 @@ public class TestClass {
 
         books.add(createAverageBook(books));
 
-        ArrayList<Book> booksMax = new ArrayList<>();
-        Book maxBook = createMaxBook(createAverageBook(books), 300);
+        ArrayList<BookProfile> booksMax = new ArrayList<>();
+        BookProfile maxBook = createMaxBook(createAverageBook(books), 300);
         booksMax.add(maxBook);
 
         ArrayList<String> maxArrayList = new ArrayList<>();
@@ -125,8 +125,8 @@ public class TestClass {
 
         books.add(createAverageBook(books));
 
-        ArrayList<Book> booksMax = new ArrayList<>();
-        Book maxBook = createMaxBook(createAverageBook(books), 300);
+        ArrayList<BookProfile> booksMax = new ArrayList<>();
+        BookProfile maxBook = createMaxBook(createAverageBook(books), 300);
         booksMax.add(maxBook);
 
         ArrayList<String> maxArrayList = new ArrayList<>();
@@ -157,9 +157,9 @@ public class TestClass {
         //тестовая следующая
         //      File file = new File("C:/Users/Natalia/Desktop/text4.txt");
         File file = new File("C:/Users/Natalia/Desktop/test_detectives/Агата Кристи 10 негритят.txt");
-        Book testBook1 = getBookFromFile(file);
+        BookProfile testBook1 = getBookFromFile(file);
 
-        ArrayList<Book> testBookOnly = new ArrayList<>();
+        ArrayList<BookProfile> testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook1);
         AllTokensClass testViborka = getBaseFrequencies(testBookOnly);
         testViborka.w = testBook1.getW();
@@ -169,7 +169,7 @@ public class TestClass {
 
         //тестовая 2
         file = new File("C:/Users/Natalia/Desktop/test_detectives/Дарья Калинина Возвращение блудного бумеранга.txt");
-        Book testBook2 = getBookFromFile(file);
+        BookProfile testBook2 = getBookFromFile(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook2);
@@ -181,7 +181,7 @@ public class TestClass {
 
         //тестовая 3
         file = new File("C:/Users/Natalia/Desktop/test_detectives/Борис Акунин Турецкий Гамбит.txt");
-        Book testBook3 = getBookFromFile(file);
+        BookProfile testBook3 = getBookFromFile(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook3);
@@ -193,7 +193,7 @@ public class TestClass {
 
         //тестовая 4
         file = new File("C:/Users/Natalia/Desktop/test_another/Брукс Карен. Озеро в лунном свете - royallib.ru.txt");
-        Book testBook4 = getBookFromFile(file);
+        BookProfile testBook4 = getBookFromFile(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook4);
@@ -205,7 +205,7 @@ public class TestClass {
 
         //тестовая 5
         file = new File("C:/Users/Natalia/Desktop/test_another/Толкиен Джон. Дети Хурина - royallib.ru.txt.txt");
-        Book testBook5 = getBookFromFile(file);
+        BookProfile testBook5 = getBookFromFile(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook5);
@@ -217,7 +217,7 @@ public class TestClass {
 
         //тестовая 6
         file = new File("C:/Users/Natalia/Desktop/test_another/Шоу Бернард. Тележка с яблоками - royallib.ru.txt");
-        Book testBook6 = getBookFromFile(file);
+        BookProfile testBook6 = getBookFromFile(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook6);
@@ -255,9 +255,9 @@ public class TestClass {
 
         //тестовая следующая
         File file = new File("C:/Users/Natalia/Desktop/test_detectives/Агата Кристи 10 негритят.txt");
-        Book testBook1 = getBookFromFileWithoutNames(file);
+        BookProfile testBook1 = getBookFromFileWithoutNames(file);
 
-        ArrayList<Book> testBookOnly = new ArrayList<>();
+        ArrayList<BookProfile> testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook1);
         AllTokensClass testViborka = getBaseFrequencies(testBookOnly);
         testViborka.w = testBook1.getW();
@@ -267,7 +267,7 @@ public class TestClass {
 
         //тестовая 2
         file = new File("C:/Users/Natalia/Desktop/test_detectives/Дарья Калинина Возвращение блудного бумеранга.txt");
-        Book testBook2 = getBookFromFileWithoutNames(file);
+        BookProfile testBook2 = getBookFromFileWithoutNames(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook2);
@@ -278,7 +278,7 @@ public class TestClass {
 
         //тестовая 3
         file = new File("C:/Users/Natalia/Desktop/test_detectives/Борис Акунин Турецкий Гамбит.txt");
-        Book testBook3 = getBookFromFileWithoutNames(file);
+        BookProfile testBook3 = getBookFromFileWithoutNames(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook3);
@@ -289,7 +289,7 @@ public class TestClass {
 
         //тестовая 4
         file = new File("C:/Users/Natalia/Desktop/test_another/Брукс Карен. Озеро в лунном свете - royallib.ru.txt");
-        Book testBook4 = getBookFromFileWithoutNames(file);
+        BookProfile testBook4 = getBookFromFileWithoutNames(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook4);
@@ -300,7 +300,7 @@ public class TestClass {
 
         //тестовая 5
         file = new File("C:/Users/Natalia/Desktop/test_another/Толкиен Джон. Дети Хурина - royallib.ru.txt.txt");
-        Book testBook5 = getBookFromFileWithoutNames(file);
+        BookProfile testBook5 = getBookFromFileWithoutNames(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook5);
@@ -311,7 +311,7 @@ public class TestClass {
 
         //тестовая 6
         file = new File("C:/Users/Natalia/Desktop/test_another/Шоу Бернард. Тележка с яблоками - royallib.ru.txt");
-        Book testBook6 = getBookFromFileWithoutNames(file);
+        BookProfile testBook6 = getBookFromFileWithoutNames(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook6);
@@ -323,8 +323,8 @@ public class TestClass {
     }
 
     //из книги со соредними значениями показателя высчитываем и сортируем максимум countWords штук слов
-    private Book createMaxBook(Book averageBook, Integer countWords) {
-        Book book = new Book("maxBook");
+    private BookProfile createMaxBook(BookProfile averageBook, Integer countWords) {
+        BookProfile book = new BookProfile("maxBook");
         book.setTf(new ArrayList<>());
         book.setTf_idf(new ArrayList<>());
         for (int i = 0; i < countWords; i++) {
@@ -337,8 +337,8 @@ public class TestClass {
     }
 
     //из книг всех - всех высчитываем средние показатели
-    private Book createAverageBook(ArrayList<Book> books) {
-        Book averageBook = new Book("averageBook");
+    private BookProfile createAverageBook(ArrayList<BookProfile> books) {
+        BookProfile averageBook = new BookProfile("averageBook");
         ArrayList<Double> w = new ArrayList<Double>();
         for (int j = 0; j < books.get(0).getW().size(); j++) {
             BigDecimal sum = BigDecimal.ZERO;
@@ -360,7 +360,7 @@ public class TestClass {
     }
 
 
-    //Ходим по папке, собираем файлы в объекты Book
+    //Ходим по папке, собираем файлы в объекты BookProfile
     public void listFilesForFolder(File folder) {
 
         for (final File fileEntry : folder.listFiles()) {
@@ -372,7 +372,7 @@ public class TestClass {
         }
     }
 
-    //Ходим по папке, собираем файлы в объекты Book
+    //Ходим по папке, собираем файлы в объекты BookProfile
     public void listFilesForFolderWithoutNames(File folder) {
 
         for (final File fileEntry : folder.listFiles()) {
@@ -398,7 +398,7 @@ public class TestClass {
     }
 
     /*Берем книгу из файла, выкиыдваем лишние слова*/
-    public Book getBookWithDetectiveWordsOnly(File file, ArrayList<String> detectiveWords) {
+    public BookProfile getBookWithDetectiveWordsOnly(File file, ArrayList<String> detectiveWords) {
 
         String s = usingBufferedReader(file.getPath());
         ArrayList<String> wordsFromString = getWordsFromString(s);
@@ -407,12 +407,12 @@ public class TestClass {
 
         ArrayList<String> fileAfterPorter = getWordsAfterPorter(wordsFromString);
 
-        Book book = new Book(file.getName(), fileAfterPorter
+        BookProfile book = new BookProfile(file.getName(), fileAfterPorter
         );
         return book;
     }
 
-    public List<String> getResultsWithDetectivesDictionary(ArrayList<Book> books) {
+    public List<String> getResultsWithDetectivesDictionary(ArrayList<BookProfile> books) {
 
         //формируем общий, сортируем, выкидываем повторы
         String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary.txt");

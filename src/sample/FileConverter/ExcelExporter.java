@@ -7,7 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
-import sample.DTO.Book;
+import sample.DTO.BookProfile;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ExcelExporter {
 
-    public static void createExcelFile(List<String> lexems, ArrayList<Book> books, String bookName) throws IOException {
+    public static void createExcelFile(List<String> lexems, ArrayList<BookProfile> books, String bookName) throws IOException {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Sheet");
         int rownum = 0;
