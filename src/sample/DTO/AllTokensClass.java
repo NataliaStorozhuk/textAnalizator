@@ -1,4 +1,4 @@
-package sample;
+package sample.DTO;
 
 import lombok.Data;
 
@@ -8,9 +8,9 @@ import java.util.List;
 @Data
 public class AllTokensClass {
 
-    List<String> arrayAfterSort;
-    List<Double> idf;
-    List<Double> w;
+    public List<String> arrayAfterSort;
+    public List<Double> idf;
+    public List<Double> w;
 
     public AllTokensClass() {
         this.arrayAfterSort = new ArrayList<>();

@@ -2,6 +2,7 @@ package sample;
 
 
 import lombok.Setter;
+import sample.DTO.AllTokensClass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,37 +58,6 @@ public class Analyzer {
         return tfIdfQ;
     }
 
-    private CompareResults getCompareResults(ArrayList<String> fileAfterPorter1, ArrayList<String> qAfterPorter, List<String> arrayAfterSort, ArrayList<Double> tfIdfD1, ArrayList<Double> tfIdfQ, List<String> qAfterSort) {
-        long start = System.currentTimeMillis();
-
-
-        //формируем общий из 2x, сортируем, выкидываем повторы
-     /*   List<String> arrayTokensForTwo = getAllTokensArray(qAfterPorter, fileAfterPorter1);
-        ArrayList<Double> tfIdfForDoc1 = getTfIgfForPairDoc(arrayAfterSort, tfIdfD1, arrayTokensForTwo);
-        ArrayList<Double> tfIdfForDoc2 = getTfIgfForPairDoc(qAfterSort, tfIdfQ, arrayTokensForTwo);
-
-        //получаем tf-idf в квадрате
-        ArrayList<Double> tfIdfD1In2Skale = getTfIdfSkale(tfIdfForDoc1);
-        ArrayList<Double> tfIdfQIn2Skale = getTfIdfSkale(tfIdfForDoc2);
-
-
-        //получаем скалярное произведение
-        Double getSkalar = getSkalar(tfIdfForDoc1, tfIdfForDoc2);
-
-        //получаем косинусное
-        Double getCos = getCos(tfIdfD1In2Skale, tfIdfQIn2Skale, getSkalar);
-
-        long finish = System.currentTimeMillis();
-        long timeConsumedMillis = finish - start;
-
-*/
-        CompareResults compareResults = new CompareResults();
-       /* compareResults.skalar = getSkalar;
-        compareResults.cos = getCos;
-        compareResults.durability = timeConsumedMillis;*/
-        return compareResults;
-    }
-
 
     private ArrayList<Double> getTfIgfForPairDoc(List<String> arrayAfterSort, ArrayList<Double> tfIdfD1,
                                                  List<String> arrayTokensForTwo) {
@@ -107,7 +77,7 @@ public class Analyzer {
         return tfIdfForDoc1;
     }
 
-    private ArrayList<Double> getTfIdfSkale(ArrayList<Double> idf) {
+    private static ArrayList<Double> getDoubleListSkale(ArrayList<Double> idf) {
         ArrayList<Double> tfIdf = new ArrayList<Double>();
         for (int i = 0; i < idf.size(); i++) {
             double temp = idf.get(i) * idf.get(i);
@@ -117,7 +87,10 @@ public class Analyzer {
         return tfIdf;
     }
 
-    private Double getCos(ArrayList<Double> tfIdfD1In2Skale, ArrayList<Double> tfIdfD2In2Skale, Double getSkalar) {
+    public static Double getCos(AllTokensClass studyViborka, AllTokensClass testViborka, Double getSkalar) {
+
+        ArrayList<Double> WstudyIn2Skale = getDoubleListSkale((ArrayList<Double>) studyViborka.getW());
+        ArrayList<Double> WtestIn2Skale = getDoubleListSkale((ArrayList<Double>) testViborka.getW());
         Double getCos = 0.0;
         Double getChisl = Math.sqrt(getSkalar);
         Double getZnam = 0.0;
@@ -126,9 +99,12 @@ public class Analyzer {
         Double getZnam2 = 0.0;
         Double getZnam2Sum = 0.0;
 
-        for (int i = 0; i < tfIdfD1In2Skale.size(); i++) {
-            getZnam1Sum += tfIdfD1In2Skale.get(i);
-            getZnam2Sum += tfIdfD2In2Skale.get(i);
+        for (int i = 0; i < WstudyIn2Skale.size(); i++) {
+            getZnam1Sum += WstudyIn2Skale.get(i);
+        }
+
+        for (int i = 0; i < WtestIn2Skale.size(); i++) {
+            getZnam2Sum += WtestIn2Skale.get(i);
         }
         getZnam1 = Math.sqrt(getZnam1Sum);
         getZnam2 = Math.sqrt(getZnam2Sum);
@@ -145,9 +121,9 @@ public class Analyzer {
         Double getSkalar = 0.0;
         Integer сountPairs = 0;
 
-        for (int i = 0; i < studyViborka.arrayAfterSort.size(); i++) {
+        for (int j = 0; j < testViborka.arrayAfterSort.size(); j++) {
 
-            for (int j = 0; j < testViborka.arrayAfterSort.size(); j++) {
+            for (int i = 0; i < studyViborka.arrayAfterSort.size(); i++) {
 
                 if (studyViborka.arrayAfterSort.get(i).equals(testViborka.arrayAfterSort.get(j))) {
                     getSkalar += (studyViborka.w.get(i) * testViborka.w.get(j));
@@ -174,7 +150,8 @@ public class Analyzer {
                 if (studyViborka.arrayAfterSort.get(i).equals(testViborka.arrayAfterSort.get(j))) {
 
                     for (int l = 0; l < words.size(); l++) {
-                        if (words.get(l).equals(studyViborka.arrayAfterSort.get(i))){}
+                        if (words.get(l).equals(studyViborka.arrayAfterSort.get(i))) {
+                        }
                     }
 
                     getSkalar += (studyViborka.w.get(i) * testViborka.w.get(j));

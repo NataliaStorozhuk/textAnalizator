@@ -1,4 +1,7 @@
-package sample;
+package sample.FileConverter;
+
+import sample.AlgorithmPorter;
+import sample.DTO.Book;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,7 +41,7 @@ public class FileToBookConverter {
     }
 
     /*Считываем файл в строку*/
-    static String usingBufferedReader(String filePath) {
+    public static String usingBufferedReader(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 

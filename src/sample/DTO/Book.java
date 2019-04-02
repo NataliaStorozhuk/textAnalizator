@@ -1,4 +1,4 @@
-package sample;
+package sample.DTO;
 
 import lombok.Data;
 

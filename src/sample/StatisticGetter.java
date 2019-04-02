@@ -1,5 +1,8 @@
 package sample;
 
+import sample.DTO.AllTokensClass;
+import sample.DTO.Book;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,13 +20,20 @@ public class StatisticGetter {
         //получаем tf - число каждой лексемы в книге
         for (Book book : books) {
             getTf(book, allTokensClass.arrayAfterSort);
-        }
+        }//долго
 
         //считаем общее число файлов, в которых встречается слово
         ArrayList<Integer> documentFrequency = getDf(books);
 
         //считаем idf
-        allTokensClass.idf = getIdf(documentFrequency, books.size());
+  //      allTokensClass.idf = getIdf(documentFrequency, books.size());
+        if (books.size()!=1)
+            allTokensClass.idf = getIdf(documentFrequency, books.size());
+        else {
+            for (int j=0; j<books.get(0).normTF.size(); j++){
+                allTokensClass.idf.add(1.0);
+            }
+        }
 
         //получаем tf-idf
         for (Book book : books) {

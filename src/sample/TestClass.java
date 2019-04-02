@@ -1,6 +1,10 @@
 package sample;
 
 import org.testng.annotations.Test;
+import sample.DTO.AllTokensClass;
+import sample.DTO.Book;
+import sample.FileConverter.ExcelExporter;
+import sample.FileConverter.ObjectToJsonConverter;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static sample.FileToBookConverter.*;
+import static sample.FileConverter.FileToBookConverter.*;
 import static sample.StatisticGetter.*;
 import static sample.StatisticGetter.getBaseFrequencies;
 
@@ -25,6 +29,41 @@ public class TestClass {
         listFilesForFolder(folder);
         AllTokensClass testViborka = getBaseFrequencies(books);
         ExcelExporter.createExcelFile(testViborka.arrayAfterSort, books, "allWords");
+    }
+
+
+    //Пробуем записать данные в json ТЕСТОВЫЕ
+    @Test
+    public void getBaseFrequencesInJson() {
+        final File folder = new File("C:/Users/Natalia/Desktop/test");
+        long start = System.currentTimeMillis();
+
+        listFilesForFolder(folder);
+        AllTokensClass testViborka = getBaseFrequencies(books);
+        books.add(createAverageBook(books));
+        testViborka.w = books.get(books.size() - 1).getW();
+
+        ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/testJsonFile", testViborka);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/testJsonFile", AllTokensClass.class);
+    }
+
+    //Пробуем записать данные в json РАБОЧИЕ
+    @Test
+    public void getBaseFrequencesInJsonDETECTIVE() {
+        final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
+       // final File folder = new File("C:/Users/Natalia/Desktop/test");
+        long start = System.currentTimeMillis();
+            //14 книг
+        listFilesForFolder(folder); //1.22-1,29
+        AllTokensClass testViborka = getBaseFrequencies(books);
+        books.add(createAverageBook(books));
+        testViborka.w = books.get(books.size() - 1).getW();
+
+        ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/testJsonFileDetective.json", testViborka);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/testJsonFileDetective.json", AllTokensClass.class);
+        long finish = System.currentTimeMillis();
+        long timeConsumedMillis = finish - start;
+        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
     }
 
     //Получить анализ выбранных 352 слов
@@ -109,12 +148,14 @@ public class TestClass {
 
         //тестовые 3
         final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
+        //     final File folder = new File("C:/Users/Natalia/Desktop/test");
         listFilesForFolder(folder);
         AllTokensClass studyViborka = StatisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         studyViborka.w = books.get(books.size() - 1).getW();
 
         //тестовая следующая
+        //      File file = new File("C:/Users/Natalia/Desktop/text4.txt");
         File file = new File("C:/Users/Natalia/Desktop/test_detectives/Агата Кристи 10 негритят.txt");
         Book testBook1 = getBookFromFile(file);
 
@@ -124,7 +165,7 @@ public class TestClass {
         testViborka.w = testBook1.getW();
 
         Double skalar = Analyzer.getSkalar(studyViborka, testViborka);
-
+        Double cos = Analyzer.getCos(studyViborka, testViborka, skalar);
 
         //тестовая 2
         file = new File("C:/Users/Natalia/Desktop/test_detectives/Дарья Калинина Возвращение блудного бумеранга.txt");
@@ -136,6 +177,7 @@ public class TestClass {
         testViborka2.w = testBook2.getW();
 
         skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        cos = Analyzer.getCos(studyViborka, testViborka, skalar);
 
         //тестовая 3
         file = new File("C:/Users/Natalia/Desktop/test_detectives/Борис Акунин Турецкий Гамбит.txt");
@@ -147,6 +189,7 @@ public class TestClass {
         testViborka3.w = testBook3.getW();
 
         skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        cos = Analyzer.getCos(studyViborka, testViborka, skalar);
 
         //тестовая 4
         file = new File("C:/Users/Natalia/Desktop/test_another/Брукс Карен. Озеро в лунном свете - royallib.ru.txt");
@@ -158,6 +201,7 @@ public class TestClass {
         testViborka4.w = testBook4.getW();
 
         skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        cos = Analyzer.getCos(studyViborka, testViborka, skalar);
 
         //тестовая 5
         file = new File("C:/Users/Natalia/Desktop/test_another/Толкиен Джон. Дети Хурина - royallib.ru.txt.txt");
@@ -169,6 +213,7 @@ public class TestClass {
         testViborka5.w = testBook5.getW();
 
         skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        cos = Analyzer.getCos(studyViborka, testViborka, skalar);
 
         //тестовая 6
         file = new File("C:/Users/Natalia/Desktop/test_another/Шоу Бернард. Тележка с яблоками - royallib.ru.txt");
@@ -180,6 +225,7 @@ public class TestClass {
         testViborka6.w = testBook6.getW();
 
         skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        cos = Analyzer.getCos(studyViborka, testViborka, skalar);
 
     }
 
@@ -196,6 +242,7 @@ public class TestClass {
 
         String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary_afterMethod.txt");
         ArrayList<String> detectiveWords = getWordsFromString(detectiveWordsString);
+
 
         for (int i = 0; i < studyViborka.arrayAfterSort.size(); i++) {
             for (int j = 0; j < detectiveWords.size(); j++) {
@@ -318,7 +365,7 @@ public class TestClass {
 
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
-                listFilesForFolder(fileEntry);
+          //      listFilesForFolder(fileEntry);
             } else {
                 books.add(getBookFromFile(fileEntry));
             }

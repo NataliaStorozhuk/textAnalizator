@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.ArrayList;
 
-import static sample.FileToBookConverter.*;
+import static sample.FileConverter.FileToBookConverter.*;
 
 //import java.awt.*;
 
