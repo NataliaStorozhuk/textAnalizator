@@ -77,8 +77,8 @@ public class Analyzer {
         return tfIdfForDoc1;
     }
 
-    private static ArrayList<Double> getDoubleListSkale(ArrayList<Double> idf) {
-        ArrayList<Double> tfIdf = new ArrayList<Double>();
+    private ArrayList<Double> getDoubleListSkale(ArrayList<Double> idf) {
+        ArrayList<Double> tfIdf = new ArrayList<>();
         for (int i = 0; i < idf.size(); i++) {
             double temp = idf.get(i) * idf.get(i);
             tfIdf.add(i, temp);
@@ -87,7 +87,7 @@ public class Analyzer {
         return tfIdf;
     }
 
-    public static Double getCos(AllTokensClass studyViborka, AllTokensClass testViborka, Double getSkalar) {
+    public Double getCos(AllTokensClass studyViborka, AllTokensClass testViborka, Double getSkalar) {
 
         ArrayList<Double> WstudyIn2Skale = getDoubleListSkale((ArrayList<Double>) studyViborka.getW());
         ArrayList<Double> WtestIn2Skale = getDoubleListSkale((ArrayList<Double>) testViborka.getW());
@@ -117,7 +117,7 @@ public class Analyzer {
     }
 
 
-    public static Double getSkalar(AllTokensClass studyViborka, AllTokensClass testViborka) {
+    public Double getSkalar(AllTokensClass studyViborka, AllTokensClass testViborka) {
         Double getSkalar = 0.0;
         Integer сountPairs = 0;
 

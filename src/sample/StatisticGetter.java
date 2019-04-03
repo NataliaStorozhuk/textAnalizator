@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class StatisticGetter {
 
-    public static AllTokensClass getBaseFrequencies(ArrayList<BookProfile> books) {
+    public AllTokensClass getBaseFrequencies(ArrayList<BookProfile> books) {
 
         AllTokensClass allTokensClass = new AllTokensClass();
         //формируем общий, сортируем, выкидываем повторы

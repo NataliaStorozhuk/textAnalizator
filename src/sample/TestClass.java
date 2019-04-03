@@ -15,11 +15,11 @@ import java.util.List;
 
 import static sample.FileConverter.FileToBookConverter.*;
 import static sample.StatisticGetter.*;
-import static sample.StatisticGetter.getBaseFrequencies;
 
 public class TestClass {
 
     Analyzer analyzer = new Analyzer();
+    StatisticGetter statisticGetter = new StatisticGetter();
     ArrayList<BookProfile> books = new ArrayList<>();
 
     //просто тест получения файлов и потом в эксельку что нибудь записать
@@ -27,7 +27,7 @@ public class TestClass {
     public void getFiles() throws IOException {
         final File folder = new File("C:/Users/Natalia/Desktop/test");
         listFilesForFolder(folder);
-        AllTokensClass testViborka = getBaseFrequencies(books);
+        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
         ExcelExporter.createExcelFile(testViborka.arrayAfterSort, books, "allWords");
     }
 
@@ -39,7 +39,7 @@ public class TestClass {
         long start = System.currentTimeMillis();
 
         listFilesForFolder(folder);
-        AllTokensClass testViborka = getBaseFrequencies(books);
+        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         testViborka.w = books.get(books.size() - 1).getW();
 
@@ -50,17 +50,17 @@ public class TestClass {
     //Пробуем записать данные в json РАБОЧИЕ
     @Test
     public void getBaseFrequencesInJsonDETECTIVE() {
-        final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
+        final File folder = new File("C:/Users/Natalia/Desktop/test");
        // final File folder = new File("C:/Users/Natalia/Desktop/test");
         long start = System.currentTimeMillis();
             //14 книг
         listFilesForFolder(folder); //1.22-1,29
-        AllTokensClass testViborka = getBaseFrequencies(books);
+        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         testViborka.w = books.get(books.size() - 1).getW();
 
-        ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/testJsonFileDetective.json", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/testJsonFileDetective.json", AllTokensClass.class);
+        ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/test.json", testViborka);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/test.json", AllTokensClass.class);
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
@@ -93,7 +93,7 @@ public class TestClass {
         long start = System.currentTimeMillis();
 
         listFilesForFolder(folder);
-        AllTokensClass testViborka = getBaseFrequencies(books);
+        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
 
         books.add(createAverageBook(books));
 
@@ -121,7 +121,7 @@ public class TestClass {
         long start = System.currentTimeMillis();
 
         listFilesForFolderWithoutNames(folder);
-        AllTokensClass testViborka = getBaseFrequencies(books);
+        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
 
         books.add(createAverageBook(books));
 
@@ -147,37 +147,36 @@ public class TestClass {
     public void getSimiliarityWithoutMagic() {
 
         //тестовые 3
-        final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
-        //     final File folder = new File("C:/Users/Natalia/Desktop/test");
-        listFilesForFolder(folder);
-        AllTokensClass studyViborka = StatisticGetter.getBaseFrequencies(books);
-        books.add(createAverageBook(books));
-        studyViborka.w = books.get(books.size() - 1).getW();
+        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/testJsonFileDetective.json", AllTokensClass.class);
+   //     AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/test.json", AllTokensClass.class);
 
         //тестовая следующая
         //      File file = new File("C:/Users/Natalia/Desktop/text4.txt");
+     //   File file = new File("C:/Users/Natalia/Desktop/text4.txt");
+
         File file = new File("C:/Users/Natalia/Desktop/test_detectives/Агата Кристи 10 негритят.txt");
         BookProfile testBook1 = getBookFromFile(file);
 
         ArrayList<BookProfile> testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook1);
-        AllTokensClass testViborka = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka.w = testBook1.getW();
 
-        Double skalar = Analyzer.getSkalar(studyViborka, testViborka);
-        Double cos = Analyzer.getCos(studyViborka, testViborka, skalar);
+        Double skalar = analyzer.getSkalar(studyViborka, testViborka);
+        Double cos = analyzer.getCos(studyViborka, testViborka, skalar);
 
         //тестовая 2
-        file = new File("C:/Users/Natalia/Desktop/test_detectives/Дарья Калинина Возвращение блудного бумеранга.txt");
+       file = new File("C:/Users/Natalia/Desktop/test_detectives/Дарья Калинина Возвращение блудного бумеранга.txt");
+   //     file = new File("C:/Users/Natalia/Desktop/text5.txt");
         BookProfile testBook2 = getBookFromFile(file);
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook2);
-        AllTokensClass testViborka2 = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka2 = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka2.w = testBook2.getW();
 
-        skalar = Analyzer.getSkalar(studyViborka, testViborka);
-        cos = Analyzer.getCos(studyViborka, testViborka, skalar);
+        skalar = analyzer.getSkalar(studyViborka, testViborka2);
+        cos = analyzer.getCos(studyViborka, testViborka, skalar);
 
         //тестовая 3
         file = new File("C:/Users/Natalia/Desktop/test_detectives/Борис Акунин Турецкий Гамбит.txt");
@@ -185,11 +184,11 @@ public class TestClass {
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook3);
-        AllTokensClass testViborka3 = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka3 = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka3.w = testBook3.getW();
 
-        skalar = Analyzer.getSkalar(studyViborka, testViborka);
-        cos = Analyzer.getCos(studyViborka, testViborka, skalar);
+        skalar = analyzer.getSkalar(studyViborka, testViborka3);
+        cos = analyzer.getCos(studyViborka, testViborka, skalar);
 
         //тестовая 4
         file = new File("C:/Users/Natalia/Desktop/test_another/Брукс Карен. Озеро в лунном свете - royallib.ru.txt");
@@ -197,11 +196,11 @@ public class TestClass {
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook4);
-        AllTokensClass testViborka4 = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka4 = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka4.w = testBook4.getW();
 
-        skalar = Analyzer.getSkalar(studyViborka, testViborka);
-        cos = Analyzer.getCos(studyViborka, testViborka, skalar);
+        skalar = analyzer.getSkalar(studyViborka, testViborka4);
+        cos = analyzer.getCos(studyViborka, testViborka, skalar);
 
         //тестовая 5
         file = new File("C:/Users/Natalia/Desktop/test_another/Толкиен Джон. Дети Хурина - royallib.ru.txt.txt");
@@ -209,11 +208,11 @@ public class TestClass {
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook5);
-        AllTokensClass testViborka5 = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka5 = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka5.w = testBook5.getW();
 
-        skalar = Analyzer.getSkalar(studyViborka, testViborka);
-        cos = Analyzer.getCos(studyViborka, testViborka, skalar);
+        skalar = analyzer.getSkalar(studyViborka, testViborka5);
+        cos = analyzer.getCos(studyViborka, testViborka, skalar);
 
         //тестовая 6
         file = new File("C:/Users/Natalia/Desktop/test_another/Шоу Бернард. Тележка с яблоками - royallib.ru.txt");
@@ -221,14 +220,19 @@ public class TestClass {
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook6);
-        AllTokensClass testViborka6 = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka6 = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka6.w = testBook6.getW();
 
-        skalar = Analyzer.getSkalar(studyViborka, testViborka);
-        cos = Analyzer.getCos(studyViborka, testViborka, skalar);
+        skalar = analyzer.getSkalar(studyViborka, testViborka6);
+        cos = analyzer.getCos(studyViborka, testViborka, skalar);
 
     }
 
+    @Test
+    public void getRealBookWithoutNames(){
+        File file = new File("C:/Users/Natalia/Desktop/test_detectives/Агата Кристи 10 негритят.txt");
+        BookProfile testBook1 = getBookFromFileWithoutNames(file);
+    }
 
     @Test
     public void getSimiliarityWithMagic() {
@@ -236,14 +240,14 @@ public class TestClass {
         //тестовые 3
         final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
         listFilesForFolderWithoutNames(folder);
-        AllTokensClass studyViborka = StatisticGetter.getBaseFrequencies(books);
+        AllTokensClass studyViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         studyViborka.w = books.get(books.size() - 1).getW();
 
         String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary_afterMethod.txt");
         ArrayList<String> detectiveWords = getWordsFromString(detectiveWordsString);
 
-
+//Это умножение idf на 5
         for (int i = 0; i < studyViborka.arrayAfterSort.size(); i++) {
             for (int j = 0; j < detectiveWords.size(); j++) {
                 if (studyViborka.arrayAfterSort.get(i).equals(detectiveWords.get(j))) {
@@ -259,10 +263,10 @@ public class TestClass {
 
         ArrayList<BookProfile> testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook1);
-        AllTokensClass testViborka = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka.w = testBook1.getW();
 
-        Double skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        Double skalar = analyzer.getSkalar(studyViborka, testViborka);
 
 
         //тестовая 2
@@ -271,10 +275,10 @@ public class TestClass {
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook2);
-        AllTokensClass testViborka2 = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka2 = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka2.w = testBook2.getW();
 
-        skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        skalar = analyzer.getSkalar(studyViborka, testViborka);
 
         //тестовая 3
         file = new File("C:/Users/Natalia/Desktop/test_detectives/Борис Акунин Турецкий Гамбит.txt");
@@ -282,10 +286,10 @@ public class TestClass {
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook3);
-        AllTokensClass testViborka3 = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka3 = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka3.w = testBook3.getW();
 
-        skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        skalar = analyzer.getSkalar(studyViborka, testViborka);
 
         //тестовая 4
         file = new File("C:/Users/Natalia/Desktop/test_another/Брукс Карен. Озеро в лунном свете - royallib.ru.txt");
@@ -293,10 +297,10 @@ public class TestClass {
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook4);
-        AllTokensClass testViborka4 = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka4 = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka4.w = testBook4.getW();
 
-        skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        skalar = analyzer.getSkalar(studyViborka, testViborka);
 
         //тестовая 5
         file = new File("C:/Users/Natalia/Desktop/test_another/Толкиен Джон. Дети Хурина - royallib.ru.txt.txt");
@@ -304,10 +308,10 @@ public class TestClass {
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook5);
-        AllTokensClass testViborka5 = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka5 = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka5.w = testBook5.getW();
 
-        skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        skalar = analyzer.getSkalar(studyViborka, testViborka);
 
         //тестовая 6
         file = new File("C:/Users/Natalia/Desktop/test_another/Шоу Бернард. Тележка с яблоками - royallib.ru.txt");
@@ -315,10 +319,10 @@ public class TestClass {
 
         testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook6);
-        AllTokensClass testViborka6 = getBaseFrequencies(testBookOnly);
+        AllTokensClass testViborka6 = statisticGetter.getBaseFrequencies(testBookOnly);
         testViborka6.w = testBook6.getW();
 
-        skalar = Analyzer.getSkalar(studyViborka, testViborka);
+        skalar = analyzer.getSkalar(studyViborka, testViborka);
 
     }
 
