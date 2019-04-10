@@ -31,9 +31,6 @@ public class ObjectToJsonConverter {
             object = classTest.newInstance();
             object = mapper.readValue(file, classTest);
 
-            //   Artist newArtist = mapper.readValue(file, Artist.class);
-            //    System.out.println("newArtist.getId() = " + newArtist.getId());
-            //  System.out.println("newArtist.getName() = " + newArtist.getName());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

@@ -3,41 +3,19 @@ package sample;
 
 import lombok.Setter;
 import sample.DTO.AllTokensClass;
+import sample.DTO.BookProfile;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
+import static sample.FileConverter.FileToBookConverter.getBookFromFileWithoutNames;
 
 @Setter
 public class Analyzer {
 
-  /*  public List<String> getSimiliarity(ArrayList<BookProfile> books) {
-
-        //Работаем с исходником
-        //     ArrayList<Integer> tdQ = getTf(qAfterPorter, qAfterPorter);
-       ArrayList<Double> tfIdfQ = getTfIdfQuery(arrayAfterSort, books, idf, bookRequest);
-
-        List<String> qAfterSort = qAfterPorter.stream().distinct().collect(Collectors.toList());
-        Collections.sort(qAfterSort);
-
-        CompareResults compareResults1 =
-                getCompareResults(fileAfterPorter1, qAfterPorter, arrayAfterSort, tfIdfD1, tfIdfQ, qAfterSort);
-
-        return compareResults;
-    }*/
-
-
-
-    /*  private ArrayList<Double> getTfIdfQuery(List<String> arrayAfterSort, ArrayList<Integer> tdD1, ArrayList<Integer> tdD2, ArrayList<Integer> tdD3, ArrayList<Double> idf, ArrayList<String> QArray) {
-        List<String> QArraySort = QArray.stream().distinct().collect(Collectors.toList());
-        Collections.sort(QArraySort);
-        ArrayList<Integer> tdQ = getTf(QArray, QArraySort);
-        ArrayList<Double> tfMaxTf = getTfMaxTf(tdQ);
-
-        ArrayList<Integer> countQDocs = getQCountCocs(arrayAfterSort, tdD1, tdD2, tdD3, QArray, QArraySort);
-
-        return getTfIdfQ(arrayAfterSort, idf, QArray, tfMaxTf, countQDocs);
-    }*/
-
+    //тоже пока пусть лежит
     private ArrayList<Double> getTfIdfQ(List<String> arrayAfterSort, ArrayList<Double> idf, ArrayList<String> QArray, ArrayList<Double> tfMaxTf, ArrayList<Integer> countQDocs) {
         ArrayList<Double> tfIdfQ = new ArrayList<>();
 
@@ -58,7 +36,7 @@ public class Analyzer {
         return tfIdfQ;
     }
 
-
+    //пока непонятно, но вдруг пригодится
     private ArrayList<Double> getTfIgfForPairDoc(List<String> arrayAfterSort, ArrayList<Double> tfIdfD1,
                                                  List<String> arrayTokensForTwo) {
         ArrayList<Double> tfIdfForDoc1 = new ArrayList<>();
@@ -77,20 +55,28 @@ public class Analyzer {
         return tfIdfForDoc1;
     }
 
+    // Возведение в квадрат каждого элемента списка
     private ArrayList<Double> getDoubleListSkale(ArrayList<Double> idf) {
         ArrayList<Double> tfIdf = new ArrayList<>();
         for (int i = 0; i < idf.size(); i++) {
             double temp = idf.get(i) * idf.get(i);
             tfIdf.add(i, temp);
-            System.out.println(tfIdf.get(i));
+            //      System.out.println(tfIdf.get(i));
         }
         return tfIdf;
     }
 
+    //получить косинусную меру сходства
     public Double getCos(AllTokensClass studyViborka, AllTokensClass testViborka, Double getSkalar) {
 
-        ArrayList<Double> WstudyIn2Skale = getDoubleListSkale((ArrayList<Double>) studyViborka.getW());
-        ArrayList<Double> WtestIn2Skale = getDoubleListSkale((ArrayList<Double>) testViborka.getW());
+        CompletableFuture<ArrayList<Double>> completableFutureStudy = CompletableFuture.supplyAsync(() -> getDoubleListSkale((ArrayList<Double>) studyViborka.getW()));
+        CompletableFuture<ArrayList<Double>> completableFutureTest = CompletableFuture.supplyAsync(() -> getDoubleListSkale((ArrayList<Double>) testViborka.getW()));
+
+        ArrayList<Double> WstudyIn2Skale = completableFutureStudy.join();
+        ArrayList<Double> WtestIn2Skale = completableFutureTest.join();
+
+        //   ArrayList<Double> WstudyIn2Skale = getDoubleListSkale((ArrayList<Double>) studyViborka.getW());
+        // ArrayList<Double> WtestIn2Skale = getDoubleListSkale((ArrayList<Double>) testViborka.getW());
         Double getCos = 0.0;
         Double getChisl = Math.sqrt(getSkalar);
         Double getZnam = 0.0;
@@ -109,14 +95,17 @@ public class Analyzer {
         getZnam1 = Math.sqrt(getZnam1Sum);
         getZnam2 = Math.sqrt(getZnam2Sum);
 
+        //getZnam1 = getZnam1Sum;
+        // getZnam2 = getZnam2Sum;
+
         getZnam = getZnam1 * getZnam2;
         getCos = getChisl / getZnam;
 
-        System.out.println("getCos=" + getCos);
+//        System.out.println("getCos=" + getCos);
         return getCos;
     }
 
-
+    //получить скалярное произведение двух векторов
     public Double getSkalar(AllTokensClass studyViborka, AllTokensClass testViborka) {
         Double getSkalar = 0.0;
         Integer сountPairs = 0;
@@ -134,36 +123,28 @@ public class Analyzer {
             }
         }
 
-        System.out.println("skalar=" + getSkalar);
-        System.out.println("pair=" + сountPairs);
+        //     System.out.println("skalar=" + getSkalar);
+        //   System.out.println("pair=" + сountPairs);
         return getSkalar;
     }
 
-    public static Double getSkalarWithDetectiveWords(AllTokensClass studyViborka, AllTokensClass testViborka, ArrayList<String> words) {
-        Double getSkalar = 0.0;
-        Integer сountPairs = 0;
 
-        for (int i = 0; i < studyViborka.arrayAfterSort.size(); i++) {
+    //Получить скалярное произведение и косинусную меру сходства по новому  файлу и обучающей выборке
+    public Double getFileCos(String pathName, AllTokensClass studyViborka) {
+        File file = new File(pathName);
+        System.out.println(file.getPath());
+//        BookProfile testBook1 = getBookFromFile(file);
+        BookProfile testBook1 = getBookFromFileWithoutNames(file);
 
-            for (int j = 0; j < testViborka.arrayAfterSort.size(); j++) {
+        ArrayList<BookProfile> testBookOnly = new ArrayList<>();
+        testBookOnly.add(testBook1);
+        AllTokensClass testViborka = StatisticGetter.getBaseFrequencies(testBookOnly);
+        testViborka.w = testBook1.getW();
 
-                if (studyViborka.arrayAfterSort.get(i).equals(testViborka.arrayAfterSort.get(j))) {
-
-                    for (int l = 0; l < words.size(); l++) {
-                        if (words.get(l).equals(studyViborka.arrayAfterSort.get(i))) {
-                        }
-                    }
-
-                    getSkalar += (studyViborka.w.get(i) * testViborka.w.get(j));
-                    сountPairs++;
-                    break;
-                }
-
-            }
-        }
-
-        System.out.println("skalar=" + getSkalar);
-        System.out.println("pair=" + сountPairs);
-        return getSkalar;
+        Double skalar = getSkalar(studyViborka, testViborka);
+        Double cos = getCos(studyViborka, testViborka, skalar);
+        System.out.println("skalar=" + skalar);
+        System.out.println("cos=" + cos);
+        return cos;
     }
 }

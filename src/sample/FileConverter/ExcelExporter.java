@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ExcelExporter {
 
-    public static void createExcelFile(List<String> lexems, ArrayList<BookProfile> books, String bookName) throws IOException {
+    public static void createExcelFile(List<String> lexems, ArrayList<BookProfile> books, String fileName) throws IOException {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Sheet");
         int rownum = 0;
@@ -54,7 +54,7 @@ public class ExcelExporter {
                 cell.setCellStyle(style);
             }
         }
-        File file = new File("C:/Users/Natalia/Desktop/" + bookName + ".xls");
+        File file = new File("C:/Users/Natalia/Desktop/" + fileName + ".xls");
         file.getParentFile().mkdirs();
 
         FileOutputStream outFile = new FileOutputStream(file);

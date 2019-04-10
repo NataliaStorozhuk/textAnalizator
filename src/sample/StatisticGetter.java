@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class StatisticGetter {
 
-    public AllTokensClass getBaseFrequencies(ArrayList<BookProfile> books) {
+    public static AllTokensClass getBaseFrequencies(ArrayList<BookProfile> books) {
 
         AllTokensClass allTokensClass = new AllTokensClass();
         //формируем общий, сортируем, выкидываем повторы
@@ -26,11 +26,11 @@ public class StatisticGetter {
         ArrayList<Integer> documentFrequency = getDf(books);
 
         //считаем idf
-  //      allTokensClass.idf = getIdf(documentFrequency, books.size());
-        if (books.size()!=1)
+        //      allTokensClass.idf = getIdf(documentFrequency, books.size());
+        if (books.size() != 1)
             allTokensClass.idf = getIdf(documentFrequency, books.size());
         else {
-            for (int j=0; j<books.get(0).normTF.size(); j++){
+            for (int j = 0; j < books.get(0).normTF.size(); j++) {
                 allTokensClass.idf.add(1.0);
             }
         }
@@ -69,13 +69,14 @@ public class StatisticGetter {
 
         for (int i = 0; i < arrayAfterSort.size(); i++) {
             String temp = arrayAfterSort.get(i);
-            int numberOfElephants = (int) book.getLexems()
+            int numberOfBooks = (int) book.getLexems()
                     .stream()
                     .filter(p -> p.equals(temp))
                     .count();
 
-            tf.add(i, numberOfElephants);
+            tf.add(i, numberOfBooks);
         }
+
 
         book.setTf(tf);
 
@@ -84,7 +85,7 @@ public class StatisticGetter {
         ArrayList<Double> newTF = new ArrayList<Double>();
         for (int i = 0; i < arrayAfterSort.size(); i++) {
 
-            BigDecimal bdDF = new BigDecimal(tf.get(i) );
+            BigDecimal bdDF = new BigDecimal(tf.get(i));
             BigDecimal bdN = new BigDecimal(maxIdf);
             BigDecimal arg = new BigDecimal(0);
             if (!bdDF.equals(arg)) {
@@ -126,7 +127,7 @@ public class StatisticGetter {
             }
 
             idf.add(i, log);
-            System.out.println(idf.get(i));
+            //System.out.println(idf.get(i));
         }
         return idf;
     }
