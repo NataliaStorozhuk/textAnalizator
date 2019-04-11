@@ -52,18 +52,29 @@ public class TestClass {
     //Пробуем записать данные в json РАБОЧИЕ
     @Test
     public void getBaseFrequencesInJsonDETECTIVE() {
-        final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
+        final File folder = new File("C:/Users/admin/Desktop/detectives_utf8");
         long start = System.currentTimeMillis();
         //50 книг
-        books = listFilesForFolder(folder); //1.22-1,29
-        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
-        books.add(createAverageBook(books));
-        testViborka.w = books.get(books.size() - 1).getW();
-
-        ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/test.json", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/testDetectivesJson.json", AllTokensClass.class);
+        books = listFilesForFolder(folder);
         long finish = System.currentTimeMillis();
-        long timeConsumedMillis = finish - start;
+        long timeConsumedMillis = finish - start;           //9604 распаралелено, 17786 если по очереди
+        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
+        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books); //это очень долго бежит!
+        finish = System.currentTimeMillis();
+        timeConsumedMillis = finish - start;
+        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
+        books.add(createAverageBook(books));
+        finish = System.currentTimeMillis();
+        timeConsumedMillis = finish - start;
+        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
+        testViborka.w = books.get(books.size() - 1).getW();
+        finish = System.currentTimeMillis();
+        timeConsumedMillis = finish - start;
+        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
+        ObjectToJsonConverter.fromObjectToJson("C:/Users/admin/Desktop/test.json", testViborka);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/admin/test.json", AllTokensClass.class);
+        finish = System.currentTimeMillis();
+        timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
     }
 
@@ -253,7 +264,7 @@ public class TestClass {
     //Ходим по папке, собираем файлы в объекты BookProfile
     public ArrayList<BookProfile> listFilesForFolder(File folder) {
 
-  /*      for (final File fileEntry : folder.listFiles()) {
+    /*    for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
           //      listFilesForFolder(fileEntry);
             } else {

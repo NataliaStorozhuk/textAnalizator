@@ -13,17 +13,37 @@ public class StatisticGetter {
 
     public static AllTokensClass getBaseFrequencies(ArrayList<BookProfile> books) {
 
+        System.out.println("Разбор по времени метода getBaseFrequencies");
+        long start = System.currentTimeMillis();
+
         AllTokensClass allTokensClass = new AllTokensClass();
         //формируем общий, сортируем, выкидываем повторы
         allTokensClass.arrayAfterSort = getAllTokensArray(books);
+
+        long finish = System.currentTimeMillis();
+        long timeConsumedMillis = finish - start;           //
+        System.out.println("getAllTokensArray" + timeConsumedMillis);
+        start = System.currentTimeMillis();
 
         //получаем tf - число каждой лексемы в книге
         for (BookProfile book : books) {
             getTf(book, allTokensClass.arrayAfterSort);
         }//долго
 
+        finish = System.currentTimeMillis();
+        timeConsumedMillis = finish - start;           //
+        System.out.println("getTf" + timeConsumedMillis);
+        start = System.currentTimeMillis();
+
         //считаем общее число файлов, в которых встречается слово
         ArrayList<Integer> documentFrequency = getDf(books);
+
+
+        finish = System.currentTimeMillis();
+        timeConsumedMillis = finish - start;           //
+        System.out.println("getDf" + timeConsumedMillis);
+        start = System.currentTimeMillis();
+
 
         //считаем idf
         //      allTokensClass.idf = getIdf(documentFrequency, books.size());
@@ -35,16 +55,34 @@ public class StatisticGetter {
             }
         }
 
+        finish = System.currentTimeMillis();
+        timeConsumedMillis = finish - start;           //
+        System.out.println("getIdf" + timeConsumedMillis);
+        start = System.currentTimeMillis();
+
         //получаем tf-idf
         for (BookProfile book : books) {
             getTfIdf(book, allTokensClass.idf);
         }
+
+        finish = System.currentTimeMillis();
+        timeConsumedMillis = finish - start;           //
+        System.out.println("getTfIdf" + timeConsumedMillis);
+        start = System.currentTimeMillis();
+
 
         //получаем w по модной формуле
         for (BookProfile book : books) {
             getW(book, allTokensClass.idf);
         }
 
+        finish = System.currentTimeMillis();
+        timeConsumedMillis = finish - start;           //
+        System.out.println("getW" + timeConsumedMillis);
+        start = System.currentTimeMillis();
+
+
+        System.out.println("Конец");
         return allTokensClass;
 
     }
