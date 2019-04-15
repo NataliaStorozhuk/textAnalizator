@@ -59,20 +59,14 @@ public class TestClass {
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;           //9604 распаралелено, 17786 если по очереди
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
-        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books); //это очень долго бежит!
-        finish = System.currentTimeMillis();
-        timeConsumedMillis = finish - start;
-        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
+
+        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books); //это очень долго бежит
         books.add(createAverageBook(books));
-        finish = System.currentTimeMillis();
-        timeConsumedMillis = finish - start;
-        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
+
         testViborka.w = books.get(books.size() - 1).getW();
-        finish = System.currentTimeMillis();
-        timeConsumedMillis = finish - start;
-        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
+
         ObjectToJsonConverter.fromObjectToJson("C:/Users/admin/Desktop/test.json", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/admin/test.json", AllTokensClass.class);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/admin/test.json", AllTokensClass.class);
         finish = System.currentTimeMillis();
         timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);

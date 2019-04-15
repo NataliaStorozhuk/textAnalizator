@@ -5,8 +5,10 @@ import sample.DTO.BookProfile;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 public class StatisticGetter {
@@ -21,14 +23,24 @@ public class StatisticGetter {
         allTokensClass.arrayAfterSort = getAllTokensArray(books);
 
         long finish = System.currentTimeMillis();
-        long timeConsumedMillis = finish - start;           //
+        long timeConsumedMillis = finish - start;
         System.out.println("getAllTokensArray" + timeConsumedMillis);
         start = System.currentTimeMillis();
 
         //получаем tf - число каждой лексемы в книге
-        for (BookProfile book : books) {
+  /*       for (BookProfile book : books) {
             getTf(book, allTokensClass.arrayAfterSort);
         }//долго
+*/
+
+        CompletableFuture[] futures = Arrays.stream(books.toArray())
+                .map(book -> CompletableFuture.supplyAsync(() -> {
+                    getTf((BookProfile) book, allTokensClass.arrayAfterSort);
+                    return null;
+                }))
+                .toArray(CompletableFuture[]::new);
+
+        CompletableFuture.allOf(futures).join();
 
         finish = System.currentTimeMillis();
         timeConsumedMillis = finish - start;           //
@@ -38,15 +50,7 @@ public class StatisticGetter {
         //считаем общее число файлов, в которых встречается слово
         ArrayList<Integer> documentFrequency = getDf(books);
 
-
-        finish = System.currentTimeMillis();
-        timeConsumedMillis = finish - start;           //
-        System.out.println("getDf" + timeConsumedMillis);
-        start = System.currentTimeMillis();
-
-
         //считаем idf
-        //      allTokensClass.idf = getIdf(documentFrequency, books.size());
         if (books.size() != 1)
             allTokensClass.idf = getIdf(documentFrequency, books.size());
         else {
@@ -55,32 +59,17 @@ public class StatisticGetter {
             }
         }
 
-        finish = System.currentTimeMillis();
-        timeConsumedMillis = finish - start;           //
-        System.out.println("getIdf" + timeConsumedMillis);
-        start = System.currentTimeMillis();
 
         //получаем tf-idf
         for (BookProfile book : books) {
             getTfIdf(book, allTokensClass.idf);
         }
 
-        finish = System.currentTimeMillis();
-        timeConsumedMillis = finish - start;           //
-        System.out.println("getTfIdf" + timeConsumedMillis);
-        start = System.currentTimeMillis();
-
 
         //получаем w по модной формуле
         for (BookProfile book : books) {
             getW(book, allTokensClass.idf);
         }
-
-        finish = System.currentTimeMillis();
-        timeConsumedMillis = finish - start;           //
-        System.out.println("getW" + timeConsumedMillis);
-        start = System.currentTimeMillis();
-
 
         System.out.println("Конец");
         return allTokensClass;
