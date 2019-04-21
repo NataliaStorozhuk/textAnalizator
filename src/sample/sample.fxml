@@ -8,63 +8,13 @@
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="318.0" minWidth="1000" prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
         <Button fx:id="download1" layoutX="200.0" layoutY="14.0" mnemonicParsing="false" prefHeight="43.5" prefWidth="159.0" text="Загрузить 1 документ" />
-        <Button fx:id="download2" layoutX="400.0" layoutY="14.0" mnemonicParsing="false" prefHeight="43.5" prefWidth="159.0" text="Загрузить 2 документ" />
-        <Button fx:id="download3" layoutX="600.0" layoutY="14.0" mnemonicParsing="false" prefHeight="43.5" prefWidth="159.0" text="Загрузить 3 документ" />
-        <Button fx:id="download4" layoutX="800.0" layoutY="14.0" mnemonicParsing="false" prefHeight="43.5" prefWidth="159.0" text="Загрузить запрос" />
 
         <Label layoutX="20.0" layoutY="68.0" text="Название" />
         <Label layoutX="20.0" layoutY="90.0" text="Исходное число лексем" />
         <Label layoutX="20.0" layoutY="115.0" text="Число лексем после стоп - слов" />
         <Label layoutX="20.0" layoutY="137.0" text="Длительность стемминга" />
 
-        <Label fx:id="name1" layoutX="200" layoutY="68.0" text="name1" />
-        <Label fx:id="countLex1" layoutX="200" layoutY="90" text="countLex1" />
-        <Label fx:id="countStop1" layoutX="200" layoutY="115.0" text="countStop1" />
-        <Label fx:id="durabilityStem1" layoutX="200" layoutY="137.0" text="durabilityStem1" />
-
-        <Label fx:id="name2" layoutX="400" layoutY="68.0" />
-        <Label fx:id="countLex2" layoutX="400" layoutY="90.0" />
-        <Label fx:id="countStop2" layoutX="400" layoutY="115.0" />
-        <Label fx:id="durabilityStem2" layoutX="400" layoutY="137.0" />
 
 
-        <Label fx:id="name3" layoutX="600" layoutY="68.0" />
-        <Label fx:id="countLex3" layoutX="600" layoutY="90.0" />
-        <Label fx:id="countStop3" layoutX="600" layoutY="115.0" />
-        <Label fx:id="durabilityStem3" layoutX="600" layoutY="137.0" />
-
-        <Label fx:id="name4" layoutX="800" layoutY="68.0" />
-        <Label fx:id="countLex4" layoutX="800" layoutY="90.0" />
-        <Label fx:id="countStop4" layoutX="800" layoutY="115.0" />
-        <Label fx:id="durabilityStem4" layoutX="800" layoutY="137.0" />
-
-        <Separator layoutX="10.0" layoutY="177.0" prefHeight="5.0" prefWidth="980.0" />
-        <Button fx:id="compare" layoutX="516.0" layoutY="192.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Произвести расчеты" />
-
-
-        <Label layoutX="20.0" layoutY="250.0" text="Скалярное произведение" />
-        <Label layoutX="20.0" layoutY="280.0" text="Манхеттенское расстояние" />
-        <Label layoutX="20.0" layoutY="310.0" text="Косинусная мера сходства" />
-        <Label layoutX="20.0" layoutY="340.0" text="Евклидово расстояние" />
-        <Label layoutX="20.0" layoutY="370.0" text="Длительность вычислений" />
-
-
-        <Label fx:id="skalar1" layoutX="400.0" layoutY="250.0" />
-        <Label fx:id="manh1" layoutX="400.0" layoutY="280.0" />
-        <Label fx:id="cos1" layoutX="400.0" layoutY="310.0" />
-        <Label fx:id="evkl1" layoutX="400.0" layoutY="340.0" />
-        <Label fx:id="durability1" layoutX="400.0" layoutY="370.0" />
-
-        <Label fx:id="skalar2" layoutX="600.0" layoutY="250.0" text="16.71652910979883" />
-        <Label fx:id="manh2" layoutX="600.0" layoutY="280.0" />
-        <Label fx:id="cos2" layoutX="600.0" layoutY="310.0" />
-        <Label fx:id="evkl2" layoutX="600.0" layoutY="340.0" />
-        <Label fx:id="durability2" layoutX="600.0" layoutY="370.0" />
-
-        <Label fx:id="skalar3" layoutX="800.0" layoutY="250.0" />
-        <Label fx:id="manh3" layoutX="800.0" layoutY="280.0" />
-        <Label fx:id="cos3" layoutX="800.0" layoutY="310.0" />
-        <Label fx:id="evkl3" layoutX="800.0" layoutY="340.0" />
-        <Label fx:id="durability3" layoutX="800.0" layoutY="370.0" />
     </children>
 </AnchorPane>

@@ -52,7 +52,7 @@ public class TestClass {
     //Пробуем записать данные в json РАБОЧИЕ
     @Test
     public void getBaseFrequencesInJsonDETECTIVE() {
-        final File folder = new File("C:/Users/admin/Desktop/detectives_utf8");
+        final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
         long start = System.currentTimeMillis();
         //50 книг
         books = listFilesForFolder(folder);
@@ -66,7 +66,7 @@ public class TestClass {
         testViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson("C:/Users/admin/Desktop/test.json", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/admin/test.json", AllTokensClass.class);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Desktop/test.json", AllTokensClass.class);
         finish = System.currentTimeMillis();
         timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);

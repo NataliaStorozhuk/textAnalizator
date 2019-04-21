@@ -55,38 +55,7 @@ public class Controller {
                 }
             }
         });
-        download2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                final FileChooser fileChooser = new FileChooser();
-                File file = fileChooser.showOpenDialog(stage);
-                if (file != null) {
-                    openFile2(file);
-                }
-            }
-        });
 
-        download3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                final FileChooser fileChooser = new FileChooser();
-                File file = fileChooser.showOpenDialog(stage);
-                if (file != null) {
-                    openFile3(file);
-                }
-            }
-        });
-
-        download4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                final FileChooser fileChooser = new FileChooser();
-                File file = fileChooser.showOpenDialog(stage);
-                if (file != null) {
-                    openFile4(file);
-                }
-            }
-        });
 
 
         compare.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -128,65 +97,6 @@ public class Controller {
         durabilityStem1.setText(String.valueOf(timeConsumedMillis));
     }
 
-    private void openFile2(File file) {
-
-        Analyzer analyzer = new Analyzer();
-        String s = usingBufferedReader(file.getPath());
-        name2.setText(file.getName());
-        ArrayList<String> newS = getWordsFromString(s);
-        countLex2.setText(String.valueOf(newS.size()));
-
-        newS = getWordsWithoutStop(newS);
-        countStop2.setText(String.valueOf(newS.size()));
-
-        long start = System.currentTimeMillis();
-        ArrayList<String> afterP = getWordsAfterPorter(newS);
-        fileAfterPorter2 = afterP;
-        long finish = System.currentTimeMillis();
-        long timeConsumedMillis = finish - start;
-        durabilityStem2.setText(String.valueOf(timeConsumedMillis));
-
-    }
-
-    private void openFile3(File file) {
-
-        Analyzer analyzer = new Analyzer();
-        String s = usingBufferedReader(file.getPath());
-        name3.setText(file.getName());
-        ArrayList<String> newS = getWordsFromString(s);
-        countLex3.setText(String.valueOf(newS.size()));
-
-        newS = getWordsWithoutStop(newS);
-        countStop3.setText(String.valueOf(newS.size()));
-
-        long start = System.currentTimeMillis();
-        ArrayList<String> afterP = getWordsAfterPorter(newS);
-        fileAfterPorter3 = afterP;
-        long finish = System.currentTimeMillis();
-        long timeConsumedMillis = finish - start;
-        durabilityStem3.setText(String.valueOf(timeConsumedMillis));
-
-    }
-
-    private void openFile4(File file) {
-
-        Analyzer analyzer = new Analyzer();
-        String s = usingBufferedReader(file.getPath());
-        name4.setText(file.getName());
-        ArrayList<String> newS = getWordsFromString(s);
-        countLex4.setText(String.valueOf(newS.size()));
-
-        newS = getWordsWithoutStop(newS);
-        countStop4.setText(String.valueOf(newS.size()));
-
-        long start = System.currentTimeMillis();
-        ArrayList<String> afterP = getWordsAfterPorter(newS);
-        fileAfterPorter4 = afterP;
-        long finish = System.currentTimeMillis();
-        long timeConsumedMillis = finish - start;
-        durabilityStem4.setText(String.valueOf(timeConsumedMillis));
-
-    }
 
     public void setStageAndSetupListeners(Stage primaryStage) {
 
