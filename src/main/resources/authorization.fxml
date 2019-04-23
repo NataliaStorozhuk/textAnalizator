@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+           stylesheets="css/style.css" fx:controller="sample.Controllers.AuthorizationController">
+    <Group StackPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="250.0" prefWidth="300.0">
+
+            <Label text="Анализатор жанровой принадлежности текстов"/>
+            <Label text="v 0.0.1"/>
+            <Label text="Логин" styleClass="welcome-text"/>
+            <TextField/>
+            <Label text="Пароль"/>
+            <TextField/>
+            <Label/>
+            <Button fx:id="enter" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Войти"/>
+        </VBox>
+    </Group>
+</StackPane>

@@ -1,4 +1,4 @@
-package sample;
+package sample.Controllers;
 
 
 import javafx.event.EventHandler;
@@ -36,6 +36,7 @@ public class AuthorizationController {
 
     @FXML
     public void initialize() {
+        //  stage.getScene().getProperties().
         enter.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -54,13 +55,15 @@ public class AuthorizationController {
 
     private void openFile1() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainController.class.getResource("main.fxml"));
+      /*  FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainController.class.getResource("sample/main.fxml"));*/
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../resources/main.fxml"));
+
         AnchorPane page = (AnchorPane) loader.load();
 
         // Создаём диалоговое окно Stage.
         //Stage dialogStage = new Stage();
-        stage.setTitle("Edit Person");
+        stage.setTitle("Анализ текста");
         //  dialogStage.initModality(Modality.NONE);
         //  dialogStage.initOwner(primaryStage);
         Scene scene = new Scene(page);

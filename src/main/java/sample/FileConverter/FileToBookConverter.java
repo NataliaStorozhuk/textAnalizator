@@ -38,14 +38,14 @@ public class FileToBookConverter {
         ArrayList<String> names = getNamesFromString(s);
 
         ArrayList<String> wordsFromString = getWordsFromString(s);
-    //    System.out.println("Число слов с именами и слоп словами"+wordsFromString.size());
+        //    System.out.println("Число слов с именами и слоп словами"+wordsFromString.size());
 
         ArrayList<String> wordsWithoutStop = getWordsWithoutStop(wordsFromString);
-      //  System.out.println("Число слов с именами и БЕЗ стоп слов"+wordsWithoutStop.size());
+        //  System.out.println("Число слов с именами и БЕЗ стоп слов"+wordsWithoutStop.size());
 
         ArrayList<String> wordsAfterPorter = getWordsAfterPorter(wordsWithoutStop);
         ArrayList<String> wordsWithoutNames = getWordsWithoutNames(wordsAfterPorter, names);
-      //  System.out.println("Число слов БЕЗ ИМЕН И СЛОП СЛОВ"+wordsWithoutNames.size());
+        //  System.out.println("Число слов БЕЗ ИМЕН И СЛОП СЛОВ"+wordsWithoutNames.size());
         BookProfile book = new BookProfile(file.getName(), wordsWithoutNames);
         return book;
     }
@@ -96,15 +96,15 @@ public class FileToBookConverter {
             Matcher matcherNames = patternNames.matcher(predl.get(i));
 
             while (matcherNames.find()) {
-                names.add(matcherNames.group().toLowerCase().replaceAll("\\s+",""));
+                names.add(matcherNames.group().toLowerCase().replaceAll("\\s+", ""));
             }
         }
 
-    //    System.out.println("Имена из файла!"+names);
+        //    System.out.println("Имена из файла!"+names);
         ArrayList<String> namesAfterPorter = getWordsAfterPorter(names);
-     //   System.out.println("Имена из файла уже после алгоритма Портера"+namesAfterPorter);
+        //   System.out.println("Имена из файла уже после алгоритма Портера"+namesAfterPorter);
         ArrayList<String> namesDistinct = (ArrayList<String>) namesAfterPorter.stream().distinct().collect(Collectors.toList());
-     //   System.out.println("Имена из файла после удаления дубликатов"+namesDistinct);
+        //   System.out.println("Имена из файла после удаления дубликатов"+namesDistinct);
         return namesDistinct;
 
     }

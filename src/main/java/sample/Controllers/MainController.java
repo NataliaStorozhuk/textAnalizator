@@ -1,12 +1,12 @@
-package sample;
+package sample.Controllers;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sample.Analyzer;
 
 import java.io.IOException;
 
@@ -15,6 +15,14 @@ import java.io.IOException;
 public class MainController {
 
 
+    public Button analysis;
+    public TextField filePath;
+    public Button fileChooser;
+    public ChoiceBox categoryList;
+    public Label skalarResult;
+    public Label cosResult;
+    public Label persentResult;
+    public Label textResult;
     String desktopPath = System.getProperty("user.home") + "\\" + "Desktop";
     private String pathFileDetectives = desktopPath + "\\detectives\\";
     private String pathFileAnother = desktopPath + "\\another\\";

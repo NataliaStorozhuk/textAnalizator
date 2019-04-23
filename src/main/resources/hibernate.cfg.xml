@@ -13,8 +13,8 @@
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
         <!-- NOTE that after automapping with IDEA property username and password will delete -->
-        <mapping class="sample.DBModels.Book"/>
         <mapping class="sample.DBModels.Genre"/>
+        <mapping class="sample.DBModels.Book"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

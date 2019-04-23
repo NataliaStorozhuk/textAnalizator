@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane stylesheets="css/style.css" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.Controllers.MainController">
+
+
+    <MenuBar>
+    </MenuBar>
+
+
+    <VBox prefHeight="500.0" prefWidth="800.0">
+
+        <Button fx:id="testButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Тест"/>
+        <Label text="1 Выберите файл"/>
+        <HBox>
+            <TextField fx:id="filePath" prefHeight="25.0" prefWidth="278.0"
+                       promptText="Выберите файл или введите путь..."/>
+            <Button fx:id="fileChooser" text="Выбрать файл"/>
+        </HBox>
+        <Label text="2 Выберите предполагаемый жанр"/>
+        <ChoiceBox fx:id="categoryList" prefWidth="150.0"/>
+
+        <Button fx:id="analysis" mnemonicParsing="false" text="Запуск анализа" alignment="CENTER"/>
+        <ProgressBar prefWidth="+Infinity" progress="0.0"/>
+
+        <Label text="Результаты" alignment="CENTER"/>
+        <HBox>
+            <Label text="Скалярное произведение: "/>
+            <Label fx:id="skalarResult" text="Label"/>
+        </HBox>
+        <HBox>
+            <Label text="Косинусная мера сходства: "/>
+            <Label fx:id="cosResult" text="Label"/>
+        </HBox>
+        <HBox>
+            <Label text="Процент близости: "/>
+            <Label fx:id="persentResult" text="Label"/>
+        </HBox>
+        <Label fx:id="textResult" text="Тут результат сканирования"/>
+    </VBox>
+
+
+</AnchorPane>
