@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <StackPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
-           stylesheets="css/style.css" fx:controller="sample.Controllers.AuthorizationController">
+           stylesheets="/css/style.css" fx:controller="sample.Controllers.AuthorizationController">
     <Group StackPane.alignment="CENTER">
         <VBox alignment="CENTER" prefHeight="250.0" prefWidth="300.0">
 

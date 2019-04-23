@@ -12,7 +12,7 @@ public class Main extends Application {
     //  http://easy-code.ru/lesson/css-javafx-form
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/authorization.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/authorization.fxml"));
         Parent root = (Parent) loader.load();
         AuthorizationController controller = (AuthorizationController) loader.getController();
         controller.setStageAndSetupListeners(primaryStage);

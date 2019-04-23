@@ -57,7 +57,7 @@ public class AuthorizationController {
 
       /*  FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainController.class.getResource("sample/main.fxml"));*/
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../resources/main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
 
         AnchorPane page = (AnchorPane) loader.load();
 
