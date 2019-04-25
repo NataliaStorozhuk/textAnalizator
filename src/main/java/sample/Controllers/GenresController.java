@@ -25,10 +25,10 @@ public class GenresController {
         final TableView<User> table = new TableView<>();
 
         TableColumn idColumn = new TableColumn("ID пользователя");
-        TableColumn loginColumn = new TableColumn("Логин");
-        TableColumn passwordColumn = new TableColumn("Пароль");
-        TableColumn rightsColumn = new TableColumn("Права");
-        TableColumn deleteColumn = new TableColumn("Настройки");
+        TableColumn loginColumn = new TableColumn("Логин controller");
+        TableColumn passwordColumn = new TableColumn("Пароль controller");
+        TableColumn rightsColumn = new TableColumn("Права controller");
+        TableColumn deleteColumn = new TableColumn("Настройки controller");
 
         // устанавливаем тип и значение которое должно хранится в колонке
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));

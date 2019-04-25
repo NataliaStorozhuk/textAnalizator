@@ -3,6 +3,7 @@ package sample.Controllers;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -82,15 +83,15 @@ public class MainController {
 
 
         //Stage stage = new Stage();
-      /*  stage.setTitle("Анализ текста");
+        stage.setTitle("Пользователи");
 
         Scene scene = new Scene(page);
         stage.setScene(scene);
 
-        // Передаём адресата в контроллер.
+        //  Передаём адресата в контроллер.
         GenresController controller = loader.getController();
-        controller.setStage(stage);*/
-        //     stage.show();
+        controller.setStage(stage);
+        stage.show();
 
     }
 
