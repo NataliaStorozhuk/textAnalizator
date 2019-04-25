@@ -2,7 +2,11 @@ package sample.Controllers;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -53,15 +57,14 @@ public class MainController {
 
     }
 
-    private Stage dialogStage;
 
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
+    public void setStage(Stage dialogStage) {
+        this.stage = dialogStage;
     }
 
     private void openFile1() throws IOException {
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      /*  Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Test Connection");
 
         // Header Text: null
@@ -69,13 +72,27 @@ public class MainController {
         alert.setContentText("Второе окошко открылось и все!!");
 
         alert.showAndWait();
+*/
+
+       /*  FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainController.class.getResource("sample/main.fxml"));*/
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
+
+        AnchorPane page = (AnchorPane) loader.load();
+
+
+        //Stage stage = new Stage();
+      /*  stage.setTitle("Анализ текста");
+
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
+
+        // Передаём адресата в контроллер.
+        GenresController controller = loader.getController();
+        controller.setStage(stage);*/
+        //     stage.show();
 
     }
 
-
-    public void setStageAndSetupListeners(Stage primaryStage) {
-
-        stage = primaryStage;
-    }
 
 }

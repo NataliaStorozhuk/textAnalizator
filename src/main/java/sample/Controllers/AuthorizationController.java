@@ -61,19 +61,15 @@ public class AuthorizationController {
 
         AnchorPane page = (AnchorPane) loader.load();
 
-        // Создаём диалоговое окно Stage.
         //Stage dialogStage = new Stage();
         stage.setTitle("Анализ текста");
-        //  dialogStage.initModality(Modality.NONE);
-        //  dialogStage.initOwner(primaryStage);
+
         Scene scene = new Scene(page);
         stage.setScene(scene);
 
         // Передаём адресата в контроллер.
         MainController controller = loader.getController();
-        controller.setDialogStage(stage);
-
-        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+        controller.setStage(stage);
         stage.show();
 
 
