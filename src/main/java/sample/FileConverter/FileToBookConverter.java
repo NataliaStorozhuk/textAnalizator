@@ -53,7 +53,12 @@ public class FileToBookConverter {
     /*Считываем файл в строку*/
     public static String usingBufferedReader(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();
+
+        //этол только для ресурсов подходит=(
+        //     InputStream in = FileToBookConverter.class.getResourceAsStream(filePath);
+        // BufferedReader br = new BufferedReader(new InputStreamReader(in));
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            //  try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
 
             String sCurrentLine;
             while ((sCurrentLine = br.readLine()) != null) {
@@ -124,7 +129,7 @@ public class FileToBookConverter {
 
     /*Удаляет стоп слова из списка*/
     public static ArrayList<String> getWordsWithoutStop(ArrayList<String> newS) {
-        String stopWordsString = usingBufferedReader("src/resources/stop_words.txt");
+        String stopWordsString = usingBufferedReader(FileToBookConverter.class.getResource("/stop_words.txt").getPath());
         ArrayList<String> stopWords = getWordsFromString(stopWordsString);
         newS.removeAll(stopWords);
         return newS;
