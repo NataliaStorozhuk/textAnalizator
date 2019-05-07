@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import sample.DTO.AllTokensClass;
 import sample.DTO.BookProfile;
 import sample.FileConverter.ExcelExporter;
+import sample.FileConverter.FileToBookConverter;
 import sample.FileConverter.ObjectToJsonConverter;
 
 import java.io.File;
@@ -23,11 +24,12 @@ public class TestClass {
     Analyzer analyzer = new Analyzer();
     StatisticGetter statisticGetter = new StatisticGetter();
     ArrayList<BookProfile> books = new ArrayList<>();
+    String desktopPath = System.getProperty("user.home") + "\\" + "Desktop";
 
     //просто тест получения файлов и потом в эксельку что нибудь записать
     @Test
     public void getFiles() throws IOException {
-        final File folder = new File("C:/Users/Natalia/Desktop/test");
+        final File folder = new File(desktopPath + "test");
         books = listFilesForFolder(folder);
         AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
         ExcelExporter.createExcelFile(testViborka.arrayAfterSort, books, "allWords");
@@ -37,7 +39,7 @@ public class TestClass {
     //Пробуем записать данные в json ТЕСТОВЫЕ
     @Test
     public void getBaseFrequencesInJson() {
-        final File folder = new File("C:/Users/Natalia/Desktop/test");
+        final File folder = new File(desktopPath + "test");
         long start = System.currentTimeMillis();
 
         books = listFilesForFolder(folder);
@@ -45,14 +47,14 @@ public class TestClass {
         books.add(createAverageBook(books));
         testViborka.w = books.get(books.size() - 1).getW();
 
-        ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/testJsonFile", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/testJsonFile", AllTokensClass.class);
+        ObjectToJsonConverter.fromObjectToJson(desktopPath + "testJsonFile", testViborka);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFile", AllTokensClass.class);
     }
 
     //Пробуем записать данные в json РАБОЧИЕ
     @Test
     public void getBaseFrequencesInJsonDETECTIVE() {
-        final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
+        final File folder = new File(desktopPath + "detectives_utf8");
         long start = System.currentTimeMillis();
         //50 книг
         books = listFilesForFolder(folder);
@@ -65,8 +67,8 @@ public class TestClass {
 
         testViborka.w = books.get(books.size() - 1).getW();
 
-        ObjectToJsonConverter.fromObjectToJson("C:/Users/admin/Desktop/test.json", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Desktop/test.json", AllTokensClass.class);
+        ObjectToJsonConverter.fromObjectToJson(desktopPath + "test.json", testViborka);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "test.json", AllTokensClass.class);
         finish = System.currentTimeMillis();
         timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
@@ -75,7 +77,7 @@ public class TestClass {
     //Получить анализ выбранных 352 слов
     @Test
     public void getResultsForDetectiveDictionary() throws IOException {
-        final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
+        final File folder = new File(desktopPath + "detectives_utf8");
         long start = System.currentTimeMillis();
 
         String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary_afterMethod.txt");
@@ -96,17 +98,17 @@ public class TestClass {
     //Опыт 2 без удаления имен
     @Test
     public void getResultsForMaxDictionary() throws IOException {
-        final File folder = new File("C:/Users/Natalia/Desktop/test");
-        //    final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
+        final File folder = new File(desktopPath + "\\" + "detectives_utf8");
         long start = System.currentTimeMillis();
 
         books = listFilesForFolder(folder);
         AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
 
-        books.add(createAverageBook(books));
+        BookProfile averageBook = createAverageBook(books);
+        books.add(averageBook);
 
         ArrayList<BookProfile> booksMax = new ArrayList<>();
-        BookProfile maxBook = createMaxBook(createAverageBook(books), 300);
+        BookProfile maxBook = createMaxBook(averageBook, 300);
         booksMax.add(maxBook);
 
         ArrayList<String> maxArrayList = getMaxUseWords(testViborka, maxBook);
@@ -130,7 +132,7 @@ public class TestClass {
     //Опыт 2, имена удалены
     @Test
     public void getResultsForMaxDictionaryWithoutNames() throws IOException {
-        final File folder = new File("C:/Users/Natalia/Desktop/another_viborka_utf8");
+        final File folder = new File(desktopPath + "another_viborka_utf8");
         long start = System.currentTimeMillis();
 
         books = listFilesForFolderWithoutNames(folder);
@@ -156,13 +158,13 @@ public class TestClass {
     public void getSimiliarityWithoutMagic() {
 
         //тестовые 3
-        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/testJsonFileDetective.json", AllTokensClass.class);
+        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileDetective.json", AllTokensClass.class);
         //         AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/test.json", AllTokensClass.class);
 
         //тестовая следующая
         //      File file = new File("C:/Users/Natalia/Desktop/text4.txt");
         //     final File folder = new File("C:/Users/Natalia/Desktop/test_testBooks");
-        final File folder = new File("C:/Users/Natalia/Desktop/test_6Books");
+        final File folder = new File(desktopPath + "test_6Books");
         for (final File fileEntry : folder.listFiles()) {
             analyzer.getFileCos(fileEntry.getPath(), studyViborka);
         }
@@ -173,7 +175,7 @@ public class TestClass {
     //Получить книгу после применения нового метода с именами
     @Test
     public void getRealBookWithoutNames() {
-        File file = new File("C:/Users/Natalia/Desktop/test_detectives/Агата Кристи 10 негритят.txt");
+        File file = new File(desktopPath + "test_detectives/Агата Кристи 10 негритят.txt");
         BookProfile testBook1 = getBookFromFileWithoutNames(file);
     }
 
@@ -190,12 +192,12 @@ public class TestClass {
         baseViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/testJsonFile", baseViborka);*/
-        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/testJsonFileWithoutNames", AllTokensClass.class);
+        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileWithoutNames", AllTokensClass.class);
 
         ymnojIDFforDetectiveWords(studyViborka, 2);
 
         //     final File folderTestBooks = new File("C:/Users/Natalia/Desktop/test_testBooks");
-        final File folderTestBooks = new File("C:/Users/Natalia/Desktop/test_6Books");
+        final File folderTestBooks = new File(desktopPath + "test_6Books");
         for (final File fileEntry : folderTestBooks.listFiles()) {
             analyzer.getFileCos(fileEntry.getPath(), studyViborka);
         }
@@ -349,4 +351,8 @@ public class TestClass {
     }
 
 
+    @Test
+    public void testStopWords() {
+        String stopWordsString = usingBufferedReader(FileToBookConverter.class.getResource("/stop_words.txt").getPath());
+    }
 }
