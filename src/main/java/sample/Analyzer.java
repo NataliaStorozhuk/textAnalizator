@@ -4,13 +4,12 @@ package sample;
 import lombok.Setter;
 import sample.DTO.AllTokensClass;
 import sample.DTO.BookProfile;
+import sample.FileConverter.FileToBookConverter;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-
-import static sample.FileConverter.FileToBookConverter.getBookFromFileWithoutNames;
 
 @Setter
 public class Analyzer {
@@ -134,7 +133,8 @@ public class Analyzer {
         File file = new File(pathName);
         System.out.println(file.getPath());
 //        BookProfile testBook1 = getBookFromFile(file);
-        BookProfile testBook1 = getBookFromFileWithoutNames(file);
+        FileToBookConverter fileToBookConverter = new FileToBookConverter();
+        BookProfile testBook1 = fileToBookConverter.getBookFromFile(file);
 
         ArrayList<BookProfile> testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook1);

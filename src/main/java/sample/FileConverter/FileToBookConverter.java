@@ -16,25 +16,11 @@ import java.util.stream.Collectors;
 
 public class FileToBookConverter {
 
-    /*Из файла прямо в объект типа BookProfile*/
-    public static BookProfile getBookFromFile(File file) {
-
-        String s = usingBufferedReader(file.getPath());
-        ArrayList<String> wordsFromString = getWordsFromString(s);
-
-        ArrayList<String> wordsWithoutStop = getWordsWithoutStop(wordsFromString);
-        ArrayList<String> fileAfterPorter = getWordsAfterPorter(wordsWithoutStop);
-
-        BookProfile book = new BookProfile(file.getName(), fileAfterPorter);
-        return book;
-    }
-
 
     /*Из файла прямо в объект типа BookProfile БЕЗ ИМЕН*/
-    public static BookProfile getBookFromFileWithoutNames(File file) {
+    public BookProfile getBookFromFile(File file) {
 
         String s = usingBufferedReader(file.getPath());
-
         ArrayList<String> names = getNamesFromString(s);
 
         ArrayList<String> wordsFromString = getWordsFromString(s);
@@ -53,12 +39,7 @@ public class FileToBookConverter {
     /*Считываем файл в строку*/
     public static String usingBufferedReader(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();
-
-        //этол только для ресурсов подходит=(
-        //     InputStream in = FileToBookConverter.class.getResourceAsStream(filePath);
-        // BufferedReader br = new BufferedReader(new InputStreamReader(in));
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            //  try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
 
             String sCurrentLine;
             while ((sCurrentLine = br.readLine()) != null) {
@@ -128,9 +109,11 @@ public class FileToBookConverter {
     }
 
     /*Удаляет стоп слова из списка*/
-    public static ArrayList<String> getWordsWithoutStop(ArrayList<String> newS) {
-        String stopWordsString = usingBufferedReader(FileToBookConverter.class.getResource("/stop_words.txt").getPath());
-        ArrayList<String> stopWords = getWordsFromString(stopWordsString);
+    public ArrayList<String> getWordsWithoutStop(ArrayList<String> newS) {
+        //    InputStream in = getClass().getResourceAsStream("/stop_words.txt");
+        //  BufferedReader stopWordsString = new BufferedReader(new InputStreamReader(in));
+        String stopWordsString = usingBufferedReader("/stop_words.txt");
+        ArrayList<String> stopWords = getWordsFromString(String.valueOf(stopWordsString));
         newS.removeAll(stopWords);
         return newS;
     }

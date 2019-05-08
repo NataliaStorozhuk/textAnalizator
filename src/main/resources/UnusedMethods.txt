@@ -1,0 +1,81 @@
+package sample;
+
+import org.testng.annotations.Test;
+import sample.DTO.AllTokensClass;
+import sample.DTO.BookProfile;
+import sample.FileConverter.ExcelExporter;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
+
+public class UnusedMethods {
+
+    //Поиск наиболее часто употребимых слов 300 шт
+    //Опыт 2 без удаления имен
+    @Test
+    public void getResultsForMaxDictionary() throws IOException {
+        final File folder = new File(desktopPath + "detectives_utf8");
+        //   final File folder = new File(desktopPath +  "test");
+        long start = System.currentTimeMillis();
+
+        books = listFilesForFolder(folder);
+        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
+
+        BookProfile averageBook = createAverageBook(books);
+        books.add(averageBook);
+
+        ArrayList<BookProfile> booksMax = new ArrayList<>();
+        BookProfile maxBook = createMaxBook(averageBook, 300);
+        booksMax.add(maxBook);
+
+        ArrayList<String> maxArrayList = getMaxUseWords(testViborka, maxBook);
+
+        long finish = System.currentTimeMillis();
+        long timeConsumedMillis = finish - start;
+        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
+
+
+        ExcelExporter.createExcelFile(maxArrayList, booksMax, desktopPath+"detectives_utf8_max300");
+    }
+
+
+    //Ходим по папке, собираем файлы в объекты BookProfile
+    public ArrayList<BookProfile> listFilesForFolder(File folder) {
+
+    /*    for (final File fileEntry : folder.listFiles()) {
+            if (fileEntry.isDirectory()) {
+          //      listFilesForFolder(fileEntry);
+            } else {
+                books.add(getBookFromFile(fileEntry));
+            }
+        }*/
+        ArrayList<BookProfile> books = new ArrayList<>();
+        CompletableFuture[] futures = Arrays.stream(folder.listFiles())
+                .filter(File::isFile)
+                .map(file -> CompletableFuture.supplyAsync(() -> {
+                    books.add(fileToBookConverter.getBookFromFile(file));
+                    return null;
+                }))
+                .toArray(CompletableFuture[]::new);
+
+        CompletableFuture.allOf(futures).join();
+        return books;
+    }
+
+    /*Из файла прямо в объект типа BookProfile*/
+    public BookProfile getBookFromFile(File file) {
+
+        String s = usingBufferedReader(file.getPath());
+        ArrayList<String> wordsFromString = getWordsFromString(s);
+
+        ArrayList<String> wordsWithoutStop = getWordsWithoutStop(wordsFromString);
+        ArrayList<String> fileAfterPorter = getWordsAfterPorter(wordsWithoutStop);
+
+        BookProfile book = new BookProfile(file.getName(), fileAfterPorter);
+        return book;
+    }
+
+}

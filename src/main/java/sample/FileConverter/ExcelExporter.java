@@ -50,11 +50,11 @@ public class ExcelExporter {
 
             for (int j = 0; j < books.size(); j++) {
                 cell = row.createCell(j + 1, CellType.STRING);
-                cell.setCellValue(books.get(j).getTf_idf().get(i));
+                cell.setCellValue(books.get(j).getW().get(i));
                 cell.setCellStyle(style);
             }
         }
-        File file = new File("C:/Users/admin/Desktop/" + fileName + ".xls");
+        File file = new File(fileName + ".xls");
         file.getParentFile().mkdirs();
 
         FileOutputStream outFile = new FileOutputStream(file);

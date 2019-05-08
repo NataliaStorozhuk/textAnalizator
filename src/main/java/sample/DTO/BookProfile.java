@@ -13,7 +13,7 @@ public class BookProfile {
     public ArrayList<Integer> tf;
     public ArrayList<Double> tf_idf;
     public ArrayList<Double> normTF;
-    private ArrayList<Double> w;
+    public ArrayList<Double> w;
 
     public BookProfile(String name, ArrayList<String> lexems) {
         this.name = name;

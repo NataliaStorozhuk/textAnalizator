@@ -21,16 +21,17 @@ import static sample.StatisticGetter.*;
 
 public class TestClass {
 
-    Analyzer analyzer = new Analyzer();
-    StatisticGetter statisticGetter = new StatisticGetter();
-    ArrayList<BookProfile> books = new ArrayList<>();
-    String desktopPath = System.getProperty("user.home") + "\\" + "Desktop";
+    private Analyzer analyzer = new Analyzer();
+    private StatisticGetter statisticGetter = new StatisticGetter();
+    private FileToBookConverter fileToBookConverter = new FileToBookConverter();
+    private ArrayList<BookProfile> books = new ArrayList<>();
+    private String desktopPath = System.getProperty("user.home") + "\\" + "Desktop" + "\\";
 
     //просто тест получения файлов и потом в эксельку что нибудь записать
     @Test
     public void getFiles() throws IOException {
         final File folder = new File(desktopPath + "test");
-        books = listFilesForFolder(folder);
+        books = listFilesFromFolder(folder);
         AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
         ExcelExporter.createExcelFile(testViborka.arrayAfterSort, books, "allWords");
     }
@@ -40,9 +41,8 @@ public class TestClass {
     @Test
     public void getBaseFrequencesInJson() {
         final File folder = new File(desktopPath + "test");
-        long start = System.currentTimeMillis();
 
-        books = listFilesForFolder(folder);
+        books = listFilesFromFolder(folder);
         AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         testViborka.w = books.get(books.size() - 1).getW();
@@ -57,7 +57,7 @@ public class TestClass {
         final File folder = new File(desktopPath + "detectives_utf8");
         long start = System.currentTimeMillis();
         //50 книг
-        books = listFilesForFolder(folder);
+        books = listFilesFromFolder(folder);
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;           //9604 распаралелено, 17786 если по очереди
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
@@ -74,13 +74,13 @@ public class TestClass {
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
     }
 
-    //Получить анализ выбранных 352 слов
+    //Получить анализ выбранных ранее "ключевых" слов
     @Test
     public void getResultsForDetectiveDictionary() throws IOException {
         final File folder = new File(desktopPath + "detectives_utf8");
         long start = System.currentTimeMillis();
 
-        String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary_afterMethod.txt");
+        String detectiveWordsString = usingBufferedReader("/detectiveDictionary_afterMethod.txt");
         ArrayList<String> detectiveWords = getWordsFromString(detectiveWordsString);
 
         getListBooksWithDetectiveWordsOnly(folder, detectiveWords);
@@ -94,32 +94,6 @@ public class TestClass {
         ExcelExporter.createExcelFile(arrayAfterSort, books, "another");
     }
 
-    //Поиск наиболее часто употребимых слов 300 шт
-    //Опыт 2 без удаления имен
-    @Test
-    public void getResultsForMaxDictionary() throws IOException {
-        final File folder = new File(desktopPath + "\\" + "detectives_utf8");
-        long start = System.currentTimeMillis();
-
-        books = listFilesForFolder(folder);
-        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
-
-        BookProfile averageBook = createAverageBook(books);
-        books.add(averageBook);
-
-        ArrayList<BookProfile> booksMax = new ArrayList<>();
-        BookProfile maxBook = createMaxBook(averageBook, 300);
-        booksMax.add(maxBook);
-
-        ArrayList<String> maxArrayList = getMaxUseWords(testViborka, maxBook);
-
-        long finish = System.currentTimeMillis();
-        long timeConsumedMillis = finish - start;
-        System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
-
-
-        ExcelExporter.createExcelFile(maxArrayList, booksMax, "detectives_utf8_max300");
-    }
 
     private ArrayList<String> getMaxUseWords(AllTokensClass testViborka, BookProfile maxBook) {
         ArrayList<String> maxArrayList = new ArrayList<>();
@@ -129,13 +103,14 @@ public class TestClass {
         return maxArrayList;
     }
 
-    //Опыт 2, имена удалены
+
+    //Поиск наиболее часто употребимых слов 300 шт
     @Test
-    public void getResultsForMaxDictionaryWithoutNames() throws IOException {
+    public void getResultsForMaxDictionary() throws IOException {
         final File folder = new File(desktopPath + "another_viborka_utf8");
         long start = System.currentTimeMillis();
 
-        books = listFilesForFolderWithoutNames(folder);
+        books = listFilesFromFolder(folder);
         AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
 
         books.add(createAverageBook(books));
@@ -172,13 +147,6 @@ public class TestClass {
     }
 
 
-    //Получить книгу после применения нового метода с именами
-    @Test
-    public void getRealBookWithoutNames() {
-        File file = new File(desktopPath + "test_detectives/Агата Кристи 10 негритят.txt");
-        BookProfile testBook1 = getBookFromFileWithoutNames(file);
-    }
-
     //Анализ без имен!
     @Test
     public void getSimiliarityWithMagic() {
@@ -186,7 +154,7 @@ public class TestClass {
        /* final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
         //final File folder = new File("C:/Users/Natalia/Desktop/test");
 
-        books = listFilesForFolderWithoutNames(folder);
+        books = listFilesFromFolder(folder);
         AllTokensClass baseViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         baseViborka.w = books.get(books.size() - 1).getW();
@@ -224,11 +192,15 @@ public class TestClass {
         BookProfile book = new BookProfile("maxBook");
         book.setTf(new ArrayList<>());
         book.setTf_idf(new ArrayList<>());
+        book.setNormTF(new ArrayList<>());
+        book.setW(new ArrayList<>());
         for (int i = 0; i < countWords; i++) {
-            book.tf.add(averageBook.tf_idf.indexOf(Collections.max(averageBook.tf_idf)));
-
-            book.tf_idf.add(Collections.max(averageBook.tf_idf));
-            averageBook.tf_idf.set(averageBook.tf_idf.indexOf(Collections.max(averageBook.tf_idf)), 0.0);
+            //пишем индекс максимального
+            book.tf.add(averageBook.w.indexOf(Collections.max(averageBook.w)));
+            //пишем сам максимальный
+            book.w.add(Collections.max(averageBook.w));
+            //обнуляем у этой книги максимальный
+            averageBook.w.set(averageBook.w.indexOf(Collections.max(averageBook.w)), 0.0);
         }
         return book;
     }
@@ -256,38 +228,14 @@ public class TestClass {
         return averageBook;
     }
 
-
     //Ходим по папке, собираем файлы в объекты BookProfile
-    public ArrayList<BookProfile> listFilesForFolder(File folder) {
-
-    /*    for (final File fileEntry : folder.listFiles()) {
-            if (fileEntry.isDirectory()) {
-          //      listFilesForFolder(fileEntry);
-            } else {
-                books.add(getBookFromFile(fileEntry));
-            }
-        }*/
-        ArrayList<BookProfile> books = new ArrayList<>();
-        CompletableFuture[] futures = Arrays.stream(folder.listFiles())
-                .filter(File::isFile)
-                .map(file -> CompletableFuture.supplyAsync(() -> {
-                    books.add(getBookFromFile(file));
-                    return null;
-                }))
-                .toArray(CompletableFuture[]::new);
-
-        CompletableFuture.allOf(futures).join();
-        return books;
-    }
-
-    //Ходим по папке, собираем файлы в объекты BookProfile, обработка без имен
-    public ArrayList<BookProfile> listFilesForFolderWithoutNames(File folder) {
+    public ArrayList<BookProfile> listFilesFromFolder(File folder) {
 
         ArrayList<BookProfile> books = new ArrayList<>();
         CompletableFuture[] futures = Arrays.stream(folder.listFiles())
                 .filter(File::isFile)
                 .map(file -> CompletableFuture.supplyAsync(() -> {
-                    books.add(getBookFromFileWithoutNames(file));
+                    books.add(fileToBookConverter.getBookFromFile(file));
                     return null;
                 }))
                 .toArray(CompletableFuture[]::new);
@@ -300,14 +248,15 @@ public class TestClass {
     //тут надо разобраться, сама не поняла, что сделала
     public void getListBooksWithDetectiveWordsOnly(File folder, ArrayList<String> detectiveWords) {
 
+        //чуть побыстрее работает без перебора папок
         for (final File fileEntry : folder.listFiles()) {
-            if (fileEntry.isDirectory()) {
-                listFilesForFolder(fileEntry);
-            } else {
+      /*      if (fileEntry.isDirectory()) {
+                listFilesFromFolder(fileEntry);
+            } else {*/
                 books.add(getBookWithDetectiveWordsOnly(fileEntry, detectiveWords));
                 System.out.println(fileEntry.getName());
             }
-        }
+        //  }
     }
 
     /*Берем книгу из файла, выкиыдваем лишние слова*/
@@ -320,8 +269,7 @@ public class TestClass {
 
         ArrayList<String> fileAfterPorter = getWordsAfterPorter(wordsFromString);
 
-        BookProfile book = new BookProfile(file.getName(), fileAfterPorter
-        );
+        BookProfile book = new BookProfile(file.getName(), fileAfterPorter);
         return book;
     }
 
@@ -329,7 +277,7 @@ public class TestClass {
     public List<String> getResultsWithDetectivesDictionary(ArrayList<BookProfile> books) {
 
         //формируем общий, сортируем, выкидываем повторы
-        String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary.txt");
+        String detectiveWordsString = usingBufferedReader("/detectiveDictionary.txt");
         ArrayList<String> arrayAfterSort = getWordsFromString(detectiveWordsString);
 
         for (int i = 0; i < books.size(); i++) {
