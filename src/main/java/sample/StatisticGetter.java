@@ -48,7 +48,8 @@ public class StatisticGetter {
         start = System.currentTimeMillis();
 
         //считаем общее число файлов, в которых встречается слово
-        ArrayList<Integer> documentFrequency = getDf(books);
+        ArrayList<Double> documentFrequency = getDf(books);
+        allTokensClass.df = documentFrequency;
 
         //считаем idf
         if (books.size() != 1)
@@ -68,7 +69,8 @@ public class StatisticGetter {
 
         //получаем w по модной формуле
         for (BookProfile book : books) {
-            getW(book, allTokensClass.idf);
+            //getW(book, allTokensClass.idf);
+            getW(book, allTokensClass.df);
         }
 
         System.out.println("Конец");
@@ -125,10 +127,10 @@ public class StatisticGetter {
     }
 
     //Получили список, который содержит количества файлов, в которых повторяются лексемы
-    public static ArrayList<Integer> getDf(ArrayList<BookProfile> books) {
-        ArrayList<Integer> documentFrequency = new ArrayList<>();
+    public static ArrayList<Double> getDf(ArrayList<BookProfile> books) {
+        ArrayList<Double> documentFrequency = new ArrayList<>();
         for (int i = 0; i < books.get(0).getTf().size(); i++) {
-            int temp = 0;
+            double temp = 0;
             for (int j = 0; j < books.size(); j++) {
                 if ((books.get(j).getTf().get(i)) != 0)
                     temp++;
@@ -139,7 +141,7 @@ public class StatisticGetter {
     }
 
     //Пoлучили idf - логарифм (общее число доков/на число доков с каждой лексемой)
-    public static ArrayList<Double> getIdf(ArrayList<Integer> documentFrequency, Integer booksSize) {
+    public static ArrayList<Double> getIdf(ArrayList<Double> documentFrequency, Integer booksSize) {
         ArrayList<Double> idf = new ArrayList<>();
         for (int i = 0; i < documentFrequency.size(); i++) {
 
@@ -173,6 +175,18 @@ public class StatisticGetter {
 
     //Получили число W для каждого документа
     public static void getW(BookProfile book, List<Double> idf) {
+        ArrayList<Double> w = new ArrayList<Double>();
+
+        for (int i = 0; i < book.normTF.size(); i++) {
+
+            double wi = (0.5 + book.normTF.get(i) * 0.5) * idf.get(i);
+            w.add(wi);
+        }
+        book.setW(w);
+    }
+
+    //Получили число W для каждого документа
+    public static void alternativeW(BookProfile book, List<Double> idf) {
         ArrayList<Double> w = new ArrayList<Double>();
 
         for (int i = 0; i < book.normTF.size(); i++) {

@@ -10,6 +10,7 @@ public class AllTokensClass {
 
     public List<String> arrayAfterSort;
     public List<Double> idf;
+    public List<Double> df;
     public List<Double> w;
 
     public AllTokensClass() {

@@ -33,7 +33,7 @@ public class TestClass {
         final File folder = new File(desktopPath + "test");
         books = listFilesFromFolder(folder);
         AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
-        ExcelExporter.createExcelFile(testViborka.arrayAfterSort, books, "allWords");
+        ExcelExporter.createExcelFile(testViborka.arrayAfterSort, books, "allWordsMagicW");
     }
 
 
@@ -68,16 +68,32 @@ public class TestClass {
         testViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson(desktopPath + "test.json", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "test.json", AllTokensClass.class);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectives.json", AllTokensClass.class);
         finish = System.currentTimeMillis();
         timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
     }
 
+
+    @Test
+    public void getWDictionaryDetective() throws IOException {
+        getResultsForDetectiveDictionary("detectives_utf8");
+    }
+
+    @Test
+    public void getWDictionaryAnother() throws IOException {
+        getResultsForDetectiveDictionary("another_viborka_utf8");
+    }
+
+    @Test
+    public void getWDictionaryTest() throws IOException {
+        getResultsForDetectiveDictionary("test");
+    }
+
     //Получить анализ выбранных ранее "ключевых" слов
     @Test
-    public void getResultsForDetectiveDictionary() throws IOException {
-        final File folder = new File(desktopPath + "detectives_utf8");
+    public void getResultsForDetectiveDictionary(String folderName) throws IOException {
+        final File folder = new File(desktopPath + folderName);
         long start = System.currentTimeMillis();
 
         String detectiveWordsString = usingBufferedReader("/detectiveDictionary_afterMethod.txt");
@@ -91,7 +107,7 @@ public class TestClass {
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
 
         books.add(createAverageBook(books));
-        ExcelExporter.createExcelFile(arrayAfterSort, books, "another");
+        ExcelExporter.createExcelFile(arrayAfterSort, books, folderName + "getWDictionary");
     }
 
 
@@ -103,11 +119,26 @@ public class TestClass {
         return maxArrayList;
     }
 
+    @Test
+    public void getMaxDetective() throws IOException {
+        getResultsForMaxDictionary("detectives_utf8");
+    }
+
+    @Test
+    public void getMaxAnother() throws IOException {
+        getResultsForMaxDictionary("another_utf8");
+    }
+
+    @Test
+    public void getMaxTest() throws IOException {
+        getResultsForMaxDictionary("test");
+    }
 
     //Поиск наиболее часто употребимых слов 300 шт
-    @Test
-    public void getResultsForMaxDictionary() throws IOException {
-        final File folder = new File(desktopPath + "another_viborka_utf8");
+
+    public void getResultsForMaxDictionary(String folderName) throws IOException {
+
+        final File folder = new File(desktopPath + folderName);
         long start = System.currentTimeMillis();
 
         books = listFilesFromFolder(folder);
@@ -125,7 +156,7 @@ public class TestClass {
         long timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
 
-        ExcelExporter.createExcelFile(maxArrayList, booksMax, "another_viborka_utf8");
+        ExcelExporter.createExcelFile(maxArrayList, booksMax, folderName + "getWCountWords300");
     }
 
     //Считаем скалярное произведение, тестим на 6 книгах ДО модных нововведений
@@ -133,7 +164,7 @@ public class TestClass {
     public void getSimiliarityWithoutMagic() {
 
         //тестовые 3
-        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileDetective.json", AllTokensClass.class);
+        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "test.json", AllTokensClass.class);
         //         AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/test.json", AllTokensClass.class);
 
         //тестовая следующая
@@ -146,8 +177,6 @@ public class TestClass {
 
     }
 
-
-    //Анализ без имен!
     @Test
     public void getSimiliarityWithMagic() {
 
@@ -232,6 +261,12 @@ public class TestClass {
     public ArrayList<BookProfile> listFilesFromFolder(File folder) {
 
         ArrayList<BookProfile> books = new ArrayList<>();
+      /*  for (final File fileEntry : folder.listFiles()) {
+
+            System.out.println(fileEntry.getName());
+            books.add(fileToBookConverter.getBookFromFile(fileEntry));
+
+        }*/
         CompletableFuture[] futures = Arrays.stream(folder.listFiles())
                 .filter(File::isFile)
                 .map(file -> CompletableFuture.supplyAsync(() -> {
@@ -250,13 +285,13 @@ public class TestClass {
 
         //чуть побыстрее работает без перебора папок
         for (final File fileEntry : folder.listFiles()) {
-      /*      if (fileEntry.isDirectory()) {
+            if (fileEntry.isDirectory()) {
                 listFilesFromFolder(fileEntry);
-            } else {*/
+            } else {
                 books.add(getBookWithDetectiveWordsOnly(fileEntry, detectiveWords));
                 System.out.println(fileEntry.getName());
             }
-        //  }
+        }
     }
 
     /*Берем книгу из файла, выкиыдваем лишние слова*/
@@ -285,7 +320,7 @@ public class TestClass {
         }
 
         //считаем общее число файлов, в которых встречается слово
-        ArrayList<Integer> documentFrequency = getDf(books);
+        ArrayList<Double> documentFrequency = getDf(books);
 
         //считаем idf
         ArrayList<Double> idf = getIdf(documentFrequency, books.size());
