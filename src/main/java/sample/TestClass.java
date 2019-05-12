@@ -156,7 +156,7 @@ public class TestClass {
         long timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
 
-        ExcelExporter.createExcelFile(maxArrayList, booksMax, folderName + "getWCountWords300");
+        ExcelExporter.createExcelFile(maxArrayList, booksMax, folderName + "getWCountWords300WithoutSF_1");
     }
 
     //Считаем скалярное произведение, тестим на 6 книгах ДО модных нововведений

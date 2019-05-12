@@ -30,10 +30,23 @@ public class FileToBookConverter {
         //  System.out.println("Число слов с именами и БЕЗ стоп слов"+wordsWithoutStop.size());
 
         ArrayList<String> wordsAfterPorter = getWordsAfterPorter(wordsWithoutStop);
-        ArrayList<String> wordsWithoutNames = getWordsWithoutNames(wordsAfterPorter, names);
+        ArrayList<String> wordsWithoutSFWords = getWordsWithoutSFWords(wordsAfterPorter);
+
+        ArrayList<String> wordsWithoutNames = getWordsWithoutNames(wordsWithoutSFWords, names);
         //  System.out.println("Число слов БЕЗ ИМЕН И СЛОП СЛОВ"+wordsWithoutNames.size());
         BookProfile book = new BookProfile(file.getName(), wordsWithoutNames);
         return book;
+    }
+
+    private ArrayList<String> getWordsWithoutSFWords(ArrayList<String> wordsAfterPorter) {
+        ArrayList<String> result = wordsAfterPorter;
+
+        String stopWordsString = usingBufferedReader((FileToBookConverter.class.getResource("/same_frequenses_words.txt").getPath()));
+        ArrayList<String> stopWords = getWordsFromString(stopWordsString);
+
+        result.removeAll(stopWords);
+        return result;
+
     }
 
     /*Считываем файл в строку*/

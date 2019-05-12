@@ -77,7 +77,8 @@ public class Analyzer {
         //   ArrayList<Double> WstudyIn2Skale = getDoubleListSkale((ArrayList<Double>) studyViborka.getW());
         // ArrayList<Double> WtestIn2Skale = getDoubleListSkale((ArrayList<Double>) testViborka.getW());
         Double getCos = 0.0;
-        Double getChisl = Math.sqrt(getSkalar);
+        Double getChisl = getSkalar;
+        //  Double getChisl = Math.sqrt(getSkalar);
         Double getZnam = 0.0;
         Double getZnam1 = 0.0;
         Double getZnam1Sum = 0.0;
