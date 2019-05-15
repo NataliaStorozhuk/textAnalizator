@@ -40,7 +40,7 @@ public class TestClass {
     //Пробуем записать данные в json ТЕСТОВЫЕ
     @Test
     public void getBaseFrequencesInJson() {
-        final File folder = new File(desktopPath + "test");
+        final File folder = new File(desktopPath + "detectives_utf8");
 
         books = listFilesFromFolder(folder);
         AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
@@ -48,7 +48,7 @@ public class TestClass {
         testViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson(desktopPath + "testJsonFile", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFile", AllTokensClass.class);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileTf*IDF", AllTokensClass.class);
     }
 
     //Пробуем записать данные в json РАБОЧИЕ
@@ -67,8 +67,8 @@ public class TestClass {
 
         testViborka.w = books.get(books.size() - 1).getW();
 
-        ObjectToJsonConverter.fromObjectToJson(desktopPath + "test.json", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectives.json", AllTokensClass.class);
+        ObjectToJsonConverter.fromObjectToJson(desktopPath + "detectivesTFIDF.json", testViborka);
+        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", AllTokensClass.class);
         finish = System.currentTimeMillis();
         timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
@@ -164,7 +164,7 @@ public class TestClass {
     public void getSimiliarityWithoutMagic() {
 
         //тестовые 3
-        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "test.json", AllTokensClass.class);
+        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", AllTokensClass.class);
         //         AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/test.json", AllTokensClass.class);
 
         //тестовая следующая
@@ -176,6 +176,7 @@ public class TestClass {
         }
 
     }
+
 
     @Test
     public void getSimiliarityWithMagic() {
@@ -189,9 +190,9 @@ public class TestClass {
         baseViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/testJsonFile", baseViborka);*/
-        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileWithoutNames", AllTokensClass.class);
+        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", AllTokensClass.class);
 
-        ymnojIDFforDetectiveWords(studyViborka, 2);
+        ymnojIDFforDetectiveWords(studyViborka, 1000);
 
         //     final File folderTestBooks = new File("C:/Users/Natalia/Desktop/test_testBooks");
         final File folderTestBooks = new File(desktopPath + "test_6Books");
@@ -202,7 +203,7 @@ public class TestClass {
     }
 
     private void ymnojIDFforDetectiveWords(AllTokensClass studyViborka, Integer cof) {
-        String detectiveWordsString = usingBufferedReader("src/resources/detectiveDictionary_afterMethod.txt");
+        String detectiveWordsString = usingBufferedReader(this.getClass().getResource("/detectiveDictionary_afterMethod.txt").getPath());
         ArrayList<String> detectiveWords = getWordsFromString(detectiveWordsString);
 
 //Это умножение idf на 5
@@ -210,6 +211,7 @@ public class TestClass {
             for (int j = 0; j < detectiveWords.size(); j++) {
                 if (studyViborka.arrayAfterSort.get(i).equals(detectiveWords.get(j))) {
                     studyViborka.w.set(i, studyViborka.w.get(i) / cof);
+                    // studyViborka.w.set(i, 0.0);
                     break;
                 }
             }
@@ -312,7 +314,7 @@ public class TestClass {
     public List<String> getResultsWithDetectivesDictionary(ArrayList<BookProfile> books) {
 
         //формируем общий, сортируем, выкидываем повторы
-        String detectiveWordsString = usingBufferedReader("/detectiveDictionary.txt");
+        String detectiveWordsString = usingBufferedReader("/detectiveDictionary_afterMethod.txt");
         ArrayList<String> arrayAfterSort = getWordsFromString(detectiveWordsString);
 
         for (int i = 0; i < books.size(); i++) {

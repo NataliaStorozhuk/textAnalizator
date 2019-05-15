@@ -69,8 +69,8 @@ public class StatisticGetter {
 
         //получаем w по модной формуле
         for (BookProfile book : books) {
-            //getW(book, allTokensClass.idf);
-            getW(book, allTokensClass.df);
+            getW(book, allTokensClass.idf);
+            //         getW(book, allTokensClass.df);
         }
 
         System.out.println("Конец");
@@ -179,7 +179,9 @@ public class StatisticGetter {
 
         for (int i = 0; i < book.normTF.size(); i++) {
 
-            double wi = (0.5 + book.normTF.get(i) * 0.5) * idf.get(i);
+            //   double wi = (0.5 + book.normTF.get(i) * 0.5) * idf.get(i);
+            //         double wi = (0.5 + book.normTF.get(i) * 0.5) * idf.get(i)/50;
+            double wi = (book.normTF.get(i)) * idf.get(i);
             w.add(wi);
         }
         book.setW(w);
