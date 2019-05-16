@@ -1,7 +1,6 @@
 package sample.Services;
 
 import sample.DAO.GenreDao;
-import sample.DBModels.Book;
 import sample.DBModels.Genre;
 
 import java.util.List;
@@ -31,9 +30,5 @@ public class GenreService {
 
     public List<Genre> findAllGenres() {
         return GenreDao.findAll();
-    }
-
-    public Book findAutoById(int id) {
-        return GenreDao.findBookById(id);
     }
 }
