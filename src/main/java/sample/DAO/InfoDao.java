@@ -2,45 +2,45 @@ package sample.DAO;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import sample.DBModels.Genre;
+import sample.DBModels.Info;
 import sample.utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
 
-public class GenreDao {
+public class InfoDao {
 
-    public static Genre findById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Genre.class, id);
+    public static Info findById(int id) {
+        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Info.class, id);
     }
 
-    public static void save(Genre Genre) {
+    public static void save(Info info) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.save(Genre);
+        session.save(info);
         tx1.commit();
         session.close();
     }
 
 
-    public static void update(Genre Genre) {
+    public static void update(Info info) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(Genre);
+        session.update(info);
         tx1.commit();
         session.close();
     }
 
-    public static void delete(Genre Genre) {
+    public static void delete(Info info) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.delete(Genre);
+        session.delete(info);
         tx1.commit();
         session.close();
     }
 
-    public static List<Genre> findAll() {
-        List<Genre> Genres = (List<Genre>) HibernateSessionFactoryUtil.getSessionFactory().openSession().
-                createQuery("From Genre").list();
-        return Genres;
+    public static List<Info> findAll() {
+        List<Info> Infos = (List<Info>) HibernateSessionFactoryUtil.getSessionFactory().openSession().
+                createQuery("From Info").list();
+        return Infos;
     }
 }

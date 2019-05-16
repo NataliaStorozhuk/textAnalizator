@@ -2,45 +2,45 @@ package sample.DAO;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import sample.DBModels.Genre;
+import sample.DBModels.Book;
 import sample.utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
 
-public class GenreDao {
+public class BookDao {
 
-    public static Genre findById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Genre.class, id);
+    public static Book findById(int id) {
+        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Book.class, id);
     }
 
-    public static void save(Genre Genre) {
+    public static void save(Book book) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.save(Genre);
+        session.save(book);
         tx1.commit();
         session.close();
     }
 
 
-    public static void update(Genre Genre) {
+    public static void update(Book book) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(Genre);
+        session.update(book);
         tx1.commit();
         session.close();
     }
 
-    public static void delete(Genre Genre) {
+    public static void delete(Book book) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.delete(Genre);
+        session.delete(book);
         tx1.commit();
         session.close();
     }
 
-    public static List<Genre> findAll() {
-        List<Genre> Genres = (List<Genre>) HibernateSessionFactoryUtil.getSessionFactory().openSession().
-                createQuery("From Genre").list();
-        return Genres;
+    public static List<Book> findAll() {
+        List<Book> Books = (List<Book>) HibernateSessionFactoryUtil.getSessionFactory().openSession().
+                createQuery("From Book").list();
+        return Books;
     }
 }

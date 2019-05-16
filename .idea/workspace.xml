@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="добавила обработку пост-стоп-слов, пофиксили формулу близостиии">
+      <change afterPath="$PROJECT_DIR$/src/main/java/sample/DAO/BookDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sample/DAO/InfoDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sample/DAO/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sample/DBModels/Info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sample/DBModels/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sample/Analyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Analyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sample/StatisticGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/StatisticGetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sample/TestClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/TestClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/detectiveDictionary_afterMethod.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/detectiveDictionary_afterMethod.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/DAO/GenreDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/DAO/GenreDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/DBModels/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/DBModels/Book.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -91,24 +95,112 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/TestClass.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/GenreDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="195" column="51" lean-forward="true" selection-start-line="195" selection-start-column="49" selection-end-line="195" selection-end-column="51" />
+            <state relative-caret-position="322">
+              <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
               <folding>
-                <element signature="method#getBaseFrequencesInJson#0;class#TestClass#0" />
-                <element signature="method#getWDictionaryDetective#0;class#TestClass#0" />
-                <element signature="method#getWDictionaryAnother#0;class#TestClass#0" />
-                <element signature="method#getWDictionaryTest#0;class#TestClass#0" />
-                <element signature="method#getResultsForDetectiveDictionary#0;class#TestClass#0" />
-                <element signature="method#getMaxUseWords#0;class#TestClass#0" />
-                <element signature="method#getResultsForMaxDictionary#0;class#TestClass#0" />
-                <element signature="method#createMaxBook#0;class#TestClass#0" />
-                <element signature="method#createAverageBook#0;class#TestClass#0" />
-                <element signature="method#getListBooksWithDetectiveWordsOnly#0;class#TestClass#0" />
-                <element signature="method#getBookWithDetectiveWordsOnly#0;class#TestClass#0" />
-                <element signature="method#testStopWords#0;class#TestClass#0" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Genre.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/BookDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="254">
+              <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/UserDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/InfoDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-68">
+              <caret line="17" column="10" lean-forward="true" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/AllTokensClass.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/BookProfile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Info.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Book.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="748">
+              <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -128,7 +220,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>надевайте</find>
       <find>Hello</find>
       <find>getWordsAfterPorter</find>
       <find>d1Arra</find>
@@ -158,11 +249,14 @@
       <find>getBookFromFile</find>
       <find>Patter</find>
       <find>getW</find>
+      <find>Genre</find>
     </findStrings>
     <replaceStrings>
       <replace>Genre</replace>
-      <replace>Book</replace>
       <replace>sample</replace>
+      <replace>Book</replace>
+      <replace>User</replace>
+      <replace>Info</replace>
     </replaceStrings>
   </component>
   <component name="FindManager">
@@ -176,13 +270,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/sample/TestDBClass.java" />
-        <option value="$PROJECT_DIR$/src/resources/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/src/sample/DBModels/Book.java" />
-        <option value="$PROJECT_DIR$/src/sample/DTO/BookProfile.java" />
-        <option value="$PROJECT_DIR$/src/sample/Analyzer.java" />
-        <option value="$PROJECT_DIR$/src/resources/stop_words.txt" />
-        <option value="$PROJECT_DIR$/src/sample/FileConverter/FileToBookConverter.java" />
         <option value="$USER_HOME$/Downloads/Telegram Desktop/PeopleQueue.java" />
         <option value="$PROJECT_DIR$/src/sample/FileConverter/ExcelExporter.java" />
         <option value="$PROJECT_DIR$/src/sample/TestClass.java" />
@@ -227,6 +314,13 @@
         <option value="$PROJECT_DIR$/src/main/resources/detectiveDictionary_afterMethod.txt" />
         <option value="$PROJECT_DIR$/src/main/java/sample/StatisticGetter.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/TestClass.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/DAO/GenreDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/DBModels/Book.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/DBModels/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/DBModels/Info.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/DAO/BookDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/DAO/InfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/DAO/UserDao.java" />
       </list>
     </option>
   </component>
@@ -239,7 +333,7 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
-    <option name="width" value="514" />
+    <option name="width" value="592" />
     <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -249,6 +343,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -289,7 +384,25 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
-              <item name="FileConverter" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sample" type="462c0819:PsiDirectoryNode" />
+              <item name="DAO" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sample" type="462c0819:PsiDirectoryNode" />
+              <item name="DBModels" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
@@ -303,7 +416,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -334,22 +446,24 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Natalia\Documents\textAnalizator\src\main\resources" />
-      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources\fxml" />
-      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources" />
-      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\java\sample" />
-      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources\fxmls" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="sample" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Natalia\Documents\textAnalizator\src\main\resources" />
       <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources" />
       <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\java\sample" />
       <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\resources\css" />
       <recent name="C:\Users\Natalia\textAnalizator\lib" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="sample.DBModels" />
+      <recent name="sample.DAO" />
+      <recent name="sample" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Natalia\Documents\textAnalizator\src\main\resources" />
+      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources\fxml" />
+      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources" />
+      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\java\sample" />
+      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources\fxmls" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -615,6 +729,8 @@
       <workItem from="1557312026019" duration="3384000" />
       <workItem from="1557315838101" duration="2341000" />
       <workItem from="1557606892416" duration="24636000" />
+      <workItem from="1557955182180" duration="432000" />
+      <workItem from="1558006701245" duration="3395000" />
     </task>
     <task id="LOCAL-00001" summary="Добавили и настроили ломбок, poi, запустили тестовый пример записи в эксельку">
       <created>1552561620663</created>
@@ -749,7 +865,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557698343536</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="небольшие изменения в коде для презентации">
+      <created>1557955344580</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1557955344581</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -785,7 +908,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="181007000" />
+    <option name="totallyTimeSpent" value="184834000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -799,7 +922,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.3472012" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.14750378" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -808,6 +931,7 @@
       <window_info id="Image Layers" order="6" />
       <window_info id="DB Browser" order="7" weight="0.5447942" />
       <window_info id="Persistence" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Duplicate detector" weight="0.3289689" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.56301147" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6817421" weight="0.38625205" />
@@ -961,7 +1085,8 @@
     <MESSAGE value="пофиксили расчет w средней и максимальной книги, ввели везде методы withoutNames и лишние вынесли в UnusedMethods, небольшие мелкие правки" />
     <MESSAGE value="попробовали w cчитать по df вместо idf" />
     <MESSAGE value="добавила обработку пост-стоп-слов, пофиксили формулу близостиии" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавила обработку пост-стоп-слов, пофиксили формулу близостиии" />
+    <MESSAGE value="небольшие изменения в коде для презентации" />
+    <option name="LAST_COMMIT_MESSAGE" value="небольшие изменения в коде для презентации" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1054,13 +1179,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/TestClass.java</url>
-          <line>223</line>
+          <line>222</line>
           <properties />
           <option name="timeStamp" value="169" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/TestClass.java</url>
-          <line>236</line>
+          <line>235</line>
           <properties />
           <option name="timeStamp" value="180" />
         </line-breakpoint>
@@ -1072,7 +1197,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/TestClass.java</url>
-          <line>281</line>
+          <line>280</line>
           <properties />
           <option name="timeStamp" value="186" />
         </line-breakpoint>
@@ -1132,25 +1257,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/TestClass.java</url>
-          <line>275</line>
+          <line>274</line>
           <properties />
           <option name="timeStamp" value="199" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/TestClass.java</url>
-          <line>280</line>
+          <line>279</line>
           <properties />
           <option name="timeStamp" value="201" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/TestClass.java</url>
-          <line>269</line>
+          <line>268</line>
           <properties />
           <option name="timeStamp" value="203" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/TestClass.java</url>
-          <line>320</line>
+          <line>319</line>
           <properties />
           <option name="timeStamp" value="204" />
         </line-breakpoint>
@@ -1192,7 +1317,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/TestClass.java</url>
-          <line>213</line>
+          <line>212</line>
           <properties />
           <option name="timeStamp" value="216" />
         </line-breakpoint>
@@ -1253,32 +1378,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://F:/Мои документы/Ноутбук 20.05.2018/TestExample/src/main/java/com/Calculator.java" />
-    <entry file="file://$PROJECT_DIR$/src/sample/DTO.java" />
-    <entry file="file://$PROJECT_DIR$/src/sample/CompareResults.java" />
-    <entry file="jar://$PROJECT_DIR$/lib/hibernate-core-5.4.2.Final.jar!/org/hibernate/cfg/Configuration.class" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Services/GenreService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#166#167#0" expanded="true" />
-            <element signature="e#211#212#0" expanded="true" />
-            <element signature="e#253#254#0" expanded="true" />
-            <element signature="e#290#291#0" expanded="true" />
-            <element signature="e#334#335#0" expanded="true" />
-            <element signature="e#373#374#0" expanded="true" />
-            <element signature="e#417#418#0" expanded="true" />
-            <element signature="e#456#457#0" expanded="true" />
-            <element signature="e#498#499#0" expanded="true" />
-            <element signature="e#540#541#0" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-            <element signature="e#629#630#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/TestDBClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
@@ -1297,16 +1396,6 @@
     <entry file="file://$PROJECT_DIR$/main.xsl" />
     <entry file="file://$PROJECT_DIR$/main.tld" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/application/Application.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/GenreDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-237">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/utils/HibernateSessionFactoryUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -1314,23 +1403,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Genre.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306">
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -1452,16 +1524,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/AllTokensClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/same_frequenses_words.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1522,30 +1584,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/BookProfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/ObjectToJsonConverter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="31" selection-start-line="31" selection-end-line="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="108" column="18" selection-start-line="108" selection-start-column="18" selection-end-line="108" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1565,7 +1607,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/TestClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="195" column="51" lean-forward="true" selection-start-line="195" selection-start-column="49" selection-end-line="195" selection-end-column="51" />
+          <caret line="194" column="51" selection-start-line="194" selection-start-column="49" selection-end-line="194" selection-end-column="51" />
           <folding>
             <element signature="method#getBaseFrequencesInJson#0;class#TestClass#0" />
             <element signature="method#getWDictionaryDetective#0;class#TestClass#0" />
@@ -1579,6 +1621,107 @@
             <element signature="method#getListBooksWithDetectiveWordsOnly#0;class#TestClass#0" />
             <element signature="method#getBookWithDetectiveWordsOnly#0;class#TestClass#0" />
             <element signature="method#testStopWords#0;class#TestClass#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="108" column="18" selection-start-line="108" selection-start-column="18" selection-end-line="108" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/BookDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/InfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-68">
+          <caret line="17" column="10" lean-forward="true" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/GenreDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Genre.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/BookProfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/AllTokensClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
