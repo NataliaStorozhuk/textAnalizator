@@ -60,6 +60,32 @@ public class MainController {
             }
         });
 
+        buttonSettings.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+                try {
+                    openSettings();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        buttonUsers.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+                try {
+                    openUsers();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
 
     }
 
@@ -85,13 +111,47 @@ public class MainController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
-        stage.setTitle("Пользователи");
+        stage.setTitle("Жанры");
 
         Scene scene = new Scene(page);
         stage.setScene(scene);
 
         //  Передаём адресата в контроллер.
         GenresController controller = loader.getController();
+        controller.setStage(stage);
+        stage.show();
+
+    }
+
+    private void openUsers() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/users.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+
+        stage.setTitle("Пользователи");
+
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
+
+        //  Передаём адресата в контроллер.
+        UsersController controller = loader.getController();
+        controller.setStage(stage);
+        stage.show();
+
+    }
+
+    private void openSettings() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/settings.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+
+        stage.setTitle("Настроечки");
+
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
+
+        //  Передаём адресата в контроллер.
+        SettingsController controller = loader.getController();
         controller.setStage(stage);
         stage.show();
 

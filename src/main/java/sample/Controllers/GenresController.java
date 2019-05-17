@@ -19,6 +19,12 @@ public class GenresController {
 
     private Stage stage;
 
+    @FXML
+    private Button back;
+
+    @FXML
+    private Button genreInfo;
+
     private ObservableList<User> usersData = FXCollections.observableArrayList();
 
     // инициализируем форму данными
