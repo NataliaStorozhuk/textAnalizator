@@ -24,14 +24,19 @@ public class Info {
     @Column(name = "precision")
     private Double precision;
 
+    @Column(name = "cofW")
+    private Double cofW;
+
+
 
     public Info() {
     }
 
-    public Info(String stopWordsPath, String stopLexemesPath, Double precision) {
+    public Info(String stopWordsPath, String stopLexemesPath, Double precision, Double cofW) {
         this.stopWordsPath = stopWordsPath;
         this.stopLexemesPath = stopLexemesPath;
         this.precision = precision;
+        this.cofW = cofW;
     }
 
 
@@ -40,7 +45,8 @@ public class Info {
                 "id=" + idInfo +
                 ", stopWordsPath='" + stopWordsPath + '\'' +
                 ", precision='" + precision + '\'' +
-                ", stopLexemesPath=" + stopLexemesPath +
+                ", stopLexemesPath=" + stopLexemesPath + '\'' +
+                ", cofW=" + cofW +
                 '}';
     }
 }

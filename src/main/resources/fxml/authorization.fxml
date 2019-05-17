@@ -13,10 +13,10 @@
             <Label text="Анализатор жанровой принадлежности текстов"/>
             <Label text="v 0.0.1"/>
             <Label text="Логин" styleClass="welcome-text"/>
-            <TextField/>
+            <TextField fx:id="labelLogin"/>
             <Label text="Пароль"/>
-            <TextField/>
-            <Label/>
+            <PasswordField fx:id="labelPassword"/>
+            <Label fx:id="labelError"/>
             <Button fx:id="enter" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Войти"/>
         </VBox>
     </Group>

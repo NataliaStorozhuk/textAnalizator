@@ -1,11 +1,13 @@
-package sample;
+package sample.Test;
 
 import org.testng.annotations.Test;
+import sample.Analyzer;
 import sample.DTO.AllTokensClass;
 import sample.DTO.BookProfile;
 import sample.FileConverter.ExcelExporter;
 import sample.FileConverter.FileToBookConverter;
 import sample.FileConverter.ObjectToJsonConverter;
+import sample.StatisticGetter;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import java.util.concurrent.CompletableFuture;
 import static sample.FileConverter.FileToBookConverter.*;
 import static sample.StatisticGetter.*;
 
-public class TestClass {
+public class TestAnaliseClass {
 
     private Analyzer analyzer = new Analyzer();
     private StatisticGetter statisticGetter = new StatisticGetter();

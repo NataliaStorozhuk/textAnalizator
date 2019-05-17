@@ -1,8 +1,8 @@
 package sample.FileConverter;
 
 import org.testng.annotations.Test;
-import sample.AlgorithmPorter;
 import sample.DTO.BookProfile;
+import sample.utils.AlgorithmPorter;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -59,8 +59,8 @@ public class MainController {
     }
 
 
-    public void setStage(Stage dialogStage) {
-        this.stage = dialogStage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     private void openFile1() throws IOException {

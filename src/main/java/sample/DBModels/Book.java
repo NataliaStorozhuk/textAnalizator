@@ -24,6 +24,9 @@ public class Book {
     @Column(name = "indexed")
     private Boolean indexed;
 
+    @Column(name = "training")
+    private Boolean training;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idGenre")
     private Genre genre;
@@ -31,10 +34,11 @@ public class Book {
     public Book() {
     }
 
-    public Book(String name, String filePath, Boolean indexed) {
+    public Book(String name, String filePath, Boolean indexed, Boolean study) {
         this.name = name;
         this.filePath = filePath;
         this.indexed = indexed;
+        this.training = study;
     }
 
     public String toString() {
@@ -43,6 +47,7 @@ public class Book {
                 ", name='" + name + '\'' +
                 ", filePath='" + filePath + '\'' +
                 ", indexed='" + indexed + '\'' +
+                ", study='" + training + '\'' +
                 ", genre=" + genre +
                 '}';
     }

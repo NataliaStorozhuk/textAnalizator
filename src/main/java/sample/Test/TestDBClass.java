@@ -1,4 +1,4 @@
-package sample;
+package sample.Test;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,8 +9,11 @@ import sample.DBModels.Genre;
 import sample.DBModels.Info;
 import sample.DBModels.User;
 import sample.Services.GenreService;
+import sample.Services.InfoService;
 import sample.Services.UserService;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -66,7 +69,7 @@ public class TestDBClass {
     }
 
     @Test
-    public void testNewUserExample() {
+    public void testNewUserExample() throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
         SessionFactory sessionFactory = new Configuration().configure()
                 .buildSessionFactory();
@@ -78,17 +81,30 @@ public class TestDBClass {
         }
     }
 
+    @Test
+    public void testNewInfoExample() {
+
+        SessionFactory sessionFactory = new Configuration().configure()
+                .buildSessionFactory();
+        try {
+            persistInfo(sessionFactory);
+            load(sessionFactory);
+        } finally {
+            sessionFactory.close();
+        }
+    }
+
     private static void load(SessionFactory sessionFactory) {
         System.out.println("-- loading persons --");
         Session session = sessionFactory.openSession();
         @SuppressWarnings("unchecked")
-        List<Genre> genres = session.createQuery("FROM Genre").list();
+/*        List<Genre> genres = session.createQuery("FROM Genre").list();
         genres.forEach((x) -> System.out.printf("- %s%n", x));
 
         List<Book> books = session.createQuery("FROM Book").list();
         books.forEach((x) -> System.out.printf(books.toString()));
-
-        List<User> users = session.createQuery("FROM User").list();
+*/
+                List<User> users = session.createQuery("FROM User").list();
         users.forEach((x) -> System.out.printf("- %s%n", x));
 
         List<Info> info = session.createQuery("FROM Info").list();
@@ -111,20 +127,34 @@ public class TestDBClass {
     private static void persistBook(SessionFactory sessionFactory) {
         GenreService genreService = new GenreService();
         Genre p1 = genreService.findGenre(1);
-        p1.addBook(new Book("Название книги", "Путь к книге", true));
+        p1.addBook(new Book("Название книги", "Путь к книге", false, false));
         genreService.updateGenre(p1);
 
     }
 
-    private static void persistUser(SessionFactory sessionFactory) {
+    private static void persistUser(SessionFactory sessionFactory) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
         UserService userService = new UserService();
-        User admin = new User("admin", "admin", true);
-        userService.saveUser(admin);
-        User operator = new User("operator", "operator", false);
+
+        //     userService.deleteUser(userService.findUser(1));
+
+        String hashPassword = String.valueOf(("admin").hashCode());
+
+        User admin = new User("admin", hashPassword, true);
         userService.saveUser(admin);
 
+        hashPassword = String.valueOf(("operator").hashCode());
+        User operator = new User("operator", hashPassword, false);
+        userService.saveUser(operator);
 
+
+    }
+
+    private static void persistInfo(SessionFactory sessionFactory) {
+
+        InfoService infoService = new InfoService();
+        Info info = new Info("путь к стоп-словам", "путь к стоп-лексемам", 0.7, 1000.0);
+        infoService.saveInfo(info);
     }
 
 

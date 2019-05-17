@@ -3,13 +3,17 @@ package sample.Controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import sample.User;
+
+import java.io.IOException;
 
 public class GenresController {
 
@@ -19,7 +23,7 @@ public class GenresController {
 
     // инициализируем форму данными
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
         initData();
 
         final TableView<User> table = new TableView<>();
@@ -84,7 +88,12 @@ public class GenresController {
 
         table.getColumns().addAll(idColumn, loginColumn, passwordColumn, rightsColumn, deleteColumn);
 
-        Scene scene = new Scene(new Group());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
+
+
+        AnchorPane page = (AnchorPane) loader.load();
+
+        Scene scene = new Scene(page);
 
         ((Group) scene.getRoot()).getChildren().addAll(table);
 

@@ -5,6 +5,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import sample.DBModels.Book;
 import sample.DBModels.Genre;
+import sample.DBModels.Info;
+import sample.DBModels.User;
 
 public class HibernateSessionFactoryUtil {
 
@@ -16,6 +18,8 @@ public class HibernateSessionFactoryUtil {
                 Configuration configuration = new Configuration().configure();
                 configuration.addAnnotatedClass(Genre.class);
                 configuration.addAnnotatedClass(Book.class);
+                configuration.addAnnotatedClass(Info.class);
+                configuration.addAnnotatedClass(User.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
 
