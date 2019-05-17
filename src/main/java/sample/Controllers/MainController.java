@@ -10,28 +10,33 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sample.Analyzer;
 
 import java.io.IOException;
 
-//import java.awt.*;
 
 public class MainController {
 
-
+    @FXML
     public Button analysis;
+    @FXML
     public TextField filePath;
+    @FXML
     public Button fileChooser;
+    @FXML
     public ChoiceBox categoryList;
-    public Label skalarResult;
-    public Label cosResult;
-    public Label persentResult;
-    public Label textResult;
+    @FXML
+    public Label skalarResult, cosResult, persentResult, textResult;
+
+    @FXML
+    public VBox adminSettings;
+    @FXML
+    public Button buttonUsers, buttonGenres, buttonSettings;
+
     String desktopPath = System.getProperty("user.home") + "\\" + "Desktop";
     private String pathFileDetectives = desktopPath + "\\detectives\\";
     private String pathFileAnother = desktopPath + "\\another\\";
-    Analyzer analyzer = new Analyzer();
 
     private Stage stage;
     @FXML
@@ -42,12 +47,12 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        testButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        buttonGenres.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    openFile1();
+                    openGenres();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -63,7 +68,7 @@ public class MainController {
         this.stage = stage;
     }
 
-    private void openFile1() throws IOException {
+    private void openGenres() throws IOException {
 
       /*  Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Test Connection");
@@ -78,11 +83,8 @@ public class MainController {
        /*  FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainController.class.getResource("sample/main.fxml"));*/
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
-
         AnchorPane page = (AnchorPane) loader.load();
 
-
-        //Stage stage = new Stage();
         stage.setTitle("Пользователи");
 
         Scene scene = new Scene(page);

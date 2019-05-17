@@ -2,14 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane stylesheets="/css/style.css" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane stylesheets="/css/style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sample.Controllers.MainController">
-
-
-    <MenuBar>
-    </MenuBar>
-
 
     <VBox prefHeight="500.0" prefWidth="800.0">
 
@@ -23,10 +17,10 @@
         <Label text="2 Выберите предполагаемый жанр"/>
         <ChoiceBox fx:id="categoryList" prefWidth="150.0"/>
 
-        <Button fx:id="analysis" mnemonicParsing="false" text="Запуск анализа" alignment="CENTER"/>
+        <Button fx:id="analysis" alignment="CENTER" mnemonicParsing="false" text="Запуск анализа"/>
         <ProgressBar prefWidth="+Infinity" progress="0.0"/>
 
-        <Label text="Результаты" alignment="CENTER"/>
+        <Label alignment="CENTER" text="Результаты"/>
         <HBox>
             <Label text="Скалярное произведение: "/>
             <Label fx:id="skalarResult" text="Label"/>
@@ -40,6 +34,13 @@
             <Label fx:id="persentResult" text="Label"/>
         </HBox>
         <Label fx:id="textResult" text="Тут результат сканирования"/>
+        <Label alignment="CENTER" text="  "/>
+        <VBox fx:id="adminSettings" prefHeight="200.0" prefWidth="100.0">
+            <Label text="Настройки администратора"/>
+            <Button fx:id="buttonUsers" text="Пользователи"/>
+            <Button fx:id="buttonGenres" text="Жанры"/>
+            <Button fx:id="buttonSettings" text="Настройки"/>
+        </VBox>
     </VBox>
 
 

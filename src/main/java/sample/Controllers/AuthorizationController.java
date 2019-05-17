@@ -3,19 +3,19 @@ package sample.Controllers;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sample.DBModels.User;
-import sample.Services.UserService;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.List;
-
-//import java.awt.*;
 
 public class AuthorizationController {
 
@@ -49,7 +49,7 @@ public class AuthorizationController {
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    openFile1();
+                    authorisation();
                 } catch (IOException | NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
@@ -60,9 +60,9 @@ public class AuthorizationController {
 
     }
 
-    private void openFile1() throws IOException, NoSuchAlgorithmException {
-
-        String login = labelLogin.getText();
+    private void authorisation() throws IOException, NoSuchAlgorithmException {
+        openUserPage();
+  /*      String login = labelLogin.getText();
         String password = labelPassword.getText();
 
         UserService userService = new UserService();
@@ -90,14 +90,13 @@ public class AuthorizationController {
                 labelError.setText("Данный пользователь не зарегистрирован!");
             }
 
-        }
-      /*  FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainController.class.getResource("sample/main.fxml"));*/
-     /*   FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        }*/
+    }
 
+    private void openAdminPage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
-        //Stage dialogStage = new Stage();
         stage.setTitle("Анализ текста");
 
         Scene scene = new Scene(page);
@@ -107,24 +106,10 @@ public class AuthorizationController {
         MainController controller = loader.getController();
         controller.setStage(stage);
         stage.show();
-
-*/
     }
 
-    private void openAdminPage() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("тут админская страница");
-
-        // Header Text: null
-        alert.setHeaderText(null);
-        alert.setContentText("А тут тоже админский текст");
-
-        alert.showAndWait();
-
-    }
-
-    private void openUserPage() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private void openUserPage() throws IOException {
+    /*    Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("User");
 
         // Header Text: null
@@ -132,7 +117,21 @@ public class AuthorizationController {
         alert.setContentText("User");
 
         alert.showAndWait();
+*/
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+
+        stage.setTitle("Анализ текста");
+
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
+
+        // Передаём адресата в контроллер.
+        MainController controller = loader.getController();
+        controller.setStage(stage);
+        //  controller.adminSettings.setVisible(false);
+        stage.show();
 
     }
 
