@@ -14,6 +14,7 @@ public class GenreService {
 
     public Genre findGenre(int id) {
         return GenreDao.findById(id);
+
     }
 
     public void saveGenre(Genre Genre) {

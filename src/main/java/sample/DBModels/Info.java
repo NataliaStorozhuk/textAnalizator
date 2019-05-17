@@ -28,6 +28,12 @@ public class Info {
     public Info() {
     }
 
+    public Info(String stopWordsPath, String stopLexemesPath, Double precision) {
+        this.stopWordsPath = stopWordsPath;
+        this.stopLexemesPath = stopLexemesPath;
+        this.precision = precision;
+    }
+
 
     public String toString() {
         return "models.Info{" +

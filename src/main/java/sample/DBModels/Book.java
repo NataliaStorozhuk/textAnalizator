@@ -24,17 +24,18 @@ public class Book {
     @Column(name = "indexed")
     private Boolean indexed;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idGenre")
     private Genre genre;
 
     public Book() {
     }
 
-    public Book(String name) {
+    public Book(String name, String filePath, Boolean indexed) {
         this.name = name;
+        this.filePath = filePath;
+        this.indexed = indexed;
     }
-
 
     public String toString() {
         return "models.Book{" +

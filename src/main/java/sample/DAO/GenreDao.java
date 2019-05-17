@@ -10,7 +10,11 @@ import java.util.List;
 public class GenreDao {
 
     public static Genre findById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Genre.class, id);
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Genre newGenre = session.get(Genre.class, id);
+        newGenre.getBooks().iterator();
+        session.close();
+        return newGenre;
     }
 
     public static void save(Genre Genre) {

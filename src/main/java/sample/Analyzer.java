@@ -139,6 +139,7 @@ public class Analyzer {
 
         ArrayList<BookProfile> testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook1);
+
         AllTokensClass testViborka = sample.StatisticGetter.getBaseFrequencies(testBookOnly);
         testViborka.w = testBook1.getW();
 

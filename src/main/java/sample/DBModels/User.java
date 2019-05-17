@@ -24,13 +24,14 @@ public class User {
     @Column(name = "rights")
     private Boolean rights;
 
+    public User(String login, String password, Boolean rights) {
+        this.login = login;
+        this.password = password;
+        this.rights = rights;
+    }
+
     public User() {
     }
-
-    public User(String login) {
-        this.login = login;
-    }
-
 
     public String toString() {
         return "models.User{" +

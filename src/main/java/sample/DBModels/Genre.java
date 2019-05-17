@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,6 @@ public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idGenre")
     private int idGenre;
 
     @Column(name = "filePath")
@@ -23,7 +23,7 @@ public class Genre {
     @Column(name = "nameGenre")
     private String nameGenre;
 
-    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Book> books;
 
     public Genre() {
@@ -32,12 +32,13 @@ public class Genre {
     public Genre(String filePath, String nameGenre) {
         this.filePath = filePath;
         this.nameGenre = nameGenre;
+        this.books = new ArrayList<>();
     }
 
 
     public void addBook(Book book) {
         book.setGenre(this);
-        books.add(book);
+        this.books.add(book);
     }
 
     public void removeBook(Book book) {
@@ -49,8 +50,8 @@ public class Genre {
         return "models.Genre{" +
                 "id=" + idGenre +
                 ", nameGenre='" + nameGenre + '\'' +
-                ", filePath=" + filePath +
-                "counBooks=" + books.size() +
-                '}';
+                ", filePath=" + filePath + '}';
     }
+
+
 }
