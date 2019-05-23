@@ -119,6 +119,7 @@ public class MainController {
         //  Передаём адресата в контроллер.
         GenresController controller = loader.getController();
         controller.setStage(stage);
+        controller.setStartData();
         stage.show();
 
     }

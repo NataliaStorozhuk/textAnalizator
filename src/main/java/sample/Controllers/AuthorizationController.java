@@ -61,7 +61,7 @@ public class AuthorizationController {
     }
 
     private void authorisation() throws IOException, NoSuchAlgorithmException {
-        openUserPage();
+        openMainPage();
   /*      String login = labelLogin.getText();
         String password = labelPassword.getText();
 
@@ -79,7 +79,7 @@ public class AuthorizationController {
                     if (user.getRights().equals(Boolean.TRUE)) {
                         openAdminPage();
                     } else {
-                        openUserPage();
+                        openMainPage();
                     }
                 } else {
                     labelError.setText("Пароль введен неверно!");
@@ -108,7 +108,7 @@ public class AuthorizationController {
         stage.show();
     }
 
-    private void openUserPage() throws IOException {
+    private void openMainPage() throws IOException {
     /*    Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("User");
 
