@@ -109,6 +109,7 @@ public class MainController {
        /*  FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainController.class.getResource("sample/main.fxml"));*/
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
+
         AnchorPane page = (AnchorPane) loader.load();
 
         stage.setTitle("Жанры");
@@ -119,7 +120,6 @@ public class MainController {
         //  Передаём адресата в контроллер.
         GenresController controller = loader.getController();
         controller.setStage(stage);
-        controller.setStartData();
         stage.show();
 
     }

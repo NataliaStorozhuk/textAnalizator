@@ -5,8 +5,18 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <StackPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
            stylesheets="/css/style.css" fx:controller="sample.Controllers.AuthorizationController">
+    <VBox>
+        <Button fx:id="genreInfo" text="Жанр 1"/>
+        <Button fx:id="back" text="Назад"/>
+        <Label layoutX="14.0" layoutY="18.0" text="List all Жанры:">
+            <font>
+                <Font name="Verdana" size="24.0"/>
+            </font>
+        </Label>
+    </VBox>
     <Group StackPane.alignment="CENTER">
         <VBox alignment="CENTER" prefHeight="250.0" prefWidth="300.0">
 

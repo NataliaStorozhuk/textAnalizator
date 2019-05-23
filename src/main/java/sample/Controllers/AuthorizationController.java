@@ -137,7 +137,6 @@ public class AuthorizationController {
 
 
     public void setStageAndSetupListeners(Stage primaryStage) {
-
         stage = primaryStage;
     }
 
