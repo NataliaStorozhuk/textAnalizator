@@ -12,6 +12,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -35,6 +37,10 @@ public class GenresController {
 
     final TableView<User> table = new TableView<User>();
     private ObservableList<User> usersData = FXCollections.observableArrayList();
+
+    private final Image deleteImage = new Image(
+            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Cancel-icon.png"
+    );
 
     // инициализируем форму данными
     @FXML
@@ -70,18 +76,22 @@ public class GenresController {
             @Override
             public TableCell<User, User> call(TableColumn<User, User> deleteColumn) {
                 return new TableCell<User, User>() {
+                    final ImageView buttonGraphic = new ImageView();
                     final Button button = new Button();
 
                     {
-                        button.setMinWidth(130);
-                        button.setText("test1");
+                        button.setGraphic(buttonGraphic);
+                        button.setMinWidth(50);
+                        button.setBorder(null);
+                        //  buttonGraphic.setImage(deleteImage);
+                        //        button.setText("test1");
                     }
 
                     @Override
                     public void updateItem(final User person, boolean empty) {
                         super.updateItem(person, empty);
                         if (person != null) {
-                            button.setText(person.getLogin() + " *");
+                            buttonGraphic.setImage(deleteImage);
                             setGraphic(button);
                             button.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
@@ -103,8 +113,6 @@ public class GenresController {
         table.setItems(usersData);
 
         table.getColumns().addAll(idColumn, loginColumn, rightsColumn, deleteColumn);
-
-
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 10, 10, 10));
         vbox.getChildren().addAll(label, table, actionTaken);
