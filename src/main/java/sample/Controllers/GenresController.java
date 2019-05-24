@@ -53,12 +53,17 @@ public class GenresController {
         final Label actionTaken = new Label();
 
         table.setEditable(true);
+        initData();
 
         TableColumn idColumn = new TableColumn("ID пользователя");
         TableColumn loginColumn = new TableColumn("Логин");
         TableColumn rightsColumn = new TableColumn("Администратор");
         TableColumn<User, User> deleteColumn = new TableColumn<>("Удалить");
+        drawTable(label, actionTaken, idColumn, loginColumn, rightsColumn, deleteColumn);
 
+    }
+
+    private void drawTable(Label label, Label actionTaken, TableColumn idColumn, TableColumn loginColumn, TableColumn rightsColumn, TableColumn<User, User> deleteColumn) {
         // устанавливаем тип и значение которое должно хранится в колонке
         idColumn.setCellValueFactory(new PropertyValueFactory<User, String>("id"));
         loginColumn.setCellValueFactory(new PropertyValueFactory<User, String>("login"));
@@ -89,26 +94,37 @@ public class GenresController {
 
                     @Override
                     public void updateItem(final User person, boolean empty) {
+                        deleteUser(person, empty);
+                        table.setItems(usersData);
+                    }
+
+                    private void deleteUser(User person, boolean empty) {
                         super.updateItem(person, empty);
-                        if (person != null) {
-                            buttonGraphic.setImage(deleteImage);
-                            setGraphic(button);
-                            button.setOnAction(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    actionTaken.setText("Bought " + person.getLogin().toLowerCase() + " for: " +
-                                            person.getPassword() + " " + person.getRights() + " " + person.getId());
+                        //    if (person != null) {
+                        buttonGraphic.setImage(deleteImage);
+                        setGraphic(button);
+                        button.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                actionTaken.setText("Bought " + person.getLogin().toLowerCase() + " for: " +
+                                        person.getPassword() + " " + person.getRights() + " " + person.getId());
+                                ObservableList<User> usersData1 = FXCollections.observableArrayList();
+                                for (User user : usersData) {
+                                    if (user.getId() != person.getId())
+                                        usersData1.add(user);
                                 }
-                            });
-                        } else {
+                                usersData = usersData1;
+                                table.refresh();
+                            }
+                        });
+              /*          } else {
                             button.setText("error");
-                        }
+                        }*/     //не знаю почему, но тут все время person=null, когда таблицу обновляем
                     }
                 };
             }
         });
 
-        initData();
 
         table.setItems(usersData);
 
@@ -120,7 +136,6 @@ public class GenresController {
 
 
         //  stage.show();
-
     }
 
     // подготавливаем данные для таблицы
