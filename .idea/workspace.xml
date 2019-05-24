@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="работает удаление">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="работает добавление">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/authorization.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/authorization.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -132,115 +132,45 @@
     <favorites_list name="JavaFxApplication" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/MainController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="60" column="11" selection-start-line="49" selection-start-column="5" selection-end-line="60" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="845">
-              <caret line="151" column="27" selection-start-line="151" selection-start-column="27" selection-end-line="151" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1007#1013#0" expanded="true" />
-                <element signature="method#openMainPage#0;class#GenresController#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/genres.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/authorization.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/users.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/AuthorizationController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="140" selection-start-line="140" selection-end-line="140" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3905#3906#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1687#1688#0" expanded="true" />
-                <element signature="e#1721#1722#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/scene/control/TableView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="842" column="22" selection-start-line="842" selection-start-column="22" selection-end-line="842" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/event/Event.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="197" selection-start-line="197" selection-end-line="197" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="22">
+                  <caret line="101" column="32" selection-start-line="101" selection-start-column="32" selection-end-line="101" selection-end-column="32" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#1007#1013#0" expanded="true" />
+                    <element signature="method#openMainPage#0;class#GenresController#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="31">
+                  <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#497#503#0" expanded="true" />
+                    <element signature="e#2128#2129#0" expanded="true" />
+                    <element signature="e#2162#2163#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -347,7 +277,6 @@
         <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/BooksController.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/GenreInfoController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/genreInfo.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/users.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/SettingsController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/settings.fxml" />
@@ -356,6 +285,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/fxml/genres.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/authorization.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java" />
       </list>
     </option>
   </component>
@@ -412,6 +342,24 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sample" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sample" type="462c0819:PsiDirectoryNode" />
+              <item name="Test" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -435,7 +383,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558688648472" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558702216207" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="private" />
@@ -739,7 +687,7 @@
       <workItem from="1558098463539" duration="19876000" />
       <workItem from="1558470877163" duration="16680000" />
       <workItem from="1558681006541" duration="176000" />
-      <workItem from="1558681645504" duration="6801000" />
+      <workItem from="1558681645504" duration="9029000" />
     </task>
     <task id="LOCAL-00001" summary="Добавили и настроили ломбок, poi, запустили тестовый пример записи в эксельку">
       <created>1552561620663</created>
@@ -937,7 +885,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558686972760</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="работает добавление">
+      <created>1558688663929</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1558688663930</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -973,7 +928,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="250994000" />
+    <option name="totallyTimeSpent" value="253222000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -986,9 +941,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.4360341" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.23294243" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -999,7 +953,7 @@
       <window_info id="Persistence" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49848714" weight="0.5237316" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8062016" visible="true" weight="0.24918744" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8062016" weight="0.24918744" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8449319" weight="0.20368364" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1010,7 +964,7 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.19379845" side_tool="true" weight="0.6057692" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.4977307" weight="0.27659574" />
       <window_info anchor="bottom" id="Problems" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" weight="0.8445172" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="13" visible="true" weight="0.843987" />
       <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="15" weight="0.32936078" />
       <window_info anchor="bottom" id="DB Execution Console" order="16" />
@@ -1131,7 +1085,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <MESSAGE value="Рефакторинг: вынесли эексель в отдельный файл, обработку исходников в отдельный, маленькие фиксики и улучшения по мелочам" />
     <MESSAGE value="Вынесли методы для получения исходных данных в отдельный файл" />
     <MESSAGE value="Поправили подсчет коэффициентов, добавили файл с новым словарем" />
     <MESSAGE value="Добавили скалярное произведение, а надо было косинусную меру=(" />
@@ -1156,7 +1109,8 @@
     <MESSAGE value="Добавлены пустые контроллеры и окошки, навигация между ними кое как работает, кроме жанров." />
     <MESSAGE value="Вывелась таблица хоть как нибудь" />
     <MESSAGE value="работает удаление" />
-    <option name="LAST_COMMIT_MESSAGE" value="работает удаление" />
+    <MESSAGE value="работает добавление" />
+    <option name="LAST_COMMIT_MESSAGE" value="работает добавление" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1375,7 +1329,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java</url>
-          <line>66</line>
+          <line>75</line>
           <properties />
           <option name="timeStamp" value="235" />
         </line-breakpoint>
@@ -1387,13 +1341,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java</url>
-          <line>161</line>
+          <line>174</line>
           <properties />
           <option name="timeStamp" value="266" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java</url>
-          <line>151</line>
+          <line>164</line>
           <properties />
           <option name="timeStamp" value="270" />
         </line-breakpoint>
@@ -1803,18 +1757,6 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1687#1688#0" expanded="true" />
-            <element signature="e#1721#1722#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/scene/control/TableView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -1842,8 +1784,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/authorization.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="85">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -1864,12 +1806,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="845">
-          <caret line="151" column="27" selection-start-line="151" selection-start-column="27" selection-end-line="151" selection-end-column="27" />
+        <state relative-caret-position="22">
+          <caret line="101" column="32" selection-start-line="101" selection-start-column="32" selection-end-line="101" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1007#1013#0" expanded="true" />
             <element signature="method#openMainPage#0;class#GenresController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31">
+          <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#497#503#0" expanded="true" />
+            <element signature="e#2128#2129#0" expanded="true" />
+            <element signature="e#2162#2163#0" expanded="true" />
           </folding>
         </state>
       </provider>

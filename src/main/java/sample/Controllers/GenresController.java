@@ -30,21 +30,18 @@ public class GenresController {
 
     private Stage stage;
 
-    @FXML
-    private Button back;
-
-    @FXML
-    private Button genreInfo;
     final VBox vbox = new VBox();
 
     final TableView<User> table = new TableView<User>();
     final Label label = new Label("Пользователи");
-    ;
+
+
     final Label actionTaken = new Label();
     final TextField newLogin = new TextField();
     final TextField newPassword = new TextField();
     final CheckBox newRights = new CheckBox();
     final Button newAdd = new Button();
+    final Button back = new Button();
     private ObservableList<User> usersData = FXCollections.observableArrayList();
 
     private final Image deleteImage = new Image(
@@ -54,24 +51,19 @@ public class GenresController {
     // инициализируем форму данными
     @FXML
     private void initialize() throws IOException {
-        table.setEditable(true);
+
 
         label.setFont(new Font("Arial", 20));
 
-        final Label actionTaken = new Label();
-
+        back.setText("Назад");
         table.setEditable(true);
         initData();
 
-        TableColumn idColumn = new TableColumn("ID пользователя");
-        TableColumn loginColumn = new TableColumn("Логин");
-        TableColumn passwordColumn = new TableColumn("Пароль");
-        TableColumn rightsColumn = new TableColumn("Администратор");
-        TableColumn<User, User> deleteColumn = new TableColumn<>("Удалить");
-        drawTable(idColumn, loginColumn, passwordColumn, rightsColumn, deleteColumn);
+
+        drawTable();
 
         final HBox hBox = new HBox();
-        hBox.getChildren().addAll(newLogin, newPassword, newRights, newAdd);
+        hBox.getChildren().addAll(back, newLogin, newPassword, newRights, newAdd);
 
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 10, 10, 10));
@@ -90,10 +82,31 @@ public class GenresController {
             }
         });
 
+        back.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+                try {
+                    openMainPage();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
     }
 
-    private TableView drawTable(TableColumn idColumn,
-                                TableColumn loginColumn, TableColumn passwordColumn, TableColumn rightsColumn, TableColumn<User, User> deleteColumn) {
+    private TableView drawTable() {
+
+        table.setEditable(true);
+
+        TableColumn idColumn = new TableColumn("ID пользователя");
+        TableColumn loginColumn = new TableColumn("Логин");
+        TableColumn passwordColumn = new TableColumn("Пароль");
+        TableColumn rightsColumn = new TableColumn("Администратор");
+        TableColumn<User, User> deleteColumn = new TableColumn<>("Удалить");
+
         // устанавливаем тип и значение которое должно хранится в колонке
         idColumn.setCellValueFactory(new PropertyValueFactory<User, String>("id"));
         loginColumn.setCellValueFactory(new PropertyValueFactory<User, String>("login"));
