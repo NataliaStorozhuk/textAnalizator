@@ -14,7 +14,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -36,6 +38,13 @@ public class GenresController {
     final VBox vbox = new VBox();
 
     final TableView<User> table = new TableView<User>();
+    final Label label = new Label("Пользователи");
+    ;
+    final Label actionTaken = new Label();
+    final TextField newLogin = new TextField();
+    final TextField newPassword = new TextField();
+    final CheckBox newRights = new CheckBox();
+    final Button newAdd = new Button();
     private ObservableList<User> usersData = FXCollections.observableArrayList();
 
     private final Image deleteImage = new Image(
@@ -47,7 +56,6 @@ public class GenresController {
     private void initialize() throws IOException {
         table.setEditable(true);
 
-        final Label label = new Label("Пользователи");
         label.setFont(new Font("Arial", 20));
 
         final Label actionTaken = new Label();
@@ -57,16 +65,39 @@ public class GenresController {
 
         TableColumn idColumn = new TableColumn("ID пользователя");
         TableColumn loginColumn = new TableColumn("Логин");
+        TableColumn passwordColumn = new TableColumn("Пароль");
         TableColumn rightsColumn = new TableColumn("Администратор");
         TableColumn<User, User> deleteColumn = new TableColumn<>("Удалить");
-        drawTable(label, actionTaken, idColumn, loginColumn, rightsColumn, deleteColumn);
+        drawTable(idColumn, loginColumn, passwordColumn, rightsColumn, deleteColumn);
+
+        final HBox hBox = new HBox();
+        hBox.getChildren().addAll(newLogin, newPassword, newRights, newAdd);
+
+        vbox.setSpacing(5);
+        vbox.setPadding(new Insets(10, 10, 10, 10));
+        vbox.getChildren().addAll(label, table, hBox, actionTaken);
+        VBox.setVgrow(table, Priority.ALWAYS);
+
+        newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+                //тут доработать по id внимательно!
+                User newUser = new User(15, newLogin.getText(), newPassword.getText(), newRights.isSelected());
+                usersData.add(newUser);
+                table.refresh();
+
+            }
+        });
 
     }
 
-    private void drawTable(Label label, Label actionTaken, TableColumn idColumn, TableColumn loginColumn, TableColumn rightsColumn, TableColumn<User, User> deleteColumn) {
+    private TableView drawTable(TableColumn idColumn,
+                                TableColumn loginColumn, TableColumn passwordColumn, TableColumn rightsColumn, TableColumn<User, User> deleteColumn) {
         // устанавливаем тип и значение которое должно хранится в колонке
         idColumn.setCellValueFactory(new PropertyValueFactory<User, String>("id"));
         loginColumn.setCellValueFactory(new PropertyValueFactory<User, String>("login"));
+        passwordColumn.setCellValueFactory(new PropertyValueFactory<User, String>("login"));
         rightsColumn.setCellValueFactory(new PropertyValueFactory<User, String>("rights"));
 
         deleteColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<User, User>, ObservableValue<User>>() {
@@ -89,7 +120,7 @@ public class GenresController {
                         button.setMinWidth(50);
                         button.setBorder(null);
                         //  buttonGraphic.setImage(deleteImage);
-                        //        button.setText("test1");
+                        button.setText("deletions");
                     }
 
                     @Override
@@ -100,7 +131,7 @@ public class GenresController {
 
                     private void deleteUser(User person, boolean empty) {
                         super.updateItem(person, empty);
-                        //    if (person != null) {
+                        if (person != null) {
                         buttonGraphic.setImage(deleteImage);
                         setGraphic(button);
                         button.setOnAction(new EventHandler<ActionEvent>() {
@@ -117,9 +148,9 @@ public class GenresController {
                                 table.refresh();
                             }
                         });
-              /*          } else {
-                            button.setText("error");
-                        }*/     //не знаю почему, но тут все время person=null, когда таблицу обновляем
+                        } else {
+                            //   button.setText("error");
+                        }     //не знаю почему, но тут все время person=null, когда таблицу обновляем
                     }
                 };
             }
@@ -128,14 +159,8 @@ public class GenresController {
 
         table.setItems(usersData);
 
-        table.getColumns().addAll(idColumn, loginColumn, rightsColumn, deleteColumn);
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 10, 10, 10));
-        vbox.getChildren().addAll(label, table, actionTaken);
-        VBox.setVgrow(table, Priority.ALWAYS);
-
-
-        //  stage.show();
+        table.getColumns().addAll(idColumn, loginColumn, passwordColumn, rightsColumn, deleteColumn);
+        return table;
     }
 
     // подготавливаем данные для таблицы
