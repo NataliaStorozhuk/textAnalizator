@@ -56,9 +56,8 @@ public class GenresController {
         label.setFont(new Font("Arial", 20));
 
         back.setText("Назад");
-        table.setEditable(true);
-        initData();
 
+        initData();
 
         drawTable();
 
@@ -98,6 +97,7 @@ public class GenresController {
     }
 
     private TableView drawTable() {
+
 
         table.setEditable(true);
 
