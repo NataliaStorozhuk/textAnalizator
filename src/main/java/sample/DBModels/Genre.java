@@ -15,7 +15,7 @@ public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idGenre;
+    public Integer idGenre;
 
     @Column(name = "filePath")
     private String filePath;
@@ -23,13 +23,13 @@ public class Genre {
     @Column(name = "nameGenre")
     private String nameGenre;
 
-    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<Book> books;
+    @OneToMany(mappedBy = "idGenre", cascade = CascadeType.ALL, orphanRemoval = false)
+    public List<Book> books;
 
     public Genre() {
     }
 
-    public Genre(String filePath, String nameGenre) {
+    public Genre(String nameGenre, String filePath) {
         this.filePath = filePath;
         this.nameGenre = nameGenre;
         this.books = new ArrayList<>();
@@ -37,7 +37,7 @@ public class Genre {
 
 
     public void addBook(Book book) {
-        book.setGenre(this);
+        book.setIdGenre(this);
         this.books.add(book);
     }
 

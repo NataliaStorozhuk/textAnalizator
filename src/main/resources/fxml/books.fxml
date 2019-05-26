@@ -22,7 +22,7 @@
             <TableColumn prefWidth="220.0" text="Настройки" fx:id="deleteColumn"/>
         </columns>
     </TableView-->
-    <Label layoutX="14.0" layoutY="18.0" text="List all books:">
+    <Label fx:id="booksTest" layoutX="14.0" layoutY="18.0" text="List all books:">
         <font>
             <Font name="Verdana" size="24.0"/>
         </font>

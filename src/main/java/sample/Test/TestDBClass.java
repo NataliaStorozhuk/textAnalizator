@@ -94,29 +94,42 @@ public class TestDBClass {
         }
     }
 
+    @Test
+    public void testBookSelectionExample() {
+
+        SessionFactory sessionFactory = new Configuration().configure()
+                .buildSessionFactory();
+        try {
+            persistInfoBooksSelection(sessionFactory);
+            //    load(sessionFactory);
+        } finally {
+            sessionFactory.close();
+        }
+    }
+
     private static void load(SessionFactory sessionFactory) {
         System.out.println("-- loading persons --");
         Session session = sessionFactory.openSession();
         @SuppressWarnings("unchecked")
-/*        List<Genre> genres = session.createQuery("FROM Genre").list();
+        List<Genre> genres = session.createQuery("FROM Genre").list();
         genres.forEach((x) -> System.out.printf("- %s%n", x));
 
-        List<Book> books = session.createQuery("FROM Book").list();
+/*        List<Book> books = session.createQuery("FROM Book").list();
         books.forEach((x) -> System.out.printf(books.toString()));
-*/
+
                 List<User> users = session.createQuery("FROM User").list();
         users.forEach((x) -> System.out.printf("- %s%n", x));
 
         List<Info> info = session.createQuery("FROM Info").list();
         info.forEach((x) -> System.out.printf("- %s%n", x));
-
+*/
         session.close();
     }
 
     private static void persistGenre(SessionFactory sessionFactory) {
 
 
-        Genre p1 = new Genre("Путь к файлу", "Имя жанра");
+        Genre p1 = new Genre("Имя жанра 5", "Путь к файлу 5");
         System.out.println(p1.toString());
 
         GenreService genreService = new GenreService();
@@ -127,9 +140,30 @@ public class TestDBClass {
     private static void persistBook(SessionFactory sessionFactory) {
         GenreService genreService = new GenreService();
         Genre p1 = genreService.findGenre(1);
-        p1.addBook(new Book("Название книги", "Путь к книге", false, false));
+        //   p1.addBook(new Book("Не обуч, не инд 1 ", "Путь к кн24ге", false, false));
+        //    p1.addBook(new Book("Не обуч, инд 1 ", "Путь к к2иге", true, false));
+        //    p1.addBook(new Book("Не обуч, инд 2 ", "Путь к кн1иге", true, false));
+        //   p1.addBook(new Book("Обуч, не инд 1", "Путь к 1книге", false, true));
+        p1.addBook(new Book("Оба", "Путь к к3ниге", true, true));
         genreService.updateGenre(p1);
 
+    }
+
+    private static void persistInfoBooksSelection(SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+
+        List<Genre> genres = session.createQuery("FROM Genre").list();
+
+        //только обучающие
+        List<Book> books = session.createQuery("FROM Book book where book.training=true and book.idGenre =:testParam").setParameter("testParam", genres.get(0)).list();
+
+
+        //только проиндексированные
+        // List<Book> books = session.createQuery("FROM Book book where book.indexed=true and book.idGenre =:testParam").setParameter("testParam", genres.get(0)).list();
+
+        //все
+        // List<Book> books = session.createQuery("FROM Book book where book.idGenre =:testParam").setParameter("testParam", genres.get(0)).list();
+        books.forEach((x) -> System.out.printf("- %s%n", x));
     }
 
     private static void persistUser(SessionFactory sessionFactory) throws NoSuchAlgorithmException, UnsupportedEncodingException {

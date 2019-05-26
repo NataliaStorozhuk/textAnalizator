@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -21,6 +22,9 @@ public class BooksController {
     private Stage stage;
     @FXML
     private Button back;
+
+    @FXML
+    private Label booksTest;
 
     @FXML
     private AnchorPane AnchorPane;
@@ -43,13 +47,16 @@ public class BooksController {
     }
 
 
-    public void setStage(Stage stage) {
+    public void setStage(Stage stage, int idGenre) {
         this.stage = stage;
+        booksTest.setText(String.valueOf(idGenre));
+
+
     }
 
     private void openGenreInfo() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genreInfo.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         stage.setTitle("Информация о жанре");
@@ -58,7 +65,7 @@ public class BooksController {
         stage.setScene(scene);
 
         // Передаём адресата в контроллер.
-        GenreInfoController controller = loader.getController();
+        GenresController controller = loader.getController();
         controller.setStage(stage);
         stage.show();
 

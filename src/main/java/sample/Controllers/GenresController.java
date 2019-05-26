@@ -1,6 +1,7 @@
 package sample.Controllers;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,9 +24,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import sample.User;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import sample.DBModels.Book;
+import sample.DBModels.Genre;
+import sample.Services.GenreService;
 
 import java.io.IOException;
+import java.util.List;
 
 public class GenresController {
 
@@ -32,21 +40,42 @@ public class GenresController {
 
     final VBox vbox = new VBox();
 
-    final TableView<User> table = new TableView<User>();
-    final Label label = new Label("Пользователи");
+    final TableView<Genre> table = new TableView<Genre>();
+    final Label label = new Label("Жанры");
 
 
-    final Label actionTaken = new Label();
-    final TextField newLogin = new TextField();
-    final TextField newPassword = new TextField();
-    final CheckBox newRights = new CheckBox();
+    // final Label actionTaken = new Label();
+    final TextField newName = new TextField();
+    final TextField newPath = new TextField();
+    // final CheckBox newRights = new CheckBox();
     final Button newAdd = new Button();
     final Button back = new Button();
-    private ObservableList<User> usersData = FXCollections.observableArrayList();
+    private ObservableList<Genre> genresData = FXCollections.observableArrayList();
 
     private final Image deleteImage = new Image(
             "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Cancel-icon.png"
     );
+
+    private final Image addImage = new Image(
+            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Add-icon.png"
+    );
+
+    private final Image backImage = new Image(
+            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Snapback-icon.png"
+    );
+
+    private final Image booksImage = new Image(
+            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Favorite-icon.png"
+    );
+
+    private final Image lexemsImage = new Image(
+            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Shuffle-On-icon.png"
+    );
+
+    private final Image reloadImage = new Image(
+            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Play-Green-icon.png"
+    );
+
 
     // инициализируем форму данными
     @FXML
@@ -54,28 +83,24 @@ public class GenresController {
 
 
         label.setFont(new Font("Arial", 20));
-
-        back.setText("Назад");
-
         initData();
-
         drawTable();
 
-        final HBox hBox = new HBox();
-        hBox.getChildren().addAll(back, newLogin, newPassword, newRights, newAdd);
+        final HBox hBox = getAddGenreBox();
 
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 10, 10, 10));
-        vbox.getChildren().addAll(label, table, hBox, actionTaken);
+        vbox.getChildren().addAll(label, table, hBox);
         VBox.setVgrow(table, Priority.ALWAYS);
 
         newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                //тут доработать по id внимательно!
-                User newUser = new User(15, newLogin.getText(), newPassword.getText(), newRights.isSelected());
-                usersData.add(newUser);
+                GenreService genreService = new GenreService();
+                Genre newGenre = new Genre(newName.getText(), newPath.getText());
+                genreService.saveGenre(newGenre);
+                genresData.add(newGenre);
                 table.refresh();
 
             }
@@ -86,7 +111,7 @@ public class GenresController {
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    openMainPage();
+                    openAdminPage();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -96,35 +121,145 @@ public class GenresController {
 
     }
 
-    private TableView drawTable() {
+    private HBox getAddGenreBox() {
+        final HBox hBox = new HBox();
 
+        final ImageView buttonGraphicAdd = new ImageView();
+        buttonGraphicAdd.setImage(addImage);
+        newAdd.setGraphic(buttonGraphicAdd);
+
+        final ImageView buttonGraphicBack = new ImageView();
+        buttonGraphicBack.setImage(backImage);
+        back.setGraphic(buttonGraphicBack);
+
+        newName.setPromptText("Название");
+        newPath.setPromptText("Путь к обучающей выборке");
+
+        hBox.getChildren().addAll(back, newName, newPath, newAdd);
+        hBox.setAlignment(Pos.CENTER);
+        return hBox;
+    }
+
+    private TableView drawTable() {
 
         table.setEditable(true);
 
-        TableColumn idColumn = new TableColumn("ID пользователя");
-        TableColumn loginColumn = new TableColumn("Логин");
-        TableColumn passwordColumn = new TableColumn("Пароль");
-        TableColumn rightsColumn = new TableColumn("Администратор");
-        TableColumn<User, User> deleteColumn = new TableColumn<>("Удалить");
+        TableColumn idColumn = new TableColumn("ID жанра");
+        TableColumn nameColumn = new TableColumn("Название");
+        TableColumn pathColumn = new TableColumn("Путь к файлу");
+        TableColumn indexedColumn = new TableColumn("Индекс");
+        TableColumn studyColumn = new TableColumn("Обуч. выб.");
+        TableColumn allBooksColumn = new TableColumn("Все");
+        TableColumn<Genre, Genre> lexemesColumn = new TableColumn<>("Лексемы");
+        TableColumn<Genre, Genre> booksColumn = new TableColumn<>("Книги");
+        TableColumn<Genre, Genre> reloadColumn = new TableColumn<>("Дообучение");
+        TableColumn<Genre, Genre> deleteColumn = new TableColumn<>("Удалить");
 
         // устанавливаем тип и значение которое должно хранится в колонке
-        idColumn.setCellValueFactory(new PropertyValueFactory<User, String>("id"));
-        loginColumn.setCellValueFactory(new PropertyValueFactory<User, String>("login"));
-        passwordColumn.setCellValueFactory(new PropertyValueFactory<User, String>("login"));
-        rightsColumn.setCellValueFactory(new PropertyValueFactory<User, String>("rights"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Genre, String>("idGenre"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Genre, String>("nameGenre"));
+        pathColumn.setCellValueFactory(new PropertyValueFactory<Genre, String>("filePath"));
+        indexedColumnCreator(indexedColumn);
+        studyColumnCreator(studyColumn);
+        allBooksColumnCreator(allBooksColumn);
 
-        deleteColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<User, User>, ObservableValue<User>>() {
+        lexemesColumnCreator(lexemesColumn);
+        booksColumnCreator(booksColumn);
+        reloadColumnCreator(reloadColumn);
+        deleteColumnCreator(deleteColumn);
+
+        table.setItems(genresData);
+
+        table.getColumns().addAll(idColumn, nameColumn, pathColumn, indexedColumn, studyColumn, allBooksColumn, lexemesColumn, booksColumn, reloadColumn, deleteColumn);
+        return table;
+    }
+
+    private void studyColumnCreator(TableColumn<Genre, Label> studyColumn) {
+        studyColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<sample.DBModels.Genre, Label>, ObservableValue<Label>>() {
+
             @Override
-            public ObservableValue<User> call(TableColumn.CellDataFeatures<User, User> features) {
-                return new ReadOnlyObjectWrapper(features.getValue());
+            public ObservableValue<Label> call(
+                    TableColumn.CellDataFeatures<sample.DBModels.Genre, Label> arg0) {
+                sample.DBModels.Genre genre = arg0.getValue();
+
+                Label label = new Label();
+
+                SessionFactory sessionFactory = new Configuration().configure()
+                        .buildSessionFactory();
+                Session session = sessionFactory.openSession();
+                List<Book> books = session.createQuery("FROM Book book where book.training=true and book.idGenre =:testParam").setParameter("testParam", genre).list();
+                label.setText(String.valueOf(books.size()));
+
+                label.setAlignment(Pos.CENTER);
+
+                return new SimpleObjectProperty<Label>(label);
+
             }
+
         });
+    }
 
+    private void allBooksColumnCreator(TableColumn<Genre, Label> allColumn) {
+        allColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<sample.DBModels.Genre, Label>, ObservableValue<Label>>() {
 
-        deleteColumn.setCellFactory(new Callback<TableColumn<User, User>, TableCell<User, User>>() {
             @Override
-            public TableCell<User, User> call(TableColumn<User, User> deleteColumn) {
-                return new TableCell<User, User>() {
+            public ObservableValue<Label> call(
+                    TableColumn.CellDataFeatures<sample.DBModels.Genre, Label> arg0) {
+                sample.DBModels.Genre genre = arg0.getValue();
+
+                Label label = new Label();
+
+                SessionFactory sessionFactory = new Configuration().configure()
+                        .buildSessionFactory();
+                Session session = sessionFactory.openSession();
+                List<Book> books = session.createQuery("FROM Book book where book.idGenre =:testParam").setParameter("testParam", genre).list();
+                label.setText(String.valueOf(books.size()));
+
+                label.setAlignment(Pos.CENTER);
+
+                return new SimpleObjectProperty<Label>(label);
+
+            }
+
+        });
+    }
+
+    private void indexedColumnCreator(TableColumn<Genre, Label> indexedColumn) {
+        indexedColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<sample.DBModels.Genre, Label>, ObservableValue<Label>>() {
+
+            @Override
+            public ObservableValue<Label> call(
+                    TableColumn.CellDataFeatures<sample.DBModels.Genre, Label> arg0) {
+                sample.DBModels.Genre genre = arg0.getValue();
+
+                Label label = new Label();
+
+                SessionFactory sessionFactory = new Configuration().configure()
+                        .buildSessionFactory();
+                Session session = sessionFactory.openSession();
+                List<Book> books = session.createQuery("FROM Book book where book.indexed=true and book.idGenre =:testParam").setParameter("testParam", genre).list();
+                label.setText(String.valueOf(books.size()));
+
+                //     label.selectedProperty().setValue(user.getRights());
+
+                label.setAlignment(Pos.CENTER);
+
+                return new SimpleObjectProperty<Label>(label);
+
+            }
+
+        });
+    }
+
+
+    private void lexemesColumnCreator(TableColumn<Genre, Genre> lexemesColumn) {
+        lexemesColumn.setCellValueFactory(features -> new ReadOnlyObjectWrapper(features.getValue()));
+
+
+        lexemesColumn.setCellFactory(new Callback<TableColumn<Genre, Genre>, TableCell<Genre, Genre>>() {
+            @Override
+            public TableCell<Genre, Genre> call(TableColumn<Genre, Genre> lexemesColumn) {
+                return new TableCell<Genre, Genre>() {
                     final ImageView buttonGraphic = new ImageView();
                     final Button button = new Button();
 
@@ -132,35 +267,44 @@ public class GenresController {
                         button.setGraphic(buttonGraphic);
                         button.setMinWidth(50);
                         button.setBorder(null);
-                        //  buttonGraphic.setImage(deleteImage);
-                        button.setText("deletions");
+
                     }
 
                     @Override
-                    public void updateItem(final User person, boolean empty) {
-                        deleteUser(person, empty);
-                        table.setItems(usersData);
+                    public void updateItem(final Genre person, boolean empty) {
+                        openLexemes(person, empty);
+                        //table.setItems(genresData);
                     }
 
-                    private void deleteUser(User person, boolean empty) {
+                    private void openLexemes(Genre person, boolean empty) {
                         super.updateItem(person, empty);
                         if (person != null) {
-                        buttonGraphic.setImage(deleteImage);
-                        setGraphic(button);
-                        button.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                actionTaken.setText("Bought " + person.getLogin().toLowerCase() + " for: " +
-                                        person.getPassword() + " " + person.getRights() + " " + person.getId());
-                                ObservableList<User> usersData1 = FXCollections.observableArrayList();
-                                for (User user : usersData) {
-                                    if (user.getId() != person.getId())
-                                        usersData1.add(user);
+                            buttonGraphic.setImage(lexemsImage);
+                            setGraphic(button);
+                            button.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genreInfo.fxml"));
+                                    AnchorPane page = null;
+                                    try {
+                                        page = (AnchorPane) loader.load();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    stage.setTitle("Лексемы жанра");
+
+                                    Scene scene = new Scene(page);
+                                    stage.setScene(scene);
+
+                                    //  Передаём адресата в контроллер.
+                                    GenreInfoController controller = loader.getController();
+                                    controller.setStage(stage, person.getIdGenre());
+                                    stage.show();
+
                                 }
-                                usersData = usersData1;
-                                table.refresh();
-                            }
-                        });
+                            });
                         } else {
                             //   button.setText("error");
                         }     //не знаю почему, но тут все время person=null, когда таблицу обновляем
@@ -168,22 +312,187 @@ public class GenresController {
                 };
             }
         });
+    }
+
+    private void booksColumnCreator(TableColumn<Genre, Genre> booksColumn) {
+        booksColumn.setCellValueFactory(features -> new ReadOnlyObjectWrapper(features.getValue()));
 
 
-        table.setItems(usersData);
+        booksColumn.setCellFactory(new Callback<TableColumn<Genre, Genre>, TableCell<Genre, Genre>>() {
+            @Override
+            public TableCell<Genre, Genre> call(TableColumn<Genre, Genre> booksColumn) {
+                return new TableCell<Genre, Genre>() {
+                    final ImageView buttonGraphic = new ImageView();
+                    final Button button = new Button();
 
-        table.getColumns().addAll(idColumn, loginColumn, passwordColumn, rightsColumn, deleteColumn);
-        return table;
+                    {
+                        button.setGraphic(buttonGraphic);
+                        button.setMinWidth(50);
+                        button.setBorder(null);
+
+                    }
+
+                    @Override
+                    public void updateItem(final Genre person, boolean empty) {
+                        openBooks(person, empty);
+                    }
+
+                    private void openBooks(Genre person, boolean empty) {
+                        super.updateItem(person, empty);
+                        if (person != null) {
+                            buttonGraphic.setImage(booksImage);
+                            setGraphic(button);
+                            button.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/books.fxml"));
+                                    AnchorPane page = null;
+                                    try {
+                                        page = (AnchorPane) loader.load();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    stage.setTitle("Книги жанра");
+
+                                    Scene scene = new Scene(page);
+                                    stage.setScene(scene);
+
+                                    //  Передаём адресата в контроллер.
+                                    BooksController controller = loader.getController();
+                                    controller.setStage(stage, person.getIdGenre());
+                                    stage.show();
+
+                                }
+                            });
+                        } else {
+                            //   button.setText("error");
+                        }     //не знаю почему, но тут все время person=null, когда таблицу обновляем
+                    }
+                };
+            }
+        });
+    }
+
+    private void reloadColumnCreator(TableColumn<Genre, Genre> reloadColumn) {
+        reloadColumn.setCellValueFactory(features -> new ReadOnlyObjectWrapper(features.getValue()));
+
+
+        reloadColumn.setCellFactory(new Callback<TableColumn<Genre, Genre>, TableCell<Genre, Genre>>() {
+            @Override
+            public TableCell<Genre, Genre> call(TableColumn<Genre, Genre> reloadColumn) {
+                return new TableCell<Genre, Genre>() {
+                    final ImageView buttonGraphic = new ImageView();
+                    final Button button = new Button();
+
+                    {
+                        button.setGraphic(buttonGraphic);
+                        button.setMinWidth(50);
+                        button.setBorder(null);
+
+                    }
+
+                    @Override
+                    public void updateItem(final Genre person, boolean empty) {
+                        reloadTraining(person, empty);
+                    }
+
+                    private void reloadTraining(Genre person, boolean empty) {
+                        super.updateItem(person, empty);
+                        if (person != null) {
+                            buttonGraphic.setImage(reloadImage);
+                            setGraphic(button);
+                            button.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+
+
+                                    //TODO Тут запуск дообучения
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Дообучение завершено успешно!");
+
+                                    // Header Text: null
+                                    alert.setHeaderText(null);
+                                    alert.setContentText("Окошко с дообучением");
+
+                                    alert.showAndWait();
+
+                                    initData();
+                                    table.refresh();
+
+                                }
+                            });
+                        } else {
+                            //   button.setText("error");
+                        }     //не знаю почему, но тут все время person=null, когда таблицу обновляем
+                    }
+                };
+            }
+        });
+    }
+
+    private void deleteColumnCreator(TableColumn<Genre, Genre> deleteColumn) {
+        deleteColumn.setCellValueFactory(features -> new ReadOnlyObjectWrapper(features.getValue()));
+
+
+        deleteColumn.setCellFactory(new Callback<TableColumn<Genre, Genre>, TableCell<Genre, Genre>>() {
+            @Override
+            public TableCell<Genre, Genre> call(TableColumn<Genre, Genre> deleteColumn) {
+                return new TableCell<Genre, Genre>() {
+                    final ImageView buttonGraphic = new ImageView();
+                    final Button button = new Button();
+
+                    {
+                        button.setGraphic(buttonGraphic);
+                        button.setMinWidth(50);
+                        button.setBorder(null);
+
+                    }
+
+                    @Override
+                    public void updateItem(final Genre person, boolean empty) {
+                        deleteGenre(person, empty);
+                        table.setItems(genresData);
+                    }
+
+                    private void deleteGenre(Genre person, boolean empty) {
+                        super.updateItem(person, empty);
+                        if (person != null) {
+                            buttonGraphic.setImage(deleteImage);
+                            setGraphic(button);
+                            button.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    ObservableList<Genre> genresData1 = FXCollections.observableArrayList();
+                                    for (Genre genre : genresData) {
+                                        if (genre.getIdGenre() != person.getIdGenre())
+                                            genresData1.add(genre);
+                                    }
+                                    genresData = genresData1;
+                                    table.refresh();
+                                }
+                            });
+                        } else {
+                            //   button.setText("error");
+                        }     //не знаю почему, но тут все время person=null, когда таблицу обновляем
+                    }
+                };
+            }
+        });
     }
 
     // подготавливаем данные для таблицы
     // вы можете получать их с базы данных
     private void initData() {
-        usersData.add(new User(1, "Alex", "qwerty", true));
-        usersData.add(new User(2, "Bob", "dsfsdfw", true));
-        usersData.add(new User(3, "Jeck", "dsfdsfwe", true));
-        usersData.add(new User(4, "Mike", "iueern", true));
-        usersData.add(new User(5, "colin", "woeirn", true));
+        genresData.clear();
+        SessionFactory sessionFactory = new Configuration().configure()
+                .buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        @SuppressWarnings("unchecked")
+        List<Genre> genres = session.createQuery("FROM Genre").list();
+        genresData.addAll(genres);
+        session.close();
     }
 
     public void setStage(Stage stage) {
@@ -193,7 +502,7 @@ public class GenresController {
 
     }
 
-    private void openMainPage() throws IOException {
+    private void openAdminPage() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
         AnchorPane page = (AnchorPane) loader.load();

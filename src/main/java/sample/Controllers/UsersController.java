@@ -73,23 +73,7 @@ public class UsersController {
 
         drawTable();
 
-        final HBox hBox = new HBox();
-
-        final ImageView buttonGraphicAdd = new ImageView();
-        buttonGraphicAdd.setImage(addImage);
-        newAdd.setGraphic(buttonGraphicAdd);
-
-        final ImageView buttonGraphicBack = new ImageView();
-        buttonGraphicBack.setImage(backImage);
-        back.setGraphic(buttonGraphicBack);
-
-        newPassword.setPromptText("Пароль");
-        newLogin.setPromptText("Логин");
-        newRights.setText("Права");
-
-
-        hBox.getChildren().addAll(back, newLogin, newPassword, newRights, newAdd);
-        hBox.setAlignment(Pos.CENTER);
+        final HBox hBox = getAddBox();
 
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 10, 10, 10));
@@ -116,6 +100,27 @@ public class UsersController {
 
         });
 
+    }
+
+    private HBox getAddBox() {
+        final HBox hBox = new HBox();
+
+        final ImageView buttonGraphicAdd = new ImageView();
+        buttonGraphicAdd.setImage(addImage);
+        newAdd.setGraphic(buttonGraphicAdd);
+
+        final ImageView buttonGraphicBack = new ImageView();
+        buttonGraphicBack.setImage(backImage);
+        back.setGraphic(buttonGraphicBack);
+
+        newPassword.setPromptText("Пароль");
+        newLogin.setPromptText("Логин");
+        newRights.setText("Права");
+
+
+        hBox.getChildren().addAll(back, newLogin, newPassword, newRights, newAdd);
+        hBox.setAlignment(Pos.CENTER);
+        return hBox;
     }
 
     void setStage(Stage stage) {
@@ -150,7 +155,7 @@ public class UsersController {
         TableColumn<sample.DBModels.User, sample.DBModels.User> deleteColumn = new TableColumn<>("Удалить");
 
         // устанавливаем тип и значение которое должно хранится в колонке
-        idColumn.setCellValueFactory(new PropertyValueFactory<sample.DBModels.User, String>("id"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<sample.DBModels.User, String>("idUser"));
         loginColumn.setCellValueFactory(new PropertyValueFactory<sample.DBModels.User, String>("login"));
         rightsColumn.setCellValueFactory(new PropertyValueFactory<sample.DBModels.User, CheckBox>("rights"));
         rightsColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<sample.DBModels.User, CheckBox>, ObservableValue<CheckBox>>() {

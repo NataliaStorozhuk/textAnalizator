@@ -29,7 +29,7 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idGenre")
-    private Genre genre;
+    public Genre idGenre;
 
     public Book() {
     }
@@ -48,7 +48,7 @@ public class Book {
                 ", filePath='" + filePath + '\'' +
                 ", indexed='" + indexed + '\'' +
                 ", study='" + training + '\'' +
-                ", genre=" + genre +
+                ", genre=" + idGenre +
                 '}';
     }
 }
