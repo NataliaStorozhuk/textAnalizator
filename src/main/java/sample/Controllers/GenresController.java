@@ -361,7 +361,7 @@ public class GenresController {
 
                                     //  Передаём адресата в контроллер.
                                     BooksController controller = loader.getController();
-                                    controller.setStage(stage, person.getIdGenre());
+                                    controller.setStage(stage, person);
                                     stage.show();
 
                                 }
