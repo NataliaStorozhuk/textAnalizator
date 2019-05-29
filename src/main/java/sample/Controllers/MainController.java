@@ -1,31 +1,46 @@
 package sample.Controllers;
 
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import sample.Analyzer;
+import sample.DBModels.Genre;
+import sample.DBModels.Info;
+import sample.DTO.Profile;
+import sample.FileConverter.ObjectToJsonConverter;
+import sample.Services.InfoService;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainController {
 
     @FXML
-    public Button analysis;
-    @FXML
     public TextField filePath;
+
     @FXML
-    public Button fileChooser;
+    public ComboBox genreCombobox;
+
     @FXML
-    public ChoiceBox categoryList;
+    public Button analysis;
+
     @FXML
     public Label skalarResult, cosResult, persentResult, textResult;
 
@@ -34,6 +49,10 @@ public class MainController {
     @FXML
     public Button buttonUsers, buttonGenres, buttonSettings;
 
+    File file;
+    private Analyzer analyser = new Analyzer();
+    List<Genre> genres;
+    Genre currentGenre;
     String desktopPath = System.getProperty("user.home") + "\\" + "Desktop";
     private String pathFileDetectives = desktopPath + "\\detectives\\";
     private String pathFileAnother = desktopPath + "\\another\\";
@@ -47,6 +66,65 @@ public class MainController {
 
     @FXML
     public void initialize() {
+
+        SessionFactory sessionFactory = new Configuration().configure()
+                .buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        genres = session.createQuery("FROM Genre").list();
+        List<String> genresNames = new ArrayList<>();
+        for (Genre genre : genres) genresNames.add(genre.getNameGenre());
+        genreCombobox.setItems((ObservableList) genresNames);
+
+        testButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+
+                //получить файл который будем анализировать
+                //превратить его в вектор
+                Profile testViborka = analyser.getTestViborka(file.getPath());
+
+                //получить характеристики из файла жанра
+                //TODO подсунуть путь такой, какой будет на самом деле в файловой системе, из базы
+                //получаем текущий жанр
+                for (Genre genre : genres)
+                    if (genre.getNameGenre().equals(genreCombobox.getValue())) {
+                        currentGenre = genre;
+                    }
+
+                Profile studyViborka = (Profile) ObjectToJsonConverter.fromJsonToObject(currentGenre.getFilePath(), Profile.class);
+
+                //посчитать всякую инфу полезную
+                //TODO вот тут вставить всякую модную обработку, если она, конечно, будет
+                Double skalar = analyser.getSkalar(studyViborka, testViborka);
+                skalarResult.setText(skalar.toString());
+
+                Double cos = analyser.getCos(studyViborka, testViborka, skalar);
+                cosResult.setText(cos.toString());
+
+                //вывести результат
+                Info info = InfoService.findInfo(1);
+                if (info.getCofW() > cos) {
+                    textResult.setText("Поздравляю! Книга " + file.getName() + "НЕ принадлежит к жанру " + currentGenre.getNameGenre());
+                } else
+                    textResult.setText("Книга " + file.getName() + "НЕ принадлежит к жанру " + currentGenre.getNameGenre());
+
+
+                //добавить книгу с параметрами в зависимости от результата
+                //создать модный файл в фс с книгой этой
+
+            }
+        });
+
+        filePath.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                final FileChooser fileChooser = new FileChooser();
+                file = fileChooser.showOpenDialog(stage);
+                filePath.setText(file.getPath());
+            }
+        });
         buttonGenres.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -95,16 +173,6 @@ public class MainController {
     }
 
     private void openGenres() throws IOException {
-
-      /*  Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Test Connection");
-
-        // Header Text: null
-        alert.setHeaderText(null);
-        alert.setContentText("Второе окошко открылось и все!!");
-
-        alert.showAndWait();
-*/
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
 

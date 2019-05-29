@@ -107,11 +107,14 @@ public class TestDBClass {
         }
     }
 
+    //TODO ЭТО ОБЯЗАТЕЛЬНО ПОТЕСТИТЬ и dao и сервисы можно упростить и тогда и в мейне это убрать
     private static void load(SessionFactory sessionFactory) {
-        System.out.println("-- loading persons --");
+      /*  System.out.println("-- loading persons --");
         Session session = sessionFactory.openSession();
         @SuppressWarnings("unchecked")
         List<Genre> genres = session.createQuery("FROM Genre").list();
+        genres.forEach((x) -> System.out.printf("- %s%n", x));*/
+        List<Genre> genres = GenreService.findAllGenres();
         genres.forEach((x) -> System.out.printf("- %s%n", x));
 
 /*        List<Book> books = session.createQuery("FROM Book").list();
@@ -123,7 +126,7 @@ public class TestDBClass {
         List<Info> info = session.createQuery("FROM Info").list();
         info.forEach((x) -> System.out.printf("- %s%n", x));
 */
-        session.close();
+        //  session.close();
     }
 
     private static void persistGenre(SessionFactory sessionFactory) {

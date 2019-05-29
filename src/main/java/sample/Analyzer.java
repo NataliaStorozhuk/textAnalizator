@@ -2,8 +2,8 @@ package sample;
 
 
 import lombok.Setter;
-import sample.DTO.AllTokensClass;
 import sample.DTO.BookProfile;
+import sample.DTO.Profile;
 import sample.FileConverter.FileToBookConverter;
 
 import java.io.File;
@@ -66,7 +66,7 @@ public class Analyzer {
     }
 
     //получить косинусную меру сходства
-    public Double getCos(AllTokensClass studyViborka, AllTokensClass testViborka, Double getSkalar) {
+    public Double getCos(Profile studyViborka, Profile testViborka, Double getSkalar) {
 
         CompletableFuture<ArrayList<Double>> completableFutureStudy = CompletableFuture.supplyAsync(() -> getDoubleListSkale((ArrayList<Double>) studyViborka.getW()));
         CompletableFuture<ArrayList<Double>> completableFutureTest = CompletableFuture.supplyAsync(() -> getDoubleListSkale((ArrayList<Double>) testViborka.getW()));
@@ -106,7 +106,7 @@ public class Analyzer {
     }
 
     //получить скалярное произведение двух векторов
-    public Double getSkalar(AllTokensClass studyViborka, AllTokensClass testViborka) {
+    public Double getSkalar(Profile studyViborka, Profile testViborka) {
         Double getSkalar = 0.0;
         Integer сountPairs = 0;
 
@@ -130,7 +130,17 @@ public class Analyzer {
 
 
     //Получить скалярное произведение и косинусную меру сходства по новому  файлу и обучающей выборке
-    public Double getFileCos(String pathName, AllTokensClass studyViborka) {
+    public Double getFileCos(String pathName, Profile studyViborka) {
+        Profile testViborka = getTestViborka(pathName);
+
+        Double skalar = getSkalar(studyViborka, testViborka);
+        Double cos = getCos(studyViborka, testViborka, skalar);
+        System.out.println("skalar=" + skalar);
+        System.out.println("cos=" + cos);
+        return cos;
+    }
+
+    public Profile getTestViborka(String pathName) {
         File file = new File(pathName);
         System.out.println(file.getPath());
 //        BookProfile testBook1 = getBookFromFile(file);
@@ -140,13 +150,8 @@ public class Analyzer {
         ArrayList<BookProfile> testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook1);
 
-        AllTokensClass testViborka = sample.StatisticGetter.getBaseFrequencies(testBookOnly);
+        Profile testViborka = StatisticGetter.getBaseFrequencies(testBookOnly);
         testViborka.w = testBook1.getW();
-
-        Double skalar = getSkalar(studyViborka, testViborka);
-        Double cos = getCos(studyViborka, testViborka, skalar);
-        System.out.println("skalar=" + skalar);
-        System.out.println("cos=" + cos);
-        return cos;
+        return testViborka;
     }
 }

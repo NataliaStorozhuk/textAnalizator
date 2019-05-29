@@ -29,7 +29,7 @@ public class GenreService {
         GenreDao.update(Genre);
     }
 
-    public List<Genre> findAllGenres() {
+    public static List<Genre> findAllGenres() {
         return GenreDao.findAll();
     }
 }

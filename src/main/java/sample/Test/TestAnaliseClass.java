@@ -2,8 +2,8 @@ package sample.Test;
 
 import org.testng.annotations.Test;
 import sample.Analyzer;
-import sample.DTO.AllTokensClass;
 import sample.DTO.BookProfile;
+import sample.DTO.Profile;
 import sample.FileConverter.ExcelExporter;
 import sample.FileConverter.FileToBookConverter;
 import sample.FileConverter.ObjectToJsonConverter;
@@ -34,7 +34,7 @@ public class TestAnaliseClass {
     public void getFiles() throws IOException {
         final File folder = new File(desktopPath + "test");
         books = listFilesFromFolder(folder);
-        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
+        Profile testViborka = statisticGetter.getBaseFrequencies(books);
         ExcelExporter.createExcelFile(testViborka.arrayAfterSort, books, "allWordsMagicW");
     }
 
@@ -45,12 +45,12 @@ public class TestAnaliseClass {
         final File folder = new File(desktopPath + "detectives_utf8");
 
         books = listFilesFromFolder(folder);
-        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
+        Profile testViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         testViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson(desktopPath + "testJsonFile", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileTf*IDF", AllTokensClass.class);
+        Profile test = (Profile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileTf*IDF", Profile.class);
     }
 
     //Пробуем записать данные в json РАБОЧИЕ
@@ -64,13 +64,13 @@ public class TestAnaliseClass {
         long timeConsumedMillis = finish - start;           //9604 распаралелено, 17786 если по очереди
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
 
-        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books); //это очень долго бежит
+        Profile testViborka = statisticGetter.getBaseFrequencies(books); //это очень долго бежит
         books.add(createAverageBook(books));
 
         testViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson(desktopPath + "detectivesTFIDF.json", testViborka);
-        AllTokensClass test = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", AllTokensClass.class);
+        Profile test = (Profile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", Profile.class);
         finish = System.currentTimeMillis();
         timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
@@ -113,7 +113,7 @@ public class TestAnaliseClass {
     }
 
 
-    private ArrayList<String> getMaxUseWords(AllTokensClass testViborka, BookProfile maxBook) {
+    private ArrayList<String> getMaxUseWords(Profile testViborka, BookProfile maxBook) {
         ArrayList<String> maxArrayList = new ArrayList<>();
         for (int i = 0; i < maxBook.tf.size(); i++) {
             maxArrayList.add(testViborka.arrayAfterSort.get(maxBook.tf.get(i)));
@@ -144,7 +144,7 @@ public class TestAnaliseClass {
         long start = System.currentTimeMillis();
 
         books = listFilesFromFolder(folder);
-        AllTokensClass testViborka = statisticGetter.getBaseFrequencies(books);
+        Profile testViborka = statisticGetter.getBaseFrequencies(books);
 
         books.add(createAverageBook(books));
 
@@ -166,8 +166,8 @@ public class TestAnaliseClass {
     public void getSimiliarityWithoutMagic() {
 
         //тестовые 3
-        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", AllTokensClass.class);
-        //         AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/test.json", AllTokensClass.class);
+        Profile studyViborka = (Profile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", Profile.class);
+        //         Profile studyViborka = (Profile) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/test.json", Profile.class);
 
         //тестовая следующая
         //      File file = new File("C:/Users/Natalia/Desktop/text4.txt");
@@ -187,12 +187,12 @@ public class TestAnaliseClass {
         //final File folder = new File("C:/Users/Natalia/Desktop/test");
 
         books = listFilesFromFolder(folder);
-        AllTokensClass baseViborka = statisticGetter.getBaseFrequencies(books);
+        Profile baseViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         baseViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/testJsonFile", baseViborka);*/
-        AllTokensClass studyViborka = (AllTokensClass) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", AllTokensClass.class);
+        Profile studyViborka = (Profile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", Profile.class);
 
         ymnojIDFforDetectiveWords(studyViborka, 1000);
 
@@ -204,7 +204,7 @@ public class TestAnaliseClass {
 
     }
 
-    private void ymnojIDFforDetectiveWords(AllTokensClass studyViborka, Integer cof) {
+    private void ymnojIDFforDetectiveWords(Profile studyViborka, Integer cof) {
         String detectiveWordsString = usingBufferedReader(this.getClass().getResource("/detectiveDictionary_afterMethod.txt").getPath());
         ArrayList<String> detectiveWords = getWordsFromString(detectiveWordsString);
 

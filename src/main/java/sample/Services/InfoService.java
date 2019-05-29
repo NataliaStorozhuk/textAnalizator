@@ -10,7 +10,7 @@ public class InfoService {
     public InfoService() {
     }
 
-    public Info findInfo(int id) {
+    public static Info findInfo(int id) {
         return InfoDao.findById(id);
     }
 

@@ -1,7 +1,7 @@
 package sample;
 
-import sample.DTO.AllTokensClass;
 import sample.DTO.BookProfile;
+import sample.DTO.Profile;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 public class StatisticGetter {
 
-    public static AllTokensClass getBaseFrequencies(ArrayList<BookProfile> books) {
+    public static Profile getBaseFrequencies(ArrayList<BookProfile> books) {
 
         System.out.println("Разбор по времени метода getBaseFrequencies");
         long start = System.currentTimeMillis();
 
-        AllTokensClass allTokensClass = new AllTokensClass();
+        Profile allTokensClass = new Profile();
         //формируем общий, сортируем, выкидываем повторы
         allTokensClass.arrayAfterSort = getAllTokensArray(books);
 
