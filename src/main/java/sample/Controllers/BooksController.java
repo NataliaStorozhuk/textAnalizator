@@ -22,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.hibernate.Session;
@@ -31,6 +32,7 @@ import sample.DBModels.Book;
 import sample.DBModels.Genre;
 import sample.Services.BookService;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -80,17 +82,6 @@ public class BooksController {
         vbox.getChildren().addAll(label, table, hBox);
         VBox.setVgrow(table, Priority.ALWAYS);
 
-        newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-
-            BookService bookService = new BookService();
-            //TODO тут в пути не путь исходника из строки, а путь уже к лексемам в фс! Будь добра, добавь обработчик!
-            Book newBook = new Book(newBookName.getText(), newPath.getText(), false, false);
-            bookService.saveBook(newBook);
-            booksData.add(newBook);
-            table.refresh();
-
-        });
-
         back.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -109,8 +100,6 @@ public class BooksController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
-        //  currentGenre = genre;
-
         stage.setScene(new Scene(vbox));
 
     }
@@ -129,6 +118,27 @@ public class BooksController {
 
         newBookName.setPromptText("Название");
         newPath.setPromptText("Путь к файлу");
+
+        newPath.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                final FileChooser fileChooser = new FileChooser();
+                File file = fileChooser.showOpenDialog(stage);
+                newPath.setText(file.getPath());
+            }
+        });
+
+        newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+
+            BookService bookService = new BookService();
+            //TODO тут в пути не путь исходника из строки, а путь уже к лексемам в фс! Будь добра, добавь обработчик!
+            Book newBook = new Book(newBookName.getText(), newPath.getText(), false, false);
+            bookService.saveBook(newBook);
+            booksData.add(newBook);
+            table.refresh();
+
+        });
 
         hBox.getChildren().addAll(back, newBookName, newPath, newAdd);
         hBox.setAlignment(Pos.CENTER);
@@ -266,7 +276,7 @@ public class BooksController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
-        stage.setTitle("Информация о жанре *" + currentGenre.getNameGenre());
+        stage.setTitle("Жанры");
 
         Scene scene = new Scene(page);
         stage.setScene(scene);
