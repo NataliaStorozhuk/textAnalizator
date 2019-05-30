@@ -67,11 +67,7 @@ public class BooksController {
     );
 
     @FXML
-    private AnchorPane AnchorPane;
-
-    @FXML
     public void initialize() {
-
         label.setFont(new Font("Arial", 20));
         initData();
 
@@ -111,10 +107,11 @@ public class BooksController {
     }
 
 
-    public void setStage(Stage stage, Genre genre) {
+    public void setStage(Stage stage) {
         this.stage = stage;
-        currentGenre = genre;
+        //  currentGenre = genre;
 
+        stage.setScene(new Scene(vbox));
 
     }
 
@@ -282,5 +279,7 @@ public class BooksController {
 
     }
 
-
+    public void setGenre(Genre person) {
+        currentGenre = person;
+    }
 }

@@ -1,5 +1,6 @@
 package sample.Controllers;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -73,7 +74,11 @@ public class MainController {
         genres = session.createQuery("FROM Genre").list();
         List<String> genresNames = new ArrayList<>();
         for (Genre genre : genres) genresNames.add(genre.getNameGenre());
-        genreCombobox.setItems((ObservableList) genresNames);
+
+        ObservableList<String> observableArrayList =
+                FXCollections.observableArrayList(genresNames);
+        genreCombobox.setItems(observableArrayList);
+
 
         testButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 

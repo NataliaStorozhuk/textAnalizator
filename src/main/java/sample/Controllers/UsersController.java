@@ -66,8 +66,6 @@ public class UsersController {
 
     @FXML
     public void initialize() {
-
-
         label.setFont(new Font("Arial", 20));
         initData();
 

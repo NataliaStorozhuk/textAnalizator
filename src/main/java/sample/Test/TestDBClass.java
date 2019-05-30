@@ -108,6 +108,7 @@ public class TestDBClass {
     }
 
     //TODO ЭТО ОБЯЗАТЕЛЬНО ПОТЕСТИТЬ и dao и сервисы можно упростить и тогда и в мейне это убрать
+    //Все норм, работает
     private static void load(SessionFactory sessionFactory) {
       /*  System.out.println("-- loading persons --");
         Session session = sessionFactory.openSession();

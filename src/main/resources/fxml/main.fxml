@@ -32,7 +32,7 @@
             </VBox.margin>
         </ComboBox>
 
-        <Button fx:id="analysis" alignment="CENTER" mnemonicParsing="false" text="Запуск анализа">
+        <Button fx:id="testButton" alignment="CENTER" mnemonicParsing="false" text="Запуск анализа">
             <VBox.margin>
                 <Insets bottom="10.0" top="10.0"/>
             </VBox.margin>

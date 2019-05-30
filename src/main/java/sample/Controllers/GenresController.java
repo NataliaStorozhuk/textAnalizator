@@ -346,7 +346,19 @@ public class GenresController {
                                 @Override
                                 public void handle(ActionEvent event) {
 
+
+                                    //FXMLLoader loader = new FXMLLoader("/sample/EditBook.fxml");
+                                    //   Parent root = loader.load();
+                                   /* Main.primaryStage.setScene(new Scene(root));
+                                    ControllerClass controllerEditBook = loader.getController(); //получаем контроллер для второй формы
+                                    controllerEditBook.someMethod(someParameters); // передаем необходимые параметры
+                                    Main.primaryStage.show();
+*/
+                                    //  Передаём адресата в контроллер.
+                                    BooksController controller = new BooksController();
+                                    controller.setGenre(person);
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/books.fxml"));
+                                    loader.setController(controller);
                                     AnchorPane page = null;
                                     try {
                                         page = (AnchorPane) loader.load();
@@ -358,10 +370,7 @@ public class GenresController {
 
                                     Scene scene = new Scene(page);
                                     stage.setScene(scene);
-
-                                    //  Передаём адресата в контроллер.
-                                    BooksController controller = loader.getController();
-                                    controller.setStage(stage, person);
+                                    controller.setStage(stage);
                                     stage.show();
 
                                 }
