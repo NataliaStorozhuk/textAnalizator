@@ -39,7 +39,7 @@ import java.util.List;
 public class BooksController {
 
 
-    String desktopPath = System.getProperty("Book.home") + "\\" + "Desktop";
+    String desktopPath = System.getProperty("user.home") + "\\" + "Desktop";
 
     private Stage stage;
     private Genre currentGenre;

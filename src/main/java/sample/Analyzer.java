@@ -3,7 +3,7 @@ package sample;
 
 import lombok.Setter;
 import sample.DTO.BookProfile;
-import sample.DTO.Profile;
+import sample.DTO.GenreProfile;
 import sample.FileConverter.FileToBookConverter;
 
 import java.io.File;
@@ -66,7 +66,7 @@ public class Analyzer {
     }
 
     //получить косинусную меру сходства
-    public Double getCos(Profile studyViborka, Profile testViborka, Double getSkalar) {
+    public Double getCos(GenreProfile studyViborka, GenreProfile testViborka, Double getSkalar) {
 
         CompletableFuture<ArrayList<Double>> completableFutureStudy = CompletableFuture.supplyAsync(() -> getDoubleListSkale((ArrayList<Double>) studyViborka.getW()));
         CompletableFuture<ArrayList<Double>> completableFutureTest = CompletableFuture.supplyAsync(() -> getDoubleListSkale((ArrayList<Double>) testViborka.getW()));
@@ -106,15 +106,15 @@ public class Analyzer {
     }
 
     //получить скалярное произведение двух векторов
-    public Double getSkalar(Profile studyViborka, Profile testViborka) {
+    public Double getSkalar(GenreProfile studyViborka, GenreProfile testViborka) {
         Double getSkalar = 0.0;
         Integer сountPairs = 0;
 
-        for (int j = 0; j < testViborka.arrayAfterSort.size(); j++) {
+        for (int j = 0; j < testViborka.lexemesList.size(); j++) {
 
-            for (int i = 0; i < studyViborka.arrayAfterSort.size(); i++) {
+            for (int i = 0; i < studyViborka.lexemesList.size(); i++) {
 
-                if (studyViborka.arrayAfterSort.get(i).equals(testViborka.arrayAfterSort.get(j))) {
+                if (studyViborka.lexemesList.get(i).equals(testViborka.lexemesList.get(j))) {
                     getSkalar += (studyViborka.w.get(i) * testViborka.w.get(j));
                     сountPairs++;
                     break;
@@ -130,8 +130,8 @@ public class Analyzer {
 
 
     //Получить скалярное произведение и косинусную меру сходства по новому  файлу и обучающей выборке
-    public Double getFileCos(String pathName, Profile studyViborka) {
-        Profile testViborka = getTestViborka(pathName);
+    public Double getFileCos(String pathName, GenreProfile studyViborka) {
+        GenreProfile testViborka = getTestViborka(pathName);
 
         Double skalar = getSkalar(studyViborka, testViborka);
         Double cos = getCos(studyViborka, testViborka, skalar);
@@ -140,7 +140,7 @@ public class Analyzer {
         return cos;
     }
 
-    public Profile getTestViborka(String pathName) {
+    public GenreProfile getTestViborka(String pathName) {
         File file = new File(pathName);
         System.out.println(file.getPath());
 //        BookProfile testBook1 = getBookFromFile(file);
@@ -150,7 +150,7 @@ public class Analyzer {
         ArrayList<BookProfile> testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook1);
 
-        Profile testViborka = StatisticGetter.getBaseFrequencies(testBookOnly);
+        GenreProfile testViborka = StatisticGetter.getBaseFrequencies(testBookOnly);
         testViborka.w = testBook1.getW();
         return testViborka;
     }

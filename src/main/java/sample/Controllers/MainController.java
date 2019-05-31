@@ -21,7 +21,7 @@ import org.hibernate.cfg.Configuration;
 import sample.Analyzer;
 import sample.DBModels.Genre;
 import sample.DBModels.Info;
-import sample.DTO.Profile;
+import sample.DTO.GenreProfile;
 import sample.FileConverter.ObjectToJsonConverter;
 import sample.Services.InfoService;
 
@@ -87,7 +87,7 @@ public class MainController {
 
                 //получить файл который будем анализировать
                 //превратить его в вектор
-                Profile testViborka = analyser.getTestViborka(file.getPath());
+                GenreProfile testViborka = analyser.getTestViborka(file.getPath());
 
                 //получить характеристики из файла жанра
                 //TODO подсунуть путь такой, какой будет на самом деле в файловой системе, из базы
@@ -97,7 +97,7 @@ public class MainController {
                         currentGenre = genre;
                     }
 
-                Profile studyViborka = (Profile) ObjectToJsonConverter.fromJsonToObject(currentGenre.getFilePath(), Profile.class);
+                GenreProfile studyViborka = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(currentGenre.getFilePath(), GenreProfile.class);
 
                 //посчитать всякую инфу полезную
                 //TODO вот тут вставить всякую модную обработку, если она, конечно, будет

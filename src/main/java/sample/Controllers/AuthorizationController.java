@@ -109,15 +109,6 @@ public class AuthorizationController {
     }
 
     private void openMainPage() throws IOException {
-    /*    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("User");
-
-        // Header Text: null
-        alert.setHeaderText(null);
-        alert.setContentText("User");
-
-        alert.showAndWait();
-*/
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
         AnchorPane page = (AnchorPane) loader.load();

@@ -3,7 +3,7 @@ package sample.Test;
 import org.testng.annotations.Test;
 import sample.Analyzer;
 import sample.DTO.BookProfile;
-import sample.DTO.Profile;
+import sample.DTO.GenreProfile;
 import sample.FileConverter.ExcelExporter;
 import sample.FileConverter.FileToBookConverter;
 import sample.FileConverter.ObjectToJsonConverter;
@@ -34,8 +34,8 @@ public class TestAnaliseClass {
     public void getFiles() throws IOException {
         final File folder = new File(desktopPath + "test");
         books = listFilesFromFolder(folder);
-        Profile testViborka = statisticGetter.getBaseFrequencies(books);
-        ExcelExporter.createExcelFile(testViborka.arrayAfterSort, books, "allWordsMagicW");
+        GenreProfile testViborka = statisticGetter.getBaseFrequencies(books);
+        //  ExcelExporter.createExcelFile(testViborka.lexemesList, books, "allWordsMagicW");
     }
 
 
@@ -45,12 +45,12 @@ public class TestAnaliseClass {
         final File folder = new File(desktopPath + "detectives_utf8");
 
         books = listFilesFromFolder(folder);
-        Profile testViborka = statisticGetter.getBaseFrequencies(books);
+        GenreProfile testViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         testViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson(desktopPath + "testJsonFile", testViborka);
-        Profile test = (Profile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileTf*IDF", Profile.class);
+        GenreProfile test = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileTf*IDF", GenreProfile.class);
     }
 
     //Пробуем записать данные в json РАБОЧИЕ
@@ -64,13 +64,13 @@ public class TestAnaliseClass {
         long timeConsumedMillis = finish - start;           //9604 распаралелено, 17786 если по очереди
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
 
-        Profile testViborka = statisticGetter.getBaseFrequencies(books); //это очень долго бежит
+        GenreProfile testViborka = statisticGetter.getBaseFrequencies(books); //это очень долго бежит
         books.add(createAverageBook(books));
 
         testViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson(desktopPath + "detectivesTFIDF.json", testViborka);
-        Profile test = (Profile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", Profile.class);
+        GenreProfile test = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", GenreProfile.class);
         finish = System.currentTimeMillis();
         timeConsumedMillis = finish - start;
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
@@ -113,10 +113,10 @@ public class TestAnaliseClass {
     }
 
 
-    private ArrayList<String> getMaxUseWords(Profile testViborka, BookProfile maxBook) {
+    private ArrayList<String> getMaxUseWords(GenreProfile testViborka, BookProfile maxBook) {
         ArrayList<String> maxArrayList = new ArrayList<>();
         for (int i = 0; i < maxBook.tf.size(); i++) {
-            maxArrayList.add(testViborka.arrayAfterSort.get(maxBook.tf.get(i)));
+            maxArrayList.add(testViborka.lexemesList.get(maxBook.tf.get(i)));
         }
         return maxArrayList;
     }
@@ -144,7 +144,7 @@ public class TestAnaliseClass {
         long start = System.currentTimeMillis();
 
         books = listFilesFromFolder(folder);
-        Profile testViborka = statisticGetter.getBaseFrequencies(books);
+        GenreProfile testViborka = statisticGetter.getBaseFrequencies(books);
 
         books.add(createAverageBook(books));
 
@@ -166,8 +166,8 @@ public class TestAnaliseClass {
     public void getSimiliarityWithoutMagic() {
 
         //тестовые 3
-        Profile studyViborka = (Profile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", Profile.class);
-        //         Profile studyViborka = (Profile) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/test.json", Profile.class);
+        GenreProfile studyViborka = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", GenreProfile.class);
+        //         GenreProfile studyViborka = (GenreProfile) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/test.json", GenreProfile.class);
 
         //тестовая следующая
         //      File file = new File("C:/Users/Natalia/Desktop/text4.txt");
@@ -187,12 +187,12 @@ public class TestAnaliseClass {
         //final File folder = new File("C:/Users/Natalia/Desktop/test");
 
         books = listFilesFromFolder(folder);
-        Profile baseViborka = statisticGetter.getBaseFrequencies(books);
+        GenreProfile baseViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         baseViborka.w = books.get(books.size() - 1).getW();
 
         ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/testJsonFile", baseViborka);*/
-        Profile studyViborka = (Profile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", Profile.class);
+        GenreProfile studyViborka = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", GenreProfile.class);
 
         ymnojIDFforDetectiveWords(studyViborka, 1000);
 
@@ -204,14 +204,14 @@ public class TestAnaliseClass {
 
     }
 
-    private void ymnojIDFforDetectiveWords(Profile studyViborka, Integer cof) {
+    private void ymnojIDFforDetectiveWords(GenreProfile studyViborka, Integer cof) {
         String detectiveWordsString = usingBufferedReader(this.getClass().getResource("/detectiveDictionary_afterMethod.txt").getPath());
         ArrayList<String> detectiveWords = getWordsFromString(detectiveWordsString);
 
 //Это умножение idf на 5
-        for (int i = 0; i < studyViborka.arrayAfterSort.size(); i++) {
+        for (int i = 0; i < studyViborka.lexemesList.size(); i++) {
             for (int j = 0; j < detectiveWords.size(); j++) {
-                if (studyViborka.arrayAfterSort.get(i).equals(detectiveWords.get(j))) {
+                if (studyViborka.lexemesList.get(i).equals(detectiveWords.get(j))) {
                     studyViborka.w.set(i, studyViborka.w.get(i) / cof);
                     // studyViborka.w.set(i, 0.0);
                     break;

@@ -1,7 +1,8 @@
 package sample;
 
 import sample.DTO.BookProfile;
-import sample.DTO.Profile;
+import sample.DTO.GenreLexema;
+import sample.DTO.GenreProfile;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,14 +14,13 @@ import java.util.stream.Collectors;
 
 public class StatisticGetter {
 
-    public static Profile getBaseFrequencies(ArrayList<BookProfile> books) {
+    public static GenreProfile getBaseFrequencies(ArrayList<BookProfile> books) {
 
         System.out.println("Разбор по времени метода getBaseFrequencies");
         long start = System.currentTimeMillis();
 
-        Profile allTokensClass = new Profile();
         //формируем общий, сортируем, выкидываем повторы
-        allTokensClass.arrayAfterSort = getAllTokensArray(books);
+        GenreProfile genreProfile = getAllTokensArray(books);
 
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;
@@ -29,13 +29,13 @@ public class StatisticGetter {
 
         //получаем tf - число каждой лексемы в книге
   /*       for (BookProfile book : books) {
-            getTf(book, allTokensClass.arrayAfterSort);
+            getTf(book, genreProfile.lexemesList);
         }//долго
 */
 
         CompletableFuture[] futures = Arrays.stream(books.toArray())
                 .map(book -> CompletableFuture.supplyAsync(() -> {
-                    getTf((BookProfile) book, allTokensClass.arrayAfterSort);
+                    getTf((BookProfile) book, genreProfile.lexemesList);
                     return null;
                 }))
                 .toArray(CompletableFuture[]::new);
@@ -49,47 +49,53 @@ public class StatisticGetter {
 
         //считаем общее число файлов, в которых встречается слово
         ArrayList<Double> documentFrequency = getDf(books);
-        allTokensClass.df = documentFrequency;
+        genreProfile.df = documentFrequency;
 
         //считаем idf
         if (books.size() != 1)
-            allTokensClass.idf = getIdf(documentFrequency, books.size());
+            genreProfile.idf = getIdf(documentFrequency, books.size());
         else {
             for (int j = 0; j < books.get(0).normTF.size(); j++) {
-                allTokensClass.idf.add(1.0);
+                genreProfile.idf.add(1.0);
             }
         }
 
 
         //получаем tf-idf
         for (BookProfile book : books) {
-            getTfIdf(book, allTokensClass.idf);
+            getTfIdf(book, genreProfile.idf);
         }
 
 
         //получаем w по модной формуле
         for (BookProfile book : books) {
-            getW(book, allTokensClass.idf);
-            //         getW(book, allTokensClass.df);
+            getW(book, genreProfile.idf);
+            //         getW(book, genreProfile.df);
         }
 
         System.out.println("Конец");
-        return allTokensClass;
+        return genreProfile;
 
     }
 
 
     /*Метод делает из списка разных книг отсортированный массив лексем без дубликатов*/
-    public static List<String> getAllTokensArray(ArrayList<BookProfile> books) {
+    public static GenreProfile getAllTokensArray(ArrayList<BookProfile> books) {
+        GenreProfile genreProfile = new GenreProfile();
         ArrayList<String> allArray = new ArrayList<String>();
         for (BookProfile book : books) {
             allArray.addAll(book.getLexems());
         }
-
         List<String> arrayAfterSort = allArray.stream().distinct().collect(Collectors.toList());
         Collections.sort(arrayAfterSort);
 
-        return arrayAfterSort;
+
+        for (int i = 0; i < arrayAfterSort.size(); i++) {
+            GenreLexema genreLexema = new GenreLexema(arrayAfterSort.get(i));
+            genreProfile.lexemesList.add(genreLexema);
+        }
+
+        return genreProfile;
     }
 
     /*Получает количество повторений каждой лексемы в книге tf */
