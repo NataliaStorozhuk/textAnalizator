@@ -299,7 +299,7 @@ public class GenresController {
 
                                     stage.setTitle("Лексемы жанра");
 
-                                    Scene scene = new Scene(page);
+                                    Scene scene = new Scene(page, 800, 600);
                                     stage.setScene(scene);
                                     controller.setStage(stage);
                                     stage.show();
@@ -369,7 +369,7 @@ public class GenresController {
 
                                     stage.setTitle("Книги жанра");
 
-                                    Scene scene = new Scene(page);
+                                    Scene scene = new Scene(page, 800, 600);
                                     stage.setScene(scene);
                                     controller.setStage(stage);
                                     stage.show();
@@ -519,7 +519,7 @@ public class GenresController {
 
         stage.setTitle("Анализ текста");
 
-        Scene scene = new Scene(page);
+        Scene scene = new Scene(page, 800, 600);
         stage.setScene(scene);
 
         // Передаём адресата в контроллер.

@@ -128,7 +128,7 @@ public class UsersController {
 
         stage.setTitle("Анализ текста");
 
-        Scene scene = new Scene(page);
+        Scene scene = new Scene(page, 800, 600);
         stage.setScene(scene);
 
         // Передаём адресата в контроллер.

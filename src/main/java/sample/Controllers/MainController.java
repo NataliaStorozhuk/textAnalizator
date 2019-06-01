@@ -185,7 +185,7 @@ public class MainController {
 
         stage.setTitle("Жанры");
 
-        Scene scene = new Scene(page);
+        Scene scene = new Scene(page, 800, 600);
         stage.setScene(scene);
 
         //  Передаём адресата в контроллер.
@@ -202,7 +202,7 @@ public class MainController {
 
         stage.setTitle("Пользователи");
 
-        Scene scene = new Scene(page);
+        Scene scene = new Scene(page, 800, 600);
         stage.setScene(scene);
 
         //  Передаём адресата в контроллер.
@@ -219,7 +219,7 @@ public class MainController {
 
         stage.setTitle("Настроечки");
 
-        Scene scene = new Scene(page);
+        Scene scene = new Scene(page, 800, 600);
         stage.setScene(scene);
 
         //  Передаём адресата в контроллер.
