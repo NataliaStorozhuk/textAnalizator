@@ -12,15 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sample.DBModels.User;
+import sample.Services.UserService;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class AuthorizationController {
-
-
-    String desktopPath = System.getProperty("user.home") + "\\" + "Desktop";
 
     private Stage stage;
     @FXML
@@ -35,15 +34,9 @@ public class AuthorizationController {
     @FXML
     private Label labelError;
 
-
-    ArrayList<String> fileAfterPorter1;
-
-    @FXML
-    private AnchorPane AnchorPane;
-
     @FXML
     public void initialize() {
-        //  stage.getScene().getProperties().
+
         enter.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -61,8 +54,8 @@ public class AuthorizationController {
     }
 
     private void authorisation() throws IOException, NoSuchAlgorithmException {
-        openMainPage();
-  /*      String login = labelLogin.getText();
+
+        String login = labelLogin.getText();
         String password = labelPassword.getText();
 
         UserService userService = new UserService();
@@ -73,14 +66,11 @@ public class AuthorizationController {
             if (user.getLogin().equals(login)) {
                 //Если у пользователя пароль подошел
 
-                String hashPassword = String.valueOf((labelPassword.getText()).hashCode());
+                String hashPassword = String.valueOf((password).hashCode());
                 if (user.getPassword().equals(hashPassword)) {
-                    //Дальше в зависимости от прав пользователя открывается админка или юзерка
-                    if (user.getRights().equals(Boolean.TRUE)) {
-                        openAdminPage();
-                    } else {
-                        openMainPage();
-                    }
+
+                    openMainPage(user);
+
                 } else {
                     labelError.setText("Пароль введен неверно!");
 
@@ -90,10 +80,10 @@ public class AuthorizationController {
                 labelError.setText("Данный пользователь не зарегистрирован!");
             }
 
-        }*/
+        }
     }
 
-    private void openAdminPage() throws IOException {
+    private void openMainPage(User user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
@@ -105,26 +95,12 @@ public class AuthorizationController {
         // Передаём адресата в контроллер.
         MainController controller = loader.getController();
         controller.setStage(stage);
+
+        //Дальше в зависимости от прав пользователя открывается админка или юзерка
+        if (user.getRights().equals(Boolean.FALSE))
+            controller.adminSettings.setVisible(false);
+
         stage.show();
-    }
-
-    private void openMainPage() throws IOException {
-
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-
-        stage.setTitle("Анализ текста");
-
-        Scene scene = new Scene(page);
-        stage.setScene(scene);
-
-        // Передаём адресата в контроллер.
-        MainController controller = loader.getController();
-        controller.setStage(stage);
-        //  controller.adminSettings.setVisible(false);
-        stage.show();
-
     }
 
 

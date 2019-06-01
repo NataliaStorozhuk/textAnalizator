@@ -2,12 +2,9 @@ package sample.Controllers;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -156,36 +153,27 @@ public class UsersController {
         idColumn.setCellValueFactory(new PropertyValueFactory<sample.DBModels.User, String>("idUser"));
         loginColumn.setCellValueFactory(new PropertyValueFactory<sample.DBModels.User, String>("login"));
         rightsColumn.setCellValueFactory(new PropertyValueFactory<sample.DBModels.User, CheckBox>("rights"));
-        rightsColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<sample.DBModels.User, CheckBox>, ObservableValue<CheckBox>>() {
+        rightsColumn.setCellValueFactory((Callback<TableColumn.CellDataFeatures<User, CheckBox>, ObservableValue<CheckBox>>) arg0 -> {
+            User user = arg0.getValue();
 
-            @Override
-            public ObservableValue<CheckBox> call(
-                    TableColumn.CellDataFeatures<sample.DBModels.User, CheckBox> arg0) {
-                sample.DBModels.User user = arg0.getValue();
+            CheckBox checkBox = new CheckBox();
 
-                CheckBox checkBox = new CheckBox();
+            checkBox.selectedProperty().setValue(user.getRights());
 
-                checkBox.selectedProperty().setValue(user.getRights());
+            checkBox.setAlignment(Pos.CENTER);
 
-                checkBox.setAlignment(Pos.CENTER);
+            checkBox.selectedProperty().addListener((ov, old_val, new_val) -> {
 
-                checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                    public void changed(ObservableValue<? extends Boolean> ov,
-                                        Boolean old_val, Boolean new_val) {
-
-                        user.setRights(new_val);
-                        UserService userService = new UserService();
-                        userService.updateUser(user);
-                        initData();
-                        table.refresh();
+                user.setRights(new_val);
+                UserService userService = new UserService();
+                userService.updateUser(user);
+                initData();
+                table.refresh();
 
 
-                    }
-                });
+            });
 
-                return new SimpleObjectProperty<CheckBox>(checkBox);
-
-            }
+            return new SimpleObjectProperty<>(checkBox);
 
         });
 
@@ -218,16 +206,13 @@ public class UsersController {
                         if (person != null) {
                             buttonGraphic.setImage(deleteImage);
                             setGraphic(button);
-                            button.setOnAction(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    actionTaken.setText("Bought " + person.getLogin().toLowerCase() + " for: " +
-                                            person.getPassword() + " " + person.getRights() + " " + person.getIdUser());
-                                    UserService userService = new UserService();
-                                    userService.deleteUser(userService.findUser(person.getIdUser()));
-                                    initData();
-                                    table.refresh();
-                                }
+                            button.setOnAction(event -> {
+                                actionTaken.setText("Bought " + person.getLogin().toLowerCase() + " for: " +
+                                        person.getPassword() + " " + person.getRights() + " " + person.getIdUser());
+                                UserService userService = new UserService();
+                                userService.deleteUser(userService.findUser(person.getIdUser()));
+                                initData();
+                                table.refresh();
                             });
                         } else {
                             //   button.setText("error");
