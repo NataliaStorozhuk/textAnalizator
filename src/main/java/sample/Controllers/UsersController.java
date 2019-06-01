@@ -40,7 +40,6 @@ public class UsersController {
     private final TableView<sample.DBModels.User> table = new TableView<>();
     private final Label label = new Label("Пользователи");
 
-    private final Label actionTaken = new Label();
     private final TextField newLogin = new TextField();
     private final TextField newPassword = new TextField();
     private final CheckBox newRights = new CheckBox();
@@ -72,7 +71,7 @@ public class UsersController {
 
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 10, 10, 10));
-        vbox.getChildren().addAll(label, table, hBox, actionTaken);
+        vbox.getChildren().addAll(label, table, hBox);
         VBox.setVgrow(table, Priority.ALWAYS);
 
         newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
@@ -207,8 +206,6 @@ public class UsersController {
                             buttonGraphic.setImage(deleteImage);
                             setGraphic(button);
                             button.setOnAction(event -> {
-                                actionTaken.setText("Bought " + person.getLogin().toLowerCase() + " for: " +
-                                        person.getPassword() + " " + person.getRights() + " " + person.getIdUser());
                                 UserService userService = new UserService();
                                 userService.deleteUser(userService.findUser(person.getIdUser()));
                                 initData();
