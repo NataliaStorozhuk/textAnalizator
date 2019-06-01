@@ -110,6 +110,7 @@ public class AuthorizationController {
 
     private void openMainPage() throws IOException {
 
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 

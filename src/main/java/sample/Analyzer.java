@@ -68,8 +68,8 @@ public class Analyzer {
     //получить косинусную меру сходства
     public Double getCos(GenreProfile studyViborka, GenreProfile testViborka, Double getSkalar) {
 
-        CompletableFuture<ArrayList<Double>> completableFutureStudy = CompletableFuture.supplyAsync(() -> getDoubleListSkale((ArrayList<Double>) studyViborka.getW()));
-        CompletableFuture<ArrayList<Double>> completableFutureTest = CompletableFuture.supplyAsync(() -> getDoubleListSkale((ArrayList<Double>) testViborka.getW()));
+        CompletableFuture<ArrayList<Double>> completableFutureStudy = CompletableFuture.supplyAsync(() -> getDoubleListSkale((ArrayList<Double>) studyViborka.getWArray()));
+        CompletableFuture<ArrayList<Double>> completableFutureTest = CompletableFuture.supplyAsync(() -> getDoubleListSkale((ArrayList<Double>) testViborka.getWArray()));
 
         ArrayList<Double> WstudyIn2Skale = completableFutureStudy.join();
         ArrayList<Double> WtestIn2Skale = completableFutureTest.join();
@@ -110,12 +110,12 @@ public class Analyzer {
         Double getSkalar = 0.0;
         Integer сountPairs = 0;
 
-        for (int j = 0; j < testViborka.lexemesList.size(); j++) {
+        for (int j = 0; j < testViborka.genreLexemas.size(); j++) {
 
-            for (int i = 0; i < studyViborka.lexemesList.size(); i++) {
+            for (int i = 0; i < studyViborka.genreLexemas.size(); i++) {
 
-                if (studyViborka.lexemesList.get(i).equals(testViborka.lexemesList.get(j))) {
-                    getSkalar += (studyViborka.w.get(i) * testViborka.w.get(j));
+                if (studyViborka.genreLexemas.get(i).equals(testViborka.genreLexemas.get(j))) {
+                    getSkalar += (studyViborka.genreLexemas.get(i).getW() * testViborka.genreLexemas.get(j).getW());
                     сountPairs++;
                     break;
                 }
@@ -151,7 +151,10 @@ public class Analyzer {
         testBookOnly.add(testBook1);
 
         GenreProfile testViborka = StatisticGetter.getBaseFrequencies(testBookOnly);
-        testViborka.w = testBook1.getW();
+        for (int i = 0; i < testBook1.getW().size(); i++) {
+            testViborka.genreLexemas.get(i).setW(testBook1.getW().get(i));
+        }
+
         return testViborka;
     }
 }

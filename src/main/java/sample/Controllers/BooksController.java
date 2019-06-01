@@ -87,7 +87,7 @@ public class BooksController {
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    openGenreInfo();
+                    openGenre();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -271,7 +271,7 @@ public class BooksController {
         session.close();
     }
 
-    private void openGenreInfo() throws IOException {
+    private void openGenre() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
         AnchorPane page = (AnchorPane) loader.load();

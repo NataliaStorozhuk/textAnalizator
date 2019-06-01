@@ -47,7 +47,7 @@ public class TestAnaliseClass {
         books = listFilesFromFolder(folder);
         GenreProfile testViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
-        testViborka.w = books.get(books.size() - 1).getW();
+        testViborka.setW(books.get(books.size() - 1).getW());
 
         ObjectToJsonConverter.fromObjectToJson(desktopPath + "testJsonFile", testViborka);
         GenreProfile test = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileTf*IDF", GenreProfile.class);
@@ -67,7 +67,7 @@ public class TestAnaliseClass {
         GenreProfile testViborka = statisticGetter.getBaseFrequencies(books); //это очень долго бежит
         books.add(createAverageBook(books));
 
-        testViborka.w = books.get(books.size() - 1).getW();
+        testViborka.setW(books.get(books.size() - 1).getW());
 
         ObjectToJsonConverter.fromObjectToJson(desktopPath + "detectivesTFIDF.json", testViborka);
         GenreProfile test = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", GenreProfile.class);
@@ -116,7 +116,7 @@ public class TestAnaliseClass {
     private ArrayList<String> getMaxUseWords(GenreProfile testViborka, BookProfile maxBook) {
         ArrayList<String> maxArrayList = new ArrayList<>();
         for (int i = 0; i < maxBook.tf.size(); i++) {
-            maxArrayList.add(testViborka.lexemesList.get(maxBook.tf.get(i)));
+            maxArrayList.add(testViborka.genreLexemas.get(maxBook.tf.get(i)).getLexema());
         }
         return maxArrayList;
     }
@@ -209,10 +209,10 @@ public class TestAnaliseClass {
         ArrayList<String> detectiveWords = getWordsFromString(detectiveWordsString);
 
 //Это умножение idf на 5
-        for (int i = 0; i < studyViborka.lexemesList.size(); i++) {
+        for (int i = 0; i < studyViborka.genreLexemas.size(); i++) {
             for (int j = 0; j < detectiveWords.size(); j++) {
-                if (studyViborka.lexemesList.get(i).equals(detectiveWords.get(j))) {
-                    studyViborka.w.set(i, studyViborka.w.get(i) / cof);
+                if (studyViborka.genreLexemas.get(i).equals(detectiveWords.get(j))) {
+                    studyViborka.getWArray().set(i, studyViborka.getWArray().get(i) / cof);
                     // studyViborka.w.set(i, 0.0);
                     break;
                 }

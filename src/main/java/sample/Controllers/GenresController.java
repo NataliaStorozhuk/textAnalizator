@@ -285,7 +285,11 @@ public class GenresController {
                                 @Override
                                 public void handle(ActionEvent event) {
 
+
+                                    GenreInfoController controller = new GenreInfoController();
+                                    controller.setGenre(person);
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genreInfo.fxml"));
+                                    loader.setController(controller);
                                     AnchorPane page = null;
                                     try {
                                         page = (AnchorPane) loader.load();
@@ -297,10 +301,7 @@ public class GenresController {
 
                                     Scene scene = new Scene(page);
                                     stage.setScene(scene);
-
-                                    //  Передаём адресата в контроллер.
-                                    GenreInfoController controller = loader.getController();
-                                    controller.setStage(stage, person.getIdGenre());
+                                    controller.setStage(stage);
                                     stage.show();
 
                                 }

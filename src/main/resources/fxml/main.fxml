@@ -37,37 +37,37 @@
                 <Insets bottom="10.0" top="10.0"/>
             </VBox.margin>
         </Button>
-        <ProgressBar prefWidth="+Infinity" progress="0.0">
+        <!--ProgressBar prefWidth="+Infinity" progress="0.0">
             <VBox.margin>
                 <Insets bottom="10.0" top="10.0"/>
             </VBox.margin>
-        </ProgressBar>
+        </ProgressBar-->
 
         <Label alignment="CENTER" text="3 Результаты"/>
         <HBox>
             <Label minWidth="150.0" text="Скалярное произведение: "/>
-            <Label fx:id="skalarResult" text="Label"/>
+            <Label fx:id="skalarResult" text="295.84699"/>
             <opaqueInsets>
                 <Insets bottom="10.0" top="10.0"/>
             </opaqueInsets>
         </HBox>
         <HBox>
             <Label minWidth="150.0" text="Косинусная мера сходства: "/>
-            <Label fx:id="cosResult" text="Label"/>
+            <Label fx:id="cosResult" text="0.2"/>
             <opaqueInsets>
                 <Insets bottom="10.0" top="10.0"/>
             </opaqueInsets>
         </HBox>
         <HBox>
             <Label minWidth="150.0" text="Процент близости: "/>
-            <Label fx:id="persentResult" text="Label"/>
+            <Label fx:id="persentResult" text="20%"/>
             <opaqueInsets>
                 <Insets left="10.0" right="10.0"/>
             </opaqueInsets>
         </HBox>
         <HBox>
             <Label minWidth="150.0" text="Принадлежность к жанру: "/>
-            <Label fx:id="textResult" text="Label"/>
+            <Label fx:id="textResult" text="Данная книга не принадлежит к выбранному жанру."/>
             <opaqueInsets>
                 <Insets left="10.0" right="10.0"/>
             </opaqueInsets>

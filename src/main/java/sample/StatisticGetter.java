@@ -35,7 +35,7 @@ public class StatisticGetter {
 
         CompletableFuture[] futures = Arrays.stream(books.toArray())
                 .map(book -> CompletableFuture.supplyAsync(() -> {
-                    getTf((BookProfile) book, genreProfile.lexemesList);
+                    getTf((BookProfile) book, genreProfile.getLexemasArray());
                     return null;
                 }))
                 .toArray(CompletableFuture[]::new);
@@ -49,27 +49,27 @@ public class StatisticGetter {
 
         //считаем общее число файлов, в которых встречается слово
         ArrayList<Double> documentFrequency = getDf(books);
-        genreProfile.df = documentFrequency;
+        genreProfile.setDf(documentFrequency);
 
         //считаем idf
         if (books.size() != 1)
-            genreProfile.idf = getIdf(documentFrequency, books.size());
+            genreProfile.setIdf(getIdf(documentFrequency, books.size()));
         else {
             for (int j = 0; j < books.get(0).normTF.size(); j++) {
-                genreProfile.idf.add(1.0);
+                genreProfile.genreLexemas.get(j).setIdf(1.0);
             }
         }
 
 
         //получаем tf-idf
         for (BookProfile book : books) {
-            getTfIdf(book, genreProfile.idf);
+            getTfIdf(book, genreProfile.getIdfArray());
         }
 
 
         //получаем w по модной формуле
         for (BookProfile book : books) {
-            getW(book, genreProfile.idf);
+            getW(book, genreProfile.getIdfArray());
             //         getW(book, genreProfile.df);
         }
 
@@ -92,7 +92,7 @@ public class StatisticGetter {
 
         for (int i = 0; i < arrayAfterSort.size(); i++) {
             GenreLexema genreLexema = new GenreLexema(arrayAfterSort.get(i));
-            genreProfile.lexemesList.add(genreLexema);
+            genreProfile.genreLexemas.add(genreLexema);
         }
 
         return genreProfile;
