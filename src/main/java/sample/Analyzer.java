@@ -115,7 +115,7 @@ public class Analyzer {
 
             for (int i = 0; i < studyViborka.genreLexemas.size(); i++) {
 
-                if (studyViborka.genreLexemas.get(i).equals(testViborka.genreLexemas.get(j))) {
+                if (studyViborka.genreLexemas.get(i).getLexema().equals(testViborka.genreLexemas.get(j).getLexema())) {
                     getSkalar += (studyViborka.genreLexemas.get(i).getW() * testViborka.genreLexemas.get(j).getW());
                     сountPairs++;
                     break;

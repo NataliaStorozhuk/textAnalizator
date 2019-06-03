@@ -386,7 +386,6 @@ public class GenresController extends ControllerConstructor {
                                     genreTraining(booksFromBase);
                                 }
 
-                                //TODO Тут запуск дообучения
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setTitle("Окошко с дообучением");
 

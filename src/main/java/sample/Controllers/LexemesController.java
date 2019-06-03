@@ -102,19 +102,10 @@ public class LexemesController extends ControllerConstructor {
     private void initData() {
 
         lexemesData.clear();
-        //TODO дописать нормально тут инициализацию
 
         String filePath = currentGenre.getFilePath();
         GenreProfile genreProfile = (GenreProfile) fromJsonToObject(filePath, GenreProfile.class);
-//        lexemesData = (ObservableList<GenreLexema>) genreProfile.genreLexemas;
         lexemesData = FXCollections.observableArrayList(genreProfile.genreLexemas);
-        /*SessionFactory sessionFactory = new Configuration().configure()
-                .buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        @SuppressWarnings("unchecked")
-        List<Book> Books = session.createQuery("FROM Book book where book.idGenre =:paramGenre").setParameter("paramGenre", currentGenre).list();
-        booksData.addAll(Books);
-        session.close();*/
     }
 
 }

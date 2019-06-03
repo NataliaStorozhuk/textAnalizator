@@ -16,7 +16,6 @@ import sample.Analyzer;
 import sample.DBModels.Genre;
 import sample.DBModels.Info;
 import sample.DTO.GenreProfile;
-import sample.FileConverter.ObjectToJsonConverter;
 import sample.Services.GenreService;
 import sample.Services.InfoService;
 
@@ -24,6 +23,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static sample.FileConverter.ObjectToJsonConverter.fromJsonToObject;
 
 
 public class MainController extends ControllerConstructor {
@@ -66,7 +67,7 @@ public class MainController extends ControllerConstructor {
 
                 //получить файл который будем анализировать
                 //превратить его в вектор
-                GenreProfile testViborka = analyser.getTestViborka(file.getPath());
+                GenreProfile bookProfile = analyser.getTestViborka(file.getPath());
 
                 //получить характеристики из файла жанра
                 //TODO подсунуть путь такой, какой будет на самом деле в файловой системе, из базы
@@ -76,23 +77,28 @@ public class MainController extends ControllerConstructor {
                         currentGenre = genre;
                     }
 
-                GenreProfile studyViborka = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(currentGenre.getFilePath(), GenreProfile.class);
+                String filePath = currentGenre.getFilePath();
+                GenreProfile genreProfile = (GenreProfile) fromJsonToObject(filePath, GenreProfile.class);
 
                 //посчитать всякую инфу полезную
+
+                Info info = InfoService.findInfo(1);
+
                 //TODO вот тут вставить всякую модную обработку, если она, конечно, будет
-                Double skalar = analyser.getSkalar(studyViborka, testViborka);
+                Double skalar = analyser.getSkalar(genreProfile, bookProfile);
                 skalarResult.setText(skalar.toString());
 
-                Double cos = analyser.getCos(studyViborka, testViborka, skalar);
-                cosResult.setText(cos.toString());
+                Double cos = analyser.getCos(genreProfile, bookProfile, skalar);
+                cosResult.setText(cos.toString() + "(min=" + info.getPrecision() + ")");
 
                 //вывести результат
-                Info info = InfoService.findInfo(1);
-                if (info.getCofW() > cos) {
-                    textResult.setText("Поздравляю! Книга " + file.getName() + "НЕ принадлежит к жанру " + currentGenre.getNameGenre());
-                } else
-                    textResult.setText("Книга " + file.getName() + "НЕ принадлежит к жанру " + currentGenre.getNameGenre());
 
+                if (info.getPrecision() < cos) {
+                    textResult.setText("Поздравляю! Книга " + file.getName() + " принадлежит к жанру " + currentGenre.getNameGenre());
+                } else
+                    textResult.setText("Книга " + file.getName() + " НЕ принадлежит к жанру " + currentGenre.getNameGenre());
+
+                persentResult.setText(String.valueOf((cos * 100)));
 
                 //добавить книгу с параметрами в зависимости от результата
                 //создать модный файл в фс с книгой этой
