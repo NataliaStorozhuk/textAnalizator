@@ -34,11 +34,12 @@ public class Book {
     public Book() {
     }
 
-    public Book(String name, String filePath, Boolean indexed, Boolean study) {
+    public Book(String name, String filePath, Boolean indexed, Boolean study, Genre genre) {
         this.name = name;
         this.filePath = filePath;
         this.indexed = indexed;
         this.training = study;
+        this.idGenre = genre;
     }
 
     public String toString() {

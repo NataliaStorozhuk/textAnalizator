@@ -155,7 +155,7 @@ public class TestDBClass {
         //    p1.addBook(new Book("Не обуч, инд 1 ", "Путь к к2иге", true, false));
         //    p1.addBook(new Book("Не обуч, инд 2 ", "Путь к кн1иге", true, false));
         //   p1.addBook(new Book("Обуч, не инд 1", "Путь к 1книге", false, true));
-        p1.addBook(new Book("Оба", "Путь к к3ниге", true, true));
+        p1.addBook(new Book("Оба", "Путь к к3ниге", true, true, p1));
         genreService.updateGenre(p1);
 
     }

@@ -5,19 +5,15 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -30,13 +26,16 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import sample.DBModels.Book;
 import sample.DBModels.Genre;
+import sample.DTO.BookProfile;
+import sample.FileConverter.FileToBookConverter;
+import sample.FileConverter.ObjectToJsonConverter;
 import sample.Services.BookService;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class BooksController {
+public class BooksController extends ControllerConstructor {
 
     private Stage stage;
     private Genre currentGenre;
@@ -46,23 +45,11 @@ public class BooksController {
     private final TableView<Book> table = new TableView<>();
     private final Label label = new Label("Книги");
 
-    private final TextField newBookName = new TextField();
     private final TextField newPath = new TextField();
     private final Button newAdd = new Button();
     private final Button back = new Button();
     private ObservableList<Book> booksData = FXCollections.observableArrayList();
 
-    private final Image deleteImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Cancel-icon.png"
-    );
-
-    private final Image addImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Add-icon.png"
-    );
-
-    private final Image backImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Snapback-icon.png"
-    );
 
     @FXML
     public void initialize() {
@@ -83,7 +70,7 @@ public class BooksController {
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    openGenre();
+                    openGenre(stage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -100,21 +87,14 @@ public class BooksController {
 
     }
 
-
     private HBox getAddBox() {
         final HBox hBox = new HBox();
 
-        final ImageView buttonGraphicAdd = new ImageView();
-        buttonGraphicAdd.setImage(addImage);
-        newAdd.setGraphic(buttonGraphicAdd);
+        newAdd.setGraphic(imageButtonAdd());
+        back.setGraphic(imageButtonBack());
 
-        final ImageView buttonGraphicBack = new ImageView();
-        buttonGraphicBack.setImage(backImage);
-        back.setGraphic(buttonGraphicBack);
-
-        newBookName.setPromptText("Название");
         newPath.setPromptText("Путь к файлу");
-
+        newPath.setMinWidth(500);
         newPath.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
             @Override
@@ -127,16 +107,25 @@ public class BooksController {
 
         newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
+            //сделали файлик
+            FileToBookConverter fileToBookConverter = new FileToBookConverter();
+            BookProfile resultBook = fileToBookConverter.getBookFromFile(new File(newPath.getText()));
+            String resultPath = ("C:\\Users\\Natalia\\Desktop\\analyzer\\books\\" + resultBook.getName() + ".json");
+            ObjectToJsonConverter.fromObjectToJson(resultPath, resultBook);
+
+            //записали в базочку
             BookService bookService = new BookService();
-            //TODO тут в пути не путь исходника из строки, а путь уже к лексемам в фс! Будь добра, добавь обработчик!
-            Book newBook = new Book(newBookName.getText(), newPath.getText(), false, false);
+            Book newBook = new Book(resultBook.name, resultPath, false, false, currentGenre);
             bookService.saveBook(newBook);
+
+            //обновили интерфейсик
             booksData.add(newBook);
             table.refresh();
+            newPath.setText("");
 
         });
 
-        hBox.getChildren().addAll(back, newBookName, newPath, newAdd);
+        hBox.getChildren().addAll(back, newPath, newAdd);
         hBox.setAlignment(Pos.CENTER);
         return hBox;
     }
@@ -144,57 +133,43 @@ public class BooksController {
 
     private void drawTable() {
 
-
         table.setEditable(true);
 
         TableColumn idColumn = new TableColumn("ID книги");
         TableColumn nameColumn = new TableColumn("Название");
-        TableColumn pathColumn = new TableColumn("Путь");
+        nameColumn.setMinWidth(400);
         TableColumn indexedColumn = new TableColumn("Индексирована");
         TableColumn trainingColumn = new TableColumn("Обуч. выб.");
         TableColumn<sample.DBModels.Book, sample.DBModels.Book> deleteColumn = new TableColumn<>("Удалить");
 
-        // устанавливаем тип и значение которое должно хранится в колонке
         idColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("idBook"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("name"));
 
         indexedColumn.setCellValueFactory(new PropertyValueFactory<Book, CheckBox>("indexed"));
-        indexedColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Book, CheckBox>, ObservableValue<CheckBox>>() {
+        indexedColumn.setCellValueFactory((Callback<TableColumn.CellDataFeatures<Book, CheckBox>, ObservableValue<CheckBox>>) arg0 -> {
+            Book book = arg0.getValue();
 
-            @Override
-            public ObservableValue<CheckBox> call(
-                    TableColumn.CellDataFeatures<sample.DBModels.Book, CheckBox> arg0) {
-                Book book = arg0.getValue();
+            CheckBox checkBox = new CheckBox();
 
-                CheckBox checkBox = new CheckBox();
+            checkBox.selectedProperty().setValue(book.getIndexed());
 
-                checkBox.selectedProperty().setValue(book.getIndexed());
+            checkBox.setAlignment(Pos.CENTER);
 
-                checkBox.setAlignment(Pos.CENTER);
-
-                return new SimpleObjectProperty<CheckBox>(checkBox);
-
-            }
+            return new SimpleObjectProperty<CheckBox>(checkBox);
 
         });
 
         trainingColumn.setCellValueFactory(new PropertyValueFactory<Book, CheckBox>("training"));
-        trainingColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Book, CheckBox>, ObservableValue<CheckBox>>() {
+        trainingColumn.setCellValueFactory((Callback<TableColumn.CellDataFeatures<Book, CheckBox>, ObservableValue<CheckBox>>) arg0 -> {
+            Book book = arg0.getValue();
 
-            @Override
-            public ObservableValue<CheckBox> call(
-                    TableColumn.CellDataFeatures<sample.DBModels.Book, CheckBox> arg0) {
-                Book book = arg0.getValue();
+            CheckBox checkBox = new CheckBox();
 
-                CheckBox checkBox = new CheckBox();
+            checkBox.selectedProperty().setValue(book.getTraining());
 
-                checkBox.selectedProperty().setValue(book.getTraining());
+            checkBox.setAlignment(Pos.CENTER);
 
-                checkBox.setAlignment(Pos.CENTER);
-
-                return new SimpleObjectProperty<CheckBox>(checkBox);
-
-            }
+            return new SimpleObjectProperty<CheckBox>(checkBox);
 
         });
 
@@ -203,7 +178,7 @@ public class BooksController {
 
         table.setItems(booksData);
 
-        table.getColumns().addAll(idColumn, nameColumn, pathColumn, indexedColumn, trainingColumn, deleteColumn);
+        table.getColumns().addAll(idColumn, nameColumn, indexedColumn, trainingColumn, deleteColumn);
     }
 
     private void deleteColumnCreator(TableColumn<Book, Book> deleteColumn) {
@@ -236,14 +211,11 @@ public class BooksController {
                         if (person != null) {
                             buttonGraphic.setImage(deleteImage);
                             setGraphic(button);
-                            button.setOnAction(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    BookService BookService = new BookService();
-                                    BookService.deleteBook(BookService.findBook(person.getIdBook()));
-                                    initData();
-                                    table.refresh();
-                                }
+                            button.setOnAction(event -> {
+                                BookService BookService = new BookService();
+                                BookService.deleteBook(BookService.findBook(person.getIdBook()));
+                                initData();
+                                table.refresh();
                             });
                         } else {
                             //   button.setText("error");
@@ -267,23 +239,6 @@ public class BooksController {
         session.close();
     }
 
-    private void openGenre() throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-
-        stage.setTitle("Жанры");
-
-        Scene scene = new Scene(page, 800, 600);
-        stage.setScene(scene);
-
-        // Передаём адресата в контроллер.
-        GenresController controller = loader.getController();
-        controller.setStage(stage);
-        stage.show();
-
-
-    }
 
     public void setGenre(Genre person) {
         currentGenre = person;
