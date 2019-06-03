@@ -127,7 +127,8 @@ public class FileToBookConverter {
         //  BufferedReader stopWordsString = new BufferedReader(new InputStreamReader(in));
         //   String stopWordsString = usingBufferedReader("/stop_words.txt");
         String stopWordsString = usingBufferedReader((FileToBookConverter.class.getResource("/stop_words.txt").getPath()));
-        ArrayList<String> stopWords = getWordsFromString(String.valueOf(stopWordsString));
+        ArrayList<String> stopWords = getWordsFromString(stopWordsString);
+        stopWords.add("");
         newS.removeAll(stopWords);
         return newS;
     }
