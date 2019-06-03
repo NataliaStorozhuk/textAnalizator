@@ -2,8 +2,8 @@ package sample.Services;
 
 import javafx.collections.ObservableList;
 import sample.DAO.UserDao;
-import sample.DBModels.Lexema;
 import sample.DBModels.User;
+import sample.DTO.Lexema;
 
 import java.util.List;
 

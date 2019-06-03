@@ -1,4 +1,4 @@
-package sample.DBModels;
+package sample.DTO;
 
 import lombok.Getter;
 import lombok.Setter;

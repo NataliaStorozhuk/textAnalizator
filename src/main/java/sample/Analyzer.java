@@ -7,6 +7,7 @@ import sample.DTO.GenreProfile;
 import sample.FileConverter.FileToBookConverter;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -156,5 +157,25 @@ public class Analyzer {
         }
 
         return testViborka;
+    }
+
+    public static ArrayList<Double> getAverageW(ArrayList<BookProfile> books) {
+        ArrayList<Double> w = new ArrayList<Double>();
+        for (int j = 0; j < books.get(0).getW().size(); j++) {
+            BigDecimal sum = BigDecimal.ZERO;
+            for (BookProfile book : books) {
+                BigDecimal getW_ = new BigDecimal(book.getW().get(j));
+                sum = sum.add(getW_);
+            }
+
+            BigDecimal zero = new BigDecimal(0);
+            BigDecimal n = new BigDecimal(books.size());
+            if (!sum.equals(zero)) {
+                zero = sum.divide(n, 5, BigDecimal.ROUND_HALF_EVEN);
+            }
+            w.add(zero.doubleValue());
+
+        }
+        return w;
     }
 }

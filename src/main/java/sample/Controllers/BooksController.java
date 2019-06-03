@@ -110,7 +110,15 @@ public class BooksController extends ControllerConstructor {
             //сделали файлик
             FileToBookConverter fileToBookConverter = new FileToBookConverter();
             BookProfile resultBook = fileToBookConverter.getBookFromFile(new File(newPath.getText()));
-            String resultPath = ("C:\\Users\\Natalia\\Desktop\\analyzer\\books\\" + resultBook.getName() + ".json");
+
+
+            File directory = new File(applicationPath + "books\\" + currentGenre.getNameGenre());
+
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            String resultPath = (applicationPath + "books\\" + currentGenre.getNameGenre() + "\\" + resultBook.getName() + ".json");
             ObjectToJsonConverter.fromObjectToJson(resultPath, resultBook);
 
             //записали в базочку
@@ -138,12 +146,14 @@ public class BooksController extends ControllerConstructor {
         TableColumn idColumn = new TableColumn("ID книги");
         TableColumn nameColumn = new TableColumn("Название");
         nameColumn.setMinWidth(400);
+        TableColumn pathColumn = new TableColumn("Путь");
         TableColumn indexedColumn = new TableColumn("Индексирована");
         TableColumn trainingColumn = new TableColumn("Обуч. выб.");
         TableColumn<sample.DBModels.Book, sample.DBModels.Book> deleteColumn = new TableColumn<>("Удалить");
 
         idColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("idBook"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("name"));
+        pathColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("filePath"));
 
         indexedColumn.setCellValueFactory(new PropertyValueFactory<Book, CheckBox>("indexed"));
         indexedColumn.setCellValueFactory((Callback<TableColumn.CellDataFeatures<Book, CheckBox>, ObservableValue<CheckBox>>) arg0 -> {
@@ -178,7 +188,7 @@ public class BooksController extends ControllerConstructor {
 
         table.setItems(booksData);
 
-        table.getColumns().addAll(idColumn, nameColumn, indexedColumn, trainingColumn, deleteColumn);
+        table.getColumns().addAll(idColumn, nameColumn, pathColumn, indexedColumn, trainingColumn, deleteColumn);
     }
 
     private void deleteColumnCreator(TableColumn<Book, Book> deleteColumn) {

@@ -18,7 +18,7 @@ public class FileToBookConverter {
 
 
     /*Из файла прямо в объект типа BookProfile БЕЗ ИМЕН*/
-    public BookProfile getBookFromFile(File file) {
+    public static BookProfile getBookFromFile(File file) {
 
         String s = usingBufferedReader(file.getPath());
         ArrayList<String> names = getNamesFromString(s);
@@ -38,7 +38,7 @@ public class FileToBookConverter {
         return book;
     }
 
-    private ArrayList<String> getWordsWithoutSFWords(ArrayList<String> wordsAfterPorter) {
+    private static ArrayList<String> getWordsWithoutSFWords(ArrayList<String> wordsAfterPorter) {
         ArrayList<String> result = wordsAfterPorter;
 
         String stopWordsString = usingBufferedReader((FileToBookConverter.class.getResource("/stop_lexemas_words.txt").getPath()));
@@ -122,7 +122,7 @@ public class FileToBookConverter {
     }
 
     /*Удаляет стоп слова из списка*/
-    public ArrayList<String> getWordsWithoutStop(ArrayList<String> newS) {
+    public static ArrayList<String> getWordsWithoutStop(ArrayList<String> newS) {
         //    InputStream in = getClass().getResourceAsStream("/stop_words.txt");
         //  BufferedReader stopWordsString = new BufferedReader(new InputStreamReader(in));
         //   String stopWordsString = usingBufferedReader("/stop_words.txt");

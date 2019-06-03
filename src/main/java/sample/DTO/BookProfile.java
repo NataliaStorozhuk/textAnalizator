@@ -23,4 +23,7 @@ public class BookProfile {
     public BookProfile(String averageBook) {
     }
 
+    public BookProfile() {
+    }
+
 }

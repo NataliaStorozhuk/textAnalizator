@@ -29,7 +29,7 @@ public class BookService {
         return BookDao.findById(id);
     }
 
-    public void saveBook(Book Book) {
+    public static void saveBook(Book Book) {
         BookDao.save(Book);
     }
 
@@ -37,7 +37,7 @@ public class BookService {
         BookDao.delete(Book);
     }
 
-    public void updateBook(Book Book) {
+    public static void updateBook(Book Book) {
         BookDao.update(Book);
     }
 

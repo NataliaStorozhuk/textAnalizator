@@ -23,19 +23,27 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import sample.DBModels.Book;
 import sample.DBModels.Genre;
+import sample.DTO.BookProfile;
+import sample.DTO.GenreProfile;
+import sample.FileConverter.ObjectToJsonConverter;
 import sample.Services.BookService;
 import sample.Services.GenreService;
+import sample.StatisticGetter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import static sample.FileConverter.FileLoader.listFilesFromFolder;
+import static sample.FileConverter.ObjectToJsonConverter.fromJsonToObject;
 
 public class GenresController extends ControllerConstructor {
 
     private Stage stage;
 
     private final VBox vbox = new VBox();
-
+    private File folder;
     private final TableView<Genre> table = new TableView<Genre>();
     private final Label label = new Label("Жанры");
 
@@ -67,12 +75,37 @@ public class GenresController extends ControllerConstructor {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                GenreService genreService = new GenreService();
-                Genre newGenre = new Genre(newName.getText(), newPath.getText());
-                genreService.saveGenre(newGenre);
+                String genrePath = (applicationPath + "genres\\");
+                String booksPath = (applicationPath + "books\\" +
+                        newName.getText());
+
+
+                //Создаем жанр в базе сразу
+                Genre newGenre = new Genre(newName.getText(), genrePath + newName.getText() + ".json");
+                GenreService.saveGenre(newGenre);
                 genresData.add(newGenre);
                 table.refresh();
 
+                //Получаем книги и пишем их в фс
+                ArrayList<BookProfile> books = getBookProfiles(booksPath, newGenre, folder);
+
+                //Получаем показатели все по выборке
+                GenreProfile testViborka = StatisticGetter.getBaseFrequencies(books); //это очень долго бежит
+                //   testViborka.setW(Analyzer.getAverageW(books));
+
+                //Пишем в gson
+                ObjectToJsonConverter.fromObjectToJson(applicationPath + "genres\\" +
+                        newName.getText() + ".json", testViborka);
+
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Добавление жанра");
+
+                // Header Text: null
+                alert.setHeaderText(null);
+                alert.setContentText("Файлы добавлены успешно!");
+
+                alert.showAndWait();
             }
         });
 
@@ -91,6 +124,26 @@ public class GenresController extends ControllerConstructor {
 
     }
 
+    private ArrayList<BookProfile> getBookProfiles(String bookPath, Genre newGenre, File folder) {
+        ArrayList<BookProfile> books = listFilesFromFolder(folder);
+
+        File directory = new File(bookPath);
+
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        for (BookProfile book : books) {
+            String resultPath = (bookPath + "\\" + book.getName() + ".json");
+            ObjectToJsonConverter.fromObjectToJson(resultPath, book);
+
+            //записали в базочку
+            Book newBook = new Book(book.name, resultPath, true, true, newGenre);
+            BookService.saveBook(newBook);
+        }
+        return books;
+    }
+
     private HBox getAddGenreBox() {
         final HBox hBox = new HBox();
 
@@ -105,9 +158,11 @@ public class GenresController extends ControllerConstructor {
 
             @Override
             public void handle(MouseEvent event) {
-                final DirectoryChooser fileChooser = new DirectoryChooser();
-                File file = fileChooser.showDialog(stage);
-                newPath.setText(file.getPath());
+                //Работа с окошком
+                final DirectoryChooser directoryChooser = new DirectoryChooser();
+                folder = directoryChooser.showDialog(stage);
+                newPath.setText(folder.getPath());
+
             }
         });
 
@@ -197,7 +252,6 @@ public class GenresController extends ControllerConstructor {
 
         });
     }
-
 
     private void lexemesColumnCreator(TableColumn<Genre, Genre> lexemesColumn) {
         lexemesColumn.setCellValueFactory(features -> new ReadOnlyObjectWrapper(features.getValue()));
@@ -318,13 +372,27 @@ public class GenresController extends ControllerConstructor {
                             setGraphic(button);
                             button.setOnAction(event -> {
 
+                                List<Book> booksFromBase = BookService.getBooksWithGenre(person);
+                                boolean tmp = true;
+                                //Если все книги уже проиндексированы, то зачем ещё раз гонять
+                                for (Book book : booksFromBase) {
+                                    if (book.getIndexed() == false) {
+                                        tmp = false;
+                                        break;
+                                    }
+                                }
+                                if (tmp == false) //если хотя бы одна - нет
+                                {
+                                    genreTraining(booksFromBase);
+                                }
+
                                 //TODO Тут запуск дообучения
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Дообучение завершено успешно!");
+                                alert.setTitle("Окошко с дообучением");
 
                                 // Header Text: null
                                 alert.setHeaderText(null);
-                                alert.setContentText("Окошко с дообучением");
+                                alert.setContentText("Дообучение завершено успешно!");
 
                                 alert.showAndWait();
 
@@ -341,9 +409,23 @@ public class GenresController extends ControllerConstructor {
         });
     }
 
+    private void genreTraining(List<Book> booksFromBase) {
+        ArrayList<BookProfile> booksFromJson = new ArrayList<>();    //взяли книжечки исходные
+        for (Book book : booksFromBase) {
+            booksFromJson.add((BookProfile) fromJsonToObject(book.getFilePath(), BookProfile.class));
+            book.setIndexed(true);
+            BookService.updateBook(book);
+        }
+
+        //Получаем показатели все по выборке
+        GenreProfile testViborka = StatisticGetter.getBaseFrequencies(booksFromJson); //это очень долго бежит
+        //Пишем в gson
+        ObjectToJsonConverter.fromObjectToJson(applicationPath + "genres\\" +
+                newName.getText() + ".json", testViborka);
+    }
+
     private void deleteColumnCreator(TableColumn<Genre, Genre> deleteColumn) {
         deleteColumn.setCellValueFactory(features -> new ReadOnlyObjectWrapper(features.getValue()));
-
 
         deleteColumn.setCellFactory(new Callback<TableColumn<Genre, Genre>, TableCell<Genre, Genre>>() {
             @Override
@@ -373,12 +455,8 @@ public class GenresController extends ControllerConstructor {
                             button.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent event) {
-                                    ObservableList<Genre> genresData1 = FXCollections.observableArrayList();
-                                    for (Genre genre : genresData) {
-                                        if (genre.getIdGenre() != person.getIdGenre())
-                                            genresData1.add(genre);
-                                    }
-                                    genresData = genresData1;
+                                    GenreService.deleteGenre(GenreService.findGenre(person.getIdGenre()));
+                                    initData();
                                     table.refresh();
                                 }
                             });

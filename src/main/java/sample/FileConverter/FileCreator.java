@@ -2,7 +2,7 @@ package sample.FileConverter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import sample.DBModels.Lexema;
+import sample.DTO.Lexema;
 
 import java.io.FileWriter;
 import java.io.IOException;

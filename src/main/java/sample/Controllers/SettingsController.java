@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import sample.DAO.InfoDao;
 import sample.DBModels.Info;
-import sample.DBModels.Lexema;
+import sample.DTO.Lexema;
 import sample.FileConverter.FileCreator;
 import sample.Services.InfoService;
 

@@ -18,8 +18,11 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import sample.DBModels.Genre;
 import sample.DTO.GenreLexema;
+import sample.DTO.GenreProfile;
 
 import java.io.IOException;
+
+import static sample.FileConverter.ObjectToJsonConverter.fromJsonToObject;
 
 public class LexemesController extends ControllerConstructor {
 
@@ -33,7 +36,6 @@ public class LexemesController extends ControllerConstructor {
     private final Button back = new Button();
 
     private ObservableList<GenreLexema> lexemesData = FXCollections.observableArrayList();
-
 
 
     @FXML
@@ -102,10 +104,10 @@ public class LexemesController extends ControllerConstructor {
         lexemesData.clear();
         //TODO дописать нормально тут инициализацию
 
-        lexemesData.add(new GenreLexema("ntcn 1", 0.2));
-        lexemesData.add(new GenreLexema("тест 1", 0.3));
-        lexemesData.add(new GenreLexema("ntcn 2313", 0.444));
-        lexemesData.add(new GenreLexema("ntcn 3", 0.113));
+        String filePath = currentGenre.getFilePath();
+        GenreProfile genreProfile = (GenreProfile) fromJsonToObject(filePath, GenreProfile.class);
+//        lexemesData = (ObservableList<GenreLexema>) genreProfile.genreLexemas;
+        lexemesData = FXCollections.observableArrayList(genreProfile.genreLexemas);
         /*SessionFactory sessionFactory = new Configuration().configure()
                 .buildSessionFactory();
         Session session = sessionFactory.openSession();

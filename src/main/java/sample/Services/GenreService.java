@@ -12,16 +12,16 @@ public class GenreService {
     public GenreService() {
     }
 
-    public Genre findGenre(int id) {
+    public static Genre findGenre(int id) {
         return GenreDao.findById(id);
 
     }
 
-    public void saveGenre(Genre Genre) {
+    public static void saveGenre(Genre Genre) {
         GenreDao.save(Genre);
     }
 
-    public void deleteGenre(Genre Genre) {
+    public static void deleteGenre(Genre Genre) {
         GenreDao.delete(Genre);
     }
 

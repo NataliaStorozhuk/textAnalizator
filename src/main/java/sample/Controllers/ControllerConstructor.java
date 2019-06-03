@@ -12,6 +12,7 @@ import java.io.IOException;
 
 class ControllerConstructor {
 
+    final String applicationPath = "C:\\Users\\Natalia\\Desktop\\analyzer\\";
     final Image booksImage = new Image(
             "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Favorite-icon.png"
     );
@@ -121,7 +122,7 @@ class ControllerConstructor {
         loader.setController(controller);
         AnchorPane page = null;
         try {
-            page = (AnchorPane) loader.load();
+            page = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -13,11 +13,10 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
+import static sample.FileConverter.FileLoader.listFilesFromFolder;
 import static sample.FileConverter.FileToBookConverter.*;
 import static sample.StatisticGetter.*;
 
@@ -65,8 +64,9 @@ public class TestAnaliseClass {
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
 
         GenreProfile testViborka = statisticGetter.getBaseFrequencies(books); //это очень долго бежит
+        //берется среднее по книгам всеем
         books.add(createAverageBook(books));
-
+//туда устанавливается w
         testViborka.setW(books.get(books.size() - 1).getW());
 
         ObjectToJsonConverter.fromObjectToJson(desktopPath + "detectivesTFIDF.json", testViborka);
@@ -244,8 +244,8 @@ public class TestAnaliseClass {
         ArrayList<Double> w = new ArrayList<Double>();
         for (int j = 0; j < books.get(0).getW().size(); j++) {
             BigDecimal sum = BigDecimal.ZERO;
-            for (int i = 0; i < books.size(); i++) {
-                BigDecimal getW_ = new BigDecimal(books.get(i).getW().get(j));
+            for (BookProfile book : books) {
+                BigDecimal getW_ = new BigDecimal(book.getW().get(j));
                 sum = sum.add(getW_);
             }
 
@@ -261,27 +261,6 @@ public class TestAnaliseClass {
         return averageBook;
     }
 
-    //Ходим по папке, собираем файлы в объекты BookProfile
-    public ArrayList<BookProfile> listFilesFromFolder(File folder) {
-
-        ArrayList<BookProfile> books = new ArrayList<>();
-      /*  for (final File fileEntry : folder.listFiles()) {
-
-            System.out.println(fileEntry.getName());
-            books.add(fileToBookConverter.getBookFromFile(fileEntry));
-
-        }*/
-        CompletableFuture[] futures = Arrays.stream(folder.listFiles())
-                .filter(File::isFile)
-                .map(file -> CompletableFuture.supplyAsync(() -> {
-                    books.add(fileToBookConverter.getBookFromFile(file));
-                    return null;
-                }))
-                .toArray(CompletableFuture[]::new);
-
-        CompletableFuture.allOf(futures).join();
-        return books;
-    }
 
     /*Получаем список книг, в котором лексемы каждой книги содержат ТОЛЬКО слова из detectiveWords*/
     //тут надо разобраться, сама не поняла, что сделала

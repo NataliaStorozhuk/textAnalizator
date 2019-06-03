@@ -17,6 +17,9 @@ public class GenreLexema {
         this.w = 0.0;
     }
 
+    public GenreLexema() {
+    }
+
     public GenreLexema(String lexema, Double w) {
         this.lexema = lexema;
         this.idf = 0.0;

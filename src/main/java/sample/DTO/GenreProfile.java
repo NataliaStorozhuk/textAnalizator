@@ -1,14 +1,24 @@
 package sample.DTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.List;
 
+
+@AllArgsConstructor
 @Data
 public class GenreProfile {
 
-    public List<GenreLexema> genreLexemas;
+    public ArrayList<GenreLexema> genreLexemas;
+
+    public GenreProfile(boolean a) {
+        this.genreLexemas = new ArrayList<>();
+    }
+
+    public GenreProfile() {
+    }
+
 
     public ArrayList<Double> getWArray() {
         ArrayList<Double> result = new ArrayList<>();

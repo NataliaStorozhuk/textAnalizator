@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
+import static sample.Analyzer.getAverageW;
+
 public class StatisticGetter {
 
     public static GenreProfile getBaseFrequencies(ArrayList<BookProfile> books) {
@@ -73,6 +75,8 @@ public class StatisticGetter {
             //         getW(book, genreProfile.df);
         }
 
+        genreProfile.setW(getAverageW(books));
+
         System.out.println("Конец");
         return genreProfile;
 
@@ -81,7 +85,7 @@ public class StatisticGetter {
 
     /*Метод делает из списка разных книг отсортированный массив лексем без дубликатов*/
     public static GenreProfile getAllTokensArray(ArrayList<BookProfile> books) {
-        GenreProfile genreProfile = new GenreProfile();
+        GenreProfile genreProfile = new GenreProfile(true);
         ArrayList<String> allArray = new ArrayList<String>();
         for (BookProfile book : books) {
             allArray.addAll(book.getLexems());
