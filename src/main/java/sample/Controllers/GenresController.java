@@ -285,8 +285,7 @@ public class GenresController {
                                 @Override
                                 public void handle(ActionEvent event) {
 
-
-                                    GenreInfoController controller = new GenreInfoController();
+                                    LexemesController controller = new LexemesController();
                                     controller.setGenre(person);
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genreInfo.fxml"));
                                     loader.setController(controller);

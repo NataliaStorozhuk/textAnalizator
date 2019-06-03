@@ -38,9 +38,6 @@ import java.util.List;
 
 public class BooksController {
 
-
-    String desktopPath = System.getProperty("user.home") + "\\" + "Desktop";
-
     private Stage stage;
     private Genre currentGenre;
 
@@ -48,7 +45,6 @@ public class BooksController {
 
     private final TableView<Book> table = new TableView<>();
     private final Label label = new Label("Книги");
-
 
     private final TextField newBookName = new TextField();
     private final TextField newPath = new TextField();
