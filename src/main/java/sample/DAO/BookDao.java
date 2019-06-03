@@ -3,6 +3,7 @@ package sample.DAO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import sample.DBModels.Book;
+import sample.DBModels.Genre;
 import sample.utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
@@ -39,8 +40,29 @@ public class BookDao {
     }
 
     public static List<Book> findAll() {
-        List<Book> Books = (List<Book>) HibernateSessionFactoryUtil.getSessionFactory().openSession().
+        List<Book> books = (List<Book>) HibernateSessionFactoryUtil.getSessionFactory().openSession().
                 createQuery("From Book").list();
-        return Books;
+        return books;
+    }
+
+    public static List<Book> findWithGenre(Genre genre) {
+        List<Book> books = (List<Book>) HibernateSessionFactoryUtil.getSessionFactory().openSession().
+                createQuery("FROM Book book where book.idGenre =:testParam").
+                setParameter("testParam", genre).list();
+        return books;
+    }
+
+    public static List<Book> findIndexedWithGenre(Genre genre) {
+        List<Book> books = (List<Book>) HibernateSessionFactoryUtil.getSessionFactory().openSession().
+                createQuery("FROM Book book where book.indexed=true and book.idGenre =:testParam").
+                setParameter("testParam", genre).list();
+        return books;
+    }
+
+    public static List<Book> findTrainingWithGenre(Genre genre) {
+        List<Book> books = (List<Book>) HibernateSessionFactoryUtil.getSessionFactory().openSession().
+                createQuery("FROM Book book where book.training=true and book.idGenre =:testParam").
+                setParameter("testParam", genre).list();
+        return books;
     }
 }

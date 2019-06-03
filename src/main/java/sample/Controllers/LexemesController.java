@@ -2,9 +2,7 @@ package sample.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,10 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -25,7 +21,7 @@ import sample.DTO.GenreLexema;
 
 import java.io.IOException;
 
-public class LexemesController {
+public class LexemesController extends ControllerConstructor {
 
     private Stage stage;
     private Genre currentGenre;
@@ -36,11 +32,8 @@ public class LexemesController {
     private final Label label = new Label("Лексемы жанра");
     private final Button back = new Button();
 
-    private ObservableList<GenreLexema> genreData = FXCollections.observableArrayList();
+    private ObservableList<GenreLexema> lexemesData = FXCollections.observableArrayList();
 
-    private final Image backImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Snapback-icon.png"
-    );
 
 
     @FXML
@@ -61,17 +54,14 @@ public class LexemesController {
         buttonGraphicBack.setImage(backImage);
         back.setGraphic(buttonGraphicBack);
 
-        back.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        back.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
-                try {
-                    openGenres();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+            try {
+                openGenrePage(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
         });
 
     }
@@ -83,23 +73,6 @@ public class LexemesController {
 
     }
 
-    private void openGenres() throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-
-        stage.setTitle("Жанры");
-
-        Scene scene = new Scene(page, 800, 600);
-        stage.setScene(scene);
-
-        // Передаём адресата в контроллер.
-        GenresController controller = loader.getController();
-        controller.setStage(stage);
-        stage.show();
-
-
-    }
 
     private void drawTable() {
 
@@ -113,7 +86,7 @@ public class LexemesController {
         lexemaColumn.setCellValueFactory(new PropertyValueFactory<GenreLexema, String>("lexema"));
         wColumn.setCellValueFactory(new PropertyValueFactory<GenreLexema, String>("w"));
 
-        table.setItems(genreData);
+        table.setItems(lexemesData);
 
         table.getColumns().addAll(lexemaColumn, wColumn);
     }
@@ -126,13 +99,13 @@ public class LexemesController {
     // подготавливаем данные из базы данных
     private void initData() {
 
-        genreData.clear();
+        lexemesData.clear();
         //TODO дописать нормально тут инициализацию
 
-        genreData.add(new GenreLexema("ntcn 1", 0.2));
-        genreData.add(new GenreLexema("тест 1", 0.3));
-        genreData.add(new GenreLexema("ntcn 2313", 0.444));
-        genreData.add(new GenreLexema("ntcn 3", 0.113));
+        lexemesData.add(new GenreLexema("ntcn 1", 0.2));
+        lexemesData.add(new GenreLexema("тест 1", 0.3));
+        lexemesData.add(new GenreLexema("ntcn 2313", 0.444));
+        lexemesData.add(new GenreLexema("ntcn 3", 0.113));
         /*SessionFactory sessionFactory = new Configuration().configure()
                 .buildSessionFactory();
         Session session = sessionFactory.openSession();

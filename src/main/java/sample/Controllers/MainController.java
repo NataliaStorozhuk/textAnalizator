@@ -4,25 +4,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import sample.Analyzer;
 import sample.DBModels.Genre;
 import sample.DBModels.Info;
 import sample.DTO.GenreProfile;
 import sample.FileConverter.ObjectToJsonConverter;
+import sample.Services.GenreService;
 import sample.Services.InfoService;
 
 import java.io.File;
@@ -31,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainController {
+public class MainController extends ControllerConstructor {
 
     @FXML
     public TextField filePath;
@@ -50,35 +45,19 @@ public class MainController {
     @FXML
     public Button buttonUsers, buttonGenres, buttonSettings;
 
-    File file;
+    private File file;
     private Analyzer analyser = new Analyzer();
-    List<Genre> genres;
-    Genre currentGenre;
-    String desktopPath = System.getProperty("user.home") + "\\" + "Desktop";
-    private String pathFileDetectives = desktopPath + "\\detectives\\";
-    private String pathFileAnother = desktopPath + "\\another\\";
+    private List<Genre> genres;
+    private Genre currentGenre;
 
     private Stage stage;
     @FXML
     private Button testButton;
 
     @FXML
-    private AnchorPane AnchorPane;
-
-    @FXML
     public void initialize() {
 
-        SessionFactory sessionFactory = new Configuration().configure()
-                .buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        genres = session.createQuery("FROM Genre").list();
-        List<String> genresNames = new ArrayList<>();
-        for (Genre genre : genres) genresNames.add(genre.getNameGenre());
-
-        ObservableList<String> observableArrayList =
-                FXCollections.observableArrayList(genresNames);
-        genreCombobox.setItems(observableArrayList);
-
+        comboboxSetItems();
 
         testButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
@@ -135,7 +114,7 @@ public class MainController {
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    openGenres();
+                    openGenrePage(stage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -148,7 +127,7 @@ public class MainController {
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    openSettings();
+                    openSettings(stage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -161,7 +140,7 @@ public class MainController {
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    openUsers();
+                    openUsers(stage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -169,65 +148,20 @@ public class MainController {
             }
         });
 
-
     }
 
+    private void comboboxSetItems() {
+        genres = GenreService.findAllGenres();
+        List<String> genresNames = new ArrayList<>();
+        for (Genre genre : genres) genresNames.add(genre.getNameGenre());
+
+        ObservableList<String> observableArrayList =
+                FXCollections.observableArrayList(genresNames);
+        genreCombobox.setItems(observableArrayList);
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
-    private void openGenres() throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genres.fxml"));
-
-        AnchorPane page = (AnchorPane) loader.load();
-
-        stage.setTitle("Жанры");
-
-        Scene scene = new Scene(page, 800, 600);
-        stage.setScene(scene);
-
-        //  Передаём адресата в контроллер.
-        GenresController controller = loader.getController();
-        controller.setStage(stage);
-        stage.show();
-
-    }
-
-    private void openUsers() throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/users.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-
-        stage.setTitle("Пользователи");
-
-        Scene scene = new Scene(page, 800, 600);
-        stage.setScene(scene);
-
-        //  Передаём адресата в контроллер.
-        UsersController controller = loader.getController();
-        controller.setStage(stage);
-        stage.show();
-
-    }
-
-    private void openSettings() throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/settings.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-
-        stage.setTitle("Настроечки");
-
-        Scene scene = new Scene(page, 800, 600);
-        stage.setScene(scene);
-
-        //  Передаём адресата в контроллер.
-        SettingsController controller = loader.getController();
-        controller.setStage(stage);
-        stage.show();
-
-    }
-
 
 }

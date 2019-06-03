@@ -70,7 +70,7 @@ public class BooksController extends ControllerConstructor {
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    openGenre(stage);
+                    openGenrePage(stage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

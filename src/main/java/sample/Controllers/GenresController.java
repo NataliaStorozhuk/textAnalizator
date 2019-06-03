@@ -2,84 +2,54 @@ package sample.Controllers;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import sample.DBModels.Book;
 import sample.DBModels.Genre;
+import sample.Services.BookService;
 import sample.Services.GenreService;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class GenresController {
+public class GenresController extends ControllerConstructor {
 
     private Stage stage;
 
-    final VBox vbox = new VBox();
+    private final VBox vbox = new VBox();
 
-    final TableView<Genre> table = new TableView<Genre>();
-    final Label label = new Label("Жанры");
+    private final TableView<Genre> table = new TableView<Genre>();
+    private final Label label = new Label("Жанры");
 
 
-    // final Label actionTaken = new Label();
-    final TextField newName = new TextField();
-    final TextField newPath = new TextField();
-    // final CheckBox newRights = new CheckBox();
-    final Button newAdd = new Button();
-    final Button back = new Button();
+    private final TextField newName = new TextField();
+    private final TextField newPath = new TextField();
+    private final Button newAdd = new Button();
+    private final Button back = new Button();
     private ObservableList<Genre> genresData = FXCollections.observableArrayList();
-
-    private final Image deleteImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Cancel-icon.png"
-    );
-
-    private final Image addImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Add-icon.png"
-    );
-
-    private final Image backImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Snapback-icon.png"
-    );
-
-    private final Image booksImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Favorite-icon.png"
-    );
-
-    private final Image lexemsImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Shuffle-On-icon.png"
-    );
-
-    private final Image reloadImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Play-Green-icon.png"
-    );
 
 
     // инициализируем форму данными
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() {
 
 
         label.setFont(new Font("Arial", 20));
@@ -111,7 +81,7 @@ public class GenresController {
             public void handle(MouseEvent mouseEvent) {
 
                 try {
-                    openAdminPage();
+                    openAdminMainPage(stage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -124,16 +94,22 @@ public class GenresController {
     private HBox getAddGenreBox() {
         final HBox hBox = new HBox();
 
-        final ImageView buttonGraphicAdd = new ImageView();
-        buttonGraphicAdd.setImage(addImage);
-        newAdd.setGraphic(buttonGraphicAdd);
-
-        final ImageView buttonGraphicBack = new ImageView();
-        buttonGraphicBack.setImage(backImage);
-        back.setGraphic(buttonGraphicBack);
+        newAdd.setGraphic(imageButtonAdd());
+        back.setGraphic(imageButtonBack());
 
         newName.setPromptText("Название");
         newPath.setPromptText("Путь к обучающей выборке");
+        newPath.setMinWidth(400);
+
+        newPath.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                final DirectoryChooser fileChooser = new DirectoryChooser();
+                File file = fileChooser.showDialog(stage);
+                newPath.setText(file.getPath());
+            }
+        });
 
         hBox.getChildren().addAll(back, newName, newPath, newAdd);
         hBox.setAlignment(Pos.CENTER);
@@ -175,78 +151,49 @@ public class GenresController {
     }
 
     private void studyColumnCreator(TableColumn<Genre, Label> studyColumn) {
-        studyColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<sample.DBModels.Genre, Label>, ObservableValue<Label>>() {
+        studyColumn.setCellValueFactory(arg0 -> {
+            Genre genre = arg0.getValue();
 
-            @Override
-            public ObservableValue<Label> call(
-                    TableColumn.CellDataFeatures<sample.DBModels.Genre, Label> arg0) {
-                sample.DBModels.Genre genre = arg0.getValue();
+            Label label = new Label();
 
-                Label label = new Label();
+            List<Book> books = BookService.getTrainingBooksWithGenre(genre);
+            label.setText(String.valueOf(books.size()));
 
-                SessionFactory sessionFactory = new Configuration().configure()
-                        .buildSessionFactory();
-                Session session = sessionFactory.openSession();
-                List<Book> books = session.createQuery("FROM Book book where book.training=true and book.idGenre =:testParam").setParameter("testParam", genre).list();
-                label.setText(String.valueOf(books.size()));
+            label.setAlignment(Pos.CENTER);
 
-                label.setAlignment(Pos.CENTER);
-
-                return new SimpleObjectProperty<Label>(label);
-
-            }
+            return new SimpleObjectProperty<Label>(label);
 
         });
     }
 
     private void allBooksColumnCreator(TableColumn<Genre, Label> allColumn) {
-        allColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<sample.DBModels.Genre, Label>, ObservableValue<Label>>() {
+        allColumn.setCellValueFactory(arg0 -> {
+            Genre genre = arg0.getValue();
 
-            @Override
-            public ObservableValue<Label> call(
-                    TableColumn.CellDataFeatures<sample.DBModels.Genre, Label> arg0) {
-                sample.DBModels.Genre genre = arg0.getValue();
+            Label label = new Label();
 
-                Label label = new Label();
+            List<Book> books = BookService.getBooksWithGenre(genre);
 
-                SessionFactory sessionFactory = new Configuration().configure()
-                        .buildSessionFactory();
-                Session session = sessionFactory.openSession();
-                List<Book> books = session.createQuery("FROM Book book where book.idGenre =:testParam").setParameter("testParam", genre).list();
-                label.setText(String.valueOf(books.size()));
+            label.setText(String.valueOf(books.size()));
 
-                label.setAlignment(Pos.CENTER);
+            label.setAlignment(Pos.CENTER);
 
-                return new SimpleObjectProperty<Label>(label);
-
-            }
+            return new SimpleObjectProperty<>(label);
 
         });
     }
 
     private void indexedColumnCreator(TableColumn<Genre, Label> indexedColumn) {
-        indexedColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<sample.DBModels.Genre, Label>, ObservableValue<Label>>() {
+        indexedColumn.setCellValueFactory(arg0 -> {
+            Genre genre = arg0.getValue();
 
-            @Override
-            public ObservableValue<Label> call(
-                    TableColumn.CellDataFeatures<sample.DBModels.Genre, Label> arg0) {
-                sample.DBModels.Genre genre = arg0.getValue();
+            Label label = new Label();
+            List<Book> books = BookService.getIndexedBooksWithGenre(genre);
+            label.setText(String.valueOf(books.size()));
 
-                Label label = new Label();
+            label.setAlignment(Pos.CENTER);
 
-                SessionFactory sessionFactory = new Configuration().configure()
-                        .buildSessionFactory();
-                Session session = sessionFactory.openSession();
-                List<Book> books = session.createQuery("FROM Book book where book.indexed=true and book.idGenre =:testParam").setParameter("testParam", genre).list();
-                label.setText(String.valueOf(books.size()));
-
-                //     label.selectedProperty().setValue(user.getRights());
-
-                label.setAlignment(Pos.CENTER);
-
-                return new SimpleObjectProperty<Label>(label);
-
-            }
+            return new SimpleObjectProperty<Label>(label);
 
         });
     }
@@ -273,7 +220,6 @@ public class GenresController {
                     @Override
                     public void updateItem(final Genre person, boolean empty) {
                         openLexemes(person, empty);
-                        //table.setItems(genresData);
                     }
 
                     private void openLexemes(Genre person, boolean empty) {
@@ -285,23 +231,7 @@ public class GenresController {
                                 @Override
                                 public void handle(ActionEvent event) {
 
-                                    LexemesController controller = new LexemesController();
-                                    controller.setGenre(person);
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/genreInfo.fxml"));
-                                    loader.setController(controller);
-                                    AnchorPane page = null;
-                                    try {
-                                        page = (AnchorPane) loader.load();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    stage.setTitle("Лексемы жанра");
-
-                                    Scene scene = new Scene(page, 800, 600);
-                                    stage.setScene(scene);
-                                    controller.setStage(stage);
-                                    stage.show();
+                                    openLexemesPage(person, stage);
 
                                 }
                             });
@@ -345,33 +275,7 @@ public class GenresController {
                             button.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent event) {
-
-
-                                    //FXMLLoader loader = new FXMLLoader("/sample/EditBook.fxml");
-                                    //   Parent root = loader.load();
-                                   /* Main.primaryStage.setScene(new Scene(root));
-                                    ControllerClass controllerEditBook = loader.getController(); //получаем контроллер для второй формы
-                                    controllerEditBook.someMethod(someParameters); // передаем необходимые параметры
-                                    Main.primaryStage.show();
-*/
-                                    //  Передаём адресата в контроллер.
-                                    BooksController controller = new BooksController();
-                                    controller.setGenre(person);
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/books.fxml"));
-                                    loader.setController(controller);
-                                    AnchorPane page = null;
-                                    try {
-                                        page = (AnchorPane) loader.load();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    stage.setTitle("Книги жанра");
-
-                                    Scene scene = new Scene(page, 800, 600);
-                                    stage.setScene(scene);
-                                    controller.setStage(stage);
-                                    stage.show();
+                                    openBookPage(person, stage);
 
                                 }
                             });
@@ -412,25 +316,21 @@ public class GenresController {
                         if (person != null) {
                             buttonGraphic.setImage(reloadImage);
                             setGraphic(button);
-                            button.setOnAction(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
+                            button.setOnAction(event -> {
 
+                                //TODO Тут запуск дообучения
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Дообучение завершено успешно!");
 
-                                    //TODO Тут запуск дообучения
-                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                    alert.setTitle("Дообучение завершено успешно!");
+                                // Header Text: null
+                                alert.setHeaderText(null);
+                                alert.setContentText("Окошко с дообучением");
 
-                                    // Header Text: null
-                                    alert.setHeaderText(null);
-                                    alert.setContentText("Окошко с дообучением");
+                                alert.showAndWait();
 
-                                    alert.showAndWait();
+                                initData();
+                                table.refresh();
 
-                                    initData();
-                                    table.refresh();
-
-                                }
                             });
                         } else {
                             //   button.setText("error");
@@ -491,41 +391,16 @@ public class GenresController {
         });
     }
 
-    // подготавливаем данные для таблицы
-    // вы можете получать их с базы данных
     private void initData() {
         genresData.clear();
-        SessionFactory sessionFactory = new Configuration().configure()
-                .buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        @SuppressWarnings("unchecked")
-        List<Genre> genres = session.createQuery("FROM Genre").list();
+        List<Genre> genres = GenreService.findAllGenres();
         genresData.addAll(genres);
-        session.close();
     }
 
-    public void setStage(Stage stage) {
+    void setStage(Stage stage) {
 
         this.stage = stage;
         stage.setScene(new Scene(vbox));
-
-    }
-
-    private void openAdminPage() throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-
-        stage.setTitle("Анализ текста");
-
-        Scene scene = new Scene(page, 800, 600);
-        stage.setScene(scene);
-
-        // Передаём адресата в контроллер.
-        MainController controller = loader.getController();
-        controller.setStage(stage);
-        controller.adminSettings.setVisible(true);
-        stage.show();
 
     }
 

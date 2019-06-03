@@ -18,23 +18,23 @@ public class UserService {
 
     }
 
-    public User findUser(int id) {
+    public static User findUser(int id) {
         return UserDao.findById(id);
     }
 
-    public void saveUser(User User) {
+    public static void saveUser(User User) {
         UserDao.save(User);
     }
 
-    public void deleteUser(User User) {
+    public static void deleteUser(User User) {
         UserDao.delete(User);
     }
 
-    public void updateUser(User User) {
+    public static void updateUser(User User) {
         UserDao.update(User);
     }
 
-    public List<User> findAllUsers() {
+    public static List<User> findAllUsers() {
         return UserDao.findAll();
     }
 }

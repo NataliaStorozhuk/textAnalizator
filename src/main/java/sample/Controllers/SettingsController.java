@@ -4,16 +4,13 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -28,7 +25,7 @@ import sample.Services.InfoService;
 
 import java.io.IOException;
 
-public class SettingsController {
+public class SettingsController extends ControllerConstructor {
 
     private Stage stage;
 
@@ -38,7 +35,7 @@ public class SettingsController {
 
     private final Label label = new Label("Настройки");
 
-    Info info;
+    private Info info;
 
     private final TextField newWord = new TextField();
     private final Button newAdd = new Button();
@@ -53,23 +50,6 @@ public class SettingsController {
     private final Label textPrecision = new Label();
     private final TextField precision = new TextField();
     private final Button savePrecision = new Button();
-
-    private final Image deleteImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Cancel-icon.png"
-    );
-
-    private final Image addImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Add-icon.png"
-    );
-
-    private final Image backImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Snapback-icon.png"
-    );
-
-    private final Image OkImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Valid-Green-icon.png"
-    );
-
 
     @FXML
     public void initialize() {
@@ -93,7 +73,7 @@ public class SettingsController {
 
             try {
                 FileCreator.updateFileStopWords(wordsData, info.getStopWordsPath());
-                openAdminPage();
+                openAdminMainPage(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -103,12 +83,10 @@ public class SettingsController {
     }
 
     private HBox getAddBox() {
+
         final HBox hBox = new HBox();
 
-        final ImageView buttonGraphicAdd = new ImageView();
-        buttonGraphicAdd.setImage(addImage);
-        newAdd.setGraphic(buttonGraphicAdd);
-
+        newAdd.setGraphic(imageButtonAdd());
         newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
             wordsData.add(new Lexema(newWord.getText()));
@@ -116,9 +94,7 @@ public class SettingsController {
 
         });
 
-        final ImageView buttonGraphicBack = new ImageView();
-        buttonGraphicBack.setImage(backImage);
-        back.setGraphic(buttonGraphicBack);
+        back.setGraphic(imageButtonBack());
 
         newWord.setPromptText("Стоп-слово");
         hBox.getChildren().addAll(back, newWord, newAdd);
@@ -134,9 +110,7 @@ public class SettingsController {
         w.setText(info.getCofW().toString());
         w.setEditable(true);
 
-        final ImageView buttonGraphicOk = new ImageView();
-        buttonGraphicOk.setImage(OkImage);
-        saveW.setGraphic(buttonGraphicOk);
+        saveW.setGraphic(imageButtonOk());
 
         saveW.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             info.setCofW(Double.valueOf(w.getText()));
@@ -154,16 +128,13 @@ public class SettingsController {
 
         textPrecision.setText("Граничная мера");
 
-        final ImageView buttonGraphicOk = new ImageView();
-        buttonGraphicOk.setImage(OkImage);
-        savePrecision.setGraphic(buttonGraphicOk);
+        savePrecision.setGraphic(imageButtonOk());
 
         savePrecision.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             if ((Double.valueOf(precision.getText()) > 1.0) || (Double.valueOf(precision.getText()) < 0.0)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Сохранение граничной меры!");
 
-                // Header Text: null
                 alert.setHeaderText(null);
                 alert.setContentText("Граничная мера должна находиться в диапазоне 0.0-1.0");
 
@@ -186,21 +157,6 @@ public class SettingsController {
     public void setStage(Stage stage) {
         this.stage = stage;
         stage.setScene(new Scene(vbox));
-    }
-
-    private void openAdminPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-        AnchorPane page = (javafx.scene.layout.AnchorPane) loader.load();
-
-        stage.setTitle("Анализ текста");
-
-        Scene scene = new Scene(page, 800, 600);
-        stage.setScene(scene);
-
-        // Передаём адресата в контроллер.
-        MainController controller = loader.getController();
-        controller.setStage(stage);
-        stage.show();
     }
 
     private void drawTable() {

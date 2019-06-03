@@ -6,32 +6,26 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import sample.DBModels.User;
 import sample.Services.UserService;
 
 import java.io.IOException;
 import java.util.List;
 
-public class UsersController {
+public class UsersController extends ControllerConstructor {
 
     private Stage stage;
 
@@ -46,19 +40,6 @@ public class UsersController {
     private final Button newAdd = new Button();
     private final Button back = new Button();
     private ObservableList<sample.DBModels.User> usersData = FXCollections.observableArrayList();
-
-    private final Image deleteImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Cancel-icon.png"
-    );
-
-    private final Image addImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Add-icon.png"
-    );
-
-    private final Image backImage = new Image(
-            "http://icons.iconarchive.com/icons/itweek/knob-toolbar/32/Knob-Snapback-icon.png"
-    );
-
 
     @FXML
     public void initialize() {
@@ -76,9 +57,8 @@ public class UsersController {
 
         newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
-            UserService userService = new UserService();
             User newUser = new User(newLogin.getText(), String.valueOf((newPassword.getText()).hashCode()), newRights.isSelected());
-            userService.saveUser(newUser);
+            UserService.saveUser(newUser);
             usersData.add(newUser);
             table.refresh();
 
@@ -87,7 +67,7 @@ public class UsersController {
         back.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
             try {
-                openAdminPage();
+                openAdminMainPage(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,18 +79,12 @@ public class UsersController {
     private HBox getAddBox() {
         final HBox hBox = new HBox();
 
-        final ImageView buttonGraphicAdd = new ImageView();
-        buttonGraphicAdd.setImage(addImage);
-        newAdd.setGraphic(buttonGraphicAdd);
-
-        final ImageView buttonGraphicBack = new ImageView();
-        buttonGraphicBack.setImage(backImage);
-        back.setGraphic(buttonGraphicBack);
+        newAdd.setGraphic(imageButtonAdd());
+        back.setGraphic(imageButtonBack());
 
         newPassword.setPromptText("Пароль");
         newLogin.setPromptText("Логин");
         newRights.setText("Права");
-
 
         hBox.getChildren().addAll(back, newLogin, newPassword, newRights, newAdd);
         hBox.setAlignment(Pos.CENTER);
@@ -122,24 +96,7 @@ public class UsersController {
         stage.setScene(new Scene(vbox));
     }
 
-    private void openAdminPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-        AnchorPane page = loader.load();
-
-        stage.setTitle("Анализ текста");
-
-        Scene scene = new Scene(page, 800, 600);
-        stage.setScene(scene);
-
-        // Передаём адресата в контроллер.
-        MainController controller = loader.getController();
-        controller.setStage(stage);
-        controller.adminSettings.setVisible(true);
-        stage.show();
-    }
-
     private void drawTable() {
-
 
         table.setEditable(true);
 
@@ -164,8 +121,7 @@ public class UsersController {
             checkBox.selectedProperty().addListener((ov, old_val, new_val) -> {
 
                 user.setRights(new_val);
-                UserService userService = new UserService();
-                userService.updateUser(user);
+                UserService.updateUser(user);
                 initData();
                 table.refresh();
 
@@ -206,8 +162,7 @@ public class UsersController {
                             buttonGraphic.setImage(deleteImage);
                             setGraphic(button);
                             button.setOnAction(event -> {
-                                UserService userService = new UserService();
-                                userService.deleteUser(userService.findUser(person.getIdUser()));
+                                UserService.deleteUser(UserService.findUser(person.getIdUser()));
                                 initData();
                                 table.refresh();
                             });
@@ -225,17 +180,10 @@ public class UsersController {
         table.getColumns().addAll(idColumn, loginColumn, rightsColumn, deleteColumn);
     }
 
-
     // подготавливаем данные из базы данных
     private void initData() {
-
         usersData.clear();
-        SessionFactory sessionFactory = new Configuration().configure()
-                .buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        @SuppressWarnings("unchecked")
-        List<sample.DBModels.User> users = session.createQuery("FROM User").list();
+        List<sample.DBModels.User> users = UserService.findAllUsers();
         usersData.addAll(users);
-        session.close();
     }
 }
