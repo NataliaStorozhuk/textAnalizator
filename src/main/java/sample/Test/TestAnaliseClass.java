@@ -340,6 +340,7 @@ public class TestAnaliseClass {
 
     @Test
     public void testStopWords() {
-        String stopWordsString = usingBufferedReader(FileToBookConverter.class.getResource("/stop_words.txt").getPath());
+        String stopWordsString = usingBufferedReader("C:\\Users\\Natalia\\Desktop\\analyzer\\stop_words.txt");
+        System.out.println(stopWordsString);
     }
 }

@@ -22,7 +22,7 @@ public class InfoService {
         InfoDao.delete(Info);
     }
 
-    public void updateInfo(Info Info) {
+    public static void updateInfo(Info Info) {
         InfoDao.update(Info);
     }
 

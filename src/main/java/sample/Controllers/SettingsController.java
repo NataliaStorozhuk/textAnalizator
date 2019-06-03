@@ -23,6 +23,8 @@ import javafx.util.Callback;
 import sample.DAO.InfoDao;
 import sample.DBModels.Info;
 import sample.DBModels.Lexema;
+import sample.FileConverter.FileCreator;
+import sample.Services.InfoService;
 
 import java.io.IOException;
 
@@ -90,6 +92,7 @@ public class SettingsController {
         back.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
             try {
+                FileCreator.updateFileStopWords(wordsData, info.getStopWordsPath());
                 openAdminPage();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -126,7 +129,10 @@ public class SettingsController {
     private HBox getWBox() {
         final HBox hBox = new HBox();
 
-        textW.setText("Коэффициент W");
+        textW.setText("Коэффициент W ");
+
+        w.setText(info.getCofW().toString());
+        w.setEditable(true);
 
         final ImageView buttonGraphicOk = new ImageView();
         buttonGraphicOk.setImage(OkImage);
@@ -134,11 +140,10 @@ public class SettingsController {
 
         saveW.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             info.setCofW(Double.valueOf(w.getText()));
+            InfoService.updateInfo(info);
         });
 
 
-        w.setText(info.getCofW().toString());
-        w.setEditable(true);
         hBox.getChildren().addAll(textW, w, saveW);
         hBox.setAlignment(Pos.CENTER);
         return hBox;
@@ -147,20 +152,32 @@ public class SettingsController {
     private HBox getPrecisionBox() {
         final HBox hBox = new HBox();
 
-        textW.setText("Граничная мера");
+        textPrecision.setText("Граничная мера");
 
         final ImageView buttonGraphicOk = new ImageView();
         buttonGraphicOk.setImage(OkImage);
         savePrecision.setGraphic(buttonGraphicOk);
 
         savePrecision.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            info.setCofW(Double.valueOf(w.getText()));
+            if ((Double.valueOf(precision.getText()) > 1.0) || (Double.valueOf(precision.getText()) < 0.0)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Сохранение граничной меры!");
+
+                // Header Text: null
+                alert.setHeaderText(null);
+                alert.setContentText("Граничная мера должна находиться в диапазоне 0.0-1.0");
+
+                alert.showAndWait();
+            } else {
+                info.setPrecision(Double.valueOf(precision.getText()));
+                InfoService.updateInfo(info);
+            }
         });
 
 
-        precision.setText(info.getCofW().toString());
+        precision.setText(info.getPrecision().toString());
         precision.setEditable(true);
-        hBox.getChildren().addAll(textW, precision, savePrecision);
+        hBox.getChildren().addAll(textPrecision, precision, savePrecision);
         hBox.setAlignment(Pos.CENTER);
         return hBox;
     }
@@ -248,11 +265,6 @@ public class SettingsController {
     private void initData() {
 
         info = InfoDao.findById(1);
-        /*SessionFactory sessionFactory = new Configuration().configure()
-                .buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        @SuppressWarnings("unchecked")
-        List<Info> info = session.createQuery("FROM Info").list();
-        session.close(); */
+        wordsData = FileCreator.getFromFileStopWords(info.getStopWordsPath());
     }
 }

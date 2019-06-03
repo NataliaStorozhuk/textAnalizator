@@ -1,6 +1,8 @@
 package sample.Services;
 
+import javafx.collections.ObservableList;
 import sample.DAO.UserDao;
+import sample.DBModels.Lexema;
 import sample.DBModels.User;
 
 import java.util.List;
@@ -10,6 +12,10 @@ public class UserService {
     private UserDao userDao = new UserDao();
 
     public UserService() {
+    }
+
+    public static void saveChanges(ObservableList<Lexema> wordsData, String stopWordsPath) {
+
     }
 
     public User findUser(int id) {

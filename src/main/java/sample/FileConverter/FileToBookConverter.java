@@ -41,7 +41,7 @@ public class FileToBookConverter {
     private ArrayList<String> getWordsWithoutSFWords(ArrayList<String> wordsAfterPorter) {
         ArrayList<String> result = wordsAfterPorter;
 
-        String stopWordsString = usingBufferedReader((FileToBookConverter.class.getResource("/same_frequenses_words.txt").getPath()));
+        String stopWordsString = usingBufferedReader((FileToBookConverter.class.getResource("/stop_lexemas_words.txt").getPath()));
         ArrayList<String> stopWords = getWordsFromString(stopWordsString);
 
         result.removeAll(stopWords);

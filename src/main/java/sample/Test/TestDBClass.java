@@ -87,8 +87,8 @@ public class TestDBClass {
         SessionFactory sessionFactory = new Configuration().configure()
                 .buildSessionFactory();
         try {
-            persistInfo(sessionFactory);
-            load(sessionFactory);
+            //  persistInfo(sessionFactory);
+            loadInfo(sessionFactory);
         } finally {
             sessionFactory.close();
         }
@@ -105,6 +105,13 @@ public class TestDBClass {
         } finally {
             sessionFactory.close();
         }
+    }
+
+    //TODO ЭТО ОБЯЗАТЕЛЬНО ПОТЕСТИТЬ и dao и сервисы можно упростить и тогда и в мейне это убрать
+    //Все норм, работает
+    private static void loadInfo(SessionFactory sessionFactory) {
+        Info info = InfoService.findInfo(1);
+        System.out.println(info.toString());
     }
 
     //TODO ЭТО ОБЯЗАТЕЛЬНО ПОТЕСТИТЬ и dao и сервисы можно упростить и тогда и в мейне это убрать
