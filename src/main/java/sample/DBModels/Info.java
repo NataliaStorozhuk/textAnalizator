@@ -24,6 +24,9 @@ public class Info {
     @Column(name = "precision")
     private Double precision;
 
+    @Column(name = "countMarkers")
+    private Integer countMarkers;
+
     @Column(name = "cofW")
     private Double cofW;
 
@@ -32,10 +35,11 @@ public class Info {
     public Info() {
     }
 
-    public Info(String stopWordsPath, String stopLexemesPath, Double precision, Double cofW) {
+    public Info(String stopWordsPath, String stopLexemesPath, Double precision, Double cofW, Integer countMarkers) {
         this.stopWordsPath = stopWordsPath;
         this.stopLexemesPath = stopLexemesPath;
         this.precision = precision;
+        this.countMarkers = countMarkers;
         this.cofW = cofW;
     }
 
@@ -49,4 +53,5 @@ public class Info {
                 ", cofW=" + cofW +
                 '}';
     }
+
 }

@@ -195,7 +195,7 @@ public class TestDBClass {
     private static void persistInfo(SessionFactory sessionFactory) {
 
         InfoService infoService = new InfoService();
-        Info info = new Info("путь к стоп-словам", "путь к стоп-лексемам", 0.7, 1000.0);
+        Info info = new Info("путь к стоп-словам", "путь к стоп-лексемам", 0.7, 1000.0, 300);
         infoService.saveInfo(info);
     }
 

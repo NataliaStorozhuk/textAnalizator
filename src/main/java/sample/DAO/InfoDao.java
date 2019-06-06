@@ -3,7 +3,7 @@ package sample.DAO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import sample.DBModels.Info;
-import sample.utils.HibernateSessionFactoryUtil;
+import sample.HibernateSessionFactoryUtil;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package sample.Controllers;
 
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -37,17 +36,14 @@ public class AuthorizationController {
     @FXML
     public void initialize() {
 
-        enter.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        enter.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
-                try {
-                    authorisation();
-                } catch (IOException | NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
-
+            try {
+                authorisation();
+            } catch (IOException | NoSuchAlgorithmException e) {
+                e.printStackTrace();
             }
+
         });
 
 

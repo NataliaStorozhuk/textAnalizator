@@ -57,7 +57,8 @@ public class UsersController extends ControllerConstructor {
 
         newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
-            User newUser = new User(newLogin.getText(), String.valueOf((newPassword.getText()).hashCode()), newRights.isSelected());
+            User newUser = new User(newLogin.getText(), String.valueOf((newPassword.getText()).hashCode()),
+                    newRights.isSelected());
             UserService.saveUser(newUser);
             usersData.add(newUser);
             table.refresh();

@@ -23,20 +23,15 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import sample.DBModels.Book;
 import sample.DBModels.Genre;
-import sample.DTO.BookProfile;
-import sample.DTO.GenreProfile;
-import sample.FileConverter.ObjectToJsonConverter;
 import sample.Services.BookService;
 import sample.Services.GenreService;
-import sample.StatisticGetter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import static sample.FileConverter.FileLoader.listFilesFromFolder;
-import static sample.FileConverter.ObjectToJsonConverter.fromJsonToObject;
+import static sample.FileConverter.JsonFileCreator.addNewGenreJsonAndDB;
+import static sample.FileConverter.JsonFileCreator.genreTraining;
 
 public class GenresController extends ControllerConstructor {
 
@@ -59,7 +54,6 @@ public class GenresController extends ControllerConstructor {
     @FXML
     private void initialize() {
 
-
         label.setFont(new Font("Arial", 20));
         initData();
         drawTable();
@@ -71,77 +65,31 @@ public class GenresController extends ControllerConstructor {
         vbox.getChildren().addAll(label, table, hBox);
         VBox.setVgrow(table, Priority.ALWAYS);
 
-        newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        newAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
-                String genrePath = (applicationPath + "genres\\");
-                String booksPath = (applicationPath + "books\\" +
-                        newName.getText());
+            Genre newGenre = addNewGenreJsonAndDB(newName.getText(), folder, applicationPath);
+            genresData.add(newGenre);
+            table.refresh();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Добавление жанра");
 
+            // Header Text: null
+            alert.setHeaderText(null);
+            alert.setContentText("Файлы добавлены успешно!");
 
-                //Создаем жанр в базе сразу
-                Genre newGenre = new Genre(newName.getText(), genrePath + newName.getText() + ".json");
-                GenreService.saveGenre(newGenre);
-                genresData.add(newGenre);
-                table.refresh();
-
-                //Получаем книги и пишем их в фс
-                ArrayList<BookProfile> books = getBookProfiles(booksPath, newGenre, folder);
-
-                //Получаем показатели все по выборке
-                GenreProfile testViborka = StatisticGetter.getBaseFrequencies(books); //это очень долго бежит
-                //   testViborka.setW(Analyzer.getAverageW(books));
-
-                //Пишем в gson
-                ObjectToJsonConverter.fromObjectToJson(applicationPath + "genres\\" +
-                        newName.getText() + ".json", testViborka);
-
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Добавление жанра");
-
-                // Header Text: null
-                alert.setHeaderText(null);
-                alert.setContentText("Файлы добавлены успешно!");
-
-                alert.showAndWait();
-            }
+            alert.showAndWait();
         });
 
-        back.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        back.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
-                try {
-                    openAdminMainPage(stage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+            try {
+                openAdminMainPage(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
         });
 
-    }
-
-    private ArrayList<BookProfile> getBookProfiles(String bookPath, Genre newGenre, File folder) {
-        ArrayList<BookProfile> books = listFilesFromFolder(folder);
-
-        File directory = new File(bookPath);
-
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-
-        for (BookProfile book : books) {
-            String resultPath = (bookPath + "\\" + book.getName() + ".json");
-            ObjectToJsonConverter.fromObjectToJson(resultPath, book);
-
-            //записали в базочку
-            Book newBook = new Book(book.name, resultPath, true, true, newGenre);
-            BookService.saveBook(newBook);
-        }
-        return books;
     }
 
     private HBox getAddGenreBox() {
@@ -256,7 +204,6 @@ public class GenresController extends ControllerConstructor {
     private void lexemesColumnCreator(TableColumn<Genre, Genre> lexemesColumn) {
         lexemesColumn.setCellValueFactory(features -> new ReadOnlyObjectWrapper(features.getValue()));
 
-
         lexemesColumn.setCellFactory(new Callback<TableColumn<Genre, Genre>, TableCell<Genre, Genre>>() {
             @Override
             public TableCell<Genre, Genre> call(TableColumn<Genre, Genre> lexemesColumn) {
@@ -281,14 +228,7 @@ public class GenresController extends ControllerConstructor {
                         if (person != null) {
                             buttonGraphic.setImage(lexemsImage);
                             setGraphic(button);
-                            button.setOnAction(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
-
-                                    openLexemesPage(person, stage);
-
-                                }
-                            });
+                            button.setOnAction(event -> openLexemesPage(person, stage));
                         } else {
                             //   button.setText("error");
                         }     //не знаю почему, но тут все время person=null, когда таблицу обновляем
@@ -326,13 +266,7 @@ public class GenresController extends ControllerConstructor {
                         if (person != null) {
                             buttonGraphic.setImage(booksImage);
                             setGraphic(button);
-                            button.setOnAction(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    openBookPage(person, stage);
-
-                                }
-                            });
+                            button.setOnAction(event -> openBookPage(person, stage));
                         } else {
                             //   button.setText("error");
                         }     //не знаю почему, но тут все время person=null, когда таблицу обновляем
@@ -383,7 +317,7 @@ public class GenresController extends ControllerConstructor {
                                 }
                                 if (tmp == false) //если хотя бы одна - нет
                                 {
-                                    genreTraining(booksFromBase);
+                                    genreTraining(booksFromBase, applicationPath, newName.getText());
                                 }
 
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -406,21 +340,6 @@ public class GenresController extends ControllerConstructor {
                 };
             }
         });
-    }
-
-    private void genreTraining(List<Book> booksFromBase) {
-        ArrayList<BookProfile> booksFromJson = new ArrayList<>();    //взяли книжечки исходные
-        for (Book book : booksFromBase) {
-            booksFromJson.add((BookProfile) fromJsonToObject(book.getFilePath(), BookProfile.class));
-            book.setIndexed(true);
-            BookService.updateBook(book);
-        }
-
-        //Получаем показатели все по выборке
-        GenreProfile testViborka = StatisticGetter.getBaseFrequencies(booksFromJson); //это очень долго бежит
-        //Пишем в gson
-        ObjectToJsonConverter.fromObjectToJson(applicationPath + "genres\\" +
-                newName.getText() + ".json", testViborka);
     }
 
     private void deleteColumnCreator(TableColumn<Genre, Genre> deleteColumn) {
@@ -480,5 +399,6 @@ public class GenresController extends ControllerConstructor {
         stage.setScene(new Scene(vbox));
 
     }
+
 
 }

@@ -1,10 +1,10 @@
-package sample;
+package sample.utils;
 
 
 import lombok.Setter;
 import sample.DTO.BookProfile;
 import sample.DTO.GenreProfile;
-import sample.FileConverter.FileToBookConverter;
+import sample.FileConverter.TxtToBookConverter;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -144,9 +144,9 @@ public class Analyzer {
     public GenreProfile getTestViborka(String pathName) {
         File file = new File(pathName);
         System.out.println(file.getPath());
-//        BookProfile testBook1 = getBookFromFile(file);
-        FileToBookConverter fileToBookConverter = new FileToBookConverter();
-        BookProfile testBook1 = fileToBookConverter.getBookFromFile(file);
+//        BookProfile testBook1 = getBookProfileFromTxt(file);
+        TxtToBookConverter fileToBookConverter = new TxtToBookConverter();
+        BookProfile testBook1 = fileToBookConverter.getBookProfileFromTxt(file);
 
         ArrayList<BookProfile> testBookOnly = new ArrayList<>();
         testBookOnly.add(testBook1);

@@ -1,6 +1,5 @@
 package sample.FileConverter;
 
-import org.testng.annotations.Test;
 import sample.DTO.BookProfile;
 import sample.utils.AlgorithmPorter;
 
@@ -10,15 +9,32 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class FileToBookConverter {
+public class TxtToBookConverter {
+
+    //Ходим по папке, собираем файлы в объекты BookProfile
+    public static ArrayList<BookProfile> listBooksFromFolder(File folder) {
+
+        ArrayList<BookProfile> books = new ArrayList<>();
+        CompletableFuture[] futures = Arrays.stream(folder.listFiles())
+                .filter(File::isFile)
+                .map(file -> CompletableFuture.supplyAsync(() -> {
+                    books.add(TxtToBookConverter.getBookProfileFromTxt(file));
+                    return null;
+                }))
+                .toArray(CompletableFuture[]::new);
+
+        CompletableFuture.allOf(futures).join();
+        return books;
+    }
 
 
     /*Из файла прямо в объект типа BookProfile БЕЗ ИМЕН*/
-    public static BookProfile getBookFromFile(File file) {
+    public static BookProfile getBookProfileFromTxt(File file) {
 
         String s = usingBufferedReader(file.getPath());
         ArrayList<String> names = getNamesFromString(s);
@@ -41,7 +57,7 @@ public class FileToBookConverter {
     private static ArrayList<String> getWordsWithoutSFWords(ArrayList<String> wordsAfterPorter) {
         ArrayList<String> result = wordsAfterPorter;
 
-        String stopWordsString = usingBufferedReader((FileToBookConverter.class.getResource("/stop_lexemas_words.txt").getPath()));
+        String stopWordsString = usingBufferedReader((TxtToBookConverter.class.getResource("/stop_lexemas_words.txt").getPath()));
         ArrayList<String> stopWords = getWordsFromString(stopWordsString);
 
         result.removeAll(stopWords);
@@ -65,14 +81,8 @@ public class FileToBookConverter {
     }
 
 
-    @Test
-    public void testtest() {
-        getNamesFromString("Энн ела рыбу Катю?! Рыбу готовила Энн.? Рыба была \"не очень\", впрочем и Энн тоже не очень" +
-                "и Катя и Маша и НИКОЛЯ тоже такие себе повара. ");
-    }
-
     /*Вырезать имена из строки*/
-    public static ArrayList<String> getNamesFromString(String text) {
+    private static ArrayList<String> getNamesFromString(String text) {
 
         String regexp = "([А-ЯA-Z]((т.п.|т.д.|пр.)|[^?!.\\(]|\\([^\\)]*\\))*[.?!])";
         Pattern pattern = Pattern.compile(regexp);
@@ -99,11 +109,8 @@ public class FileToBookConverter {
             }
         }
 
-        //    System.out.println("Имена из файла!"+names);
         ArrayList<String> namesAfterPorter = getWordsAfterPorter(names);
-        //   System.out.println("Имена из файла уже после алгоритма Портера"+namesAfterPorter);
         ArrayList<String> namesDistinct = (ArrayList<String>) namesAfterPorter.stream().distinct().collect(Collectors.toList());
-        //   System.out.println("Имена из файла после удаления дубликатов"+namesDistinct);
         return namesDistinct;
 
     }
@@ -123,10 +130,7 @@ public class FileToBookConverter {
 
     /*Удаляет стоп слова из списка*/
     public static ArrayList<String> getWordsWithoutStop(ArrayList<String> newS) {
-        //    InputStream in = getClass().getResourceAsStream("/stop_words.txt");
-        //  BufferedReader stopWordsString = new BufferedReader(new InputStreamReader(in));
-        //   String stopWordsString = usingBufferedReader("/stop_words.txt");
-        String stopWordsString = usingBufferedReader((FileToBookConverter.class.getResource("/stop_words.txt").getPath()));
+        String stopWordsString = usingBufferedReader((TxtToBookConverter.class.getResource("/stop_words.txt").getPath()));
         ArrayList<String> stopWords = getWordsFromString(stopWordsString);
         stopWords.add("");
         newS.removeAll(stopWords);

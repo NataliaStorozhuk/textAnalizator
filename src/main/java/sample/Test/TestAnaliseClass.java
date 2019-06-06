@@ -1,13 +1,12 @@
 package sample.Test;
 
 import org.testng.annotations.Test;
-import sample.Analyzer;
 import sample.DTO.BookProfile;
 import sample.DTO.GenreProfile;
-import sample.FileConverter.ExcelExporter;
-import sample.FileConverter.FileToBookConverter;
 import sample.FileConverter.ObjectToJsonConverter;
-import sample.StatisticGetter;
+import sample.FileConverter.TxtToBookConverter;
+import sample.utils.Analyzer;
+import sample.utils.StatisticGetter;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,15 +15,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static sample.FileConverter.FileLoader.listFilesFromFolder;
-import static sample.FileConverter.FileToBookConverter.*;
-import static sample.StatisticGetter.*;
+import static sample.FileConverter.TxtToBookConverter.*;
+import static sample.utils.StatisticGetter.*;
 
 public class TestAnaliseClass {
 
     private Analyzer analyzer = new Analyzer();
     private StatisticGetter statisticGetter = new StatisticGetter();
-    private FileToBookConverter fileToBookConverter = new FileToBookConverter();
+    private TxtToBookConverter fileToBookConverter = new TxtToBookConverter();
     private ArrayList<BookProfile> books = new ArrayList<>();
     private String desktopPath = System.getProperty("user.home") + "\\" + "Desktop" + "\\";
 
@@ -32,7 +30,7 @@ public class TestAnaliseClass {
     @Test
     public void getFiles() throws IOException {
         final File folder = new File(desktopPath + "test");
-        books = listFilesFromFolder(folder);
+        books = listBooksFromFolder(folder);
         GenreProfile testViborka = statisticGetter.getBaseFrequencies(books);
         //  ExcelExporter.createExcelFile(testViborka.lexemesList, books, "allWordsMagicW");
     }
@@ -43,7 +41,7 @@ public class TestAnaliseClass {
     public void getBaseFrequencesInJson() {
         final File folder = new File(desktopPath + "detectives_utf8");
 
-        books = listFilesFromFolder(folder);
+        books = listBooksFromFolder(folder);
         GenreProfile testViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         testViborka.setW(books.get(books.size() - 1).getW());
@@ -58,7 +56,7 @@ public class TestAnaliseClass {
         final File folder = new File(desktopPath + "detectives_utf8");
         long start = System.currentTimeMillis();
         //50 книг
-        books = listFilesFromFolder(folder);
+        books = listBooksFromFolder(folder);
         long finish = System.currentTimeMillis();
         long timeConsumedMillis = finish - start;           //9604 распаралелено, 17786 если по очереди
         System.out.println("Время работы в милисекундах: " + timeConsumedMillis);
@@ -143,7 +141,7 @@ public class TestAnaliseClass {
         final File folder = new File(desktopPath + folderName);
         long start = System.currentTimeMillis();
 
-        books = listFilesFromFolder(folder);
+        books = listBooksFromFolder(folder);
         GenreProfile testViborka = statisticGetter.getBaseFrequencies(books);
 
         books.add(createAverageBook(books));
@@ -186,7 +184,7 @@ public class TestAnaliseClass {
        /* final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
         //final File folder = new File("C:/Users/Natalia/Desktop/test");
 
-        books = listFilesFromFolder(folder);
+        books = listBooksFromFolder(folder);
         GenreProfile baseViborka = statisticGetter.getBaseFrequencies(books);
         books.add(createAverageBook(books));
         baseViborka.w = books.get(books.size() - 1).getW();
@@ -269,7 +267,7 @@ public class TestAnaliseClass {
         //чуть побыстрее работает без перебора папок
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
-                listFilesFromFolder(fileEntry);
+                listBooksFromFolder(fileEntry);
             } else {
                 books.add(getBookWithDetectiveWordsOnly(fileEntry, detectiveWords));
                 System.out.println(fileEntry.getName());

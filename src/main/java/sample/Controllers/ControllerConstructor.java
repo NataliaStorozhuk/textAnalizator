@@ -66,7 +66,7 @@ class ControllerConstructor {
 
         stage.setTitle("Жанры");
 
-        Scene scene = new Scene(page, 800, 600);
+        Scene scene = new Scene(page, 1000, 600);
         stage.setScene(scene);
 
         GenresController controller = loader.getController();

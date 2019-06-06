@@ -12,12 +12,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import sample.Analyzer;
 import sample.DBModels.Genre;
 import sample.DBModels.Info;
 import sample.DTO.GenreProfile;
 import sample.Services.GenreService;
 import sample.Services.InfoService;
+import sample.utils.Analyzer;
 
 import java.io.File;
 import java.io.IOException;

@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import sample.DBModels.Book;
 import sample.DBModels.Genre;
-import sample.utils.HibernateSessionFactoryUtil;
+import sample.HibernateSessionFactoryUtil;
 
 import java.util.List;
 

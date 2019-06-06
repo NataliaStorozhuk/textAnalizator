@@ -32,7 +32,7 @@ public class LexemesController extends ControllerConstructor {
     private final VBox vbox = new VBox();
 
     private final TableView<GenreLexema> table = new TableView<>();
-    private final Label label = new Label("Лексемы жанра");
+    public final Label label = new Label("Лексемы жанра");
     private final Button back = new Button();
 
     private ObservableList<GenreLexema> lexemesData = FXCollections.observableArrayList();
@@ -42,6 +42,7 @@ public class LexemesController extends ControllerConstructor {
     public void initialize() {
 
         label.setFont(new Font("Arial", 20));
+        label.setText("Лексемы жанра " + currentGenre.getNameGenre());
         initData();
 
         drawTable();

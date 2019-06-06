@@ -1,4 +1,4 @@
-package sample;
+package sample.utils;
 
 import sample.DTO.BookProfile;
 import sample.DTO.GenreLexema;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-import static sample.Analyzer.getAverageW;
+import static sample.utils.Analyzer.getAverageW;
 
 public class StatisticGetter {
 
@@ -29,11 +29,6 @@ public class StatisticGetter {
         System.out.println("getAllTokensArray" + timeConsumedMillis);
         start = System.currentTimeMillis();
 
-        //получаем tf - число каждой лексемы в книге
-  /*       for (BookProfile book : books) {
-            getTf(book, genreProfile.lexemesList);
-        }//долго
-*/
 
         CompletableFuture[] futures = Arrays.stream(books.toArray())
                 .map(book -> CompletableFuture.supplyAsync(() -> {
@@ -84,18 +79,17 @@ public class StatisticGetter {
 
 
     /*Метод делает из списка разных книг отсортированный массив лексем без дубликатов*/
-    public static GenreProfile getAllTokensArray(ArrayList<BookProfile> books) {
+    private static GenreProfile getAllTokensArray(ArrayList<BookProfile> books) {
         GenreProfile genreProfile = new GenreProfile(true);
         ArrayList<String> allArray = new ArrayList<String>();
         for (BookProfile book : books) {
             allArray.addAll(book.getLexems());
         }
-        List<String> arrayAfterSort = allArray.stream().distinct().collect(Collectors.toList());
-        Collections.sort(arrayAfterSort);
+        List<String> arrayAfterSort = allArray.stream().distinct().sorted().collect(Collectors.toList());
 
 
-        for (int i = 0; i < arrayAfterSort.size(); i++) {
-            GenreLexema genreLexema = new GenreLexema(arrayAfterSort.get(i));
+        for (String s : arrayAfterSort) {
+            GenreLexema genreLexema = new GenreLexema(s);
             genreProfile.genreLexemas.add(genreLexema);
         }
 
@@ -166,7 +160,6 @@ public class StatisticGetter {
             }
 
             idf.add(i, log);
-            //System.out.println(idf.get(i));
         }
         return idf;
     }

@@ -20,7 +20,7 @@ import javafx.util.Callback;
 import sample.DAO.InfoDao;
 import sample.DBModels.Info;
 import sample.DTO.Lexema;
-import sample.FileConverter.FileCreator;
+import sample.FileConverter.JsonFileCreator;
 import sample.Services.InfoService;
 
 import java.io.IOException;
@@ -51,6 +51,10 @@ public class SettingsController extends ControllerConstructor {
     private final TextField precision = new TextField();
     private final Button savePrecision = new Button();
 
+    private final Label textCountMarkers = new Label();
+    private final TextField countMarkers = new TextField();
+    private final Button saveCountMarkers = new Button();
+
     @FXML
     public void initialize() {
         label.setFont(new Font("Arial", 20));
@@ -62,17 +66,18 @@ public class SettingsController extends ControllerConstructor {
 
         final HBox wBox = getWBox();
         final HBox precisionBox = getPrecisionBox();
+        final HBox markersBox = getMarkersBox();
 
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 10, 10, 10));
-        vbox.getChildren().addAll(label, wBox, precisionBox, table, hBox);
+        vbox.getChildren().addAll(label, wBox, precisionBox, markersBox, table, hBox);
         VBox.setVgrow(table, Priority.ALWAYS);
 
 
         back.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
 
             try {
-                FileCreator.updateFileStopWords(wordsData, info.getStopWordsPath());
+                JsonFileCreator.updateFileStopWords(wordsData, info.getStopWordsPath());
                 openAdminMainPage(stage);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -80,6 +85,26 @@ public class SettingsController extends ControllerConstructor {
 
         });
 
+    }
+
+    private HBox getMarkersBox() {
+
+        final HBox hBox = new HBox();
+
+        textCountMarkers.setText("Число слов - маркеров");
+
+        saveCountMarkers.setGraphic(imageButtonOk());
+
+        saveCountMarkers.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            saveCountMarkersInDB();
+        });
+
+
+        countMarkers.setText(info.getCountMarkers().toString());
+        countMarkers.setEditable(true);
+        hBox.getChildren().addAll(textCountMarkers, countMarkers, saveCountMarkers);
+        hBox.setAlignment(Pos.CENTER);
+        return hBox;
     }
 
     private HBox getAddBox() {
@@ -131,18 +156,7 @@ public class SettingsController extends ControllerConstructor {
         savePrecision.setGraphic(imageButtonOk());
 
         savePrecision.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            if ((Double.valueOf(precision.getText()) > 1.0) || (Double.valueOf(precision.getText()) < 0.0)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Сохранение граничной меры!");
-
-                alert.setHeaderText(null);
-                alert.setContentText("Граничная мера должна находиться в диапазоне 0.0-1.0");
-
-                alert.showAndWait();
-            } else {
-                info.setPrecision(Double.valueOf(precision.getText()));
-                InfoService.updateInfo(info);
-            }
+            savePrecisionInDB();
         });
 
 
@@ -152,7 +166,6 @@ public class SettingsController extends ControllerConstructor {
         hBox.setAlignment(Pos.CENTER);
         return hBox;
     }
-
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -221,6 +234,29 @@ public class SettingsController extends ControllerConstructor {
     private void initData() {
 
         info = InfoDao.findById(1);
-        wordsData = FileCreator.getFromFileStopWords(info.getStopWordsPath());
+        wordsData = JsonFileCreator.getFromFileStopWords(info.getStopWordsPath());
     }
+
+
+    private void savePrecisionInDB() {
+        if ((Double.valueOf(precision.getText()) > 1.0) || (Double.valueOf(precision.getText()) < 0.0)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Сохранение граничной меры!");
+
+            alert.setHeaderText(null);
+            alert.setContentText("Граничная мера должна находиться в диапазоне 0.0-1.0");
+
+            alert.showAndWait();
+        } else {
+            info.setPrecision(Double.valueOf(precision.getText()));
+            InfoService.updateInfo(info);
+        }
+    }
+
+    private void saveCountMarkersInDB() {
+        info.setCountMarkers(Integer.valueOf(countMarkers.getText()));
+        InfoService.updateInfo(info);
+    }
+
+
 }
