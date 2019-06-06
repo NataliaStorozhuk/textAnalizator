@@ -2,6 +2,7 @@ package sample.FileConverter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.Analizator.StatisticGetter;
 import sample.DBModels.Book;
 import sample.DBModels.Genre;
 import sample.DTO.BookProfile;
@@ -9,7 +10,6 @@ import sample.DTO.GenreProfile;
 import sample.DTO.Lexema;
 import sample.Services.BookService;
 import sample.Services.GenreService;
-import sample.utils.StatisticGetter;
 
 import java.io.File;
 import java.io.FileWriter;

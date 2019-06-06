@@ -1,4 +1,4 @@
-package sample.utils;
+package sample.Analizator;
 
 import sample.DTO.BookProfile;
 import sample.DTO.GenreLexema;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-import static sample.utils.Analyzer.getAverageW;
+import static sample.Analizator.Analyzer.getAverageW;
 
 public class StatisticGetter {
 

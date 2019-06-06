@@ -1,7 +1,7 @@
 package sample.FileConverter;
 
+import sample.Analizator.AlgorithmPorter;
 import sample.DTO.BookProfile;
-import sample.utils.AlgorithmPorter;
 
 import java.io.BufferedReader;
 import java.io.File;

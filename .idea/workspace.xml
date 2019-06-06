@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="пока все идет по плану... коммит by Dima*)">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Будто бы даже прога готова!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sample/Controllers/LexemesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Controllers/LexemesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sample/Controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sample/Test/TestDBClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Test/TestDBClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/FileConverter/JsonFileCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/FileConverter/JsonFileCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/FileConverter/TxtToBookConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/FileConverter/TxtToBookConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/utils/AlgorithmPorter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Analizator/AlgorithmPorter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/utils/Analyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Analizator/Analyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/utils/StatisticGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Analizator/StatisticGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,6 +69,34 @@
         <item name="MYDB: database" type="2aa06773:H2ImplModel$Database" />
         <item name="PUBLIC: schema" type="7f85d983:H2ImplModel$Schema" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="hibernate.cfg.xml/Hibernate" type="feb32156:DbDataSourceImpl" />
+        <item name="MYDB: database" type="2aa06773:H2ImplModel$Database" />
+        <item name="PUBLIC: schema" type="7f85d983:H2ImplModel$Schema" />
+        <item name="BOOK: table" type="818c1b4a:H2ImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="hibernate.cfg.xml/Hibernate" type="feb32156:DbDataSourceImpl" />
+        <item name="MYDB: database" type="2aa06773:H2ImplModel$Database" />
+        <item name="PUBLIC: schema" type="7f85d983:H2ImplModel$Schema" />
+        <item name="GENRE: table" type="818c1b4a:H2ImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="hibernate.cfg.xml/Hibernate" type="feb32156:DbDataSourceImpl" />
+        <item name="MYDB: database" type="2aa06773:H2ImplModel$Database" />
+        <item name="PUBLIC: schema" type="7f85d983:H2ImplModel$Schema" />
+        <item name="INFO: table" type="818c1b4a:H2ImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="hibernate.cfg.xml/Hibernate" type="feb32156:DbDataSourceImpl" />
+        <item name="MYDB: database" type="2aa06773:H2ImplModel$Database" />
+        <item name="PUBLIC: schema" type="7f85d983:H2ImplModel$Schema" />
+        <item name="USER: table" type="818c1b4a:H2ImplModel$Table" />
+      </path>
     </expand>
     <select />
   </component>
@@ -111,52 +144,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/ControllerConstructor.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="118" column="24" selection-start-line="118" selection-start-column="24" selection-end-line="118" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="340">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/FileToBookConverter.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Analizator/AlgorithmPorter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="130" column="26" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Test/TestDBClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="154" column="69" selection-start-line="154" selection-start-column="69" selection-end-line="154" selection-end-column="69" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/LexemesController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
-              <caret line="107" column="83" selection-start-line="107" selection-start-column="83" selection-end-line="107" selection-end-column="83" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="35" selection-start-line="35" selection-end-line="35" />
+            <state relative-caret-position="306">
+              <caret line="31" column="11" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -164,56 +164,40 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="79" selection-start-line="79" selection-end-line="79" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="387" selection-start-line="387" selection-end-line="387" />
-              <folding>
-                <element signature="method#getAddGenreBox#0;class#GenresController#0" />
-                <element signature="method#drawTable#0;class#GenresController#0" />
-                <element signature="method#studyColumnCreator#0;class#GenresController#0" />
-                <element signature="method#allBooksColumnCreator#0;class#GenresController#0" />
-                <element signature="method#indexedColumnCreator#0;class#GenresController#0" />
-                <element signature="method#booksColumnCreator#0;class#GenresController#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/StatisticGetter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="73" selection-start-line="73" selection-end-line="73" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2899#2907#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="425">
+              <caret line="98" column="29" selection-start-line="98" selection-start-column="29" selection-end-line="98" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/JsonFileCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="117" column="49" selection-start-line="117" selection-start-column="49" selection-end-line="117" selection-end-column="49" />
+            <state relative-caret-position="186">
+              <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#genreTraining#0;class#JsonFileCreator#0" />
+                <element signature="method#getBookProfilesInJsonAndDB#0;class#JsonFileCreator#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/FileLoader.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/BooksController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+            <state relative-caret-position="194">
+              <caret line="97" column="51" selection-start-line="97" selection-start-column="51" selection-end-line="97" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/ControllerConstructor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -235,13 +219,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Choice</find>
-      <find>stage.setScene(new Scene(vbox));</find>
-      <find>All</find>
-      <find>GenreProfile</find>
-      <find>setStage</find>
-      <find>delete</find>
-      <find>sample.DBModels.User</find>
       <find>Strin</find>
       <find>Лекстема</find>
       <find>scene</find>
@@ -265,6 +242,13 @@
       <find>booksPath</find>
       <find>bookPath</find>
       <find>TODO</find>
+      <find>setMinWidth</find>
+      <find>addNewGenreJsonAndDB</find>
+      <find>genres</find>
+      <find>getResource(&quot;/fxml/genres.fxml&quot;));</find>
+      <find>openGe</find>
+      <find>Лексемы</find>
+      <find>+ curre</find>
     </findStrings>
     <replaceStrings>
       <replace>Genre</replace>
@@ -290,13 +274,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/sample/DAO/GenreDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/DAO/UserDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/DBModels/User.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/utils/HibernateSessionFactoryUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/TestDBClass.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/utils/TestFileCreatior.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/TestAnaliseClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/UserTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/User.java" />
@@ -305,15 +282,12 @@
         <option value="$PROJECT_DIR$/src/main/resources/fxml/users.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/genres.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/settings.fxml" />
-        <option value="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/books.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/sample/DTO/Lexeme.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/DTO/Profile.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/DTO/Lexema.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/authorization.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/DBModels/Info.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/DBModels/Lexema.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/AuthorizationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/GenreInfoController.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/OkImage.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Services/InfoService.java" />
@@ -323,24 +297,34 @@
         <option value="$PROJECT_DIR$/src/main/java/sample/DBModels/Book.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Services/BookService.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/DAO/BookDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/SettingsController.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Services/UserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/FileConverter/FileLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Analyzer.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/DTO/BookProfile.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/genreInfo.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/ControllerConstructor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/BooksController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/StatisticGetter.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/DTO/GenreProfile.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/DTO/GenreLexema.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Analyzer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/AuthorizationController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/StatisticGetter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/utils/StatisticGetter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Test/ExcelExporter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/FileConverter/FileLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/FileConverter/FileToBookConverter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/FileConverter/FileCreator.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Test/TestDBClass.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/MainController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/FileConverter/JsonFileCreator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/ControllerConstructor.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/LexemesController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/BooksController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/DBModels/Info.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Test/TestDBClass.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/SettingsController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/utils/Analyzer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Analizator/AlgorithmPorter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Controllers/MainController.java" />
       </list>
     </option>
   </component>
@@ -352,8 +336,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="11" />
-    <option name="y" value="8" />
+    <option name="x" value="-28" />
+    <option name="y" value="9" />
     <option name="width" value="1386" />
     <option name="height" value="788" />
   </component>
@@ -365,6 +349,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -405,6 +390,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
+              <item name="Analizator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sample" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -423,64 +417,12 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
-              <item name="DTO" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sample" type="462c0819:PsiDirectoryNode" />
               <item name="FileConverter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sample" type="462c0819:PsiDirectoryNode" />
-              <item name="Services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sample" type="462c0819:PsiDirectoryNode" />
-              <item name="Test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sample" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="textAnalizator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="textAnalizator" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="fxml" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -498,7 +440,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559604633217" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559781546188" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="private" />
@@ -515,8 +457,15 @@
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="sample.Controllers" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="sample.Controllers" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Natalia\Documents\textAnalizator\src\main\resources" />
+      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources\fxml" />
+      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources" />
+      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\java\sample" />
+      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources\fxmls" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="sample" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Natalia\Documents\textAnalizator\src\main\resources" />
@@ -531,12 +480,8 @@
       <recent name="sample.DAO" />
       <recent name="sample" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Natalia\Documents\textAnalizator\src\main\resources" />
-      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources\fxml" />
-      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources" />
-      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\java\sample" />
-      <recent name="C:\Users\admin\IdeaProjects\textAnalizator\src\main\resources\fxmls" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="sample.Controllers" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -663,7 +608,7 @@
       <module name="Porter_3" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="sample.FileConverter.*" />
+          <option name="PATTERN" value="sample.Test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -685,7 +630,7 @@
       <module name="Porter_3" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="sample.FileConverter.*" />
+          <option name="PATTERN" value="sample.Test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -707,7 +652,7 @@
       <module name="Porter_3" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="sample.FileConverter.*" />
+          <option name="PATTERN" value="sample.Test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -813,7 +758,12 @@
       <workItem from="1559110551725" duration="9673000" />
       <workItem from="1559238064190" duration="6628000" />
       <workItem from="1559551262403" duration="8360000" />
-      <workItem from="1559563684659" duration="30249000" />
+      <workItem from="1559563684659" duration="30505000" />
+      <workItem from="1559650539683" duration="1136000" />
+      <workItem from="1559690636967" duration="666000" />
+      <workItem from="1559773399236" duration="8004000" />
+      <workItem from="1559823929935" duration="591000" />
+      <workItem from="1559853880321" duration="327000" />
     </task>
     <task id="LOCAL-00001" summary="Добавили и настроили ломбок, poi, запустили тестовый пример записи в эксельку">
       <created>1552561620663</created>
@@ -1109,7 +1059,21 @@
       <option name="project" value="LOCAL" />
       <updated>1559602055439</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Будто бы даже прога готова!">
+      <created>1559604678616</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1559604678616</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Ненмого рефакторинга и +1 поле в настройках">
+      <created>1559780366858</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1559780366859</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1145,7 +1109,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="359935000" />
+    <option name="totallyTimeSpent" value="370915000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1160,7 +1124,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.24886535" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.2677761" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -1170,17 +1134,17 @@
       <window_info id="DB Browser" order="7" weight="0.23524962" />
       <window_info id="Persistence" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4977307" weight="0.5220949" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.72617245" weight="0.2405892" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.8434191" visible="true" weight="0.4091653" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49546143" weight="0.5220949" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.72314674" visible="true" weight="0.14075287" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8434191" weight="0.4091653" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32733223" />
       <window_info anchor="bottom" id="Application Servers" order="7" />
       <window_info anchor="bottom" id="Profiler" order="8" />
       <window_info anchor="bottom" id="Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.15658094" side_tool="true" visible="true" weight="0.4091653" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.7110439" weight="0.64484453" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.27685326" side_tool="true" weight="0.14075287" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.709531" weight="0.39934534" />
       <window_info anchor="bottom" id="Problems" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.8418202" />
       <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
@@ -1198,10 +1162,10 @@
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Theme Preview" order="7" />
-      <window_info anchor="right" id="Coverage" order="8" sideWeight="0.50138503" side_tool="true" visible="true" weight="0.18456884" />
+      <window_info anchor="right" id="Coverage" order="8" sideWeight="0.5021552" side_tool="true" visible="true" weight="0.18456884" />
       <window_info anchor="right" id="Ant Build" order="9" weight="0.515885" />
-      <window_info anchor="right" id="Database" order="10" sideWeight="0.49861497" visible="true" weight="0.18456884" />
-      <window_info anchor="right" id="Maven" order="11" weight="0.07639939" />
+      <window_info anchor="right" id="Maven" order="10" weight="0.07639939" />
+      <window_info anchor="right" id="Database" order="11" sideWeight="0.49784482" weight="0.18401207" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.02233805" />
@@ -1303,8 +1267,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <MESSAGE value="пофиксили расчет w средней и максимальной книги, ввели везде методы withoutNames и лишние вынесли в UnusedMethods, небольшие мелкие правки" />
-    <MESSAGE value="попробовали w cчитать по df вместо idf" />
     <MESSAGE value="добавила обработку пост-стоп-слов, пофиксили формулу близостиии" />
     <MESSAGE value="небольшие изменения в коде для презентации" />
     <MESSAGE value="добавила DB модели и DAO для новых таблиц" />
@@ -1328,7 +1290,9 @@
     <MESSAGE value="все вынесено в ControllerConstructor, что относится к навигации и вид кнопок" />
     <MESSAGE value="жанры, дообучение РЕАЛИЗОВАНЫ" />
     <MESSAGE value="пока все идет по плану... коммит by Dima*)" />
-    <option name="LAST_COMMIT_MESSAGE" value="пока все идет по плану... коммит by Dima*)" />
+    <MESSAGE value="Будто бы даже прога готова!" />
+    <MESSAGE value="Ненмого рефакторинга и +1 поле в настройках" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ненмого рефакторинга и +1 поле в настройках" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1336,116 +1300,116 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java</url>
-          <line>141</line>
+          <url>file://$PROJECT_DIR$/src/main/java/sample/Analizator/Analyzer.java</url>
+          <line>142</line>
           <properties />
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Main.java</url>
-          <line>21</line>
+          <line>20</line>
           <properties />
           <option name="timeStamp" value="139" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>95</line>
+          <line>93</line>
           <properties />
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>222</line>
+          <line>220</line>
           <properties />
           <option name="timeStamp" value="169" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>235</line>
+          <line>233</line>
           <properties />
           <option name="timeStamp" value="180" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>118</line>
+          <line>116</line>
           <properties />
           <option name="timeStamp" value="182" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>158</line>
+          <line>156</line>
           <properties />
           <option name="timeStamp" value="187" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>144</line>
+          <line>142</line>
           <properties />
           <option name="timeStamp" value="188" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>146</line>
+          <line>144</line>
           <properties />
           <option name="timeStamp" value="189" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/FileConverter/ExcelExporter.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/sample/Test/ExcelExporter.java</url>
           <line>59</line>
           <properties />
           <option name="timeStamp" value="190" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>31</line>
+          <line>29</line>
           <properties />
           <option name="timeStamp" value="191" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/StatisticGetter.java</url>
-          <line>171</line>
+          <url>file://$PROJECT_DIR$/src/main/java/sample/Analizator/StatisticGetter.java</url>
+          <line>164</line>
           <properties />
           <option name="timeStamp" value="193" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>128</line>
+          <line>126</line>
           <properties />
           <option name="timeStamp" value="197" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>298</line>
+          <line>281</line>
           <properties />
           <option name="timeStamp" value="204" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>123</line>
+          <line>121</line>
           <properties />
           <option name="timeStamp" value="205" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>41</line>
+          <line>39</line>
           <properties />
           <option name="timeStamp" value="210" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java</url>
-          <line>136</line>
+          <url>file://$PROJECT_DIR$/src/main/java/sample/Analizator/Analyzer.java</url>
+          <line>137</line>
           <properties />
           <option name="timeStamp" value="211" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java</url>
-          <line>128</line>
+          <url>file://$PROJECT_DIR$/src/main/java/sample/Analizator/Analyzer.java</url>
+          <line>129</line>
           <properties />
           <option name="timeStamp" value="215" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>212</line>
+          <line>210</line>
           <properties />
           <option name="timeStamp" value="216" />
         </line-breakpoint>
@@ -1486,20 +1450,8 @@
           <option name="timeStamp" value="274" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java</url>
-          <line>92</line>
-          <properties />
-          <option name="timeStamp" value="301" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java</url>
-          <line>89</line>
-          <properties />
-          <option name="timeStamp" value="310" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Controllers/LexemesController.java</url>
-          <line>103</line>
+          <line>104</line>
           <properties />
           <option name="timeStamp" value="314" />
         </line-breakpoint>
@@ -1517,43 +1469,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java</url>
-          <line>33</line>
+          <line>31</line>
           <properties />
           <option name="timeStamp" value="322" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/FileConverter/FileLoader.java</url>
-          <line>25</line>
-          <properties />
-          <option name="timeStamp" value="323" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/sample/Controllers/MainController.java</url>
-          <line>79</line>
+          <line>80</line>
           <properties />
           <option name="timeStamp" value="328" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java</url>
-          <line>118</line>
+          <url>file://$PROJECT_DIR$/src/main/java/sample/Analizator/Analyzer.java</url>
+          <line>119</line>
           <properties />
           <option name="timeStamp" value="329" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java</url>
-          <line>110</line>
+          <url>file://$PROJECT_DIR$/src/main/java/sample/Analizator/Analyzer.java</url>
+          <line>111</line>
           <properties />
           <option name="timeStamp" value="331" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java</url>
-          <line>113</line>
+          <url>file://$PROJECT_DIR$/src/main/java/sample/Analizator/Analyzer.java</url>
+          <line>114</line>
           <properties />
           <option name="timeStamp" value="332" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java</url>
-          <line>117</line>
+          <url>file://$PROJECT_DIR$/src/main/java/sample/Analizator/Analyzer.java</url>
+          <line>118</line>
           <properties />
           <option name="timeStamp" value="333" />
         </line-breakpoint>
@@ -1567,7 +1513,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/main/java/sample/DBModels/Info.java</url>
-          <line>27</line>
+          <line>30</line>
           <properties field="cofW" class="sample.DBModels.Info" />
           <option name="timeStamp" value="291" />
         </line-breakpoint>
@@ -1633,127 +1579,8 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/settings.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="66" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/javafx-src.zip!/javafx/scene/control/TableView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="842" column="22" selection-start-line="842" selection-start-column="22" selection-end-line="842" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/OkImage.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/authorization.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/users.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41208">
-          <caret line="2578" selection-start-line="2578" selection-end-line="2578" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Info.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://ac3ed731-bfee-4db1-b96b-2841313993ce/database/MYDB/schema/PUBLIC/table/INFO">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/UnusedMethods.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="260" column="12" selection-start-line="260" selection-start-column="12" selection-end-line="260" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/detectiveDictionary.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Services/InfoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/stop_lexemas_words.txt">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/main.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Services/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="36" column="34" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/AuthorizationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="61" column="39" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="172" column="18" selection-start-line="172" selection-start-column="18" selection-end-line="172" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/SettingsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="112" column="36" lean-forward="true" selection-start-line="112" selection-start-column="36" selection-end-line="112" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/BookDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="67" column="1" selection-start-line="67" selection-start-column="1" selection-end-line="67" selection-end-column="1" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/GenreDao.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1785,13 +1612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/ExcelExporter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-558">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/javafx-src.zip!/javafx/event/Event.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -1813,41 +1633,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/FileCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Services/BookService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-          <folding>
-            <element signature="e#305#306#0" expanded="true" />
-            <element signature="e#356#357#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/Lexema.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Class.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-107">
           <caret line="392" column="13" selection-start-line="392" selection-start-column="13" selection-end-line="392" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://ac3ed731-bfee-4db1-b96b-2841313993ce/database/MYDB/schema/PUBLIC/table/BOOK">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://ac3ed731-bfee-4db1-b96b-2841313993ce/database/MYDB/schema/PUBLIC/table/GENRE">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/javafx-src.zip!/javafx/collections/FXCollections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="340" selection-start-line="340" selection-end-line="340" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DAO/BookDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="47" column="42" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Test/ExcelExporter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/FileLoader.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Test/TestDBClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="197" column="91" selection-start-line="197" selection-start-column="91" selection-end-line="197" selection-end-column="91" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/HibernateSessionFactoryUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -1867,40 +1709,101 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Book.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/authorization.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/genres.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/main.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="21" column="27" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="27" />
+        <state relative-caret-position="637">
+          <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/settings.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/css/style.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/users.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Services/BookService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+          <folding>
+            <element signature="e#305#306#0" expanded="true" />
+            <element signature="e#356#357#0" expanded="true" />
+            <element signature="e#555#556#0" expanded="true" />
+            <element signature="e#614#615#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Services/InfoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Services/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="36" column="34" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Services/GenreService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Analizator/Analyzer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-901">
+          <caret line="45" column="25" lean-forward="true" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3707">
+          <caret line="283" column="11" selection-start-line="283" selection-start-column="11" selection-end-line="283" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/BooksController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/ObjectToJsonConverter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="190" column="66" selection-start-line="190" selection-start-column="66" selection-end-line="190" selection-end-column="66" />
+        <state relative-caret-position="154">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
-    <entry file="das://ac3ed731-bfee-4db1-b96b-2841313993ce/database/MYDB/schema/PUBLIC/table/BOOK">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://ac3ed731-bfee-4db1-b96b-2841313993ce/database/MYDB/schema/PUBLIC/table/GENRE">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/TxtToBookConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1360">
+          <caret line="20" lean-forward="true" selection-end-line="151" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/BookProfile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="366">
           <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1908,127 +1811,164 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/javafx-src.zip!/javafx/collections/FXCollections.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/GenreLexema.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="340" selection-start-line="340" selection-end-line="340" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/ObjectToJsonConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        <state relative-caret-position="258">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/GenreProfile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
+        <state relative-caret-position="-438">
           <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#199#200#0" expanded="true" />
-            <element signature="e#252#253#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/GenreLexema.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DTO/Lexema.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Test/TestDBClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="154" column="69" selection-start-line="154" selection-start-column="69" selection-end-line="154" selection-end-column="69" />
+        <state relative-caret-position="170">
+          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/FileLoader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Book.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+        <state relative-caret-position="-254">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/FileToBookConverter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Genre.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="130" column="26" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
+        <state relative-caret-position="-356">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Test/TestAnaliseClass.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/DBModels/Info.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="518">
+          <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/ControllerConstructor.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/AuthorizationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="118" column="24" selection-start-line="118" selection-start-column="24" selection-end-line="118" selection-end-column="24" />
+        <state relative-caret-position="1819">
+          <caret line="107" column="5" lean-forward="true" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Analizator/StatisticGetter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2022">
+          <caret line="16" column="13" selection-end-line="204" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/SettingsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="233" column="29" lean-forward="true" selection-start-line="233" selection-start-column="29" selection-end-line="233" selection-end-column="29" />
+          <folding>
+            <element signature="method#getWBox#0;class#SettingsController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/UsersController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="60" column="20" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/LexemesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="44" column="70" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="70" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/GenresController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="387" selection-start-line="387" selection-end-line="387" />
+        <state relative-caret-position="17">
+          <caret line="67" column="63" selection-end-line="404" />
           <folding>
             <element signature="method#getAddGenreBox#0;class#GenresController#0" />
             <element signature="method#drawTable#0;class#GenresController#0" />
             <element signature="method#studyColumnCreator#0;class#GenresController#0" />
             <element signature="method#allBooksColumnCreator#0;class#GenresController#0" />
             <element signature="method#indexedColumnCreator#0;class#GenresController#0" />
+            <element signature="method#lexemesColumnCreator#0;class#GenresController#0" />
             <element signature="method#booksColumnCreator#0;class#GenresController#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/LexemesController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Analizator/AlgorithmPorter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="107" column="83" selection-start-line="107" selection-start-column="83" selection-end-line="107" selection-end-column="83" />
+        <state relative-caret-position="306">
+          <caret line="31" column="11" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/StatisticGetter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/ControllerConstructor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        <state relative-caret-position="194">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2899#2907#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/BooksController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="97" column="51" selection-start-line="97" selection-start-column="51" selection-end-line="97" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/Controllers/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
+        <state relative-caret-position="425">
+          <caret line="98" column="29" selection-start-line="98" selection-start-column="29" selection-end-line="98" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Analyzer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/FileConverter/JsonFileCreator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="117" column="49" selection-start-line="117" selection-start-column="49" selection-end-line="117" selection-end-column="49" />
+        <state relative-caret-position="186">
+          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#genreTraining#0;class#JsonFileCreator#0" />
+            <element signature="method#getBookProfilesInJsonAndDB#0;class#JsonFileCreator#0" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,22 +1,22 @@
 package sample.Test;
 
 import org.testng.annotations.Test;
+import sample.Analizator.Analyzer;
+import sample.Analizator.StatisticGetter;
 import sample.DTO.BookProfile;
 import sample.DTO.GenreProfile;
 import sample.FileConverter.ObjectToJsonConverter;
 import sample.FileConverter.TxtToBookConverter;
-import sample.utils.Analyzer;
-import sample.utils.StatisticGetter;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static sample.Analizator.Analyzer.getAverageW;
+import static sample.Analizator.StatisticGetter.*;
 import static sample.FileConverter.TxtToBookConverter.*;
-import static sample.utils.StatisticGetter.*;
 
 public class TestAnaliseClass {
 
@@ -239,22 +239,7 @@ public class TestAnaliseClass {
     //из книг всех - всех высчитываем средние показатели
     private BookProfile createAverageBook(ArrayList<BookProfile> books) {
         BookProfile averageBook = new BookProfile("averageBook");
-        ArrayList<Double> w = new ArrayList<Double>();
-        for (int j = 0; j < books.get(0).getW().size(); j++) {
-            BigDecimal sum = BigDecimal.ZERO;
-            for (BookProfile book : books) {
-                BigDecimal getW_ = new BigDecimal(book.getW().get(j));
-                sum = sum.add(getW_);
-            }
-
-            BigDecimal zero = new BigDecimal(0);
-            BigDecimal n = new BigDecimal(books.size());
-            if (!sum.equals(zero)) {
-                zero = sum.divide(n, 5, BigDecimal.ROUND_HALF_EVEN);
-            }
-            w.add(zero.doubleValue());
-
-        }
+        ArrayList<Double> w = getAverageW(books);
         averageBook.setW(w);
         return averageBook;
     }
@@ -296,8 +281,8 @@ public class TestAnaliseClass {
         String detectiveWordsString = usingBufferedReader("/detectiveDictionary_afterMethod.txt");
         ArrayList<String> arrayAfterSort = getWordsFromString(detectiveWordsString);
 
-        for (int i = 0; i < books.size(); i++) {
-            getTf(books.get(i), arrayAfterSort);
+        for (BookProfile book1 : books) {
+            getTf(book1, arrayAfterSort);
         }
 
         //считаем общее число файлов, в которых встречается слово

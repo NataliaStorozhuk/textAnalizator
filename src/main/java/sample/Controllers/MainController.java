@@ -12,18 +12,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import sample.Analizator.Analyzer;
 import sample.DBModels.Genre;
 import sample.DBModels.Info;
 import sample.DTO.GenreProfile;
 import sample.Services.GenreService;
 import sample.Services.InfoService;
-import sample.utils.Analyzer;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static sample.FileConverter.JsonFileCreator.addNewBookJsonInDB;
 import static sample.FileConverter.ObjectToJsonConverter.fromJsonToObject;
 
 
@@ -95,6 +96,7 @@ public class MainController extends ControllerConstructor {
 
                 if (info.getPrecision() < cos) {
                     textResult.setText("Поздравляю! Книга " + file.getName() + " принадлежит к жанру " + currentGenre.getNameGenre());
+                    addNewBookJsonInDB(applicationPath, currentGenre, file.getPath());
                 } else
                     textResult.setText("Книга " + file.getName() + " НЕ принадлежит к жанру " + currentGenre.getNameGenre());
 

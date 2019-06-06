@@ -37,11 +37,6 @@
                 <Insets bottom="10.0" top="10.0"/>
             </VBox.margin>
         </Button>
-        <!--ProgressBar prefWidth="+Infinity" progress="0.0">
-            <VBox.margin>
-                <Insets bottom="10.0" top="10.0"/>
-            </VBox.margin>
-        </ProgressBar-->
 
         <Label alignment="CENTER" text="3 Результаты"/>
         <HBox>
