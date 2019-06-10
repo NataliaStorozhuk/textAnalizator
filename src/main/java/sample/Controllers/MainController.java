@@ -37,9 +37,6 @@ public class MainController extends ControllerConstructor {
     public ComboBox genreCombobox;
 
     @FXML
-    public Button analysis;
-
-    @FXML
     public Label skalarResult, cosResult, persentResult, textResult;
 
     @FXML

@@ -20,8 +20,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TestDBClass {
-    public static final String DB_URL = "jdbc:h2:/c:/JavaPrj/SQLDemo/db/mydb";
-    public static final String DB_Driver = "org.h2.Driver";
+    private static final String DB_URL = "jdbc:h2:/c:/JavaPrj/SQLDemo/db/mydb";
+    private static final String DB_Driver = "org.h2.Driver";
 
     @Test
     public void testConnection() {
@@ -37,10 +37,8 @@ public class TestDBClass {
         } catch (SQLException e) {
             e.printStackTrace(); // обработка ошибок  DriverManager.getConnection
             System.out.println("Ошибка SQL !");
-
         }
     }
-
 
     @Test
     public void testNewGenre() {
@@ -69,7 +67,7 @@ public class TestDBClass {
     }
 
     @Test
-    public void testNewUserExample() throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    public void testNewUser() throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
         SessionFactory sessionFactory = new Configuration().configure()
                 .buildSessionFactory();
@@ -82,20 +80,17 @@ public class TestDBClass {
     }
 
     @Test
-    public void testNewInfoExample() {
+    public void testNewInfo() {
 
-        SessionFactory sessionFactory = new Configuration().configure()
-                .buildSessionFactory();
-        try {
+        try (SessionFactory sessionFactory = new Configuration().configure()
+                .buildSessionFactory()) {
             //  persistInfo(sessionFactory);
-            loadInfo(sessionFactory);
-        } finally {
-            sessionFactory.close();
+            loadInfo();
         }
     }
 
     @Test
-    public void testBookSelectionExample() {
+    public void testBookSelection() {
 
         SessionFactory sessionFactory = new Configuration().configure()
                 .buildSessionFactory();
@@ -107,7 +102,7 @@ public class TestDBClass {
         }
     }
 
-    private static void loadInfo(SessionFactory sessionFactory) {
+    private static void loadInfo() {
         Info info = InfoService.findInfo(1);
         System.out.println(info.toString());
     }

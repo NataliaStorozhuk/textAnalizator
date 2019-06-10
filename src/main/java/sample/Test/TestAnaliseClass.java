@@ -31,8 +31,8 @@ public class TestAnaliseClass {
     public void getFiles() throws IOException {
         final File folder = new File(desktopPath + "test");
         books = listBooksFromFolder(folder);
-        GenreProfile testViborka = statisticGetter.getBaseFrequencies(books);
-        //  ExcelExporter.createExcelFile(testViborka.lexemesList, books, "allWordsMagicW");
+        GenreProfile testViborka = getBaseFrequencies(books);
+        ExcelExporter.createExcelFile(testViborka.getLexemasArray(), books, "allWordsMagicW");
     }
 
 
@@ -47,7 +47,7 @@ public class TestAnaliseClass {
         testViborka.setW(books.get(books.size() - 1).getW());
 
         ObjectToJsonConverter.fromObjectToJson(desktopPath + "testJsonFile", testViborka);
-        GenreProfile test = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileTf*IDF", GenreProfile.class);
+        // GenreProfile test = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "testJsonFileTf*IDF", GenreProfile.class);
     }
 
     //Пробуем записать данные в json РАБОЧИЕ
@@ -161,48 +161,28 @@ public class TestAnaliseClass {
 
     //Считаем скалярное произведение, тестим на 6 книгах ДО модных нововведений
     @Test
-    public void getSimiliarityWithoutMagic() {
-
-        //тестовые 3
-        GenreProfile studyViborka = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", GenreProfile.class);
-        //         GenreProfile studyViborka = (GenreProfile) ObjectToJsonConverter.fromJsonToObject("C:/Users/Natalia/Desktop/test.json", GenreProfile.class);
-
-        //тестовая следующая
-        //      File file = new File("C:/Users/Natalia/Desktop/text4.txt");
-        //     final File folder = new File("C:/Users/Natalia/Desktop/test_testBooks");
+    public void getSimilarityWithoutMagic() {
+        GenreProfile studyViborka = (GenreProfile) ObjectToJsonConverter.fromJsonToObject
+                (desktopPath + "detectivesTFIDF.json", GenreProfile.class);
         final File folder = new File(desktopPath + "test_6Books");
         for (final File fileEntry : folder.listFiles()) {
             analyzer.getFileCos(fileEntry.getPath(), studyViborka);
         }
-
     }
 
-
+    //Считаем скалярное произведение, тестим на 6 книгах после обновления значений весов
     @Test
-    public void getSimiliarityWithMagic() {
-
-       /* final File folder = new File("C:/Users/Natalia/Desktop/detectives_utf8");
-        //final File folder = new File("C:/Users/Natalia/Desktop/test");
-
-        books = listBooksFromFolder(folder);
-        GenreProfile baseViborka = statisticGetter.getBaseFrequencies(books);
-        books.add(createAverageBook(books));
-        baseViborka.w = books.get(books.size() - 1).getW();
-
-        ObjectToJsonConverter.fromObjectToJson("C:/Users/Natalia/Desktop/testJsonFile", baseViborka);*/
-        GenreProfile studyViborka = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(desktopPath + "detectivesTFIDF.json", GenreProfile.class);
-
-        ymnojIDFforDetectiveWords(studyViborka, 1000);
-
-        //     final File folderTestBooks = new File("C:/Users/Natalia/Desktop/test_testBooks");
+    public void getSimilarityWithMagic() {
+        GenreProfile studyViborka = (GenreProfile) ObjectToJsonConverter.fromJsonToObject(
+                desktopPath + "detectivesTFIDF.json", GenreProfile.class);
+        dimentionIDFforDetectiveWords(studyViborka, 1000);
         final File folderTestBooks = new File(desktopPath + "test_6Books");
         for (final File fileEntry : folderTestBooks.listFiles()) {
             analyzer.getFileCos(fileEntry.getPath(), studyViborka);
         }
-
     }
 
-    private void ymnojIDFforDetectiveWords(GenreProfile studyViborka, Integer cof) {
+    private void dimentionIDFforDetectiveWords(GenreProfile studyViborka, Integer cof) {
         String detectiveWordsString = usingBufferedReader(this.getClass().getResource("/detectiveDictionary_afterMethod.txt").getPath());
         ArrayList<String> detectiveWords = getWordsFromString(detectiveWordsString);
 

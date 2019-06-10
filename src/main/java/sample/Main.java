@@ -16,7 +16,7 @@ public class Main extends Application {
         AuthorizationController controller = (AuthorizationController) loader.getController();
         controller.setStageAndSetupListeners(primaryStage);
 
-        primaryStage.setTitle("Прототип программы сравнения близости текстов");
+        primaryStage.setTitle("Анализатор жанра литературного произведения");
         Scene scene = new Scene(root, 800, 600);
 
         primaryStage.setScene(scene);
